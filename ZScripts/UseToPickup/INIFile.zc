@@ -16,7 +16,7 @@ struct U2P_INIFile {
 		// Find first non-whitespace character.
 		if (fromStart)
 		for (let i = 0; i < len; i++) {
-			let code = s.CharCodeAt(i);
+			let code = s.ByteAt(i);
 			if (
 				code == 32 ||
 				(code <= 31 && ((1 << code) & WhitespaceASCIIChars))
@@ -29,7 +29,7 @@ struct U2P_INIFile {
 		// Find last non-whitespace character.
 		if (fromEnd)
 		for (let i = end; i > start; i--) {
-			let code = s.CharCodeAt(i);
+			let code = s.ByteAt(i);
 			if (
 				code == 32 ||
 				(code <= 31 && ((1 << code) & WhitespaceASCIIChars))
@@ -47,7 +47,7 @@ struct U2P_INIFile {
 	
 	static bool IsAllSpace(String s) {
 		for (let i = 0, len = s.Length(); i < len; i++) {
-			let code = s.CharCodeAt(i);
+			let code = s.ByteAt(i);
 			if (
 				code != 32 &&
 				(code > 31 || !((1 << code) & WhitespaceASCIIChars))
@@ -88,10 +88,10 @@ struct U2P_INIFile {
 			let line = TrimSpace(lines[lineNum]);
 			
 			// Skip blank lines and comment lines.
-			if (line == "" || line.CharAt(0) == "#")
+			if (line == "" || line.ByteAt(0) == "#")////
 				continue;
 			
-			if (line.CharAt(0) == "[") {
+			if (line.ByteAt(0) == "[") {////
 				// This is a section header.
 				let end = line.IndexOf("]", 1);
 				
@@ -338,7 +338,7 @@ struct U2P_INIFile {
 			let nameLen = sectionName.Length();
 			
 			if (nameLen >= 2)
-			switch (sectionName.CharCodeAt(nameLen - 1)) {
+			switch (sectionName.ByteAt(nameLen - 1)) {
 				case 43: // +
 				case 45: // -
 					if (purgeSuperSubSections) {

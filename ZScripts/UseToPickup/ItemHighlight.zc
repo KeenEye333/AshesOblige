@@ -246,7 +246,7 @@ class U2P_ItemHighlight : Thinker {
 			);
 		}
 		
-		/* if (fracTween[ITW_TEXT] != 0.) {
+		if (fracTween[ITW_TEXT] != 0.) {
 			let fontHeight = U2P.MsgFontHeight * CleanYFac;
 			
 			Vector2 textCoord = (
@@ -264,7 +264,7 @@ class U2P_ItemHighlight : Thinker {
 				DTA_Color, highlightColor
 			);
 			
-			textCoord.Y += fontHeight * 1.8; */
+			textCoord.Y += fontHeight * 1.8;
 			/*
 			{
 				// Draw the label saying which button to push.
@@ -310,6 +310,6 @@ class U2P_ItemHighlight : Thinker {
 				DTA_Color, highlightColor
 			);
 */
-		//}
+		}
 	}
 }

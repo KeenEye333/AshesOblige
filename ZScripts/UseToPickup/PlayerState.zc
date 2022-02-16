@@ -90,8 +90,8 @@ class U2P_PlayerState : Thinker {
 		let enabled = Settings.IsEnabled.GetBool();
 		
 		// Block normal pickup, if appropriate.
-		if (pp)
-			pp.bPickup = enabled? false : GetDefaultByType(pp.GetClass()).bPickup;
+		//if (pp)
+			//pp.bPickup = enabled? false : GetDefaultByType(pp.GetClass()).bPickup;
 		
 		// Clear the focused item, if appropriate.
 		if (FocusedItem) {
@@ -145,7 +145,7 @@ class U2P_PlayerState : Thinker {
 				// Allow picking up items in a sphere around the viewpoint.
 				pickupRange = max(
 					pp_? pp_.UseRange : GetDefaultByType('PlayerPawn').UseRange,
-					pp.Radius,
+					100,
 					pp.Height
 				);
 				highlightRange = max(highlightRange, pickupRange);
