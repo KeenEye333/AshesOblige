@@ -294,3 +294,5 @@ actor pipebomb: Weapon replaces rocketammo
         PIPE ZYX 2
 		Goto Ready
 }}
+
+//Cro-bar
