@@ -1,0 +1,66 @@
+ACTOR ScabbieSavage: actor replaces demon
+{
+  Health 100
+  PainChance 180
+  Speed 12
+  Radius 20
+  Height 56
+  maxtargetrange 64
+  Mass 200
+  scale 0.8
+  Monster
+  +FLOORCLIP
+  SeeSound "cannibal/sight"
+  AttackSound "weapons/crowbarswing"
+  PainSound "cannibal/pain"
+  DeathSound "cannibal/death"
+  ActiveSound "cannibal/active"
+  Obituary "%o was beat down by a savage cannibal."
+  States
+  {
+  Spawn:
+    SARG V 10 A_Look
+    Loop
+  See:
+    SARG AABB 2 Fast A_Chase
+	SARG A 0 A_jumpifcloser(96,"Charge")
+	SARG CCDD 2 Fast A_Chase
+	SARG A 0 A_jumpifcloser(96,"Charge")
+    Loop
+  Melee:
+    SARG EF 6 Fast A_FaceTarget
+    SARG G 8 Fast A_CustomMeleeAttack(random(2,4)*5, "weapons/crowbarhit")
+    Goto See
+  Charge:
+    SARG W 6 A_facetarget
+	SARG X 0 A_playsound("weapons/crowbarswing",CHAN_7,1.0)
+	SARG XX 3 A_recoil(-4)
+	SARG Y 5 A_CustomMeleeAttack(random(2,4)*5, "weapons/crowbarhit")
+	SARG Z 7 
+	goto see
+  Pain:
+    SARG H 6 Fast A_Pain
+    SARG H 2 Fast
+    Goto See
+  Death:
+    SARG I 8
+    SARG J 8 A_Scream
+    SARG K 4
+    SARG L 4 A_NoBlocking
+    SARG M 4
+    SARG N -1
+    Stop
+  Xdeath:
+    SARG J 6  A_PlaySound("Special/Gibdeath")
+	SARG OOO 0 A_SpawnDebris("FlyingBlood",1)
+	SARG O 0 A_NoBlocking
+    SARG O 5 A_SpawnDebris("FlyingGibOffal",1)
+	SARG P 5 A_SpawnDebris("FlyingGibOffal",1)
+	SARG Q 4  A_SpawnDebris("FlyingGibEntrails",1)
+	SARG R 4 A_SpawnDebris("FlyingBlood",1)
+	SARG S 4 A_SpawnDebris("FlyingBlood",1)
+	SARG T 4 A_SpawnDebris("FlyingBlood",1)
+	SARG U -1
+	stop
+  }
+}

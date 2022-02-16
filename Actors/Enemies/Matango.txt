@@ -1,0 +1,118 @@
+ACTOR Matango: actor replaces Arachnotron
+{
+  Health 400
+  Radius 32
+  Height 56
+  Mass 600
+  Speed 9
+  damagefactor "spores", 0.0
+  damagefactor "acid", 0.0
+  damagefactor "slime", 0.5
+  damagefactor "fire", 1.5
+  bloodcolor orange
+  PainChance 128
+  Monster
+  meleerange 96
+  +FLOORCLIP
+  +BOSSDEATH
+  SeeSound "creeper/see"
+  PainSound "creeper/pain"
+  DeathSound "creeper/death"
+  ActiveSound "creeper/active"
+  Obituary "%o was melted by a Matango."
+  hitObituary "%o was mangled by a Matango."
+  States
+  {
+  Spawn:
+    MTNG Z 10 A_Look
+    Loop
+  See:
+    MTNG A 0 A_PlaySound ("creeper/run", CHAN_body)
+    MTNG A 2 A_Chase
+    MTNG ABBCC 2 A_Chase
+    MTNG D 2 A_Chase
+    MTNG DEEFF 2 A_Chase
+    Goto See
+  Missile:
+    MTNG A 0 A_JumpIfCloser(256, "melee")
+    MTNG Z 10 Bright A_FaceTarget
+	MTNG Z 0 A_PlaySound ("creeper/spit", CHAN_body)
+    TNT1 A 0 A_JumpIfCloser(300, "shortmissile")
+    TNT1 A 0 A_JumpIfCloser(600, "midmissile")
+	TNT1 A 0 A_JumpIfCloser(900, "longmissile")
+    MTNG G 4 Bright 
+    MTNG H 4 Bright A_CustomMissile("creeperspray", 30, 1,random(-6, 6))
+    MTNG I 8 Bright A_CustomMissile("creeperspray", 30, 5,random(-6, 6))
+	MTNG H 4 Bright A_CustomMissile("creeperspray", 30, 0,random(-6, 6))
+	MTNG G 4 Bright
+    Goto see
+   ShortMissile:
+    MTNG G 4 Bright 
+    MTNG H 4 Bright A_CustomMissile("creeperspray", 30, 1,random(-3, 3))
+    MTNG I 8 Bright A_CustomMissile("creeperspray", 30, 0,random(-3, 3))
+	MTNG H 4 Bright A_CustomMissile("creeperspray", 30, 0,random(-3, 3))
+	MTNG G 4 Bright
+    Goto see
+	midMissile:
+    MTNG G 4 Bright 
+    MTNG H 4 Bright A_CustomMissile("creeperspray", 30, 1,random(-3, 3))
+    MTNG I 8 Bright A_CustomMissile("creeperspray", 30, 1,random(-4, 4))
+	MTNG H 4 Bright A_CustomMissile("creeperspray", 30, 0,random(-5, 5))
+	MTNG G 4 Bright
+    Goto see
+	longMissile:
+    MTNG G 4 Bright 
+    MTNG H 4 Bright A_CustomMissile("creeperspray", 30, 1,random(-4, 4))
+    MTNG I 8 Bright A_CustomMissile("creeperspray", 30, 3,random(-5, 5))
+	MTNG H 4 Bright A_CustomMissile("creeperspray", 30, 0,random(-5, 5))
+	MTNG G 4 Bright
+    Goto see
+  Melee:
+    MTNG K 3 A_playsound("creeper/rage", CHAN_VOICE)
+    MTNG A 0 A_ChangeFlag("NOPAIN", 1)
+	MTNG LMNOOO 4
+	goto charge
+  Charge:
+    MTN2 A 1 A_Recoil (-5)
+	MTNG A 0 A_facetarget
+	MTN2 A 2  A_CustomMeleeAttack(random(2, 4))
+	MTN2 B 1 A_Recoil (-5)
+	MTNG B 0 A_PlaySound ("creeper/run", CHAN_body)
+	MTN2 B 2  A_CustomMeleeAttack(random(2, 4))
+	MTNG A 0 A_facetarget
+	MTN2 C 1 A_Recoil (-5)
+	MTNG A 0 A_facetarget
+	MTN2 C 2  A_CustomMeleeAttack(random(2, 4))
+	MTN2 D 1 A_Recoil (-5)
+	MTNG A 0 A_facetarget
+	MTN2 D 2  A_CustomMeleeAttack(random(2, 4))
+	MTNG A 0 A_JumpIfInTargetLOS(1, 0, JLOSF_DEADNOJUMP, 500)
+	goto rageend
+	MTNG A 0 A_JUMP(32,"rageend")
+	MTNG A 0 A_JumpIfCloser(386, "charge")
+	goto rageend
+   rageend:
+    MTNG O 3 A_playsound("creeper/rageend", CHAN_VOICE)
+    MTNG A 0 A_ChangeFlag("NOPAIN", 0)
+	MTNG ONMLLL 4
+	goto see
+  Pain:
+    MTNG P 3
+    MTNG P 3 A_Pain
+    Goto See+1
+  Death:
+    MTNG Q 6 A_Scream
+    MTNG R 5 A_NoBlocking
+    MTNG STU 5
+    MTNG V -1 A_BossDeath
+    Stop
+   BURN:
+    MTN2 E 5 A_playsound("creeper/fdeath", CHAN_VOICE)
+    MTN2 FGHEFGHEFGHEFGH 4 bright A_NoBlocking
+	MTN2 H 0 A_BossDeath
+    MTN2 IJKLMNO 5 bright
+	MTN2 PQRQPQRQPQRQPQRQPQRQPQRQPQRQPQRQPQRQPQ 6
+    MTN2 S -1 A_BossDeath
+    Stop
+  }
+}

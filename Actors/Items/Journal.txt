@@ -1,0 +1,55 @@
+//Journal Pages - old-school decorate QuestTrackers since global arrays are bullshit
+//                Never do a printinv - if you do, Lord Humongous will know and he will beat you and kill your dog while you look on in horror
+
+
+ACTOR JournalMap1: Inventory  //Unlocks hub1 map and associated quests
+{
+    Inventory.Amount 1
+    Inventory.MaxAmount 1
+	Inventory.InterHubAmount 0
+    -INVBAR
+}
+ACTOR JournalMap2: Inventory  //Unlocks hub2 map and associated quests
+{
+    Inventory.Amount 1
+    Inventory.MaxAmount 1
+	Inventory.InterHubAmount 0
+    -INVBAR
+}
+Actor JournalMapUpdate: JournalMap1 //unlocks expanded directions on map
+{
+Inventory.MaxAmount 3
+}
+
+// Quests -  0 - no quest, 1 - quest started, 2 - Quest Updated, 3 - Quest updated2, 4 - Quest failed, 5 - Quest completed
+ACTOR JournalPage1: Inventory  //Quest One
+{
+    Inventory.Amount 1
+    Inventory.MaxAmount 5
+	Inventory.InterHubAmount 0
+    -INVBAR
+}
+Actor JournalPage2: JournalPage1 //quest two
+{
+}
+Actor JournalPage3: JournalPage1  //quest three
+{
+}
+Actor JournalPage4: JournalPage1  //quest four
+{
+}
+Actor JournalPage5: JournalPage1 //quest five
+{
+}
+Actor JournalPage6: JournalPage1 //quest six
+{
+}
+Actor JournalPage7: JournalPage1  //quest seven
+{
+}
+Actor JournalPage8: JournalPage1 //quest eight
+{
+}
+Actor JournalPage9: JournalPage1 // quest nine damn I hope I remember to remove all the Adolf Hitlers I hid in every map jesus can't imagine what would happen if anyone found those 
+{
+}

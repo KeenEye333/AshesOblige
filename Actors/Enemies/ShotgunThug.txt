@@ -1,0 +1,178 @@
+ACTOR shotgunthug: pistolthug replaces Shotgunguy
+{
+  Health 40
+  Mass 100
+  Speed 10
+  PainChance 256
+  Monster
+  Decal "BulletChip"
+  SeeSound "vulture/sight"
+  PainSound "goon/pain"
+  DeathSound "goon/death"
+  Obituary "%o was blasted by a Vulture Outlaw."
+  DropItem "PumpySpawn"
+  DropItem "ShotAmmoDropper"
+  States
+  {
+  Spawn:
+    VUL3 v 10 A_Look
+    Loop
+  //Switching
+  See:
+    VUL3 A 0 A_AlertMonsters(150)
+    VUL3 A 0 A_ChangeFlag("MissileEvenMore", 0)
+	VUL3 A 0 A_TakeInventory("GoonRally", 1)
+	VUL3 A 0 A_TakeInventory("GoonWimp", 1)
+	VUL3 A 0 A_TakeInventory("GoonScared", 1)
+	VUL3 A 0 A_JumpIfHealthLower(5, "ScaredSwitch")
+	VUL3 A 0 A_JumpIfInventory("GoonFear", 15, "ScaredSwitch")
+    VUL3 A 0 A_JumpIfInventory("GoonOrder", 1, "WanderSwitch")
+	//Normal Mode
+	VUL3 AABBCCDD 3 A_Chase
+	VUL3 A 0 A_checksight("ambushsee")
+	VUL3 A 0 A_CheckProximity("AggressiveSwitch","pistolthug",256.0,2,CPXF_ANCESTOR)
+	loop
+	 //Aggressive Mode
+  AggressiveSwitch:
+    VUL3 A 0 A_ChangeFlag("MissileEvenMore", 1)
+    Goto AggressiveSee
+  AggressiveSee:
+	VUL3 AABBCCDD 3 A_Chase
+	VUL3 A 0 A_JumpIfHealthLower(10, "See")
+	VUL3 A 0 A_checksight("see")
+    Loop
+  //Search Mode
+  WanderSwitch:
+    VUL3 A 0 A_ClearTarget
+    Goto WanderSee
+	WanderSee:
+	VUL3 A 0 A_jump(220,2)
+	VUL3 A 0 A_PlaySound("goon/orders",CHAN_VOICE)
+    VUL3 A 3 A_Wander
+    VUL3 A 0 A_LookEx(10, 0, 0, 0, 360, "See")
+    VUL3 A 3 A_Wander
+    VUL3 A 0 A_LookEx(10, 0, 0, 0, 360, "See")
+    VUL3 B 3 A_Wander
+    VUL3 A 0 A_LookEx(10, 0, 0, 0, 360, "See")
+	VUL3 B 3 A_Wander
+    VUL3 A 0 A_LookEx(10, 0, 0, 0, 360, "See")
+	VUL3 C 3 A_Wander
+    VUL3 A 0 A_LookEx(10, 0, 0, 0, 360, "See")
+	VUL3 C 3 A_Wander
+    VUL3 A 0 A_LookEx(10, 0, 0, 0, 360, "See")
+	VUL3 D 3 A_Wander
+    VUL3 A 0 A_LookEx(10, 0, 0, 0, 360, "See")
+	VUL3 D 3 A_Wander
+    VUL3 A 0 A_LookEx(10, 0, 0, 0, 360, "See")
+	loop
+	//Ambush mode
+	AmbushSee:
+	VUL3 A 0 A_jump(240,2)
+	VUL3 A 0 A_PlaySound("goon/orders",CHAN_VOICE)
+	VUL3 AABBCCD 3 A_Chase
+	VUL3 D 3 A_jump(32,"waitsee")
+    loop
+	Waitsee: 
+	VUL3 E 10 A_sentinelrefire
+	VUL3 E 0 A_jump(32,"Ambushsee")
+	VUL3 E 0 A_checksight("waitsee")
+	goto missile+1
+   //Scared Mode
+   Scaredswitch:
+    VUL3 A 0 A_ChangeFlag("Frightened", 1)
+    Goto ScaredSee
+	Scaredsee:
+	VUL3 A 0 A_jump(246,2)
+	VUL3 A 0 A_PlaySound("Vulture/run",CHAN_VOICE)
+	VUL3 ABCD 3 A_chase
+	VUL3 D 0 A_checksight("idlereset")
+	goto see
+  IdleReset:
+    VUL3 E 0 A_facetarget
+    VUL3 E 0 A_cleartarget
+   Idle:
+    VUL3 E 10 A_Look
+    Loop
+  Missile:
+    VUL3 E 10 Fast A_FaceTarget
+	VUL3 E 0 A_FaceTarget
+	VUL3 E 10 A_FaceTarget
+	VUL3 F 1 bright A_customMissile("BulletTracerSmall", 32, 12, random(-9, 9), CMF_OFFSETPITCH, random(-1, 1))
+	VUL3 FFF 0 A_customMissile("BulletTracerSmall", 32, 12, random(-9, 9), CMF_OFFSETPITCH, random(-1, 1))
+    VUL3 F 0 bright A_PlaySound ("weapons/grizlygun", CHAN_WEAPON)
+	VUL1 F 0 A_PlaySound("Distant/shotgun",CHAN_BODY)
+	VUL3 F 0 A_AlertMonsters
+    VUL3 F 9 bright A_customMissile("BulletTracerSmall", 32, 0, random(-6, 6), 1, random(-4, 4))
+    VUL3 w 20 A_PlaySound ("weapons/SHOTGR", CHAN_item)
+    Goto See
+  Pain:
+    VUL3 G 4
+    VUL3 G 4 A_Pain
+    Goto See
+  BURN:                
+    VUL3 M 1 A_PlaySound("special/firedeath", CHAN_VOICE)
+	VUL3 A 0 A_radiusgive("goonfear",1024,0,8)
+    VUL3 A 0 A_HideThing
+    VUL3 A 0 A_Fall
+    VUL3 A 0 A_SpawnItem("BurnDeathHuman",1,0,0)
+    VUL3 A -1
+    Stop
+  Death:
+    VUL3 G 6 A_Scream
+    VUL3 H 6 A_radiusgive("goonfear",512,0,2)
+    VUL3 I 7 A_AlertMonsters(256)
+    VUL3 J 5 A_NoBlocking
+    VUL3 K 5
+    VUL3 L -1
+    Stop
+  Xdeath.fire:
+  XDeath:
+    VUL3 M 3 A_PlaySound("Special/Gibdeath", CHAN_BODY)
+	VUL3 M 3 A_PlaySound("goon/explode", CHAN_VOICE)
+	VUL3 A 0 A_radiusgive("goonfear",1024,0,8)
+	VUL3 NNNN 0 A_SpawnDebris("FlyingBlood",1)
+    VUL3 N 4 A_SpawnDebris("FlyingGibOffal",1)
+	VUL3 NN 0 A_SpawnDebris("FlyingBlood",1)
+	VUL3 N 0 A_SpawnDebris("FlyingGibArm",1)
+	VUL3 N 0 A_SpawnDebris("FlyingGibEntrails",1)
+	VUL3 N 0 A_SpawnDebris("FlyingGibRib",1)
+    VUL3 O 4 A_NoBlocking
+	VUL3 NNN 0 A_SpawnDebris("FlyingBlood",1)
+    VUL3 PQRST 4
+    VUL3 U -1
+    Stop
+  }
+}
+
+Actor DeadBandit : shotgunthug replaces Deadshotgunguy
+{
+		Skip_Super
+		DropItem "None"
+		scale 0.75
+	States
+	{
+	Spawn:
+		Goto Super::Death+4
+	}
+}
+Actor GibbedBandit : ShotgunThug replaces Gibbedmarineextra
+{
+    Skip_Super
+	DropItem "None"
+	States
+	{
+	Spawn:
+		Goto Super::XDeath+4
+	}
+}
+
+
+Actor BanditTalkative: ShotgunThug replaces MarineShotgun
+{
+States
+  {
+    Spawn:
+    VUL3 V 10 A_turretlook
+    Loop
+}
+}

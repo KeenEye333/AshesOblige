@@ -1,0 +1,1705 @@
+actor TownMilitia: actor 414
+ {
+  ConversationID 6
+  Health 80
+  PainChance 200
+  Speed 12
+  Radius 20
+  Height 56
+  scale 0.75
+  Monster
+  +NEVERTARGET
+  -COUNTKILL
+  +NOSPLASHALERT
+  +FLOORCLIP
+  +MISSILEMORE
+  +MISSILEEVENMORE
+  +NEVERRESPAWN
+  +ISMONSTER
+  decal "BulletChip"
+  AttackSound "weapons/ingramfire"
+  DeathSound "*death"
+  PainSound "*pain50"
+  Obituary "%o was shot for disturbing the peace."
+  DropItem "Ingramspawn"
+  States
+  {
+   Spawn:
+    GARD V 6 A_turretlook
+    Loop
+   See:
+    GARD A 0 A_ALERTMONSTERS
+    GARD ABCD 4 A_chase
+    Loop
+   Idle:
+    GARD E 10 A_turretlook
+	loop
+   Missile:
+    GARD E 10 A_FaceTarget
+	GARD F 0 A_PlaySound("weapons/ingramfire", CHAN_WEAPON)
+	GARD F 3 A_PlaySound("Distant/smg",CHAN_BODY)
+    GARD E 3 Bright A_customMissile("BulletTracersmall", 32, 12, random(-6, 6), CMF_OFFSETPITCH, random(-1, 1))
+	GARD F 0 A_PlaySound("weapons/ingramfire", CHAN_WEAPON)
+	GARD F 0 A_PlaySound("Distant/smg",CHAN_BODY)
+    GARD F 3 Bright A_customMissile("BulletTracersmall", 32, 12, random(-6, 6), CMF_OFFSETPITCH, random(-1, 1))
+	GARD F 0 A_PlaySound("weapons/ingramfire", CHAN_WEAPON)
+	GARD F 0 A_PlaySound("Distant/smg",CHAN_BODY)
+	GARD E 3 Bright A_customMissile("BulletTracersmall", 32, 12, random(-6, 6), CMF_OFFSETPITCH, random(-1, 1))
+    GARD F 0 A_PlaySound("weapons/ingramfire", CHAN_WEAPON)
+	GARD F 0 A_PlaySound("Distant/smg",CHAN_BODY)
+	GARD E 10 A_SentinelRefire()
+    Goto Missile+1
+    Goto See
+   Pain:
+    GARD G 1 A_ChangeFlag("FRIENDLY", FALSE)
+    GARD G 8 Fast A_Pain
+    Goto See
+   Death:
+    GARD G 3 ACS_execute(11,0)
+    GARD H 4 A_Scream
+    GARD I 4 A_NoBlocking
+    GARD J 3
+    GARD K -1
+    Stop
+	}
+	}
+actor MilitiaStayStill: TownMilitia 13101
+ {
+  Speed 0
+  States
+  {
+   Spawn:
+    GARD V 6 A_turretlook
+    Loop
+   See:
+    GARD A 0 A_ALERTMONSTERS
+    GARD E 10 A_chase
+    Loop
+   Idle:
+    GARD E 10 A_turretlook
+	loop
+   Missile:
+    GARD E 10 A_FaceTarget
+	GARD F 0 A_PlaySound("weapons/ingramfire", CHAN_WEAPON)
+	GARD F 3 A_PlaySound("Distant/smg",CHAN_BODY)
+    GARD E 3 Bright A_customMissile("BulletTracersmall", 32, 12, random(-6, 6), CMF_OFFSETPITCH, random(-1, 1))
+	GARD F 0 A_PlaySound("weapons/ingramfire", CHAN_WEAPON)
+	GARD F 0 A_PlaySound("Distant/smg",CHAN_BODY)
+    GARD F 3 Bright A_customMissile("BulletTracersmall", 32, 12, random(-6, 6), CMF_OFFSETPITCH, random(-1, 1))
+	GARD F 0 A_PlaySound("weapons/ingramfire", CHAN_WEAPON)
+	GARD F 0 A_PlaySound("Distant/smg",CHAN_BODY)
+	GARD E 3 Bright A_customMissile("BulletTracersmall", 32, 12, random(-6, 6), CMF_OFFSETPITCH, random(-1, 1))
+    GARD F 0 A_PlaySound("weapons/ingramfire", CHAN_WEAPON)
+	GARD F 0 A_PlaySound("Distant/smg",CHAN_BODY)
+	GARD E 10 A_SentinelRefire()
+    Goto Missile+1
+    Goto See
+   Pain:
+    GARD G 1 A_ChangeFlag("FRIENDLY", FALSE)
+    GARD G 8 Fast A_Pain
+    Goto See
+   Death:
+    GARD G 3 ACS_execute(11,0)
+    GARD H 4 A_Scream
+    GARD I 4 A_NoBlocking
+    GARD J 3
+    GARD K -1
+    Stop
+	}
+	}
+actor MilitiaLeader: TownMilitia 415
+{
+translation 2
+}
+ACTOR BadlandsGuard1 : TownMilitia 481
+{
+  Health 60
+  PainChance 200
+  Speed 12
+  Radius 20
+  Height 56
+  scale 0.85
+  DeathSound "*death"
+  PainSound "*pain50"
+  Obituary "%o was shot for disturbing the peace."
+  DropItem "Pumpyspawn"
+  States
+	{
+	Spawn:
+	GRD2 V 10 A_turretlook
+    loop
+	See:
+    GRD2 A 0 A_ALERTMONSTERS
+    GRD2 ABCD 4 A_chase
+    Loop
+	Missile:
+    GRD2 E 10 Fast A_FaceTarget
+	GRD2 E 0 A_FaceTarget
+	GRD2 E 10 A_FaceTarget
+	GRD2 F 1 bright A_customMissile("BulletTracerSmall", 32, 12, random(-9, 9), CMF_OFFSETPITCH, random(-1, 1))
+	GRD2 FFF 0 A_customMissile("BulletTracerSmall", 32, 12, random(-9, 9), CMF_OFFSETPITCH, random(-1, 1))
+    GRD2 F 0 bright A_PlaySound ("weapons/grizlygun", CHAN_WEAPON)
+	GRD2 F 0 A_PlaySound("Distant/shotgun",CHAN_BODY)
+	GRD2 F 0 A_AlertMonsters
+    GRD2 F 9 bright A_customMissile("BulletTracerSmall", 32, 0, random(-6, 6), 1, random(-4, 4))
+    GRD2 w 20 A_PlaySound ("weapons/SHOTGR", CHAN_item)
+    Goto See
+	}
+}
+ACTOR BadlandsGuard2 : TownMilitia 482
+{
+  Health 60
+  PainChance 200
+  Speed 0
+  Radius 20
+  Height 56
+  +STANDSTILL
+  scale 0.85
+ decal "BulletChip"
+  DeathSound "*death"
+  PainSound "*pain50"
+  Obituary "%o was shot for disturbing the peace."
+  DropItem "Musketspawn"
+  States
+	{
+	Spawn:
+	GRD3 V 10  A_turretlook
+    loop
+	see:
+	GRD3 A 0 A_ALERTMONSTERS
+    GRD3 W 4 A_chase
+	loop
+    Missile:
+    GRD3 E 20 A_FaceTarget
+    GRD3 F 0 A_PlayWeaponSound("weapons/rifleshot")
+	GRD3 F 0 A_customMissile("MusketTracer",56,12,random(-1, 1), CMF_OFFSETPITCH, random(-1, 1))
+    GRD3 F 5 Bright A_FaceTarget
+	GRD3 A 0 A_PlaySound("weapons/rifledistant",3)
+	GRD3 E 5 A_FaceTarget
+	GRD3 W 10 A_PlaySound("weapons/musketlever",7)
+    Goto See
+   Pain:
+    GARD G 1 A_ChangeFlag("FRIENDLY", FALSE)
+    GARD G 8 Fast A_Pain
+    Goto See
+   Death:
+    GARD G 3 ACS_execute(11,0)
+    GARD H 4 A_Scream
+    GARD I 4 A_NoBlocking
+    GARD J 3
+    GARD K -1
+    Stop
+	}
+}
+ACTOR BadlandsGuard3 : TownMilitia 483
+{
+  Health 60
+  PainChance 200
+  Speed 12
+  Radius 20
+  Height 56
+  scale 0.85
+  DeathSound "*death"
+  PainSound "*pain50"
+  Obituary "%o was shot for disturbing the peace."
+  DropItem "Pumpyspawn"
+  States
+	{
+	Spawn:
+	GRD4 V 10 A_turretlook
+    loop
+	See:
+    GRD4 A 0 A_ALERTMONSTERS
+    GRD4 ABCD 4 A_chase
+    Loop
+	Missile:
+    GRD4 E 10 Fast A_FaceTarget
+	GRD4 E 0 A_FaceTarget
+	GRD4 E 10 A_FaceTarget
+	GRD4 F 1 bright A_customMissile("BulletTracerSmall", 32, 12, random(-9, 9), CMF_OFFSETPITCH, random(-1, 1))
+	GRD4 FFF 0 A_customMissile("BulletTracerSmall", 32, 12, random(-9, 9), CMF_OFFSETPITCH, random(-1, 1))
+    GRD4 F 0 bright A_PlaySound ("weapons/grizlygun", CHAN_WEAPON)
+	GRD4 F 0 A_PlaySound("Distant/shotgun",CHAN_BODY)
+	GRD4 F 0 A_AlertMonsters
+    GRD4 F 9 bright A_customMissile("BulletTracerSmall", 32, 0, random(-6, 6), 1, random(-4, 4))
+    GRD4 w 20 A_PlaySound ("weapons/SHOTGR", CHAN_item)
+    Goto See
+	}
+}
+ACTOR BadlandsGuard4 : TownMilitia 484
+{
+  Health 60
+  PainChance 200
+  Speed 12
+  Radius 20
+  Height 56
+  scale 0.85
+  DeathSound "*death"
+  PainSound "*pain50"
+  Obituary "%o was shot for disturbing the peace."
+  DropItem "Ingramspawn"
+  States
+	{
+	Spawn:
+	GRD5 V 10 A_turretlook
+    loop
+	See:
+    GRD5 A 0 A_ALERTMONSTERS
+    GRD5 ABCD 4 A_chase
+    Loop
+    Missile:
+    GRD5 E 10 A_FaceTarget
+    GRD5 FWEFWEFW 3 Bright A_customMissile("BulletTracersmall", 32, 12, random(-6, 6), CMF_OFFSETPITCH, random(-1, 1))
+    GRD5 E 10 A_SentinelRefire()
+    Goto Missile+1
+    Goto See
+	}
+}
+ACTOR BadlandsSheriff : TownMilitia 485
+{
+  Health 10000000
+  PainChance 200
+  Speed 0
+  Radius 20
+  Height 56
+  Monster
+  +NEVERTARGET
+  -COUNTKILL
+  +NOSPLASHALERT
+  +FLOORCLIP
+  +MISSILEMORE
+  +MISSILEEVENMORE
+  +NEVERRESPAWN
+  +STANDSTILL
+  +DONTTHRUST
+  +INVULNERABLE
+  scale 0.85
+  States
+	{
+	Spawn:
+	SHRF A 10
+    loop
+	}
+}
+Actor BadlandsGateGuard : BadlandsGuard1 486{}
+Actor BadlandsUptownGuard : BadlandsGuard3 487{}
+Actor BadlandsJailGuard : BadlandsGuard4 13064{}
+Actor BadlandsARMORER : BadlandsGuard4 13083
+{
+ States
+  {
+   Spawn:
+    ARR1 V 10 A_turretlook
+    Loop
+	}
+}
+actor PorcelainWary: Townmilitia 901
+ {
+  Health 110
+  PainChance 128
+  Speed 9
+  Radius 20
+  Height 56
+  scale 0.75
+  Monster
+  -COUNTKILL
+  +NOSPLASHALERT
+  +FLOORCLIP
+  +MISSILEMORE
+  +MISSILEEVENMORE
+  +NEVERRESPAWN
+  +ISMONSTER
+  +AVOIDMELEE
+   Decal "BulletChip"
+  SeeSound ""
+  PainSound "Porcelain/pain"
+  deathsound "Porcelain/death"
+  Attacksound "weapons/grizlygun"
+  Obituary "%o was perforated for picking on Porcelain."
+  DropItem "pumpyspawn"
+  DropItem "Questlocket"
+  States
+  {
+   Spawn:
+    PORC E 6 A_turretlook
+    Loop
+   See:
+    PORC AABBCCDD 2 A_chase("Missile","Missile",CHF_NORANDOMTURN)
+    Loop
+   idle:
+    PORC V 0 a_cleartarget
+    PORC V 6 A_Look
+	loop
+   Missile:
+    PORC E 10 Fast A_FaceTarget
+	PORC E 0 A_FaceTarget
+	PORC E 5 A_FaceTarget
+	PORC F 1 bright A_customMissile("BulletTracermedium", 32, 12, random(-6, 6), CMF_OFFSETPITCH, random(-1, 1))
+	PORC FFFF 0 A_customMissile("BulletTracermedium", 32, 12, random(-6, 6), CMF_OFFSETPITCH, random(-1, 1))
+    PORC F 0 bright A_PlaySound ("weapons/grizlygun", CHAN_WEAPON)
+    PORC F 9 bright A_customMissile("BulletTracermedium", 32, 0, random(-6, 6), 1, random(-4, 4))
+    PORC E 5 A_PlaySound ("weapons/SHOTGR", CHAN_item)
+    PORC E 10 A_SentinelRefire()
+    Goto Missile+1
+   Pain:
+    PORC G 1 
+    PORC G 8 Fast A_Pain
+    Goto See
+   greetings:
+    PORC ZYZYEEYZYYZYEE 5 A_turretlook
+    goto spawn
+   Yes:
+    PORC Y 1 A_jump(96,"yes2")
+    PORC ZYZZYZYZZYEYZZ 5
+	goto spawn
+   Yes2:
+    PORC ZYZYEEYZYYZYEEYZYE 5
+	goto spawn
+   Death:
+    PORC H 3 ACS_execute(28,0)
+    PORC I 4 A_Scream
+    PORC J 4 A_NoBlocking
+    PORC K 3
+	PORC L 3
+    PORC M -1
+    Stop
+	}
+	}
+actor PorcelainFriendly: townmilitia 902
+ {
+  Health 110
+  PainChance 128
+  Speed 0
+  Radius 20
+  Height 56
+  scale 0.75
+  Monster
+  +NEVERTARGET
+  -COUNTKILL
+  +NOSPLASHALERT
+  +FLOORCLIP
+  +MISSILEMORE
+  +MISSILEEVENMORE
+  +NEVERRESPAWN
+  +ISMONSTER
+  +AVOIDMELEE
+  +FRIENDLY
+   Decal "BulletChip"
+  SeeSound ""
+  PainSound "Porcelain/pain"
+  deathsound "Porcelain/death"
+  Attacksound "weapons/grizlygun"
+  Obituary "%o was perforated for picking on Porcelain."
+  DropItem "pumpyspawn"
+  DropItem "Questlocket"
+  States
+  {
+   Spawn:
+    PORC V 6 A_look
+    Loop
+   See:
+    PORC E 2 A_chase("Missile","Missile",CHF_NORANDOMTURN)
+    Loop
+   idle:
+    PORC V 0 a_cleartarget
+    PORC V 6 A_look
+	loop
+   Missile:
+    PORC E 10 Fast A_FaceTarget
+	PORC E 0 A_FaceTarget
+	PORC E 5 A_FaceTarget
+	PORC F 1 bright A_customMissile("BulletTracerfriend", 32, 12, random(-9, 9), CMF_OFFSETPITCH, random(-1, 1))
+	PORC FFF 0 A_customMissile("BulletTracerfriend", 32, 12, random(-9, 9), CMF_OFFSETPITCH, random(-1, 1))
+    PORC F 0 bright A_PlaySound ("weapons/grizlygun", CHAN_WEAPON)
+	PORC F 0 A_AlertMonsters
+    PORC F 9 bright A_customMissile("BulletTracerfriend", 32, 0, random(-6, 6), 1, random(-4, 4))
+    PORC E 5 A_PlaySound ("weapons/SHOTGR", CHAN_item)
+    PORC E 10 A_SentinelRefire()
+    Goto Missile+1
+    Goto See
+   Pain:
+    PORC G 1 
+    PORC G 8 Fast A_Pain
+    Goto See
+   greetings:
+    PORC VWWXVWVWXVWWV 5 A_turretlook
+    goto spawn
+   Yes:
+    PORC E 1 A_jump(96,"yes2")
+    PORC VWVWXVWWVXVW 5
+	goto spawn
+   Yes2:
+    PORC WWXVWVVWVWXVWVWWVW 5
+	goto spawn
+   Death:
+    PORC H 3 ACS_execute(28,0)
+    PORC I 4 A_Scream
+    PORC J 4 A_NoBlocking
+    PORC K 3
+	PORC L 3
+    PORC M -1
+    Stop
+	}
+	}
+actor PorcelainCutscene: PorcelainFriendly 13116
+ {
+  States
+  {
+   Spawn:
+    P2RC A 6 A_look
+    Loop
+	}
+	}
+Actor Barrettfired: Inventory { Inventory.MaxAmount 2 }
+ACTOR BarrettInsane: pistolthug 903
+{
+  Health 150
+   Radius 15
+  Height 64
+  mass 150
+  Speed 12
+  species human
+  PainChance 192
+  damagefactor "crowdamage", 2.0
+   damagefactor "ally", 0.0
+  scale 1
+  seesound "Barrett/see2"
+  PainSound "Barrett/pain"
+  DeathSound "Barrett/death"
+  Obituary "%o was blown away by Barrett."
+  DropItem "shortyspawn", 255, 3
+  DropItem "shotgunammo"
+  States
+  {
+  Spawn:
+    BRT1 V 10 A_Look
+    Loop
+  see:
+    BRT1 W 1
+	goto Missile
+  chase:
+    BRT1 A 0 A_jumpifinventory("barrettfired",2,"reload")
+    BRT1 A 0 A_AlertMonsters(150)
+	BRT1 AABBCCDD 2 A_Chase
+	loop
+  Idle:
+    BRT1 E 10 A_Look
+    goto chase
+  Missile:
+	BRT1 W 5 fast A_FaceTarget
+	BRT1 E 10 A_FaceTarget
+	BRT1 F 1 bright A_PlaySound("weapons/sawedofffire",CHAN_WEAPON)
+	BRT1 F 0 A_AlertMonsters
+	BRT1 F 0 A_giveinventory("barrettfired",1)
+	BRT1 FFFFF 0 bright A_customMissile("BulletTracersmall", 32, 12, random(-9, 9), CMF_OFFSETPITCH, random(-1, 1))
+    BRT1 F 10 bright A_customMissile("BulletTracersmall", 32, 12, random(-9, 9), CMF_OFFSETPITCH, random(-1, 1))
+    Goto chase
+  Reload:
+	BRT1 Y 5 A_FaceTarget
+    BRT1 Y 1 A_PlaySound("weapons/sawedoffopen",CHAN_WEAPON)
+	BRT1 Z 10 A_FaceTarget
+	BRT1 W 10 A_PlaySound("weapons/sawedoffload",CHAN_WEAPON)
+	BRT1 Z 10 A_PlaySound("weapons/sawedoffclose",CHAN_WEAPON)
+	BRT1 Y 10 A_takeinventory("barrettfired",2)
+    Goto chase
+  Pain:
+    BRT1 G 4
+    BRT1 G 4 A_Pain
+    Goto chase
+  BURN:                
+    BRT1 I 1 A_PlaySound("Barrett/fire", CHAN_VOICE)
+    VUL2 A 0 A_HideThing
+    VUL2 A 0 A_Fall
+    VUL2 A 0 A_SpawnItem("BurnDeathHuman",1,0,0)
+    VUL2 A -1
+    Stop
+  Death.Crowdamage:
+    BRT1 G 5 A_playsound("Barrett/dazed",CHAN_VOICE,1.0)
+	BRT1 I 6 
+	BRT1 J 3 
+	BRT1 J 0
+	BRT1 J 0 A_SpawnItemEx ("BarrettDazed",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION,0,10)
+	BRT1 J 0 A_HIDETHING
+	BRT1 J -1 
+	STOP
+  Death:
+    BRT1 G 5 A_Scream
+    BRT1 I 7 A_AlertMonsters(256)
+    BRT1 J 5 A_NoBlocking
+    BRT1 K 4 acs_execute(51,12)
+    BRT1 L -1
+    Stop
+  XDeath.fire:
+  XDeath:
+    BRT1  M 3 A_PlaySound("Special/Gibdeath", CHAN_BODY)
+	BRT1  M 3 A_PlaySound("Barrett/Gib", CHAN_VOICE)
+	BRT1  A 0 A_radiusgive("goonfear",512,0,4)
+	BRT1  NNNN 0 A_SpawnDebris("FlyingBlood",1)
+    BRT1  N 4 A_SpawnDebris("FlyingGibOffal",1)
+	BRT1  NN 0 A_SpawnDebris("FlyingBlood",1)
+	BRT1  N 0 A_SpawnDebris("FlyingGibArm",1)
+	BRT1  N 0 A_SpawnDebris("FlyingGibEntrails",1)
+	BRT1  N 0 A_SpawnDebris("FlyingGibRib",1)
+    BRT1  O 4 A_NoBlocking
+	BRT1  NNN 0 A_SpawnDebris("FlyingBlood",1)
+    BRT1  PQRST 4
+    BRT1  U -1
+    Stop
+  }
+}
+ACTOR BarrettDazed: pistolthug
+{
+  Health 20
+   Radius 10
+  Height 32
+  mass 150
+  Speed 0
+  species human
+  PainChance 192
+  damagefactor "crowdamage", 2.0
+  scale 1
+  PainSound "Barrett/pain"
+  DeathSound "Barrett/death"
+  Obituary "%o was blown away by Barrett."
+  DropItem "shortyspawn", 255, 3
+  DropItem "shotgunammo"
+  +FRIENDLY
+  States
+  {
+  Spawn:
+    BRT1 X 10 
+    Loop
+  see:
+    BRT1 X 10 A_WANDER
+	loop
+  Idle:
+    BRT1 X 0 
+    goto spawn
+  Pain:
+    BRT1 G 4
+    BRT1 G 4 A_Pain
+    Goto spawn
+  BURN:                
+    BRT1 I 1 A_PlaySound("Barrett/fire", CHAN_VOICE)
+    VUL2 A 0 A_HideThing
+    VUL2 A 0 A_Fall
+    VUL2 A 0 A_SpawnItem("BurnDeathHuman",1,0,0)
+    VUL2 A -1
+    Stop
+  Death:
+    BRT1 G 5 A_Scream
+    BRT1 I 7 A_AlertMonsters(256)
+    BRT1 J 5 A_NoBlocking
+    BRT1 K 4 acs_execute(51,12)
+    BRT1 L -1
+    Stop
+  XDeath.fire:
+  XDeath:
+    BRT1  M 3 A_PlaySound("Special/Gibdeath", CHAN_BODY)
+	BRT1  M 3 A_PlaySound("Barrett/Gib", CHAN_VOICE)
+	BRT1  A 0 A_radiusgive("goonfear",512,0,4)
+	BRT1  NNNN 0 A_SpawnDebris("FlyingBlood",1)
+    BRT1  N 4 A_SpawnDebris("FlyingGibOffal",1)
+	BRT1  NN 0 A_SpawnDebris("FlyingBlood",1)
+	BRT1  N 0 A_SpawnDebris("FlyingGibArm",1)
+	BRT1  N 0 A_SpawnDebris("FlyingGibEntrails",1)
+	BRT1  N 0 A_SpawnDebris("FlyingGibRib",1)
+    BRT1  O 4 A_NoBlocking
+	BRT1  NNN 0 A_SpawnDebris("FlyingBlood",1)
+    BRT1  PQRST 4
+    BRT1  U -1
+    Stop
+  }
+}
+ACTOR BarrettBattleBuddy: BarrettInsane 904
+{
+  seesound "Barrett/see2"
+  +FRIENDLY
+  states
+  {
+  Spawn:
+    BRT1 V 6 A_turretlook
+    Loop
+  Missile:
+	BRT1 W 5 fast A_FaceTarget
+	BRT1 E 10 A_FaceTarget
+	BRT1 F 1 bright A_PlaySound("weapons/sawedofffire",CHAN_WEAPON)
+	BRT1 F 0 A_AlertMonsters
+	BRT1 F 0 A_giveinventory("barrettfired",1)
+	BRT1 FFFFF 0 bright A_customMissile("BulletTracerfriend", 32, 12, random(-9, 9), CMF_OFFSETPITCH, random(-1, 1))
+    BRT1 F 10 bright A_customMissile("BulletTracerfriend", 32, 12, random(-9, 9), CMF_OFFSETPITCH, random(-1, 1))
+    Goto chase
+   Death.crowdamage:
+    BRT1 G 5 A_Scream
+    BRT1 I 7 A_AlertMonsters(256)
+    BRT1 J 5 A_NoBlocking
+    BRT1 K 4
+    BRT1 L -1
+    Stop
+	}
+}
+Actor MojoTheChamp: ScabbieSavage 905
+{
+-COUNTKILL
+health 300
+painchance 64
+states
+{
+Melee:
+    SARG EF 6 Fast A_FaceTarget
+    SARG GG 4 Fast A_CustomMeleeAttack(random(2,4)*5, "weapons/crowbarhit")
+    Goto See
+SideEffects:
+    MOJO A 4 A_playsound("Cannibal/mojoexplodo",CHAN_VOICE,1.0)
+    MOJO A 4 A_Noblocking
+	MOJO BCCBCCAAABCCCBCCCCCBAAAA 4
+	MOJO DDEEFFGHIJKLMNO 4
+	MOJO PQ 2 A_playsound("gasbag/death",CHAN_BODY,1.0)
+	MOJO QQQQ 0 A_SpawnDebris("FlyingGibOffal",1)
+	MOJO QQQQ 0  A_SpawnDebris("FlyingGibEntrails",1)
+	MOJO QQQQ 0 A_SpawnDebris("FlyingBlood",1)
+	MOJO Q 1 A_DIE
+Death:
+    SARG I 8
+    SARG J 8 A_Scream
+    SARG K 4 ACS_EXECUTE(16,12)
+    SARG L 4 A_NoBlocking
+    SARG M 4
+    SARG N -1
+    Stop
+}
+}
+actor PorcelainRescued: actor 13113
+ {
+  Health 110
+  PainChance 128
+  Speed 9
+  Radius 20
+  Height 56
+  scale 0.75
+  Monster
+  +NEVERTARGET
+  -COUNTKILL
+  +NOSPLASHALERT
+  +FLOORCLIP
+  +MISSILEMORE
+  +MISSILEEVENMORE
+  +NEVERRESPAWN
+  +ISMONSTER
+  +AVOIDMELEE
+  +FRIENDLY
+   Decal "BulletChip"
+  SeeSound ""
+  PainSound "Porcelain/pain"
+  deathsound "Porcelain/death"
+  Attacksound "weapons/grizlygun"
+  Obituary "%o was perforated for picking on Porcelain."
+  DropItem "pumpyspawn"
+  DropItem "questlocket"
+  States
+  {
+   Spawn:
+    PORC V 6 A_turretlook
+    Loop
+	Idle:
+    PORC V 6 A_turretlook
+    Loop
+   See:
+    PORC AABBCCDD 2 A_chase
+    Loop
+   Missile:
+    PORC E 10 Fast A_FaceTarget
+	PORC E 0 A_FaceTarget
+	PORC E 5 A_FaceTarget
+	PORC F 1 bright A_customMissile("BulletTracerfriend", 32, 12, random(-9, 9), CMF_OFFSETPITCH, random(-1, 1))
+	PORC FFF 0 A_customMissile("BulletTracerfriend", 32, 12, random(-9, 9), CMF_OFFSETPITCH, random(-1, 1))
+    PORC F 0 bright A_PlaySound ("weapons/grizlygun", CHAN_WEAPON)
+	PORC F 0 A_AlertMonsters
+    PORC F 9 bright A_customMissile("BulletTracerfriend", 32, 0, random(-6, 6), 1, random(-4, 4))
+    PORC E 5 A_PlaySound ("weapons/SHOTGR", CHAN_item)
+    PORC E 10 A_SentinelRefire()
+    Goto Missile+1
+    Goto See
+   JUMP:
+    PCLB A 0
+	PCLB A 0 A_ChangeFlag("SHOOTABLE", false)
+	PCLB A 0  A_ChangeFlag("SHOOTABLE", false)
+	PCLB ABCDDEEFGHIJJJJ 4
+	goto spawn
+   Pain:
+    PORC G 1 
+    PORC G 8 Fast A_Pain
+    Goto See
+   greetings:
+    PORC VWWXVWVWXVWWV 5 A_turretlook
+    goto spawn
+   Yes:
+    PORC E 1 A_jump(96,"yes2")
+    PORC VWVWXVWWVXVW 5
+	goto spawn
+   Yes2:
+    PORC WWXVWVVWVWXVWVWWVW 5
+	goto spawn
+    Death:
+    PORC H 3 ACS_execute(28,0)
+    PORC I 4 A_Scream
+    PORC J 4 A_NoBlocking
+    PORC K 3
+	PORC L 3
+    PORC M -1
+    Stop
+	}
+	}
+actor PorcelainBattleBuddy: PorcelainRescued
+{
++FRIENDLY
+ States
+  {
+   Spawn:
+    PORC V 6 A_look
+    Loop
+	Idle:
+    PORC V 6 A_look
+    Loop
+}
+}
+actor WALKER: actor 455
+ {
+  Health 180
+  PainChance 128
+  Speed 8
+  Radius 20
+  Height 56
+  scale 0.8
+  Monster
+  +NEVERTARGET
+  -COUNTKILL
+  +NOSPLASHALERT
+  +FLOORCLIP
+  +MISSILEMORE
+  +MISSILEEVENMORE
+  +NEVERRESPAWN
+  +ISMONSTER
+  MinMissileChance 150
+  AttackSound "weapons/shotgun"
+  DeathSound "*death"
+  PainSound "*pain50"
+  Obituary "%o was gunned down by Walker."
+  DropItem "shotgun"
+  States
+  {
+   Spawn:
+    WLKR V 6 A_turretlook
+    Loop
+	Idle:
+    WLKR E 6 A_turretlook
+    Loop
+   See:
+    WLKR AABBCCDD 2 A_FASTchase
+    Loop
+   greetings:
+    WLKR V 6 A_turretlook
+    Loop
+   Missile:
+    WLKR E 8 Fast A_FaceTarget
+    WLKR F 4 Fast A_PlaySound ("weapons/grizlygun", CHAN_WEAPON)
+	WLKR FFFFF 0 A_customMissile("BulletTracerSmall", 32, 12, random(-9, 9), CMF_OFFSETPITCH, random(-1, 1))
+    WLKR E 3 Fast A_AlertMonsters
+	WLKR E 3 Fast A_PlaySound ("weapons/SHOTGR", CHAN_item)
+    Goto See
+   Pain:
+    WLKR E 8 Fast A_Pain
+    Goto See
+   Death:
+    WLKR G 2
+    WLKR H 4 A_Scream
+    WLKR I 5
+    WLKR J 4
+    WLKR K 4 A_NoBlocking
+    WLKR L -1
+    Stop
+	}
+	}
+actor GARAVITO: actor 488
+ {
+  Health 160
+  PainChance 128
+  Speed 10
+  Radius 20
+  Height 56
+  scale 0.75
+  Monster
+  +NEVERTARGET
+  -COUNTKILL
+  +NOSPLASHALERT
+  +FLOORCLIP
+  +MISSILEMORE
+  +MISSILEEVENMORE
+  +NEVERRESPAWN
+  +ISMONSTER
+  decal "BulletChip"
+  AttackSound "weapons/M16Fire"
+  DeathSound "*death"
+  PainSound "*pain50"
+  Obituary "%o was 'retired' by Garavito."
+  DropItem "Ar15Spawn"
+  DropItem "questc4"
+  States
+  {
+   Spawn:
+//     GARV V 6 A_turretlook
+    GARV V 6 A_Look
+    Loop
+   See:
+    GARV A 0 A_ALERTMONSTERS
+    GARV ABCD 3 A_FASTchase
+    Loop
+   greetings:
+    GARV VXYZZYYZYZYZYYZYYZYYZYZYXV 5 A_turretlook
+    goto spawn
+    Yes:
+    GARV V 1 A_jump(96,"yes2")
+	GARV V 1 A_jump(96,"yes3")
+    GAR2 ABCBCBCBBCCBCBCBBCBA 5
+	goto spawn
+   Yes2:
+    GAR2 ABCBCBCBBBAAFGHGGHGHHGGHIGFEA 5
+	goto spawn
+   Yes3:
+    GAR2 DJKJKJJKFGHGGGHGHGHIGHFED 5
+	goto spawn
+   Missile:
+    GARV W 10 A_FaceTarget
+	GARV E 5 A_FaceTarget
+    GARV FEFEFE 3 Bright A_customMissile("BulletTracermedium", 32, 12, random(-4, 4), CMF_OFFSETPITCH, random(-1, 1))
+    GARV E 10 A_SentinelRefire()
+    Goto Missile+1
+    Goto See
+   Pain:
+    GARV G 1 A_ChangeFlag("FRIENDLY", FALSE)
+    GARV G 8 Fast A_Pain
+    Goto See
+   Death:
+    GARV G 3 A_Scream
+    GARV H 4 a_givetotarget("dialogtoken16",1)
+    GARV I 4 A_NoBlocking
+    GARV JK 3
+    GARV L -1
+    Stop
+	}
+	}
+actor TheGeneral: actor 13107
+ {
+  Health 10000
+  PainChance 128
+  Speed 0
+  Radius 20
+  Height 56
+  scale 0.8
+  Monster
+  +NEVERTARGET
+  -COUNTKILL
+  -shootable
+  +NOSPLASHALERT
+  +FLOORCLIP
+  +NEVERRESPAWN
+  +ISMONSTER
+  States
+  {
+   Spawn:
+    GEN1 A 10 
+    Loop
+   See:
+    GEN1 A 10 A_chase
+    Loop
+   greetings:
+    GEN1 BCDEEFFFGECDCDEDBA 5 
+    goto spawn
+   Yes:
+    GEN1 B 1 A_jump(96,"yes2")
+	GEN1 B 1 A_jump(96,"yes3")
+    GEN1 HIJKIHHKJKIHIJB 5
+	goto spawn
+   Yes2:
+    GEN1 BKLMNOPOPNOPPNOMLKB 5
+	goto spawn
+   Yes3:
+    GEN1 BCDEHIJKHIKKJJHIJHB 5
+	goto spawn
+   Missile:
+    GEN1 A 10
+    Goto See
+   Pain:
+    GEN1 A 10
+    Goto See
+   Death:
+    GEN1 A -1
+    Stop
+	}
+	}
+actor TURRET: actor 489
+{
+  height 48
+  radius 32
+  Health 200
+  Speed 0
+  PainChance 0
+  Mass 10000000
+  Monster
+  +SOLID
+  -CANPASS
+  +AMBUSH
+  +NOBLOOD
+  +NOSPLASHALERT
+  -COUNTKILL
+  MinMissileChance 150
+  seesound "turret/see"
+ States
+  {
+  Spawn:
+    TRT1 A 5 A_LOOKEX(LOF_NOSOUNDCHECK,0, 780, 0, 0, "FIRECHECK2")
+    Loop
+  See:
+    TRT1 A 2 A_Chase
+    Loop
+  Missile:
+  Pain:
+    TRT1 A 1 A_facetarget
+	TRT1 A 0 A_playsound("turret/start", CHAN_weapon)
+	TRT1 A 33 A_FACETARGET
+    goto fireloop
+  FIRECHECK:
+    TRT1 A 0 A_JumpIfTargetInLOS("fireloop", 0, JLOSF_DEADNOJUMP)
+	goto FIREEND
+  FIRECHECK2:
+    TRT1 A 1 A_JumpIfTargetInLOS("Missile", 0, JLOSF_DEADNOJUMP)
+	TRT1 A 0 A_cleartarget
+	goto spawn
+  FIRELOOP:
+    TRT1 B 1 A_playsound("turret/fire", CHAN_WEAPON)
+	TRT1 B 0 A_playsound("turret/far", CHAN_VOICE)
+	TRT1 A 0 A_FACETARGET
+	TRT1 B 2 bright A_CustomMissile("MGTracer",32,0,random(-3,3),0,random(0,3))
+	TRT1 A 0 A_FACETARGET
+	TRT1 C 3 bright A_CustomMissile("MGTracer",32,0,random(-3,3),0,random(0,3))
+	TRT1 A 0 A_FACETARGET
+	TRT1 B 3 bright A_CustomMissile("ExcessTracer",32,0,random(-3,3),0,random(0,3))
+	TRT1 A 0 A_FACETARGET
+	TRT1 B 0 A_playsound("turret/far", CHAN_VOICE)
+	TRT1 C 3 bright A_CustomMissile("MGTracer",32,0,random(-3,3),0,random(0,3))
+	TRT1 A 0 A_FACETARGET
+	TRT1 B 3 bright A_CustomMissile("MGTracer",32,0,random(-3,3),0,random(0,3))
+	TRT1 A 0 A_FACETARGET
+	TRT1 C 3 bright A_CustomMissile("ExcessTracer",32,0,random(-3,3),0,random(0,3))
+	TRT1 A 0 A_FACETARGET
+	TRT1 B 3 bright A_CustomMissile("MGTracer",32,0,random(-3,3),0,random(0,3))
+	TRT1 A 0 A_FACETARGET
+	TRT1 B 0 A_playsound("turret/far", CHAN_VOICE)
+	TRT1 C 3 bright A_CustomMissile("MGTracer",32,0,random(-3,3),0,random(0,3))
+	TRT1 A 0 A_FACETARGET
+	TRT1 B 3 bright A_CustomMissile("ExcessTracer",32,0,random(-3,3),0,random(0,3))
+	TRT1 A 0 A_FACETARGET
+	TRT1 B 2 bright A_LOOKEX(LOF_NOSOUNDCHECK,0, 780, 0, 0, "FIRECHECK")
+	TRT1 A 1 A_FACETARGET
+	goto fireend
+  FIREEND:
+    TRT1 A 1 A_PLAYSOUND("turret/end", CHAN_WEAPON)
+    TRT1 A 34 
+    goto spawn
+  Death:
+    TNT1 A 2 A_SpawnItemEx("HEExplode")
+    TRT2 A -1
+    Stop
+  }
+}
+Actor DeadTurret : Turret 494
+{
+		Skip_Super
+	States
+	{
+	Spawn:
+		Goto Super::Death+1
+	}
+}
+Actor PsychicMutantFakeBoss: actor 495
+{
+  Radius 4
+  Height 56
+  +NODAMAGE
+  +NOBLOCKMAP
+  States
+  {
+   Spawn:
+    PSYM VWXYW 6
+    loop
+   Anim1:
+    PSYM VWXYWVZABCD 6
+    goto idle1
+   Idle1:
+    PSYM BABCD 6
+	loop
+   Supersaiyan:
+    PSYM EFGH 6
+	goto idle2
+   idle2:
+    PSYM IJKH 6
+	loop
+   Attack1:
+    PSYM LMN 6
+	goto idle3 
+   Idle3:
+    PSYM ON 6
+	loop
+   Attack2:
+    PSYM P 10
+	loop
+	}
+	}
+Actor PsychicMutantForcefieldFake: actor 496
+{
+  Health 100000000
+  Radius 32
+  Height 72
+  Mass 0x7fffffff
+  renderstyle add
+  painchance 256
+  alpha 0.8
+  +SOLID
+  +SHOOTABLE
+  +NOBLOOD
+  DeathSound "BellRing"
+  States
+  {
+  Spawn:
+    TNT1 A 10
+    loop
+  Pain:
+    FFLD A 1 A_jump(96,"pain2")
+	FFLD A 1 A_jump(96,"pain3")
+    FFLD A 1
+	goto spawn
+  Pain2:
+    FFLD B 2
+	goto spawn
+  Pain3:
+    FFLD C 2
+	goto spawn
+   }
+ }
+ ACTOR LARRY: actor 387
+{
+  Health 175
+  PainChance 100
+  Speed 6
+  Radius 18
+  Height 56
+  Mass 800
+  scale 0.8
+  Monster
+  +FLOORCLIP
+  -COUNTKILL
+  SeeSound "slayer/see"
+  AttackSound "weapons/crowbarswing"
+  PainSound "slayer/pain"
+  DeathSound "slayer/die"
+  ActiveSound "slayer/act"
+  Obituary "%o had his life rescheduled by Larry."
+  States
+  {
+  Spawn:
+    LARY A 20 A_turretLook
+	LARY A 1 A_jump(64,"fidget1")
+	LARY A 1 A_jump(32,"fidget2")
+	LARY A 1 A_jump(32,"fidget3")
+    Loop
+  Fidget1:
+    LARY AMLMA 3 A_turretLook
+	goto spawn
+  Fidget2:
+    LARY ABHNONONOPNHBA 4 A_turretLook
+	goto spawn
+  Fidget3:
+    LARY AEFEFEFIIIA 4 A_turretLook
+	goto spawn
+  See:
+    SLY2 AABBCCDD 3 Fast A_Chase
+    Loop
+  Missile:
+    SLY2 E 4 A_FACETARGET
+	SLY2 F 2 A_FACETARGET
+	SLY2 F 0 A_PlaySound ("weapons/SHOTGR", CHAN_item)
+	SLY2 F 4 A_FACETARGET
+	SLY2 GG 4 A_FACETARGET
+    SLY2 F 4 A_FACETARGET
+    SLY2 HH 4 A_FACETARGET
+    SLY2 H 5
+	SLY2 I 1 bright
+	SLY2 IIIIII 0 A_customMissile("BulletTracerSmall", 32, 12, random(-10, 10), CMF_OFFSETPITCH, random(-1, 1))
+	SLY2 I 0 A_PlaySound ("weapons/grizlygun", CHAN_WEAPON)
+	SLY2 I 0 A_AlertMonsters
+	SLY2 I 9 bright
+    SLY2 H 8
+	SLY2 E 6
+	goto see	
+  Melee:
+    SLY2 W 4 A_PlaySound("weapons/crowbarswing")
+    SLY2 X 2 A_CustomMeleeAttack(random(3,5)*5, "weapons/crowbarhit")
+    SLY2 Y 6
+    Goto See
+  Pain:
+    SLY2 J 3
+	SLY2 J 3 A_pain
+	goto see
+  Death:
+	SLY2 J 4
+	SLYR K 5 A_scream
+	SLYR L 5 A_Noblocking
+    SLYR M 7
+	SLYR N 8
+    SLYR O 5
+    SLYR PPPPPPQPQPQ 4
+    SLYR Q -1 
+	stop
+   greetings:
+    LARY BGGGGHHGGHHGGHGHGGGHGBA 4 A_turretlook
+    goto spawn
+    Yes:
+    LARY A 1 A_jump(96,"yes2")
+	LARY A 1 A_jump(96,"yes3")
+    LARY ABCDDCDCDDCCDCDCDDCBA 3
+	goto spawn
+   Yes2:
+    LARY ABGHGGHGHIJJIIJJIJJIJBA 3
+	goto spawn
+   Yes3:
+    LARY ABNONLIIIJIJKIJJIIJKII 3
+	goto spawn
+  }
+}
+ACTOR MILLER: Actor 425
+{
+  Health 70
+  Radius 15
+  cameraheight 48
+  Height 48
+  mass 90
+  Speed 0
+  species human
+  PainChance 70
+  Monster
+  +FLOORCLIP
+  +missilemore
+  +MISSILEEVENMORE
+  -COUNTKILL
+  scale 0.8
+  Decal "BulletChip"
+  PainSound "goon/pain"
+  DeathSound "goon/death"
+  Obituary "%o was shot by Jack Miller."
+  DropItem "revolverspawn", 255
+  DropItem "fortyfiveloose", 255, 4
+  States
+  {
+  Spawn:
+    JMLR V 10 A_Look
+    Loop
+   //Switching
+   //Switching
+  See:
+	//Normal Mode
+	JML2 E 2 A_setsize(-1,32,false)
+	JML2 EEE 6 A_Chase
+	JML2 F 0 A_jump(128,"see")
+	JML2 F 3 fast A_FaceTarget
+	JMLR E 3 A_CHASE
+	JMLR E 0 A_setsize(-1,48,false)
+	JMLR E 3 A_FACETARGET
+	JMLR EEEE 0 A_CHASE
+	JML2 F 4
+	loop
+  Idle:
+    JMLR v 0 A_setsize(-1,48,false)
+    JMLR V 10 A_Look
+    Loop
+  Missile:
+    JMLR E 3 A_FaceTarget
+	JMLR F 0 A_PlaySound("weapons/revolverfire",CHAN_WEAPON)
+	VUL1 F 0 A_PlaySound("Distant/revolver",CHAN_BODY)
+	JMLR F 0 A_AlertMonsters
+    JMLR F 5 bright A_customMissile("BulletTracerlarge", 40, 12, random(-2, 2), CMF_OFFSETPITCH, random(-1, 1))
+	JMLR E 10
+	JML2 F 4
+    Goto see
+  Pain:
+    JML2 G 4 A_setsize(-1,32,false)
+    JML2 G 4 A_Pain
+    Goto See
+  BURN:                
+    JMLR H 1 A_PlaySound("special/firedeath", CHAN_VOICE)
+    JMLR A 0 A_HideThing
+    JMLR A 0 A_Fall
+    JMLR A 0 A_SpawnItem("BurnDeathHuman",1,0,0)
+    JMLR A -1
+    Stop
+  Death:
+    JMLR H 5 A_Scream
+    JMLR I 7 A_radiusgive("goonfear",512,0,2)
+    JMLR J 7 A_AlertMonsters(256)
+    JMLR K 5 A_NoBlocking
+    TNT1 A -1 A_SpawnItem("MillerWounded",1,0,0)
+    Stop
+  greetings:
+    JMLR VWYWYZWVWYWYYWYWWZYWV 4 A_turretlook
+    goto spawn
+    Yes:
+    JMLR V 1 A_jump(96,"yes2")
+    JMLR VWYWYZWVWYWYYWYWWZYWV 4
+	goto spawn
+   Yes2:
+    JML2 ABBABABCDCDDCDCDBAABAABABAB 3
+	goto spawn
+  }
+}
+Actor MILLERWOUNDED
+{
+ Health 5
+  Radius 15
+  cameraheight 32
+  Height 32
+  mass 90
+  Speed 0
+  species human
+  PainChance 255
+  Monster
+  +FLOORCLIP
+  -COUNTKILL
+  scale 0.8
+  Decal "BulletChip"
+  PainSound "goon/pain"
+  DeathSound "goon/death"
+  Obituary "%o was shot by Jack Miller."
+  States
+  {
+  Spawn:
+    JML2 H 10 
+	JML2 I 10
+    Loop
+  see: 
+    JML2 H 1 
+	goto spawn
+  Pain:
+    JML2 J 4 
+    JML2 J 4 A_Pain
+    Goto See
+  BURN:                
+    JML2 J 1 A_PlaySound("special/firedeath", CHAN_VOICE)
+    JMLR A 0 A_HideThing
+    JMLR A 0 A_Fall
+    JMLR A 0 A_SpawnItem("BurnDeathHuman",1,0,0)
+    JMLR A -1
+    Stop
+  Death:
+    JML2 J 5 A_Scream
+    JML2 K 7 A_AlertMonsters(256)
+    JML2 L 5 A_NoBlocking
+    JML2 L -1
+    Stop
+  greetings:
+    JML2 HIIHMNHMMHNHMMMMNH 4
+    goto spawn
+    Yes:
+    JML2 HIIHMNHMMHNHMMMMNH 4
+	goto spawn
+  }
+}
+ACTOR MILLERHealthy: Actor 13092
+{
+  Health 60
+  Radius 15
+  cameraheight 48
+  Height 48
+  mass 90
+  Speed 0
+  species human
+  PainChance 70
+  Monster
+  +FLOORCLIP
+  +missilemore
+  +MISSILEEVENMORE
+  -COUNTKILL
+  scale 0.8
+  Decal "BulletChip"
+  PainSound "goon/pain"
+  DeathSound "goon/death"
+  Obituary "%o was shot by Jack Miller."
+  DropItem "revolverspawn", 255
+  DropItem "fortyfiveloose", 255, 4
+  States
+  {
+  Spawn:
+    JMLR V 10 A_turretLook
+    Loop
+   //Switching
+   //Switching
+  See:
+	//Normal Mode
+	JMLR EEE 6 A_Chase
+	loop
+  Idle:
+    JML2 V 10 A_turretLook
+    Loop
+  Missile:
+    JMLR E 3 A_FaceTarget
+	JMLR F 0 A_PlaySound("weapons/revolverfire",CHAN_WEAPON)
+	VUL1 F 0 A_PlaySound("Distant/revolver",CHAN_BODY)
+	JMLR F 0 A_AlertMonsters
+    JMLR F 5 bright A_customMissile("BulletTracerlarge", 40, 12, random(-2, 2), CMF_OFFSETPITCH, random(-1, 1))
+	JMLR E 10
+	JMLR E 4
+    Goto see
+  Pain:
+    JML2 G 4 A_setsize(-1,32,false)
+    JML2 G 4 A_Pain
+    Goto See
+  BURN:                
+    JMLR H 1 A_PlaySound("special/firedeath", CHAN_VOICE)
+    JMLR A 0 A_HideThing
+    JMLR A 0 A_Fall
+    JMLR A 0 A_SpawnItem("BurnDeathHuman",1,0,0)
+    JMLR A -1
+    Stop
+  Death:
+    JMLR H 5 A_Scream
+    JMLR I 7 A_radiusgive("goonfear",512,0,2)
+    JMLR J 7 A_AlertMonsters(256)
+    JMLR K 5 A_NoBlocking
+	JMLR L -1
+    Stop
+  greetings:
+    JML2 VWYWYWVWYWYYWYWWZZYWV 5 A_turretlook
+    goto spawn
+    Yes:
+    JML2 V 1 A_jump(96,"yes2")
+    JML2 VWYWYZWVWYWYYWYWWYWV 5 A_turretlook
+	goto spawn
+   Yes2:
+    JML2 VWYWYWVWYWYYWYWWZZYWV 5 A_turretlook
+	goto spawn
+  }
+}
+ACTOR SILVER: townmilitia 13061
+{
+  Health 150
+   Radius 15
+  Height 64
+  mass 150
+  Speed 9
+  species human
+  PainChance 192
+  damagefactor "crowdamage", 2.0
+  scale 0.7
+  seesound "Barrett/see2"
+  PainSound "Barrett/pain"
+  DeathSound "Barrett/death"
+  Obituary "%o was cut down by Silver."
+  DropItem "shortyspawn", 255, 3
+  DropItem "shotgunammo"
+  States
+  {
+  Spawn:
+    SVR1 V 10 A_TurretLook
+    Loop
+  see:
+    SVR1 AABBCCDD 3 A_chase
+	loop
+  chase:
+	SVR1 AABBCCDD 2 A_Chase
+	loop
+  Idle:
+    SVR1 V 10 A_Look
+    goto chase
+  Missile:
+	SVR1 V 5 fast A_FaceTarget
+	SVR1 V 10 A_FaceTarget
+	SVR1 V 1 bright A_PlaySound("weapons/sawedofffire",CHAN_WEAPON)
+	SVR1 V 0 A_AlertMonsters
+	SVR1 V 0 bright A_customMissile("BulletTracersmall", 32, 12, random(-9, 9), CMF_OFFSETPITCH, random(-1, 1))
+    SVR1 V 10 bright A_customMissile("BulletTracersmall", 32, 12, random(-9, 9), CMF_OFFSETPITCH, random(-1, 1))
+    Goto chase
+  Pain:
+    SVR1 V 4
+    SVR1 V 4 A_Pain
+    Goto chase
+  BURN:                
+    SVR1 V 1 A_PlaySound("Barrett/fire", CHAN_VOICE)
+    VUL2 A 0 A_HideThing
+    VUL2 A 0 A_Fall
+    VUL2 A 0 A_SpawnItem("BurnDeathHuman",1,0,0)
+    VUL2 A -1
+    Stop
+  Death:
+    SVR1 V 5 A_Scream
+    SVR1 V 7 A_AlertMonsters(256)
+    SVR1 V 5 A_NoBlocking
+    SVR1 V 4
+    SVR1 V -1
+    Stop
+  XDeath.fire:
+  XDeath:
+    BRT1  M 3 A_PlaySound("Special/Gibdeath", CHAN_BODY)
+	BRT1  M 3 A_PlaySound("Barrett/Gib", CHAN_VOICE)
+	BRT1  A 0 A_radiusgive("goonfear",512,0,4)
+	BRT1  NNNN 0 A_SpawnDebris("FlyingBlood",1)
+    BRT1  N 4 A_SpawnDebris("FlyingGibOffal",1)
+	BRT1  NN 0 A_SpawnDebris("FlyingBlood",1)
+	BRT1  N 0 A_SpawnDebris("FlyingGibArm",1)
+	BRT1  N 0 A_SpawnDebris("FlyingGibEntrails",1)
+	BRT1  N 0 A_SpawnDebris("FlyingGibRib",1)
+    BRT1  O 4 A_NoBlocking
+	BRT1  NNN 0 A_SpawnDebris("FlyingBlood",1)
+    BRT1  PQRST 4
+    BRT1  U -1
+    Stop
+  greetings:
+    SVR1 VWXXWV 6 A_turretlook
+    goto spawn
+    Yes:
+    SVR1 V 1 A_jump(96,"yes2")
+	SVR1 V 1 A_jump(96,"yes3")
+    SVR1 VWXXWVVVVVVYVVVV 5 
+	goto spawn
+   Yes2:
+    SVR1 VVWWWWWWZWWWVVVV 5
+	goto spawn
+   Yes3:
+    SVR1 VVVVYVVVWWWZWWVV 5
+	goto spawn
+  }
+}
+Actor ScaredRaider: RevolverThug 601
+{
+ -COUNTKILL
+States
+  {
+  Spawn:
+    VUL4 D 10 A_TurretLook
+    Loop
+   //Switching
+   //Switching
+   Yes:
+    VUL4 ABCBCABACBABACBBAACBBACBBA 4
+	goto spawn
+}
+}
+Actor WeldingRaider: RevolverThug 13088
+{
+ -COUNTKILL
+States
+  {
+  Spawn:
+    VWLD A 10 A_TurretLook
+	VWLD A 0 A_jump(64,"Weldingstart")
+    Loop
+   //Switching
+   //Switching
+   Yes:
+    VWLD BCBCBCBBCBBCBBCBB 4
+	goto spawn
+   WeldingStart:
+   VWLD D 10 A_turretLook
+   WeldLoop:
+   VWLD D 0 A_PlaySound("goon/weld",CHAN_WEAPON)
+   VWLD EFGHIFHIFGHFHI 2 bright A_spawnitemex("lanternglow",0,5,8,0)
+   WeldEnd:
+   VWLD D 10 A_jump(192,"Weldloop")
+   goto spawn
+   
+}
+}
+ACTOR GoonsBoss: PistolThug 13075
+{
+  Health 140
+  PainChance 64
+  +missilemore
+  +missileevenmore
+  -avoidmelee
+  scale 0.9
+  Decal "BulletChip"
+  SeeSound "vulture/sight"
+  PainSound "goon/pain"
+  DeathSound "goon/death"
+  Obituary "%o was shot down by the Goon Boss."
+  DropItem "Revolverspawn"
+  DropItem "Revolverspawn"
+  States
+  {
+  Spawn:
+    VULB E 10 A_Look
+    Loop
+  //Switching
+  See:
+    VULB A 0 A_AlertMonsters(150)
+	VULB AABBCCDD 2 A_Chase
+	loop
+  Idle:
+    VULB E 0 A_cleartarget
+    VULB E 10 A_Look
+    Loop
+  Missile:
+    VULB E 10 A_FaceTarget
+	VULB E 0 A_FaceTarget
+    VULB E 10 Fast
+	VULB E 0 A_FaceTarget
+	VULB F 0 A_PlaySound("weapons/revolverfire",CHAN_WEAPON)
+	VULB F 0 A_PlaySound("Distant/revolver",CHAN_BODY)
+	VULB F 0 A_AlertMonsters
+    VULB F 4 bright A_customMissile("BulletTracerlarge", 48, 12, random(-9, 9), CMF_OFFSETPITCH, random(-1, 1))
+	VULB F 3 A_facetarget
+	VULB V 0 A_PlaySound("weapons/revolverfire",CHAN_WEAPON)
+	VULB V 0 A_PlaySound("Distant/revolver",CHAN_BODY)
+	VULB V 0 A_AlertMonsters
+    VULB V 4 bright A_customMissile("BulletTracerlarge", 48, -12, random(-9, 9), CMF_OFFSETPITCH, random(-1, 1))
+	VULB V 3 A_facetarget
+	VULB F 0 A_PlaySound("weapons/revolverfire",CHAN_WEAPON)
+	VULB F 0 A_PlaySound("Distant/revolver",CHAN_BODY)
+	VULB F 0 A_AlertMonsters
+    VULB F 4 bright A_customMissile("BulletTracerlarge", 48, 12, random(-9, 9), CMF_OFFSETPITCH, random(-1, 1))
+	VULB F 3 A_facetarget
+	VULB V 0 A_PlaySound("weapons/revolverfire",CHAN_WEAPON)
+	VULB V 0 A_PlaySound("Distant/revolver",CHAN_BODY)
+	VULB V 0 A_AlertMonsters
+    VULB V 4 bright A_customMissile("BulletTracerlarge", 48, -12, random(-9, 9), CMF_OFFSETPITCH, random(-1, 1))
+	VULB V 3 A_facetarget
+	VULB E 5 A_facetarget
+    Goto see
+  Pain:
+    VULB G 4
+    VULB H 4 A_Pain
+    Goto See
+  BURN:                
+    VULB G 1 A_PlaySound("special/firedeath", CHAN_VOICE)
+	POSS A 0 A_radiusgive("goonfear",512,0,8)
+    POSS A 0 A_HideThing
+    POSS A 0 A_Fall
+    POSS A 0 A_SpawnItem("BurnDeathHuman",1,0,0)
+    POSS A -1
+    Stop
+  Death:
+    VULB G 4 A_Scream
+    VULB H 5 A_radiusgive("goonfear",512,0,4)
+    VULB I 4 A_AlertMonsters(150)
+    VULB J 4 A_NoBlocking
+    VULB K 3
+    VULB L -1
+    Stop
+  XDeath.fire:
+  XDeath:
+    VULB G 4 A_Scream
+    VULB H 5 A_radiusgive("goonfear",512,0,4)
+    VULB I 4 A_AlertMonsters(150)
+    VULB J 4 A_NoBlocking
+    VULB K 3
+    VULB L -1
+    Stop
+  }
+}
+ACTOR Hauer : pistolthug 13084
+{
+  Health 150
+  PainChance 192
+  Speed 12
+  Radius 20
+  Height 56
+  scale 0.75
+ decal "BulletChip"
+  DeathSound "*death"
+  PainSound "*pain50"
+  Obituary "%o was gunned down by Hauer."
+  DropItem "Musketspawn"
+  States
+	{
+	Spawn:
+	HAUR V 1 A_JumpIfInventory("RJNPCHostilityToken",1,"HostileLook")
+	Goto NeutralLook
+	
+	HostileLook:
+		HAUR V 1
+		HAUR V 9 A_Look
+		Goto Spawn
+	NeutralLook:
+	HAUR V 1
+	HAUR V 9  A_turretlook
+    Goto Spawn
+	
+	see:
+	HAUR A 0 A_ALERTMONSTERS
+    HAUR ABCD 4 A_chase
+	loop
+    Missile:
+    HAUR E 15 A_FaceTarget
+    HAUR F 0 A_PlayWeaponSound("weapons/rifleshot")
+	HAUR F 0 A_customMissile("MusketTracer",56,12,random(-1, 1), CMF_OFFSETPITCH, random(-1, 1))
+    HAUR F 5 Bright A_FaceTarget
+	HAUR A 0 A_PlaySound("weapons/rifledistant",3)
+	HAUR E 5 A_FaceTarget
+	HAUR W 10 A_PlaySound("weapons/musketlever",7)
+    Goto See
+   Pain:
+    GARD G 1 A_ChangeFlag("FRIENDLY", FALSE)
+    GARD G 8 Fast A_Pain
+    Goto See
+   Death:
+    GARD G 3 A_Scream
+    GARD H 4 A_GiveToTarget("RJPlayerToken_KilledHauer", 1)
+    GARD I 4 A_NoBlocking
+    GARD J 3
+    GARD K -1
+    Stop
+	}
+}
+ACTOR HauerHostile : pistolthug 13085
+{
+  Health 150
+  PainChance 192
+  Speed 12
+  Radius 20
+  Height 56
+  +STANDSTILL
+  scale 0.75
+ decal "BulletChip"
+  DeathSound "*death"
+  PainSound "*pain50"
+  Obituary "%o was gunned down by Hauer."
+  DropItem "Musketspawn"
+  States
+	{
+	Spawn:
+	HAUR V 10  A_look
+    loop
+	see:
+	HAUR A 0 A_ALERTMONSTERS
+    HAUR ABCD 4 A_chase
+	loop
+    Missile:
+    HAUR E 15 A_FaceTarget
+    HAUR F 0 A_PlayWeaponSound("weapons/rifleshot")
+	HAUR F 0 A_customMissile("MusketTracer",56,12,random(-1, 1), CMF_OFFSETPITCH, random(-1, 1))
+    HAUR F 5 Bright A_FaceTarget
+	HAUR A 0 A_PlaySound("weapons/rifledistant",3)
+	HAUR E 5 A_FaceTarget
+	HAUR W 10 A_PlaySound("weapons/musketlever",7)
+    Goto See
+   Pain:
+    GARD G 1 A_ChangeFlag("FRIENDLY", FALSE)
+    GARD G 8 Fast A_Pain
+    Goto See
+   Death:
+    GARD G 3 A_Scream
+    GARD H 4 
+    GARD I 4 A_NoBlocking
+    GARD J 3
+    GARD K -1
+    Stop
+	}
+}
+   

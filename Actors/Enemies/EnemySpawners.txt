@@ -1,0 +1,16 @@
+actor ThugSpawner : RandomSpawner replaces zombieman
+{
+    DropItem "PistolThug", 255, 1
+    DropItem "RevolverThug", 255, 1
+}
+actor AssaultSpawner : RandomSpawner replaces Marinechaingun
+{
+    DropItem "NewGuardTrooper", 255, 1
+	DropItem "GrrlThug", 255, 1
+}
+actor TacticalSpawner : RandomSpawner replaces Chaingunguy
+{
+    DropItem "NewGuardTrooper", 255, 1
+	DropItem "GrrlThug", 255, 1
+}
+

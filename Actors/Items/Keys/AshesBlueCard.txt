@@ -1,0 +1,16 @@
+ACTOR AshesBlueCard : CustomInventory replaces Bluecard
+{
+  Inventory.PickupMessage "Got the blue employee card"
+  Inventory.Icon "STKEYS0"
+  scale 0.7
+  States
+  {
+  Spawn:
+    BKEY A 10
+    BKEY A 10 Bright
+    Loop
+  Pickup:
+	TNT1 A 1 A_GiveInventory("Bluecard",1)
+	stop
+  }
+}

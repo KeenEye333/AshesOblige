@@ -1,0 +1,72 @@
+ACTOR Pitfiend: actor replaces DoomImp 
+{
+  Health 60
+  Radius 16
+  Height 35
+  Mass 80
+  Speed 10
+  scale 0.8
+  PainChance 220
+  Monster
+  +FLOORCLIP
+  +NEVERFAST
+  SeeSound "fiend/sight"
+  PainSound "fiend/pain"
+  DeathSound "fiend/death"
+  ActiveSound "fiend/active"
+  Obituary "%o was slimed by a pitfiend."
+  HitObituary "%o was thrown to the pitfiends."
+  States
+  {
+  Spawn:
+    TROO D 5 A_Look
+    Loop
+  See:
+    TROO A 0 A_AlertMonsters(150)
+    TROO AABBCCDD 2 A_Chase
+    Loop
+  Melee:
+  Missile:
+    TROO EF 8 A_FaceTarget
+    TROO G 10 A_CustomComboAttack("FiendSpit", 20, 3 * random(1, 8), "fiend/claw")
+    Goto See
+  Pain:
+    TROO H 3 A_Pain
+    TROO H 3 
+    Goto See
+  Death:
+    TROO H 6 A_Scream
+    TROO I 7
+    TROO J 7 
+    TROO K 6 A_AlertMonsters(256)
+    TROO L 6 A_NoBlocking
+	TROO V 6
+    TROO M -1
+    Stop
+  XDeath:
+    TROO N 5 A_PlaySound("Special/Gibdeath")
+	TROO NNNN 0 A_SpawnDebris("FlyingBlood",1)
+    TROO O 5 A_SpawnDebris("FlyingGibOffal",1)
+	TROO NNNN 0 A_SpawnDebris("FlyingBlood",1)
+	TROO N 0 A_SpawnDebris("FlyingGibOffal",1)
+	TROO N 0 A_SpawnDebris("FlyingGibEntrails",1)
+	TROO N 0 A_SpawnDebris("FlyingGibOffal",1)
+    TROO P 4 A_NoBlocking
+	TROO NNN 0 A_SpawnDebris("FlyingBlood",1)
+    TROO QRST 4
+    TROO U -1
+    Stop
+  Raise:
+    TROO MLKJI 8
+    Goto See
+  }
+}
+ACTOR DeadPitFiend : PitFiend replaces DeadDoomImp
+{
+  Skip_Super
+  States
+  {
+  Spawn:
+    Goto Super::Death+6
+  }
+}

@@ -1,0 +1,313 @@
+ACTOR NewGuardTrooper: actor
+{
+  Health 70
+  radius 20
+  height 56
+  Mass 100
+  Speed 6
+  PainChance 170
+  scale 0.7
+  +FLOORCLIP
+  +MISSILEMORE
+  +MISSILEEVENMORE
+  +avoidmelee
+  Monster
+  Decal "BulletChip"
+  SeeSound "Newguard/sight"
+  PainSound "Newguard/pain"
+  DeathSound "Newguard/die"
+  AttackSound "weapons/m16fire"
+  Obituary "%o was put down by a mysterious soldier."
+  DropItem "AR15spawn"
+  DropItem "RifleAmmoDropper"
+  States
+  {
+  Spawn:
+    NGRD E 10 A_Look
+    Loop
+  //Switching
+  See:
+    NGRD A 0 A_AlertMonsters(384)
+	NGRD A 0 A_JumpIfInventory("GoonFear", 1, "CasaultySwitch")
+	//Normal Mode
+	NGRD AABBCCDD 2 A_Chase
+	NGRD A 0 A_checksight("ambushsee")
+	 //Aggressive Mode
+  AggressiveSwitch:
+    NGRD A 0 A_ChangeFlag("avoidmelee", 0)
+    Goto AggressiveSee
+  AggressiveSee:
+	NGRD AABBCCDD 2 A_Chase
+	NGRD A 0 A_jump(220,2)
+	NGRD A 0 A_PlaySound("Newguard/attack",CHAN_VOICE)
+	NGRD A 0 A_checksight("see")
+    Loop
+  //Search Mode
+  WanderSwitch:
+    NGRD A 0 A_ClearTarget
+    Goto WanderSee
+	WanderSee:
+	NGRD A 0 A_jump(220,2)
+	NGRD A 0 A_PlaySound("Newguard/search",CHAN_VOICE)
+    NGRD A 2 A_Wander
+    NGRD A 0 A_LookEx(10, 0, 0, 0, 360, "See")
+    NGRD A 2 A_Wander
+    NGRD A 0 A_LookEx(10, 0, 0, 0, 360, "See")
+    NGRD B 2 A_Wander
+    NGRD A 0 A_LookEx(10, 0, 0, 0, 360, "See")
+	NGRD B 2 A_Wander
+    NGRD A 0 A_LookEx(10, 0, 0, 0, 360, "See")
+	NGRD C 2 A_Wander
+    NGRD A 0 A_LookEx(10, 0, 0, 0, 360, "See")
+	NGRD C 2 A_Wander
+    NGRD A 0 A_LookEx(10, 0, 0, 0, 360, "See")
+	NGRD D 2 A_Wander
+    NGRD A 0 A_LookEx(10, 0, 0, 0, 360, "See")
+	NGRD D 2 A_Wander
+    NGRD A 0 A_LookEx(10, 0, 0, 0, 360, "See")
+	loop
+	//Ambush mode
+	AmbushSee:
+	NGRD A 0 A_ChangeFlag("avoidmelee", 1)
+	NGRD A 0 A_jump(240,2)
+	NGRD A 0 A_PlaySound("Newguard/search",CHAN_VOICE)
+	NGRD AABBCCD 2 A_Chase
+	NGRD D 3 A_jump(32,"waitsee")
+    loop
+	Waitsee: 
+	NGRD E 0 A_FACETARGET
+	NGRD E 10 A_sentinelrefire
+	NGRD E 0 A_jump(32,"Ambushsee")
+	NGRD E 0 A_checksight("waitsee")
+	goto missile+1
+   //Scared Mode
+   Casualtyswitch:
+    NGRD A 0 A_ChangeFlag("AvoidMelee", 1)
+	Scaredsee:
+	NGRD A 0 A_takeinventory("goonfear",3)
+	NGRD A 0 A_jump(64,2)
+	NGRD A 0 A_PlaySound("Newguard/Mandown",CHAN_VOICE)
+	goto see
+  Idle:
+    NGRD E 10 A_Look
+    Loop
+  Missile:
+    NGRD E 10 A_FaceTarget
+	NGRD E 5 A_FaceTarget
+	NGRD E 1 A_PlaySound("weapons/m16fire",CHAN_WEAPON)
+	VUL1 F 0 A_PlaySound("Distant/m16",CHAN_BODY)
+    NGRD F 2 Bright A_customMissile("BulletTracermedium", 32, 12, random(-4, 4), CMF_OFFSETPITCH, random(-1, 1))
+	NGRD E 1 A_PlaySound("weapons/m16fire",CHAN_WEAPON)
+	VUL1 F 0 A_PlaySound("Distant/m16",CHAN_BODY)
+    NGRD F 2 Bright A_customMissile("BulletTracermedium", 32, 12, random(-4, 4), CMF_OFFSETPITCH, random(-1, 1))
+	NGRD E 1 A_PlaySound("weapons/m16fire",CHAN_WEAPON)
+	VUL1 F 0 A_PlaySound("Distant/m16",CHAN_BODY)
+    NGRD F 2 Bright A_customMissile("BulletTracermedium", 32, 12, random(-4, 4), CMF_OFFSETPITCH, random(-1, 1))
+	NGRD E 3 A_facetarget
+	NGRD E 1 A_PlaySound("weapons/m16fire",CHAN_WEAPON)
+	VUL1 F 0 A_PlaySound("Distant/m16",CHAN_BODY)
+    NGRD F 2 Bright A_customMissile("BulletTracermedium", 32, 12, random(-4, 4), CMF_OFFSETPITCH, random(-1, 1))
+	NGRD E 1 A_PlaySound("weapons/m16fire",CHAN_WEAPON)
+	VUL1 F 0 A_PlaySound("Distant/m16",CHAN_BODY)
+    NGRD F 2 Bright A_customMissile("BulletTracermedium", 32, 12, random(-4, 4), CMF_OFFSETPITCH, random(-1, 1))
+	NGRD E 1 A_PlaySound("weapons/m16fire",CHAN_WEAPON)
+	VUL1 F 0 A_PlaySound("Distant/m16",CHAN_BODY)
+    NGRD F 2 Bright A_customMissile("BulletTracermedium", 32, 12, random(-4, 4), CMF_OFFSETPITCH, random(-1, 1))
+    NGRD E 10 A_SentinelRefire()
+    Goto Missile+1
+    Goto See
+  Pain:
+    NGRD G 4
+    NGRD G 4 A_Pain
+    Goto See
+  BURN:                
+    NGRD G 1 A_PlaySound("Newguard/fire", CHAN_VOICE)
+	NGRD A 0 A_radiusgive("goonfear",1024,RGF_MONSTERS,1)
+    NGRD A 0 A_HideThing
+    NGRD A 0 A_Fall
+    NGRD A 0 A_SpawnItem("BurnDeathHuman",1,0,0)
+    NGRD A -1
+    Stop
+  Death:
+    NGRD G 6 A_Scream
+    NGRD H 6 A_radiusgive("goonfear",512,RGF_MONSTERS,1)
+    NGRD I 7 A_AlertMonsters(256)
+    NGRD J 5 A_NoBlocking
+    NGRD K 5
+    NGRD L -1
+    Stop
+  Xdeath.fire:
+  XDeath:
+    VUL3 M 3 A_PlaySound("Newguard/splode", CHAN_BODY)
+	VUL3 M 3 A_PlaySound("goon/explode", CHAN_VOICE)
+	VUL3 A 0 A_radiusgive("goonfear",1024,RGF_MONSTERS,1)
+	VUL3 NNNN 0 A_SpawnDebris("FlyingBlood",1)
+    VUL3 N 4 A_SpawnDebris("FlyingGibOffal",1)
+	VUL3 NN 0 A_SpawnDebris("FlyingBlood",1)
+	VUL3 N 0 A_SpawnDebris("FlyingGibArm",1)
+	VUL3 N 0 A_SpawnDebris("FlyingGibEntrails",1)
+	VUL3 N 0 A_SpawnDebris("FlyingGibRib",1)
+    VUL3 O 4 A_NoBlocking
+	VUL3 NNN 0 A_SpawnDebris("FlyingBlood",1)
+    VUL3 PQRST 4
+    VUL3 U -1
+    Stop
+  }
+}
+
+ACTOR NewGuardTrooperWolf: actor replaces WolfensteinSS
+{
+  Health 70
+  radius 20
+  height 56
+  Mass 100
+  Speed 6
+  PainChance 170
+  scale 0.7
+  +FLOORCLIP
+  +MISSILEMORE
+  +MISSILEEVENMORE
+  +avoidmelee
+  Monster
+  Decal "BulletChip"
+  SeeSound "Newguard/sight"
+  PainSound "Newguard/pain"
+  DeathSound "Newguard/die"
+  AttackSound "weapons/m16fire"
+  Obituary "%o was put down by a mysterious soldier."
+  DropItem "AR15spawn"
+  DropItem "RifleAmmoDropper"
+  States
+  {
+  Spawn:
+    NGRD E 10 A_Look
+    Loop
+  //Switching
+  See:
+    NGRD A 0 A_AlertMonsters(384)
+	NGRD A 0 A_JumpIfInventory("GoonFear", 1, "CasaultySwitch")
+	//Normal Mode
+	NGRD AABBCCDD 2 A_Chase
+	NGRD A 0 A_checksight("ambushsee")
+	 //Aggressive Mode
+  AggressiveSwitch:
+    NGRD A 0 A_ChangeFlag("avoidmelee", 0)
+    Goto AggressiveSee
+  AggressiveSee:
+	NGRD AABBCCDD 2 A_Chase
+	NGRD A 0 A_jump(220,2)
+	NGRD A 0 A_PlaySound("Newguard/attack",CHAN_VOICE)
+	NGRD A 0 A_checksight("see")
+    Loop
+  //Search Mode
+  WanderSwitch:
+    NGRD A 0 A_ClearTarget
+    Goto WanderSee
+	WanderSee:
+	NGRD A 0 A_jump(220,2)
+	NGRD A 0 A_PlaySound("Newguard/search",CHAN_VOICE)
+    NGRD A 2 A_Wander
+    NGRD A 0 A_LookEx(10, 0, 0, 0, 360, "See")
+    NGRD A 2 A_Wander
+    NGRD A 0 A_LookEx(10, 0, 0, 0, 360, "See")
+    NGRD B 2 A_Wander
+    NGRD A 0 A_LookEx(10, 0, 0, 0, 360, "See")
+	NGRD B 2 A_Wander
+    NGRD A 0 A_LookEx(10, 0, 0, 0, 360, "See")
+	NGRD C 2 A_Wander
+    NGRD A 0 A_LookEx(10, 0, 0, 0, 360, "See")
+	NGRD C 2 A_Wander
+    NGRD A 0 A_LookEx(10, 0, 0, 0, 360, "See")
+	NGRD D 2 A_Wander
+    NGRD A 0 A_LookEx(10, 0, 0, 0, 360, "See")
+	NGRD D 2 A_Wander
+    NGRD A 0 A_LookEx(10, 0, 0, 0, 360, "See")
+	loop
+	//Ambush mode
+	AmbushSee:
+	NGRD A 0 A_ChangeFlag("avoidmelee", 1)
+	NGRD A 0 A_jump(240,2)
+	NGRD A 0 A_PlaySound("Newguard/search",CHAN_VOICE)
+	NGRD AABBCCD 2 A_Chase
+	NGRD D 3 A_jump(32,"waitsee")
+    loop
+	Waitsee: 
+	NGRD E 0 A_FACETARGET
+	NGRD E 10 A_sentinelrefire
+	NGRD E 0 A_jump(32,"Ambushsee")
+	NGRD E 0 A_checksight("waitsee")
+	goto missile+1
+   //Scared Mode
+   Casualtyswitch:
+    NGRD A 0 A_ChangeFlag("AvoidMelee", 1)
+	Scaredsee:
+	NGRD A 0 A_takeinventory("goonfear",3)
+	NGRD A 0 A_jump(64,2)
+	NGRD A 0 A_PlaySound("Newguard/Mandown",CHAN_VOICE)
+	goto see
+  Idle:
+    NGRD E 10 A_Look
+    Loop
+  Missile:
+    NGRD E 10 A_FaceTarget
+	NGRD E 5 A_FaceTarget
+	NGRD E 1 A_PlaySound("weapons/m16fire",CHAN_WEAPON)
+	VUL1 F 0 A_PlaySound("Distant/m16",CHAN_BODY)
+    NGRD F 2 Bright A_customMissile("BulletTracermedium", 32, 12, random(-4, 4), CMF_OFFSETPITCH, random(-1, 1))
+	NGRD E 1 A_PlaySound("weapons/m16fire",CHAN_WEAPON)
+	VUL1 F 0 A_PlaySound("Distant/m16",CHAN_BODY)
+    NGRD F 2 Bright A_customMissile("BulletTracermedium", 32, 12, random(-4, 4), CMF_OFFSETPITCH, random(-1, 1))
+	NGRD E 1 A_PlaySound("weapons/m16fire",CHAN_WEAPON)
+	VUL1 F 0 A_PlaySound("Distant/m16",CHAN_BODY)
+    NGRD F 2 Bright A_customMissile("BulletTracermedium", 32, 12, random(-4, 4), CMF_OFFSETPITCH, random(-1, 1))
+	NGRD E 3 A_facetarget
+	NGRD E 1 A_PlaySound("weapons/m16fire",CHAN_WEAPON)
+	VUL1 F 0 A_PlaySound("Distant/m16",CHAN_BODY)
+    NGRD F 2 Bright A_customMissile("BulletTracermedium", 32, 12, random(-4, 4), CMF_OFFSETPITCH, random(-1, 1))
+	NGRD E 1 A_PlaySound("weapons/m16fire",CHAN_WEAPON)
+	VUL1 F 0 A_PlaySound("Distant/m16",CHAN_BODY)
+    NGRD F 2 Bright A_customMissile("BulletTracermedium", 32, 12, random(-4, 4), CMF_OFFSETPITCH, random(-1, 1))
+	NGRD E 1 A_PlaySound("weapons/m16fire",CHAN_WEAPON)
+	VUL1 F 0 A_PlaySound("Distant/m16",CHAN_BODY)
+    NGRD F 2 Bright A_customMissile("BulletTracermedium", 32, 12, random(-4, 4), CMF_OFFSETPITCH, random(-1, 1))
+    NGRD E 10 A_SentinelRefire()
+    Goto Missile+1
+    Goto See
+  Pain:
+    NGRD G 4
+    NGRD G 4 A_Pain
+    Goto See
+  BURN:                
+    NGRD G 1 A_PlaySound("Newguard/fire", CHAN_VOICE)
+	NGRD A 0 A_radiusgive("goonfear",1024,RGF_MONSTERS,1)
+    NGRD A 0 A_HideThing
+    NGRD A 0 A_Fall
+    NGRD A 0 A_SpawnItem("BurnDeathHuman",1,0,0)
+    NGRD A -1
+    Stop
+  Death:
+    NGRD G 6 A_Scream
+    NGRD H 6 A_radiusgive("goonfear",512,RGF_MONSTERS,1)
+    NGRD I 7 A_AlertMonsters(256)
+    NGRD J 5 A_NoBlocking
+    NGRD K 5
+    NGRD L -1
+    Stop
+  Xdeath.fire:
+  XDeath:
+    VUL3 M 3 A_PlaySound("Newguard/splode", CHAN_BODY)
+	VUL3 M 3 A_PlaySound("goon/explode", CHAN_VOICE)
+	VUL3 A 0 A_radiusgive("goonfear",1024,RGF_MONSTERS,1)
+	VUL3 NNNN 0 A_SpawnDebris("FlyingBlood",1)
+    VUL3 N 4 A_SpawnDebris("FlyingGibOffal",1)
+	VUL3 NN 0 A_SpawnDebris("FlyingBlood",1)
+	VUL3 N 0 A_SpawnDebris("FlyingGibArm",1)
+	VUL3 N 0 A_SpawnDebris("FlyingGibEntrails",1)
+	VUL3 N 0 A_SpawnDebris("FlyingGibRib",1)
+    VUL3 O 4 A_NoBlocking
+	VUL3 NNN 0 A_SpawnDebris("FlyingBlood",1)
+    VUL3 PQRST 4
+    VUL3 U -1
+    Stop
+  }
+}

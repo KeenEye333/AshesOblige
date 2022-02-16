@@ -1,0 +1,98 @@
+ACTOR Destroyer : actor replaces Archvile
+{
+  Health 700
+   Radius 24
+  Height 96
+  Mass 800
+  Speed 12
+  scale 0.8
+  damagefactor "radiation", 0.0
+  damagefactor "fire",0.5
+  PainChance 20
+  Monster
+  +FLOORCLIP
+  +NEVERTARGET
+   SeeSound "Destroyer/sight"
+  PainSound "Destroyer/pain"
+  DeathSound "Destroyer/death"
+  ActiveSound "Destroyer/Active"
+  AttackSound "weapons/crowbarswing"
+  Obituary "%o was destroyed by a Destroyer."
+  DropItem "NapalmammoDropper"
+  DropItem "NapalmSpawn"
+  States
+  {
+  Spawn:
+    DTYR L 10 A_Look
+    Loop
+  See:
+    DTYR AABBCCD 2 A_Chase
+	DTYR D 2 A_CHASE
+	DTYR D 0 A_JUMP(32, "grencheck")
+    Loop
+ Melee:
+ Missile:
+        DTYR L 2 A_FaceTarget
+		DTYR L 0 A_Jumpifcloser(256,"flamer")
+		 DTYR L 2 A_FaceTarget
+		DTYR E 4 Fast A_FaceTarget
+		DTYR F 6 Fast A_FaceTarget
+		DTYR G 1 A_FaceTarget
+		DTYR G 2 A_CustomMissile("MasterFirebomb", 32, -10, random(-2,1),CMF_OFFSETPITCH,random(2,10))
+		DTYR G 1
+		DTYR L 2 a_sentinelrefire
+		DTYR L 0 A_Jumpifcloser(750,"missile")
+		Goto see
+  Flamer:
+        DTYR E 4 Fast A_FaceTarget
+		DTYR F 6 Fast A_FaceTarget
+		DTYR G 1 A_FaceTarget
+		DTYR G 0 A_PlaySound("weapons/flamestream", CHAN_WEAPON)
+		DTYR GGGGG 2 A_CustomMissile("DestroyerStream", 32, -10, 0, 0,0)
+		DTYR H 2 A_CustomMissile("DestroyerStream", 32, -10, -20, 0,0)
+		DTYR H 2 A_CustomMissile("DestroyerStream", 32, -10, -30, 0,0)
+		DTYR G 0 A_PlaySound("weapons/flamestream", CHAN_WEAPON)
+		DTYR H 2 A_CustomMissile("DestroyerStream", 32, -10, -20, 0,0)
+		DTYR GG 2 A_CustomMissile("DestroyerStream", 32, -10, -10, 0,0)
+		DTYR II 2 A_CustomMissile("DestroyerStream", 32, -10, 0, 0,0)
+		DTYR JJ 2 A_CustomMissile("DestroyerStream", 32, -10, 10, 0,0)
+		DTYR G 0 A_PlaySound("weapons/flamestream", CHAN_WEAPON)
+		DTYR K 2 A_CustomMissile("DestroyerStream", 32, -10, 20, 0,0)
+		DTYR K 2 A_CustomMissile("DestroyerStream", 32, -10, 30, 0,0)
+		DTYR K 2 A_CustomMissile("DestroyerStream", 32, -10, 20, 0,0)
+		DTYR G 0 A_PlaySound("weapons/flamestream", CHAN_WEAPON)
+		DTYR JJ 2 A_CustomMissile("DestroyerStream", 32, -10, 10, 0,0)
+		DTYR II 2 A_CustomMissile("DestroyerStream", 32, -10, 0, 0,0)
+		DTYR G 0 A_PlaySound("weapons/flamestream", CHAN_WEAPON)
+		DTYR GG 2 A_CustomMissile("DestroyerStream", 32, -10, -10, 0,0)
+		DTYR FF 4
+		Goto See 
+  Grencheck:
+        DTYR D 0 A_Jumpifcloser(512,"grenthrow")
+		goto see
+  GRENTHROW:
+        DTYR L 4 A_FaceTarget
+		DTYR M 4 A_Facetarget
+		DTYR M 0 A_PlaySound("overseer/crossbow", CHAN_WEAPON)
+		DTYR N 4 A_Facetarget
+		DTYR O 2 A_Facetarget
+		DTYR O 0 A_PlaySound("weapons/crowbarswing", CHAN_WEAPON)
+		DTYR O 2 A_CustomMissile("Radgrenade",96,5,20,CMF_OFFSETPITCH,35)
+		DTYR P 2 A_CustomMissile("Radgrenade",96,0,0,CMF_OFFSETPITCH,35)
+		DTYR P 2 A_CustomMissile("Radgrenade",96,-5,-20,CMF_OFFSETPITCH,35)
+		DTYR P 5
+		goto see		
+  Pain:
+    DTYR Q 2
+    DTYR Q 2 A_Pain
+    Goto See
+  Death:
+		DTYR R 8
+		DTYR S 8 A_Scream
+		DTYR TUV 5
+		DTYR W 5 A_NoBlocking
+		DTYR XY 5
+		DTYR Z -1
+		Stop
+  }
+}

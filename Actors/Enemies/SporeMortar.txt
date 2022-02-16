@@ -1,0 +1,75 @@
+ACTOR SporeMortar: Actor //replaces CommanderKeen
+{
+  Health 100
+  Radius 16
+  Height 64
+  Mass 10000000
+  PainChance 256
+  Monster
+  bloodcolor orange
+  +SOLID
+  +SHOOTABLE
+  +COUNTKILL
+  +NOPAIN
+  +LOOKALLAROUND
+  //-SPAWNCEILING
+  damagefactor "spores", 0.0
+  damagefactor "acid", 0.0
+  damagefactor "slime", 0.5
+  damagefactor "fire", 1.5
+  DeathSound "spore/death"
+  Obituary "%o was infested with spores."
+  States
+  {
+  Spawn:
+    SBMB A 1 A_ClearTarget
+    SBMB A 10 A_LookEx(LOF_NOSOUNDCHECK, 0, 512, 0, 0, "see")
+    Loop
+  see:
+    SBMB A 3 A_playsound("spore/open",CHAN_BODY)
+	SBMB AB 4
+	SBMB C 4 A_giveInventory("sporeopen", 1)
+	SBMB DEF 4
+	goto armed
+  armed:
+    SBMB F 10
+    SBMB A 0 A_JumpIfInTargetLOS(1, 0, JLOSF_DEADNOJUMP, 500)
+	goto idle
+    SBMB F 1 A_JumpIfCloser(512, "missile")
+	SBMB F 1
+	SBMB A 0 A_JumpIfInTargetLOS(1, 0, JLOSF_DEADNOJUMP, 500)
+	goto idle
+	SBMB F 1
+	goto armed
+  IDLE:
+    SBMB F 20 A_LookEx(LOF_NOSOUNDCHECK, 0, 512, 0, 0, "armed")
+    SBMB F 3 A_playsound("spore/close",CHAN_BODY)
+	SBMB FED 4 A_ClearTarget
+	SBMB C 4 A_takeInventory("sporeopen", 1)
+	SBMB BA 4 A_ClearTarget
+	goto spawn
+  MISSILE:
+    SBMB F 2 A_playsound("creeper/spit",CHAN_VOICE)
+	SBMB GHIJKL 3 A_FACETARGET
+	SBMB M 4 A_CustomMissile("sporebomb", 30, 0, 0, 2, 25)
+	SBMB LLKF 3
+	goto armed
+  Death:
+    SBMB A 0 A_jumpifinventory("sporeopen",1,"deathopen")
+    SBMB N 4
+    SBMB O 4 A_Scream
+    SBMB PQR 4
+    SBMB S 5
+    SBMB T 5 A_KeenDie
+    SBMB U -1
+    Stop
+   Deathopen:
+    SBMB V 4
+    SBMB W 4 A_Scream
+    SBMB XQR 4
+    SBMB S 5 A_NoBlocking
+    SBMB T 5 A_KeenDie
+    SBMB U -1
+    Stop
+  }
+}

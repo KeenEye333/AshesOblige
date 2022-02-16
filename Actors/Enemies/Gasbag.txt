@@ -1,0 +1,110 @@
+Actor Gasbag: actor replaces LostSoul
+{
+  Health 80
+  Radius 16
+  Height 50
+  Mass 80
+  Speed 1
+  Damage 0
+  PainChance 128
+  scale 0.6
+  Monster
+  bloodcolor Darkgreen
+  damagetype Spores
+  +FLOAT
+  +NOGRAVITY
+  +MISSILEMORE
+  PainSound "gasbag/pain"
+  DeathSound "gasbag/death"
+  Obituary "%o became a gasbag colony."
+  States
+  {
+  Spawn:
+    GBAG A 0 A_playsound("gasbag/active",CHAN_BODY)
+	GBAG A 0 A_Stop //Breath
+    GBAG A 5 A_Wander
+	GBAG A 0 A_LookEx(LOF_NOSOUNDCHECK, 0, 256, 0, 0, "see")
+	GBAG B 5 A_wander
+	GBAG B 0 A_LookEx(LOF_NOSOUNDCHECK, 0, 256, 0, 0, "see")
+	GBAG C 0 A_RECOIL(-1) //floaty movement
+	GBAG C 5 A_wander
+	GBAG C 0 A_LookEx(LOF_NOSOUNDCHECK, 0, 256, 0, 0, "see")
+	GBAG C 5 A_wander
+	GBAG C 0 A_LookEx(LOF_NOSOUNDCHECK, 0, 256, 0, 0, "see")
+	GBAG B 5 A_wander
+	GBAG B 0 A_LookEx(LOF_NOSOUNDCHECK, 0, 256, 0, 0, "see")
+    Loop
+  See:
+    GBAG A 0 A_playsound("gasbag/active",CHAN_BODY)
+    GBAG D 0 A_PlaySound("Gasbag/sight",CHAN_VOICE)
+    GBAG DEFFF 5 A_FACETARGET
+  chase:
+    GBAG A 0 A_playsound("gasbag/active",CHAN_BODY)
+	GBAG A 0 A_Stop //Breathe
+    GBAG GHFF 4 A_Chase
+	GBAG F 4 A_RECOIL(-2)
+	GBAG F 4 A_CHASE
+    Loop
+  Missile:
+    GBAG F 4 A_PlaySound ("gasbag/attack")
+    GBAG FGH 4 A_FaceTarget
+	GBAG H 2 A_Recoil (-1)
+	GBAG A 0 A_JumpIfCloser(56, "Melee")
+	GBAG H 0 A_FaceTarget
+	GBAG H 2 A_Recoil (-2)
+	GBAG A 0 A_JumpIfCloser(56, "Melee")
+	GBAG H 0 A_FaceTarget
+	GBAG H 2 A_Recoil (-2)
+	GBAG A 0 A_JumpIfCloser(56, "Melee")
+	GBAG H 0 A_FaceTarget
+	GBAG H 2 A_Recoil (-3)
+	GBAG A 0 A_JumpIfCloser(56, "Melee")
+	GBAG H 0 A_FaceTarget
+	GBAG H 2 A_Recoil (-3)
+	GBAG A 0 A_JumpIfCloser(56, "Melee")
+	GBAG H 0 A_FaceTarget
+	GBAG H 2 A_Recoil (-2)
+	GBAG A 0 A_JumpIfCloser(56, "Melee")
+	GBAG H 0 A_FaceTarget
+	GBAG H 2 A_Recoil (-2)
+	GBAG A 0 A_JumpIfCloser(56, "Melee")
+	GBAG H 0 A_FaceTarget
+	GBAG G 2 A_Recoil (-1)
+	GBAG A 0 A_JumpIfCloser(56, "Melee")
+	GBAG H 0 A_FaceTarget
+	GBAG G 2 A_Recoil (-1)
+	GBAG A 0 A_JumpIfCloser(56, "Melee")
+	GBAG H 0 A_FaceTarget
+	GBAG G 2 A_Recoil (-1)
+	GBAG A 0 A_JumpIfCloser(56, "Melee")
+	GBAG H 0 A_FaceTarget
+    GBAG F 2 A_Recoil (-1)
+	GBAG A 0 A_JumpIfCloser(56, "Melee")
+    GBAG F 2 A_Recoil (-1)
+	GBAG A 0 A_JumpIfCloser(56, "Melee")
+    Goto chase
+   Melee:
+    GBAG F 0 A_ChangeFlag("NOPAIN", TRUE)
+    GBAG F 3 A_PlaySound ("gasbag/attack")
+    GBAG IJK 3
+	GBAG K 3 A_Die
+    stop
+  Pain:
+    GBAG E 4 A_Pain
+    GBAG D 4
+	GBAG E 4
+    Goto chase
+  Death:
+    GBAG L 2  A_Scream
+    GBAG M 2 A_SpawnItemEX("BursterBlood", 0, 0, 0, random (4, 12), 0, random (4, 12), random(0, 360))
+	GBAG M 0 A_SpawnItem("bursterMist", 0, 40)
+	GBAG MMMMMMMMMMM 0  A_SpawnItemEX("BursterBlood", 0, 0, 0, random (4, 12), 0, random (4, 12), random(0, 360))
+    GBAG N 4 A_Explode(50, 128, XF_NOTMISSILE,true,true) 
+    GBAG O 4  
+    GBAG P 4
+    GBAG Q 4
+    GBAG R 4 A_SetFloorClip
+	GBAG S -1 A_NoBlocking
+	stop
+  }
+}

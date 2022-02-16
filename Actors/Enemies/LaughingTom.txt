@@ -1,0 +1,90 @@
+ACTOR LaughingTom: actor replaces revenant
+{
+  damage 5
+  Health 250
+  Radius 20
+  Height 56
+  Mass 300
+  Speed 15
+  PainChance 100
+  Monster
+  MeleeThreshold 256
+  +MISSILEMORE 
+  +FLOORCLIP
+  +DROPOFF
+  SeeSound "Tom/see"
+  PainSound "Tom/pain"
+  DeathSound "Tom/death"
+  Obituary "%o caught the joke."
+  hitObituary "%o felt the punchline."
+  DropItem "MusketSpawn"
+  DropItem "SlugAmmoDropper"
+  States
+  {
+  Spawn:
+    LTOM A 10 A_Look
+    Loop
+  See:
+    LTOM A 0 A_SetShootable
+    LTOM AABBCCDD 2 A_Chase
+	LTOM D 0 A_JumpIfTargetInLOS("SEE")
+	LTOM D 0 A_jump(32,"campercheck")
+    Loop
+  Melee:
+    LTOM G 0 A_FaceTarget
+    LTOM G 6 A_FaceTarget
+	LTOM G 0 A_Playsound("tom/attack",CHAN_VOICE)
+    LTOM I 5 A_FaceTarget
+	LTOM J 5 A_FaceTarget
+	LTOM J 0 A_Playsound("skeleton/swing",CHAN_WEAPON)
+	LTOM K 5 A_recoil(-15)
+	LTOM L 5 A_CustomMeleeAttack(random(4,8)*5, "weapons/crowbarhit")
+    LTOM L 15 a_stop
+    Goto See
+  Campercheck:
+    LTOM GGGGGGGG 2  A_JumpIfTargetInLOS("Missile")
+	LTOM G 2 A_jump(192,"campercheck")
+	goto huntmode
+  Huntmode:
+    LTOM G 0 A_UnSetShootable
+	LTOM A 0 A_jump(250,1)
+	LTOM G 0 A_Playsound("tom/active",CHAN_VOICE)
+	TNT1 AAAA 1 A_chase("Emergehide","EmergeHide")
+	TNT1 AAAAA  1 A_wander
+	goto emergehide
+  Emergehide:
+    TNT1 AAAA 1
+	TNT1 A 1 A_JumpIfTargetInLOS("huntmode")
+	goto emerge
+  Emerge:
+    LTOM G 1 A_SetShootable
+	goto see
+  Missile:
+    LTOM A 0 A_JUMP(230,1)
+	LTOM A 0 A_Playsound("tom/attack",CHAN_VOICE)
+    LTOM G 10 A_FaceTarget
+    LTOM E 20 A_FaceTarget
+	LTOM E 0 A_Jumpifcloser(192,"melee")
+    LTOM F 5 Bright A_FaceTarget
+	LTOM F 0 A_PlayWeaponSound("weapons/rifleshot")
+	LTOM F 0 A_customMissile("MusketTracer",48,12,random(-1, 1), CMF_OFFSETPITCH, random(-1, 1))
+    LTOM F 5 Bright A_FaceTarget
+	LTOM A 0 A_PlaySound("weapons/rifledistant",3)
+	LTOM E 5 A_FaceTarget
+	LTOM G 5 A_PlaySound("weapons/musketlever",7)
+	LTOM H 7 A_FaceTarget
+	LTOM G 5 A_FaceTarget
+    Goto See
+  Pain:
+    LTOM M 5
+    LTOM M 5 A_Pain
+    Goto See
+  Death:
+    LTOM N 5
+    LTOM O 5 A_Scream
+    LTOM P 5 A_NoBlocking
+    LTOM Q 5
+    LTOM R -1
+    Stop
+  }
+}

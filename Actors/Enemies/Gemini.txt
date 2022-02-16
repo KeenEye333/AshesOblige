@@ -1,0 +1,237 @@
+ACTOR Gemini: Actor replaces Cyberdemon
+{
+  Health 1500
+  Radius 40
+  Height 110
+  Mass 1000
+  Speed 20
+  PainChance 20
+  Monster
+  +BOSS
+  +NOFEAR
+  +MISSILEMORE
+  +MISSILEEVENMORE
+  +FLOORCLIP
+  +NORADIUSDMG
+  +DONTMORPH
+  +BOSSDEATH
+ SeeSound "Gemini/sight"
+  DropItem "HealthDropper"
+  DropItem "ArmorDropper"
+  DropItem "UpgradeDropper"
+  DropItem "DrugDropper"
+  DropItem "BonusItemDropper"
+  PainSound "Gemini/painb"
+  DeathSound "Gemini/giantdie"
+  Obituary "%o was obliterated by a Cannibal Warlord."
+  hitObituary "%o was obliterated by a Cannibal Warlord."
+  States
+  {
+  Spawn:
+    GEMI V 10 A_Look
+    Loop
+  See:
+    GEMI A 0 
+    TNT1 A 0 A_JumpIfInventory("GeminiCheck", 1, "RageSee")
+    TNT1 A 0 A_JumpIfHealthLower(1499, "RageMode")
+    GEMI AA 4 A_CHASE
+	GEMI A 0 A_jump(220,2)
+	GEMI A 0 A_PlaySound("Gemini/Taunt",CHAN_ITEM)
+	GEMI B 6 A_HOOF
+	GEMI CC 4 A_Chase
+	GEMI D 6 A_HOOF
+    Loop
+  Idle: 
+    GEMI V 0 A_JumpIfInventory("GeminiCheck", 1, "Rageidle")
+  Idle1:
+    GEMI V 10 A_Look
+    Loop
+  RageIdle:
+    GEMR E 10 a_look
+	loop
+  RageSee:
+    GEMR AAA 2 A_CHASE("Ragemissile","Ragemissile")
+	GEMR B 2 A_HOOF
+	GEMR BB 2 A_Chase("Ragemissile","Ragemissile")
+	GEMR CCC 2 A_Chase("Ragemissile","Ragemissile")
+	GEMR D 2 A_HOOF
+	GEMR DD 2  A_Chase("Ragemissile","Ragemissile")
+    Loop
+  Missile:
+    GEMI A 0 A_JumpIfInventory("GeminiCheck", 1, "RageMissile")
+	GEMI A 0 A_JumpIfHealthLower(1499, "RageMode")
+    GEMI E 1 a_jump(48,"pipebomb")
+	TNT1 A 0 A_JumpIfCloser(256, "FlameAttack")
+    GEMI E 9 A_FaceTarget
+    GEMI E 1 A_FaceTarget
+	GEMI F 1 bright A_PlaySound("weapons/heavyfire",CHAN_WEAPON)
+	VUL1 F 0 A_PlaySound("Distant/m16",CHAN_BODY)
+	GEMI F 2 bright A_CustomMissile("MGTracer",65,20,random(-5,5),0,random(0,6))
+	VUL1 F 0 A_PlaySound("Distant/m16",CHAN_BODY)
+	GEMI E 1 A_FaceTarget
+	GEMI G 1 bright 
+	GEMI G 2 bright A_CustomMissile("MGTracer",65,20,random(-5,5),0,random(0,6))
+	VUL1 F 0 A_PlaySound("Distant/m16",CHAN_BODY)
+	GEMI E 1 A_FaceTarget
+	GEMI F 1 bright
+	GEMI F 2 bright A_CustomMissile("MGTracer",65,20,random(-5,5),0,random(0,6))
+	VUL1 F 0 A_PlaySound("Distant/m16",CHAN_BODY)
+	GEMI E 1 A_FaceTarget
+	GEMI G 1 bright
+	GEMI G 2 bright A_CustomMissile("MGTracer",65,20,random(-5,5),0,random(0,6))
+	VUL1 F 0 A_PlaySound("Distant/m16",CHAN_BODY)
+	GEMI E 1 A_FaceTarget
+	GEMI F 1 bright 
+	GEMI F 2 bright A_CustomMissile("MGTracer",65,20,random(-5,5),0,random(0,6))
+	VUL1 F 0 A_PlaySound("Distant/m16",CHAN_BODY)
+	GEMI E 1 A_FaceTarget
+	GEMI G 1 bright 
+	GEMI G 2 bright A_CustomMissile("MGTracer",65,20,random(-5,5),0,random(0,6))
+	VUL1 F 0 A_PlaySound("Distant/m16",CHAN_BODY)
+	GEMI E 1 A_FaceTarget
+	GEMI E 1 A_checksight("Missed")
+	GEMI E 1 A_sentinelrefire
+    goto missile+2
+  RageMissile:
+    GEMR E 6 A_FaceTarget
+    GEMR E 1 A_FaceTarget
+	TNT1 A 0 A_JumpIfCloser(256, "RageFlame")
+	GEMR F 1 bright A_PlaySound("weapons/heavyfire",CHAN_WEAPON)
+	GEMR F 2 bright A_CustomMissile("MGTracer",65,20,random(-5,5),0,random(0,6))
+	VUL1 F 0 A_PlaySound("Distant/m16",CHAN_BODY)
+	GEMR E 1 A_FaceTarget
+	GEMR G 1 bright 
+	GEMR G 2 bright A_CustomMissile("MGTracer",65,20,random(-5,5),0,random(0,6))
+	VUL1 F 0 A_PlaySound("Distant/m16",CHAN_BODY)
+	GEMR E 1 A_FaceTarget
+	GEMR F 1 bright
+	GEMR F 2 bright A_CustomMissile("MGTracer",65,20,random(-5,5),0,random(0,6))
+	VUL1 F 0 A_PlaySound("Distant/m16",CHAN_BODY)
+	GEMR E 1 A_FaceTarget
+	GEMR G 1 bright
+	GEMR G 2 bright A_CustomMissile("MGTracer",65,20,random(-5,5),0,random(0,6))
+	VUL1 F 0 A_PlaySound("Distant/m16",CHAN_BODY)
+	GEMR E 1 A_FaceTarget
+	GEMR F 1 bright 
+	GEMR F 2 bright A_CustomMissile("MGTracer",65,20,random(-5,5),0,random(0,6))
+	VUL1 F 0 A_PlaySound("Distant/m16",CHAN_BODY)
+	GEMR E 1 A_FaceTarget
+	GEMR G 1 bright 
+	GEMR G 2 bright A_CustomMissile("MGTracer",65,20,random(-5,5),0,random(0,6))
+	VUL1 F 0 A_PlaySound("Distant/m16",CHAN_BODY)
+	GEMR E 2 A_FaceTarget
+	GEMR E 1 A_MonsterRefire(64, "RageSee")
+    goto ragemissile+2
+  Missed:
+    GEMI E 1 A_jump(128,1)
+    GEMI E 0 A_playsound("gemini/missed", CHAN_ITEM)
+	GEMI E 0 A_jump(128,"missile")
+	goto see
+  FlameAttack:
+    GEMI E 6 A_FaceTarget
+    GEMI E 1 A_FaceTarget
+	GEMI F 1 bright A_PlaySound("weapons/flamestream", CHAN_WEAPON)
+	GEMI F 2 bright A_CustomMissile("firestream",65,20,random(-5,5),0,random(0,6))
+	GEMI E 1 A_FaceTarget
+	GEMI G 1 bright 
+	GEMI G 2 bright A_CustomMissile("firestream",65,20,random(-5,5),0,random(0,6))
+	GEMI E 1 A_FaceTarget
+	GEMI F 1 bright
+	GEMI F 2 bright A_CustomMissile("firestream",65,20,random(-5,5),0,random(0,6))
+	GEMI E 1 A_FaceTarget
+	GEMI G 1 bright
+	GEMI G 2 bright A_CustomMissile("firestream",65,20,random(-5,5),0,random(0,6))
+	GEMI E 1 A_FaceTarget
+	GEMI F 1 bright 
+	GEMI F 2 bright A_CustomMissile("firestream",65,20,random(-5,5),0,random(0,6))
+	GEMI E 1 A_FaceTarget
+	GEMI G 1 bright 
+	GEMI G 2 bright A_CustomMissile("firestream",65,20,random(-5,5),0,random(0,6))
+	GEMI E 1 A_FaceTarget
+	goto see
+   RageFlame:
+    GEMR E 6 A_FaceTarget
+    GEMR E 1 A_FaceTarget
+	GEMR F 1 bright A_PlaySound("weapons/flamestream", CHAN_WEAPON)
+	GEMR F 2 bright A_CustomMissile("firestream",65,20,random(-5,5),0,random(0,6))
+	GEMR E 1 A_FaceTarget
+	GEMR G 1 bright 
+	GEMR G 2 bright A_CustomMissile("firestream",65,20,random(-5,5),0,random(0,6))
+	GEMR E 1 A_FaceTarget
+	GEMR F 1 bright
+	GEMR F 2 bright A_CustomMissile("firestream",65,20,random(-5,5),0,random(0,6))
+	GEMR E 1 A_FaceTarget
+	GEMR G 1 bright
+	GEMR G 2 bright A_CustomMissile("firestream",65,20,random(-5,5),0,random(0,6))
+	GEMR E 1 A_FaceTarget
+	GEMR F 1 bright 
+	GEMR F 2 bright A_CustomMissile("firestream",65,20,random(-5,5),0,random(0,6))
+	GEMR E 1 A_FaceTarget
+	GEMR G 1 bright 
+	GEMR G 2 bright A_CustomMissile("firestream",65,20,random(-5,5),0,random(0,6))
+	GEMR E 1 A_FaceTarget
+	goto Ragesee
+  RageMode:
+    GEMD A 0
+    GEMD A 0 A_PlaySound("Gemini/dwarfdie",CHAN_ITEM)
+    GEMD ABCDDD 4 A_ChangeFlag("NOPAIN", true)
+	GEMD A 0 A_PlaySound("Gemini/ragemode",CHAN_7)
+	GEMD DEEEEFFFFFGGGG 4
+	GEMD A 0 A_giveinventory("Geminicheck", 1)
+	TNT1 A 0 A_ChangeFlag(FRIGHTENING, TRUE)
+	GEMD G 20
+	GEMD G 10 A_ChangeFlag("NOPAIN", false)
+	goto see
+  PipeBomb:
+    GEMI A 0 A_JumpIfHealthLower(1499, "RageMode")
+	TNT1 A 0 A_JumpIfCloser(384, "missile+1")
+    TNT1 A 0 A_JumpIfCloser(512, "shortmissile")
+    TNT1 A 0 A_JumpIfCloser(704, "midmissile")
+	TNT1 A 0 A_JumpIfCloser(1024, "longmissile")
+	Goto missile +1
+  Shortmissile:
+    GEMI A 0 A_PlaySound("Gemini/Throw",CHAN_ITEM)
+	GEMI W 10 A_facetarget
+	GEMI X 5 A_FACEtarget
+    GEMI Y 1 A_FaceTarget
+    GEMI Y 10 A_CustomMissile("pipebomb1", 80, -20, 0, 2, 0)
+	GEMI E 1 a_sentinelrefire
+    Goto pipebomb
+  midmissile:
+    GEMI A 0 A_PlaySound("Gemini/Throw",CHAN_ITEM)
+	GEMI W 10 A_facetarget
+	GEMI X 5 A_FACEtarget
+    GEMI Y 1 A_FaceTarget
+    GEMI Y 10 A_CustomMissile("pipebomb4", 80, -20, 0, 2, 10)
+	GEMI E 1 a_sentinelrefire
+    Goto pipebomb
+  longmissile:
+    GEMI A 0 A_PlaySound("Gemini/Throw",CHAN_ITEM)
+	GEMI W 10 A_facetarget
+	GEMI X 5 A_FACEtarget
+    GEMI Y 1 A_FaceTarget
+    GEMI Y 10 A_CustomMissile("pipebomb6", 80, -20, 0, 2, 20)
+	GEMI E 1 a_sentinelrefire
+    Goto pipebomb
+  Pain:
+    GEMI A 0 A_JumpIfInventory("GeminiCheck", 1, "RagePain")
+    GEMI H 2 a_jump(128,1)
+	GEMI H 1 A_playsound("gemini/paina",CHAN_ITEM)
+    GEMI H 5 A_Pain
+    Goto See
+  RagePain:
+    GEMI H 2 A_pain
+    GEMI H 4
+    Goto See
+  Death:
+    GEMR I 6 A_Scream
+	GEMR I 6
+    GEMR J 6
+    GEMR K 5
+    GEMR L 10 A_NoBlocking
+	GEMR MNMNMNMNMN 7
+    GEMR O 6
+    GEMR P -1 A_BossDeath
+    Stop
+  }
+}

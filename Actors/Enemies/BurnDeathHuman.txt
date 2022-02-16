@@ -1,0 +1,26 @@
+ACTOR BurnDeathHuman
+{
+    Radius 16
+    Height 56
+    Speed 15
+    Scale 1
+    +RANDOMIZE
+    +DONTSPLASH
+    +FLOORCLIP
+    +LOOKALLAROUND
+	-COUNTKILL
+    damagetype Fire
+    Obituary "%o was near someone in flames."
+    States
+    {
+    Spawn:
+    FDTH A 4  bright 
+	FDTH BCDEABCDEABCDEABCDE 4 bright A_Wander
+	goto death
+	death:
+	FDTH A 5 bright A_NoBlocking
+	FDTH FGHIJKLMN 5 bright
+	FDTH O 5
+	FDTH P -1
+	}
+}

@@ -1,0 +1,68 @@
+ACTOR GasBagNursery: Actor replaces PainElemental
+{
+  Health 350
+  Radius 31
+  Height 72
+  Mass 400
+  Speed 8
+  scale 0.8
+  PainChance 128
+  Monster
+  +FLOAT
+  +NOGRAVITY
+  PainSound "gasbag/pain"
+  DeathSound "gasbag/death"
+  activesound "colony/groan"
+  Obituary "%o became a gasbag colony."
+  States
+  {
+  Spawn:
+    CLNY A 0
+    CLNY ABCABCABC 5 A_Look
+	CLNY A 0 a_jump(32,"moanlook")
+    Loop
+  Moanlook:
+    CLNY A 0 A_activesound
+    CLNY ADED 5 A_Look
+	goto spawn
+  See:
+    CLNY ABCABC 4 A_Chase
+    CLNY ADEA 4 A_Chase("","")
+    Loop
+  Missile:
+    CLNY ABC 4 A_FaceTarget
+    CLNY F 5 A_FaceTarget
+    CLNY GHIJ 5 A_FaceTarget
+    CLNY K 2 Bright A_CustomMissile("EyeballSeeker", 16, -32)
+	CLNY K 2 Bright A_CustomMissile("EyeballSeeker", 56, 0)
+	CLNY I 2 Bright A_CustomMissile("EyeballSeeker", 32, -28)
+	CLNY I 2 Bright A_CustomMissile("EyeballSeeker", 30, 32)
+	CLNY J 4 A_FaceTarget
+	CLNY K 2 Bright A_CustomMissile("EyeballSeeker", 16, -32)
+	CLNY K 2 Bright A_CustomMissile("EyeballSeeker", 56, 0)
+	CLNY I 2 Bright A_CustomMissile("EyeballSeeker", 32, -28)
+	CLNY I 2 Bright A_CustomMissile("EyeballSeeker", 30, 32)
+	CLNY HGF 4 A_FaceTarget
+    Goto See
+  Pain:
+    CLNY CDE 3 A_Pain
+    CLNY D 3 
+    Goto See
+  Death:
+    CLNY L 4  A_Scream
+    CLNY M 4 A_SpawnItemEX("BursterBlood", 0, 0, 0, random (4, 12), 0, random (4, 12), random(0, 360))
+	CLNY M 0 A_SpawnItem("bursterMist", 0, 40)
+	CLNY MMMMMMMMMMM 0  A_SpawnItemEX("BursterBlood", 0, 0, 0, random (4, 12), 0, random (4, 12), random(0, 360))
+    CLNY N 4 A_Explode(70, 192, XF_NOTMISSILE,true,true) 
+    CLNY O 4  
+    CLNY P 4
+  deathloop:
+    CLNY Q 4 A_JumpIf(z <= floorz+4,"AltCrash")
+	goto deathloop
+  Altcrash:
+    CLNY R 4 A_SetFloorClip
+	CLNY ST 4
+	CLNY U -1 A_NoBlocking
+    Stop
+  }
+}

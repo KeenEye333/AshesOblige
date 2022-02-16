@@ -1,0 +1,146 @@
+ACTOR RevolverThug: pistolthug 
+{
+  PainSound "goon/pain"
+  DeathSound "goon/death"
+  Obituary "%o was shot down by a Vulture Thug."
+  DropItem "RevolverSpawn"
+  DropItem "FortyFiveAmmoDropper"
+  States
+  {
+  Spawn:
+    VUL2 V 10 A_Look
+    Loop
+   //Switching
+   //Switching
+  See:
+    VUL2 A 0 A_AlertMonsters(150)
+    VUL2 A 0 A_ChangeFlag("MissileEvenMore", 0)
+	VUL2 A 0 A_TakeInventory("GoonRally", 1)
+	VUL2 A 0 A_TakeInventory("GoonWimp", 1)
+	VUL2 A 0 A_TakeInventory("GoonScared", 1)
+	VUL2 A 0 A_JumpIfHealthLower(5, "ScaredSwitch")
+	VUL2 A 0 A_JumpIfInventory("GoonFear", 15, "ScaredSwitch")
+    VUL2 A 0 A_JumpIfInventory("GoonOrder", 1, "WanderSwitch")
+	//Normal Mode
+	VUL2 AABBCCDD 2 A_Chase
+	VUL2 A 0 A_checksight("ambushsee")
+	VUL2 A 0 A_CheckProximity("AggressiveSwitch","pistolthug",256.0,2,CPXF_ANCESTOR)
+	loop
+	 //Aggressive Mode
+  AggressiveSwitch:
+    VUL2 A 0 A_ChangeFlag("MissileEvenMore", 1)
+    Goto AggressiveSee
+  AggressiveSee:
+	VUL2 AABBCCDD 2 A_Chase
+	VUL2 A 0 A_JumpIfHealthLower(10, "See")
+	VUL2 A 0 A_checksight("see")
+    Loop
+  //Search Mode
+  WanderSwitch:
+    VUL2 A 0 A_ClearTarget
+    Goto WanderSee
+	WanderSee:
+	VUL2 A 0 A_jump(220,2)
+	VUL2 A 0 A_PlaySound("vulture/search",CHAN_VOICE)
+    VUL2 A 4 A_Wander
+    VUL2 A 0 A_LookEx(10, 0, 0, 0, 360, "See")
+    VUL2 A 4 A_Wander
+    VUL2 A 0 A_LookEx(10, 0, 0, 0, 360, "See")
+    VUL2 B 4 A_Wander
+    VUL2 A 0 A_LookEx(10, 0, 0, 0, 360, "See")
+	VUL2 B 4 A_Wander
+    VUL2 A 0 A_LookEx(10, 0, 0, 0, 360, "See")
+	VUL2 C 4 A_Wander
+    VUL2 A 0 A_LookEx(10, 0, 0, 0, 360, "See")
+	VUL2 C 4 A_Wander
+    VUL2 A 0 A_LookEx(10, 0, 0, 0, 360, "See")
+	VUL2 D 4 A_Wander
+    VUL2 A 0 A_LookEx(10, 0, 0, 0, 360, "See")
+	VUL2 D 4 A_Wander
+    VUL2 A 0 A_LookEx(10, 0, 0, 0, 360, "See")
+	loop
+	//ambushmode
+	AmbushSee:
+	VUL2 A 0 A_jump(240,2)
+	VUL2 A 0 A_PlaySound("vulture/search",CHAN_VOICE)
+	VUL2 AABBCCD 2 A_Chase
+	VUL2 D 2 A_jump(32,"waitsee")
+    loop
+	Waitsee: 
+	VUL2 E 10 A_sentinelrefire
+	VUL2 E 0 A_jump(32,"Ambushsee")
+	VUL2 E 0 A_checksight("waitsee")
+	goto missile+1
+   //Scared Mode
+   Scaredswitch:
+    VUL2 A 0 A_ChangeFlag("Frightened", 1)
+    Goto ScaredSee
+	Scaredsee:
+	VUL2 A 0 A_jump(246,2)
+	VUL2 A 0 A_PlaySound("Vulture/run",CHAN_VOICE)
+	VUL2 ABCD 3 A_Chase
+	VUL2 D 0 A_checksight("idlereset")
+	goto see
+  IdleReset:
+    VUL2 E 0 A_facetarget
+    VUL2 E 0 A_cleartarget
+   Idle:
+    VUL2 E 10 A_Look
+    Loop
+  Missile:
+	VUL2 W 10 fast A_FaceTarget
+	VUL2 E 5 A_FaceTarget
+	VUL2 F 0 A_PlaySound("weapons/revolverfire",CHAN_WEAPON)
+	VUL1 F 0 A_PlaySound("Distant/revolver",CHAN_BODY)
+	VUL1 F 0 A_AlertMonsters
+    VUL2 F 5 bright A_customMissile("BulletTracerlarge", 32, 12, random(-9, 9), CMF_OFFSETPITCH, random(-1, 1))
+	VUL2 W 10
+    Goto see
+  Pain:
+    VUL2 G 4
+    VUL2 G 4 A_Pain
+    Goto See
+  BURN:                
+    VUL2 I 1 A_PlaySound("special/firedeath", CHAN_VOICE)
+	VUL2 A 0 A_radiusgive("goonfear",512,0,8)
+    VUL2 A 0 A_HideThing
+    VUL2 A 0 A_Fall
+    VUL2 A 0 A_SpawnItem("BurnDeathHuman",1,0,0)
+    VUL2 A -1
+    Stop
+  Death:
+    VUL2 G 5 A_Scream
+    VUL2 H 7 A_radiusgive("goonfear",512,0,2)
+    VUL2 I 7 A_AlertMonsters(256)
+    VUL2 J 5 A_NoBlocking
+    VUL2 K 4
+    VUL2 L -1
+    Stop
+  XDeath.fire:
+  XDeath:
+    VUL2  M 3 A_PlaySound("Special/Gibdeath", CHAN_BODY)
+	VUL2  M 3 A_PlaySound("goon/explode", CHAN_VOICE)
+	VUL2  A 0 A_radiusgive("goonfear",512,0,4)
+	VUL2  NNNN 0 A_SpawnDebris("FlyingBlood",1)
+    VUL2  N 4 A_SpawnDebris("FlyingGibOffal",1)
+	VUL2  NN 0 A_SpawnDebris("FlyingBlood",1)
+	VUL2  N 0 A_SpawnDebris("FlyingGibArm",1)
+	VUL2  N 0 A_SpawnDebris("FlyingGibEntrails",1)
+	VUL2  N 0 A_SpawnDebris("FlyingGibRib",1)
+    VUL2  O 4 A_NoBlocking
+	VUL2  NNN 0 A_SpawnDebris("FlyingBlood",1)
+    VUL2  PQRST 4
+    VUL2  U -1
+    Stop
+  }
+}
+
+Actor ThugTalkative2: revolverThug replaces Marineberserk
+{
+States
+  {
+    Spawn:
+    VUL2 V 10 A_turretlook
+    Loop
+}
+}

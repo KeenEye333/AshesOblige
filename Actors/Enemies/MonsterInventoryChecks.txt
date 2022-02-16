@@ -1,0 +1,21 @@
+Actor GoonOrder: Inventory { Inventory.MaxAmount 1 }
+
+Actor GoonFear : Inventory { Inventory.MaxAmount 20 }
+
+Actor GoonRally : Inventory { Inventory.MaxAmount 1 }
+
+Actor GoonScared : Inventory { Inventory.MaxAmount 1 }
+
+Actor GoonWimp : Inventory { Inventory.MaxAmount 1 }
+
+Actor SporeOpen : Inventory { Inventory.MaxAmount 1 }
+
+Actor GeminiCheck: Inventory
+{
+   Inventory.MaxAmount 1
+}
+
+Actor VinayaCheck: Inventory
+{
+   Inventory.MaxAmount 1
+}

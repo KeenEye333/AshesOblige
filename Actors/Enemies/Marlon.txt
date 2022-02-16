@@ -1,0 +1,101 @@
+Actor Marlon: actor 13089
+{
+  health 120
+  Mass 100
+  Speed 10
+  PainChance 256
+  Monster
+  Decal "BulletChip"
+  SeeSound "vulture/sight"
+  PainSound "goon/pain"
+  DeathSound "goon/death"
+  DropItem "PumpySpawn"
+  DropItem "ShotAmmoDropper"
+  DropItem "shortyspawn", 255, 3
+  Obituary "%o was given a dose of lead by Marlon."
+	States
+	{
+		Spawn:
+		VMLN A 5 A_JumpIfInventory("RJNPCHostilityToken",1,"HostileLook")
+		Goto NeutralLook
+		
+		HostileLook:
+		VMLN E 1
+		VMLN E 9 A_Look
+		Goto Spawn
+		
+		NeutralLook:
+		VMLN A 1
+		VMLN A 9 A_turretlook
+		VMLN A 0 A_jump(64,"fidget")
+		Goto Spawn
+		
+		Fidget:
+		VMLN V 5
+		VMLN WXYVWXYVWXY 5 A_turretlook
+		VMLN A 0 A_jump(64,"fidget")
+		Goto Spawn
+		
+		greetings:
+        VMLN ABABBABBABBABA 5 A_turretlook
+        goto spawn
+        Yes:
+        VMLN A 1 A_jump(96,"yes2")
+        VMLN BBABBAAABABBABBA 5
+	    goto spawn
+        Yes2:
+        VMLN ABCDCCDDCDDCABA 5
+	    goto spawn
+		
+		See:
+        VMLN A 0 A_AlertMonsters(150)
+	    VMLN E 5 A_Chase
+		goto see
+		
+		Idle:
+        VMLN E 10 A_Look
+        Loop
+		
+		Missile:
+         VMLN E 5 Fast A_FaceTarget
+	     VMLN E 0 A_FaceTarget
+	     VMLN E 10 A_FaceTarget
+	     VMLN F 1 bright A_customMissile("BulletTracerSmall", 32, 12, random(-9, 9), CMF_OFFSETPITCH, random(-1, 1))
+	     VMLN FFFF 0 A_customMissile("BulletTracerSmall", 32, 12, random(-9, 9), CMF_OFFSETPITCH, random(-1, 1))
+         VMLN F 0 bright A_PlaySound ("weapons/grizlygun", CHAN_WEAPON)
+	     VMLN F 0 A_PlaySound("Distant/shotgun",CHAN_BODY)
+	     VMLN F 0 A_AlertMonsters
+         VMLN F 9 bright A_customMissile("BulletTracerSmall", 32, 0, random(-6, 6), 1, random(-4, 4))
+         VMLN E 20 A_FaceTarget
+         Goto See
+		 
+		 Pain:
+         VMLN G 4
+         VMLN G 4 A_Pain
+         Goto See
+		 
+		 Death:
+         VMLN G 6 A_Scream
+         VMLN H 6 A_radiusgive("goonfear",512,0,2)
+         VMLN I 7 A_AlertMonsters(256)
+         VMLN J 5 A_NoBlocking
+         VMLN K -1
+         Stop
+        Xdeath.fire:
+        XDeath:
+        VSTN M 3 A_PlaySound("Special/Gibdeath", CHAN_BODY)
+	    VSTN M 3 A_PlaySound("goon/explode", CHAN_VOICE)
+	    VSTN A 0 A_radiusgive("goonfear",1024,0,8)
+	    VSTN NNNN 0 A_SpawnDebris("FlyingBlood",1)
+        VSTN N 4 A_SpawnDebris("FlyingGibOffal",1)
+	    VSTN NN 0 A_SpawnDebris("FlyingBlood",1)
+	    VSTN N 0 A_SpawnDebris("FlyingGibArm",1)
+	    VSTN N 0 A_SpawnDebris("FlyingGibEntrails",1)
+	    VSTN N 0 A_SpawnDebris("FlyingGibRib",1)
+        VSTN O 4 A_NoBlocking
+	    VSTN NNN 0 A_SpawnDebris("FlyingBlood",1)
+        VSTN PQRST 4
+        VSTN U -1
+        Stop
+	}
+}

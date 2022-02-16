@@ -1,0 +1,116 @@
+Actor RJPistolThugTalkative: ThugTalkative
+{
+	States
+	{
+		Spawn:
+		VUL1 V 1 A_JumpIfInventory("RJNPCHostilityToken",1,"HostileLook")
+		Goto NeutralLook
+		
+		HostileLook:
+		VUL1 V 1
+		VUL1 V 9 A_Look
+		Goto Spawn
+		
+		NeutralLook:
+		VUL1 V 1
+		VUL1 V 9 A_turretlook
+		Goto Spawn
+	}
+}
+
+Actor RJRevolverThugTalkative:  ThugTalkative2
+{
+	States
+	{
+		Spawn:
+		VUL2 V 1 A_JumpIfInventory("RJNPCHostilityToken",1,"HostileLook")
+		Goto NeutralLook
+		
+		HostileLook:
+		VUL2 V 1
+		VUL2 V 9 A_Look
+		Goto Spawn
+		
+		NeutralLook:
+		VUL2 V 1
+		VUL2 V 9 A_turretlook
+		Goto Spawn
+	}
+}
+
+Actor RJShotgunThugTalkative: BanditTalkative
+{
+	States
+	{
+		Spawn:
+		VUL3 V 1 A_JumpIfInventory("RJNPCHostilityToken",1,"HostileLook")
+		Goto NeutralLook
+		
+		HostileLook:
+		VUL3 V 1
+		VUL3 V 9 A_Look
+		Goto Spawn
+		
+		NeutralLook:
+		VUL3 V 1
+		VUL3 V 9 A_turretlook
+		Goto Spawn
+	}
+}
+
+Actor RJMachinegunThugTalkative: RaiderTalkative
+{
+	States
+	{
+		Spawn:
+		RGAL V 1 A_JumpIfInventory("RJNPCHostilityToken",1,"HostileLook")
+		Goto NeutralLook
+		
+		HostileLook:
+		RGAL V 1
+		RGAL V 9 A_Look
+		Goto Spawn
+		
+		NeutralLook:
+		RGAL V 1
+		RGAL V 9 A_turretlook
+		Goto Spawn
+	}
+}
+ACTOR RJPitfiendNeutral: Pitfiend 13023
+{
+	States
+	{
+		Spawn:
+		TROO D 1 A_JumpIfInventory("RJNPCHostilityToken",1,"HostileLook")
+		Goto NeutralLook
+		
+		HostileLook:
+		TROO D 1
+		TROO D 9 A_Look
+		Goto Spawn
+		
+		NeutralLook:
+		TROO D 1
+		TROO D 9 A_turretlook
+		Goto Spawn
+	}
+}
+
+Actor RJPistolThugNeutral: RJPistolThugTalkative{}
+Actor RJRevolverThugNeutral:  RJRevolverThugTalkative{}
+Actor RJShotgunThugNeutral: RJShotgunThugTalkative{}
+Actor RJMachinegunThugNeutral: RJMachinegunThugTalkative{}
+Actor CLYDE: RJPistolThugTalkative 13086{} 
+
+Actor RJWarehouseGuard : RJShotgunThugTalkative{}
+
+Actor RJMainGateGuard : RJShotgunThugTalkative{}
+Actor RJGateGuardA : RJMachinegunThugTalkative{}
+Actor RJGateGuardB : RJRevolverThugTalkative{}
+
+Actor RJCrateGuy : RJRevolverThugTalkative{}
+Actor RJSassy : RJMachinegunThugTalkative{}
+
+
+Actor RJRoamerCrusherGuy: RJRevolverThugTalkative{}

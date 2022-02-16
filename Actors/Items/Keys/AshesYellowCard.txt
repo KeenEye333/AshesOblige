@@ -1,0 +1,16 @@
+ACTOR AshesYellowCard : CustomInventory replaces Yellowcard
+{
+  Inventory.PickupMessage "Got the yellow security card"
+  Inventory.Icon "STKEYS1"
+  scale 0.7
+  States
+  {
+  Spawn:
+    YKEY A 10
+    YKEY A 10 Bright
+    Loop
+  Pickup:
+	TNT1 A 1 A_GiveInventory("Yellowcard",1)
+	stop
+  }
+}

@@ -1,0 +1,61 @@
+ACTOR Master: Actor replaces BaronOfHell
+{
+  Health 800
+  Radius 24
+  Height 64
+  Mass 1000
+  Speed 10
+  PainChance 50
+  meleerange 64
+  meleethreshold 96
+  Monster
+  +FLOORCLIP
+  +BOSSDEATH
+  +MISSILEMORE
+  SeeSound "master/sight"
+  PainSound "master/pain"
+  DeathSound "master/death"
+  ActiveSound "master/idle"
+  DropItem "NapalmammoDropper"
+  DropItem "NapalmSpawn"
+  DropItem "PipeAmmo"
+  hitObituary "%o was pulped by a Cannibal Master."
+  States
+  {
+  Spawn:
+    BOSS V 10 A_Look
+    Loop
+  See:
+    BOSS BBCC 3 A_CHASE
+	BOSS DD 3 A_PlaySound ("master/walk1", CHAN_body)
+	BOSS EEFF 3 A_Chase 
+	BOSS AA 3 A_PlaySound ("master/walk2", CHAN_body)
+    Loop
+  Melee:
+    BOSS P 6 A_PlaySound("weapons/crowbarswing")
+	BOSS Q 6 A_CustomMeleeAttack(random(3,5)*5, "weapons/crowbarhit")
+	BOSS R 8 A_blast (BF_DONTWARN,128,96)
+	BOSS V 6
+  Missile:
+    BOSS V 10 A_FaceTarget
+	BOSS G 8 bright A_CustomMissile("MasterFirebomb",32,10,random(-3,3),CMF_OFFSETPITCH,random(3,6))
+	BOSS V 5 a_sentinelrefire
+    Goto See
+  Pain:
+    BOSS H 2
+    BOSS H 6 A_Pain
+    Goto See
+  Death:
+    BOSS I 10
+    BOSS J 8 A_Scream
+    BOSS K 8
+    BOSS L 8 A_NoBlocking
+    BOSS MN 8
+    BOSS O -1 A_BossDeath
+    Stop
+  Raise:
+    BOSS O 8
+    BOSS NMLKJI 8
+    Goto See
+  }
+}
