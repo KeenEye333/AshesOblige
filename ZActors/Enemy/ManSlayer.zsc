@@ -1,0 +1,758 @@
+class RJDeadShield : Actor
+{
+	Int SpeenAngle;
+	Int SpinAttenuation;
+	Int Maxbounce, TrackBounce;
+	
+	Property SpinAttenuation : SpinAttenuation;
+	
+	Default
+	{
+		Radius 12;
+		Height 40;
+		Mass 1;
+		Gravity 1.0;
+		
+		//Scale 1.0;
+		//Alpha 1.0;
+		
+		+NOBLOCKMAP;
+		+THRUACTORS;
+		+MISSILE;
+		+USEBOUNCESTATE
+		+BOUNCEONWALLS;
+		+BOUNCEONFLOORS;
+		+BOUNCEONCEILINGS;
+		+DONTBOUNCEONSKY;
+		+EXPLODEONWATER;
+		-ALLOWBOUNCEONACTORS;
+		-BOUNCEONACTORS
+		
+		bouncesound "RJShieldBounce";
+		
+		BounceFactor 0.7;
+		WallBounceFactor 0.7;
+		BounceCount 4;
+		
+		RJDeadShield.SpinAttenuation 2;
+
+		
+	}
+
+	Override void PostBeginPlay()
+	{
+		super.PostBeginPlay();
+		//RadiusDebug.Enable(self);
+		//SPEEEEEEN
+		Maxbounce = self.BounceCount;
+		TrackBounce = 0;
+		SpeenAngle = RandomPick(-20, 20);
+
+	}
+	
+	Override void Tick()
+	{
+		super.Tick();
+		self.Angle += SpeenAngle;
+		//Console.PrintF("%i SpinAngle", SpeenAngle);
+	}
+	
+	
+	
+	
+	States
+	{
+		Spawn:
+			RJSH AA 10;
+			loop;
+		Bounce:
+			RJSH A 0
+			{
+				TrackBounce ++;
+				//Console.PrintF("%i", BounceCount);
+				If(SpeenAngle > (0 + SpinAttenuation))
+				{SpeenAngle -= SpinAttenuation;}
+				Else If(SpeenAngle < (0 - SpinAttenuation))
+				{SpeenAngle += SpinAttenuation;}
+				Else
+				{SpeenAngle = 0;}
+				If((Trackbounce > Maxbounce) || (BounceCount < 1))
+				{
+					//speculative fix to shield getting stuck sometimes in weird edge cases
+					self.A_Remove(AAPTR_DEFAULT, RMVF_EVERYTHING);
+				}
+			}
+			goto Spawn;
+		Death:
+			TNT1 A 0 
+			{
+				A_NoBlocking(false);
+				bUSEBOUNCESTATE = false;
+			}
+			TNT1 A 0  A_SpawnItemEx("RJBullshitHack");
+			TNT1 A 1 ;//A_NoBlocking(false);
+			TNT1 A 1;
+			stop;
+	}
+	
+	
+}
+
+Class RJSubShield : Actor
+{
+	RJShield ParentShield;
+	
+	Default
+	{
+		Obituary "How did this even happen?";
+		Health 100000;
+		GibHealth -30;
+		Radius 5;
+		Height 40;
+		Mass 100;
+		Speed 16;
+		scale 1.0;
+		Monster;
+		-COUNTKILL;
+		//species "ShieldGuy";
+		renderstyle "None";
+		//+FloorClip
+		-CANBLAST;
+		+DONTTHRUST;
+		+NEVERTARGET
+		+NOBLOOD;
+		+NOGRAVITY;
+		//+THRUSPECIES;
+		+GHOST;
+		-SOLID;
+		
+		+NORADIUSDMG;
+	}
+	
+	override void postbeginplay()
+	{
+		super.postbeginplay();
+		//RadiusDebug.Enable(self);
+	}
+	
+	override void Tick()
+	{
+		super.tick();
+		If(!ParentShield && !InStateSequence(self.CurState, self.ResolveState("Death")))
+		{
+			self.SetState(self.ResolveState("Death"));
+			//Console.PrintF("RJSubShield trying to die");
+		}
+		//Console.PrintF("RJSubShield Exists");
+	}
+	
+	override int DamageMobj(Actor inflictor, Actor source, int damage, Name mod, int flags, double angle)
+	{
+		//pass damage taken on to the main shield
+		super.DamageMobj(self,self,0,"nihilism",0,0);
+		If(ParentShield)
+		{
+			ParentShield.DamageMobj(inflictor, source, damage, mod, flags, angle);
+		}
+		return 0;//item=!item?null:item.inv
+	}
+	
+	states
+	{
+		Spawn:
+			TNT1 AA 1;
+			loop;
+		Death:
+			TNT1 A 0;
+			TNT1 A 1 A_NoBlocking(false);
+			TNT1 A 1 A_Remove(AAPTR_DEFAULT|RMVF_EVERYTHING);
+			stop;
+	}
+}
+
+Class RJShield : Actor
+{
+	ZManslayer Holder;
+	
+	RJSubShield LSub;
+	RJSubShield RSub;
+
+	Vector3 CurrentOffsets;
+	const SubOffs = 8.0;
+	Int AngleOffset;
+	
+	bool SilentDeath;
+	bool Dropped;//blind fix to stop a rare double spawn bug due to state fuckery
+
+	Default
+	{
+		Obituary "How did this even happen?";
+		Health 300;
+		GibHealth -30;
+		Radius 5;
+		Height 40;
+		Mass 100;
+		Speed 16;
+		scale 1.0;
+		Monster;
+		-COUNTKILL;
+		//species "ShieldGuy";
+		renderstyle "None";
+		//+FloorClip
+		-CANBLAST;
+		+DONTTHRUST;
+		+NEVERTARGET
+		+NOBLOOD;
+		+NOGRAVITY;
+		//+THRUSPECIES;
+		+GHOST;
+		-SOLID;
+		//DeathSound "RJShieldBreak";
+	}
+	
+	override void postbeginplay()
+	{
+		super.postbeginplay();
+		//RadiusDebug.Enable(self);
+		SilentDeath = False;
+		Dropped = False;
+		AngleOffset = 0;
+		
+		If(ZManslayer(master))
+		{
+			Holder = ZManslayer(master);
+			//self.SpawnItemEx();
+			LSub = RJSubShield(self.Spawn("RJSubShield", self.pos));
+			LSub.master = master;
+			LSub.ParentShield = self;
+			
+			RSub = RJSubShield(self.Spawn("RJSubShield", self.pos));
+			RSub.master = master;
+			RSub.ParentShield = self;
+		}
+		CurrentOffsets = (24.0, 0.0, 0.0);
+	}
+	
+	void SetPosition(Vector3 Position, Int AngOff, Int ZSize)
+	{
+		CurrentOffsets = Position;
+		AngleOffset = AngOff;
+		A_SetSize(-1, ZSize, false);
+		
+		If(LSub)
+		{
+			LSub.A_SetSize(-1, ZSize, false);
+		}
+		
+		If(RSub)
+		{
+			RSub.A_SetSize(-1, ZSize, false);
+		}
+	}
+	
+	override int DamageMobj(Actor inflictor, Actor source, int damage, Name mod, int flags, double angle)
+	{
+		super.DamageMobj(inflictor, source, damage, mod, flags, angle);
+		
+		if(mod != "Fire" && mod != "Poison")
+		{
+			//ding!
+			//Console.PrintF("Should hear damage sound.");
+			A_StartSound("RJRichochet", CHAN_AUTO, CHANF_OVERLAP, 1.0, 1.0);
+		}
+		
+		/*
+		string Fuck1;
+		If(source)
+		{Fuck1 = source.GetClassName();}
+		Else
+		{Fuck1 = "None";}
+		
+		string Fuck2;
+		If(inflictor)
+		{Fuck2 = inflictor.GetClassName();}
+		Else
+		{Fuck2 = "None";}
+		
+		Console.PrintF("%s took %i damage from source/inflictor %s / %s",
+			self.GetClassName(),
+			damage,
+			Fuck1,
+			Fuck2);
+		*/
+		return 0;
+	}
+	
+	override void Tick()
+	{
+		super.tick();
+		If(master)
+		{
+			If(master.bCORPSE && InStateSequence(self.CurState, self.ResolveState("Spawn")))
+			{
+				//console.printf("Remove");
+				SilentDeath = True;
+				self.SetState(self.ResolveState("Death"));
+			}
+			//params: destination pointer, forward (x) offset, side to side (y) offset, z offset, angle, flags
+			self.A_Warp(AAPTR_MASTER, CurrentOffsets.x, CurrentOffsets.y, CurrentOffsets.z, AngleOffset, WARPF_NOCHECKPOSITION|WARPF_INTERPOLATE|WARPF_STOP);
+			//possible crash if the sub shields dont have a master?
+			//no built in funcs handle this.
+			If(LSub)
+			{
+				LSub.A_Warp(AAPTR_MASTER, CurrentOffsets.x, CurrentOffsets.y - SubOffs, CurrentOffsets.z, AngleOffset, WARPF_NOCHECKPOSITION|WARPF_INTERPOLATE|WARPF_STOP);
+			}
+			If(RSub)
+			{
+				RSub.A_Warp(AAPTR_MASTER, CurrentOffsets.x, CurrentOffsets.y + SubOffs, CurrentOffsets.z, AngleOffset, WARPF_NOCHECKPOSITION|WARPF_INTERPOLATE|WARPF_STOP);
+			}
+		}
+		Else
+		{
+			//console.printf("Remove");
+			If(InStateSequence(self.CurState, self.ResolveState("Spawn")))
+			{
+				SilentDeath = True;
+				self.SetState(self.ResolveState("Death"));
+				
+			}
+		}
+		//Console.PrintF("MainShield Exists");
+	}
+	
+	states
+	{
+		Spawn:
+			TNT1 AA 1;
+			loop;
+		Death:
+			TNT1 A 0
+			{
+				If(Holder)
+				{
+					Holder.ShieldBreaks();
+				}
+			}
+			TNT1 A 0 
+			{
+				If(SilentDeath && !Dropped)
+				{
+					Dropped = True;
+					A_SpawnItemEx("RJDeadShield", 0, 0, 4, random (5, 7), random (-3, 3), random(4, 6));
+				}
+				Else If(!Dropped)
+				{
+					Dropped = True;
+					A_SpawnItemEx("RJBullshitHack");
+				}
+				
+			}
+			TNT1 A 1 A_NoBlocking(false);
+			TNT1 A 1 A_Remove(AAPTR_DEFAULT|RMVF_EVERYTHING);
+			stop;
+	}
+	
+	
+}
+
+//I wish gzdoom was a person so I could violently beat them to death
+//pass in the angle of the originating shield and you may be able to spawn stuff relatively
+Class RJBullshitHack : Actor
+{
+	Default
+	{
+		+NOBLOCKMAP;
+		+NOGRAVITY;
+		+NOINTERACTION;
+	}
+	
+	States
+	{
+		Spawn:
+			TNT1 AAAAAAA 0 A_SpawnItemEx("shotSmoke", 0, 0, random (2, 40), random (-1, 1), random (-1, 1), random (1, 3), 0, 0, 30);
+			TNT1 AAAAAAAAAAAA 0 A_SpawnItemEx("RJShieldSpark", 0, 0, random (8, 48), random (-6, 6), random (-6, 6), random (3, 6), 0, 0, 30);
+			
+			TNT1 A 0 A_SpawnItemEx("RJShieldChunk1",0,0,48,random (-5, 5), random (-5, 5), random (1, 6),0,0,0,0);//Upper Left
+			TNT1 A 0 A_SpawnItemEx("RJShieldChunk2",0,0,48,random (-5, 5), random (-5, 5), random (1, 6),0,0,0,0);//Upper Right
+			TNT1 A 0 A_SpawnItemEx("RJShieldChunk3",0,0,36,random (-5, 5), random (-5, 5), random (1, 6),0,0,0,0);//Lower Upper Mid
+			TNT1 A 0 A_SpawnItemEx("RJShieldChunk4",0,0,26,random (-5, 5), random (-5, 5), random (1, 6),0,0,0,0);//Middle Left
+			TNT1 A 0 A_SpawnItemEx("RJShieldChunk5",0,0,26,random (-5, 5), random (-5, 5), random (1, 6),0,0,0,0);//Middle Right
+			TNT1 A 0 A_SpawnItemEx("RJShieldChunk6",0,0,16,random (-5, 5), random (-5, 5), random (1, 6),0,0,0,0);//Lower Left
+			TNT1 A 0 A_SpawnItemEx("RJShieldChunk7",0,0,16,random (-5, 5), random (-5, 5), random (1, 6),0,0,0,0);//Lower Right
+			
+			TNT1 A 0 A_SpawnItemEx("ArmorScrap",0,0,36,random (-5, 5), random (-5, 5), random (1, 6),0,0,0,0);//Lower Upper Mid
+			
+			TNT1 A 35 A_StartSound("RJShieldBreak", CHAN_5);//there is no good way to play this fucking sound otherwise
+			TNT1 A 35;
+			goto Death;
+		Death:
+			TNT1 AA 1;
+			stop;
+	}
+}
+
+Class RJShieldSpark: Actor
+{
+	default
+	{
+		+NOBLOCKMAP;
+		+NOGRAVITY;
+		//+ALLOWPARTICLES;
+		+RANDOMIZE;
+		+NOEXTREMEDEATH;
+		renderstyle "normal";
+		Decal "BulletChip";
+		Alpha 1.0;
+		VSpeed 0;
+		Mass 0;
+		Scale 1.5;
+	}
+  
+	States
+	{
+		Spawn:
+			PIN2 B 1 bright;
+			PIN2 C 1 Bright;
+			PIN2 D 2 bright;
+			PIN2 E 2 bright;
+			PIN2 F 2;
+			PIN2 G 2;
+			PIN2 H 2;
+			goto Death;
+		Death:
+			TNT1 AA 1;
+			stop;
+		
+	}
+}
+
+Class ZManslayer : actor replaces Fatso
+{
+
+	const FC = 4.0;
+	
+	RJShield MyShield;
+	bool HaveShield;
+	
+	Default
+	{
+		Health 175;
+		PainChance 100;
+		Speed 6;
+		Radius 18;
+		Height 56;
+		Mass 800;
+		scale 0.8;
+		Monster;
+		+FLOORCLIP;
+		+BOSSDEATH;
+		SeeSound "slayer/see";
+		AttackSound "weapons/crowbarswing";
+		PainSound "slayer/pain";
+		DeathSound "slayer/die";
+		ActiveSound "slayer/act";
+		Obituary "%o was crushed by a Manslayer Cannibal.";
+		dropitem "shotgunammo",255, 4;
+	}
+	
+	override void postbeginplay()
+	{
+		super.postbeginplay();
+		self.A_SpawnItemEx("RJShield", 10, 10, 10, 0, 0, 0, 0, SXF_SETMASTER|SXF_NOCHECKPOSITION|SXF_ISTRACER);
+		MyShield = RJShield(tracer);//a little bit roundabout, but w/e
+		HaveShield = True;
+		//RadiusDebug.Enable(self);
+		
+	}
+	
+	void ShieldBreaks()
+	{
+		//console.printf("Shield breaks.");
+		HaveShield = False;
+		bMissileMore = True;
+		speed = 10;
+		//A_StartSound("RJShieldBreak", CHAN_5);
+		
+		//when you do this the character loses all clipping for some reason
+		//If(!InStateSequence(self.CurState, self.ResolveState("Death")))
+		If(Health > 0)
+		{
+			//Console.PrintF("%s sent to Exist2", self.GetClassName());
+			//A_StartSound("RJShieldBreak", CHAN_5);
+			self.SetState(self.ResolveState("Pain"));
+			//self.SetState(self.ResolveState("SpecialPain"));
+			
+		}
+		//force the pain state?
+		//make sure to check if alive
+	}
+	
+	//this just avoids having to do a bunch of inline checks to make sure the shield is still there
+	void MoveShield(Vector3 Position, Int AngOff = 0, Int ZSize = 40)
+	{
+		If(MyShield)
+		{
+			MyShield.SetPosition(Position, AngOff, ZSize);
+		}
+	}
+	/*
+	override int DamageMobj(Actor inflictor, Actor source, int damage, Name mod, int flags, double angle)
+	{
+		super.DamageMobj(inflictor, source, damage, mod, flags, angle);
+		
+		string Fuck1;
+		If(source)
+		{Fuck1 = source.GetClassName();}
+		Else
+		{Fuck1 = "None";}
+		
+		string Fuck2;
+		If(inflictor)
+		{Fuck2 = inflictor.GetClassName();}
+		Else
+		{Fuck2 = "None";}
+		
+		Console.PrintF("%s took %i damage from source/inflictor %s / %s",
+			self.GetClassName(),
+			damage,
+			Fuck1,
+			Fuck2);
+		return 0;
+	}
+	*/
+	
+	/*
+	All Offsets are from the perspective of the holding actor
+	XOffset: + is forward, - is backward
+	YOffset: + is right, - is left 
+	ZOffset: + is up, - is down
+	*/
+	
+	States
+	{
+		Spawn:
+			SLYR A 0;
+			SLYR A 0
+			{
+				If(HaveShield)
+				{return resolvestate("ShieldSpawn");}
+				Else
+				{return resolvestate("NoShieldSpawn");}
+			}
+			loop;
+		ShieldSpawn:
+			SLYR V 0;
+			SLYR V 1 MoveShield((FC + 24.0, 0.0, 4.0), 90, 20);
+			SLYR V 9 A_look;
+			//SLYR A 0 A_SetAngle(self.angle + 8, SPF_INTERPOLATE);
+			loop;
+		NoShieldSpawn:
+			//SLYR A 0 MoveShield((FC + 24.0, 0.0, 8.0));
+			SLY2 A 10 A_look;
+			loop;
+		
+		//------------------------------------------------------------------
+		See:
+			SLYR A 0;
+			SLYR A 0
+			{
+				If(HaveShield)
+				{return resolvestate("ShieldSee");}
+				Else
+				{return resolvestate("NoShieldSee");}
+			}
+			loop;
+		ShieldSee:
+			SLYR A 0 MoveShield((FC + 24.0, 0.0, 8.0));
+			SLYR AA 2 A_Chase;
+			SLYR B 0 MoveShield((FC + 21.0, 2.0, 10.0));
+			SLYR BB 2 A_Chase;
+			SLYR C 0 MoveShield((FC + 23.0, 3.0, 10.0));
+			SLYR CC 2 A_Chase;
+			SLYR D 0 MoveShield((FC + 22.0, 2.0, 10.0));
+			SLYR DD 2 A_Chase;
+			loop;
+		NoShieldSee:
+			//SLY2 A 0 MoveShield((FC + 24.0, 0.0, 8.0));
+			SLY2 AA 2 A_Chase;
+			//SLY2 B 0 MoveShield((FC + 21.0, 2.0, 10.0));
+			SLY2 BB 2 A_Chase;
+			//SLY2 C 0 MoveShield((FC + 23.0, 3.0, 10.0));
+			SLY2 CC 2 A_Chase;
+			//SLY2 D 0 MoveShield((FC + 22.0, 2.0, 10.0));
+			SLY2 DD 2 A_Chase;
+			loop;
+		
+		//------------------------------------------------------------------
+		Missile:
+			SLYR A 0;
+			SLYR A 0
+			{
+				If(HaveShield)
+				{return resolvestate("ShieldMissile");}
+				Else
+				{return resolvestate("NoShieldMissile");}
+			}
+			loop;
+		ShieldMissile:
+			SLYR E 0 MoveShield((FC + 24.0, -2.0, 8.0));
+			SLYR E 4 A_FACETARGET;
+			SLYR F 0 MoveShield((FC + 21.0, -4.0, 9.0));
+			SLYR F 2 A_FACETARGET;
+			SLYR F 0 A_StartSound ("weapons/SHOTGR", CHAN_item);
+			SLYR F 4 A_FACETARGET;
+			SLYR G 0 MoveShield((FC + 18.0, -7.0, 10.0));
+			SLYR GG 4 A_FACETARGET;
+			SLYR F 0 MoveShield((FC + 21.0, -4.0, 9.0));
+			SLYR F 4 A_FACETARGET;
+			SLYR H 0 MoveShield((FC + 17.0, -11.0, 8.0));
+			SLYR HH 4 A_FACETARGET;
+			SLYR I 0 MoveShield((FC + 17.0, -11.0, 8.0));
+			SLYR H 5;
+			SLYR I 1 bright;
+			//SLYR IIIII 0 A_customMissile("RJBulletTracerSmall", 32, 12, random(-10, 10), CMF_OFFSETPITCH, random(-1, 1));
+			SLYR IIIIII 0 A_SpawnProjectile("RJBulletTracerSmall", 32, 12, random(-7, 7), CMF_OFFSETPITCH, random(-2,2));
+			SLYR I 0 A_StartSound ("weapons/grizlygun", CHAN_WEAPON);
+			SLYR I 0 A_AlertMonsters;
+			SLYR I 9 bright ;//A_customMissile("RJBulletTracerSmall", 32, 0, random(-10, 10), 1, random(-4, 4));
+			SLYR G 0 MoveShield((FC + 18.0, -7.0, 10.0));
+			SLYR H 8;//4;
+			SLYR H 0 MoveShield((FC + 17.0, -11.0, 8.0));
+			SLYR E 6;
+			goto see;
+		NoShieldMissile:
+			//SLY2 E 0 MoveShield((FC + 24.0, -2.0, 8.0));
+			SLY2 E 4 A_FACETARGET;
+			//SLY2 F 0 MoveShield((FC + 21.0, -4.0, 9.0));
+			SLY2 F 2 A_FACETARGET;
+			SLY2 F 0 A_StartSound ("weapons/SHOTGR", CHAN_item);
+			SLY2 F 4 A_FACETARGET;
+			//SLY2 G 0 MoveShield((FC + 18.0, -7.0, 10.0));
+			SLY2 GG 4 A_FACETARGET;
+			//SLY2 F 0 MoveShield((FC + 21.0, -4.0, 9.0));
+			SLY2 F 4 A_FACETARGET;
+			//SLY2 H 0 MoveShield((FC + 17.0, -11.0, 8.0));
+			SLY2 HH 4 A_FACETARGET;
+			//SLY2 I 0 MoveShield((FC + 17.0, -11.0, 8.0));
+			SLY2 H 5;
+			SLY2 I 1 bright;
+			SLY2 IIIIII 0 A_SpawnProjectile("RJBulletTracerSmall", 32, 12, random(-7, 7), CMF_OFFSETPITCH, random(-2,2));// 0 A_customMissile("BulletTracerSmall", 32, 12, random(-10, 10), CMF_OFFSETPITCH, random(-1, 1));
+			SLY2 I 0 A_StartSound ("weapons/grizlygun", CHAN_WEAPON);
+			SLY2 I 0 A_AlertMonsters;
+			SLY2 I 9 bright ;//A_customMissile("BulletTracerSmall", 32, 0, random(-10, 10), 1, random(-4, 4));
+			//SLY2 G 0 MoveShield((FC + 18.0, -7.0, 10.0));
+			SLY2 H 8;//4;
+			//SLY2 H 0 MoveShield((FC + 17.0, -11.0, 8.0));
+			SLY2 E 6;
+			goto see;
+		
+		//------------------------------------------------------------------
+		Melee:
+			SLYR A 0;
+			SLYR A 0
+			{
+				If(HaveShield)
+				{return resolvestate("ShieldMelee");}
+				Else
+				{return resolvestate("NoShieldMelee");}
+			}
+			loop;
+		ShieldMelee:
+			SLYR W 0 MoveShield((FC + 12.0, 14.0, 8.0));
+			SLYR W 6 A_StartSound("weapons/crowbarswing");
+			SLYR X 0 MoveShield((FC + 18.0, -4.0, 16.0));
+			SLYR X 4 A_CustomMeleeAttack(random(3,5)*5, "weapons/crowbarhit");
+			SLYR Y 0 MoveShield((FC + 8.0, -24.0, 32.0));
+			SLYR Y 8 A_Blast(BF_DONTWARN | BF_NOIMPACTDAMAGE, 64, 48, 20);//A_blast(0,64,48);
+			goto see;
+		NoShieldMelee:
+			//SLY2 W 0 MoveShield((FC + 12.0, 14.0, 8.0));
+			SLY2 W 4 A_StartSound("weapons/crowbarswing");
+			//SLY2 X 0 MoveShield((FC + 18.0, -4.0, 16.0));
+			SLY2 X 2 A_CustomMeleeAttack(random(3,5)*5, "weapons/crowbarhit");
+			//SLY2 Y 0 MoveShield((FC + 8.0, -24.0, 32.0));
+			SLY2 Y 6 A_Blast(BF_DONTWARN | BF_NOIMPACTDAMAGE, 64, 48, 20);//A_blast(0,64,48);
+			goto see;
+			
+		//------------------------------------------------------------------
+		//SpecialPain:
+			//SLYR J 0 A_StartSound("RJShieldBreak", CHAN_5);
+		Pain:
+			SLYR A 0;
+			SLYR A 0
+			{
+				If(HaveShield)
+				{return resolvestate("ShieldPain");}
+				Else
+				{return resolvestate("NoShieldPain");}
+			}
+			loop;
+		ShieldPain:
+			SLYR J 0 MoveShield((FC + 24.0, -16.0, 16.0));
+			SLYR J 3;
+			SLYR J 3 A_pain;
+			//SLYR J 3 A_StartSound("RJShieldBreak", CHAN_5);
+			goto see;
+		NoShieldPain:
+			//SLY2 J 0 MoveShield((FC + 24.0, -16.0, 16.0));
+			SLY2 J 3;
+			SLY2 J 3 A_pain;
+			goto see;
+		
+		//------------------------------------------------------------------
+		//both states are the same, just keeping them if we want to differentiate later
+		Death:
+			SLYR A 0;
+			SLYR A 0
+			{
+				If(HaveShield)
+				{return resolvestate("ShieldDeath");}
+				Else
+				{return resolvestate("NoShieldDeath");}
+			}
+			stop;
+		ShieldDeath:
+			//pause on N
+			SLY2 J 4;
+			SLYR K 5 A_scream;
+			SLYR L 5 A_Noblocking;
+			SLYR M 7;
+			SLYR N 8;
+			SLYR O 5;
+			SLYR P 4;
+			SLYR Q -1 A_bossdeath;
+			/*
+			SLY2 J 5;
+			SLYR K 6 A_scream;
+			SLYR L 6 A_Noblocking;
+			SLYR MNO 6;
+			SLYR P 4;
+			SLYR Q -1 A_bossdeath;
+			*/
+			/*
+			FATT K 6;
+			FATT L 6 A_scream;
+			FATT M 6 A_Noblocking;
+			FATT NOPQRS 6;
+			FATT T -1 A_bossdeath;
+			*/
+			stop;
+		NoShieldDeath:
+			SLY2 J 4;
+			SLYR K 5 A_scream;
+			SLYR L 5 A_Noblocking;
+			SLYR M 7;
+			SLYR N 8;
+			SLYR O 5;
+			SLYR P 4;
+			SLYR Q -1 A_bossdeath;
+			/*
+			FATT K 6;
+			FATT L 6 A_scream;
+			FATT M 6 A_Noblocking;
+			FATT NOPQRS 6;
+			FATT T -1 A_bossdeath;
+			*/
+			stop;
+	}
+}

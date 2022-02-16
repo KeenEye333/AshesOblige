@@ -1,0 +1,334 @@
+class RJBasicSmoke : Actor
+{
+	//int Lifetime;
+	//property Lifetime: Lifetime;//ticks until actor begins to fade out
+	double DeccelRate, FadeInRate,FadeOutRate;
+	property DeccelRate:DeccelRate;//rate at which the initial velocity will decay
+	//property FadeInRate:FadeInRate;
+	property FadeOutRate:FadeOutRate;
+	double ConstX, ConstY, ConstZ;
+	property ConstXYZ:ConstX,ConstY,ConstZ;//constant velocity that will be applied at all times (eg, wind)
+	
+	Vector3 InitialVelocity, ConstantVelocity;
+	
+	Default
+	{
+		+FORCEXYBILLBOARD;
+		+NOINTERACTION;
+		XScale 1.0;
+		YScale 1.0;
+		Alpha 1.0;
+		RenderStyle "Translucent";
+		RJBasicSmoke.DeccelRate 0.99;
+		//RJBasicSmoke.FadeInRate 0.2;
+		RJBasicSmoke.FadeOutRate 0.003;//0.003;//0.007;
+		RJBasicSmoke.ConstXYZ 0.0, 0.0, 0.0;
+		//RJBasicSmoke.Lifetime 350;
+	}
+	
+	// for visual variety, if desired
+	void FlipXY(bool FX = true, Bool FY = true)
+	{
+		If(FX)
+		{
+			if(random(0,1) == 1){self.scale.x = -self.scale.x;}
+		}
+		If(FY)
+		{
+			if(random(0,1) == 1){self.scale.y = -self.scale.y;}
+		}
+	}
+	
+	override void postbeginplay()
+	{
+		InitialVelocity = vel;
+		ConstantVelocity = (ConstX, ConstY, ConstZ);
+	}
+	
+	override void Tick()
+	{
+		super.Tick();
+		if (level.isfrozen()) return;
+		vel = ConstantVelocity + InitialVelocity;
+		InitialVelocity *= DeccelRate;
+	}
+}
+
+
+Class RJICBM : Actor
+{
+	Int DedTics, DedTimer;//remove this actor after this number of ticks
+	Property DedTics:DedTics;
+	
+	Default
+	{
+		RJICBM.DedTics 1400;//1050;//700;
+		+NOINTERACTION;
+		+FORCEYBILLBOARD;
+		Scale 2.0;
+	}
+	
+	override void PostBeginPlay()
+	{
+		super.PostBeginPlay();
+		DedTimer = 0;
+		
+	}
+	
+	override void Tick()
+	{
+		super.Tick();
+		if (level.isfrozen()) return;
+		If(DedTimer < DedTics)
+		{
+			DedTimer ++;
+		}
+		Else
+		{
+			self.A_Remove(AAPTR_TRACER, RMVF_EVERYTHING);
+			self.A_Remove(AAPTR_DEFAULT, RMVF_EVERYTHING);//had issues with this before...
+		}
+		//console.printf("Dead timer: %i", DedTimer);
+	}
+	
+	States
+	{
+		Spawn:
+			ICBM A 1;
+			//flare will be kept in position by warping
+			ICBM A 1 A_SpawnItemEx("ICBMFlare",
+									0.0,0.0,0.0,
+									0.0,0.0,0.0,
+									0,
+									SXF_ISTRACER | SXF_SETTARGET);
+			goto Launched;
+		Launched:
+			ICBM A 1 A_ChangeVelocity(0.0, 0.0, 0.1, CVF_RELATIVE);//A_ChangeVelocity(0.0, 0.0, 0.3, CVF_RELATIVE);
+			ICBM A 0 A_SpawnItemEx("ICBMFire",
+									0.0,0.0,-128.0,
+									-vel.x,-vel.y,-vel.z);
+			//2nd, smokeless flame object to cheat and punch up the brightness
+			ICBM A 0 A_SpawnItemEx("ICBMFire2",
+									0.0,0.0,-128.0,
+									-vel.x,-vel.y,-vel.z);
+			//ICBM A 0 A_LogFloat(self.vel.z);
+			loop;
+		Death:
+			TNT1 A -1;
+			stop;
+	}
+}
+
+Class ICBMFlare : Actor
+{
+	Default
+	{
+		+FORCEXYBILLBOARD;
+		+NOINTERACTION;
+		XScale 1.2;
+		YScale 1.2;
+		Alpha 1.0;
+		RenderStyle "Add";
+
+	}
+	
+	// for visual variety, if desired
+	/*
+	void FlipXY(bool FX = true, Bool FY = true)
+	{
+		If(FX)
+		{
+			if(random(0,1) == 1){self.scale.x = -self.scale.x;}
+		}
+		If(FY)
+		{
+			if(random(0,1) == 1){self.scale.y = -self.scale.y;}
+		}
+	}*/
+	
+	States
+	{
+		Spawn:
+			FLAR B 1 BRIGHT A_Warp(AAPTR_TARGET, 0.0, 0.0, -96.0, 0, WARPF_NOCHECKPOSITION | WARPF_INTERPOLATE);
+			//FLAR B 0 BRIGHT FlipXY();
+			loop;//A_Warp(target, 0.0, 0.0, -128.0, 0, WARPF_NOCHECKPOSITION | WARPF_INTERPOLATE);
+		Death:
+			TNT1 A -1;
+			Stop;
+	}
+}
+
+
+Class ICBMFire : RJBasicSmoke
+{
+	Double AlphaThreshold;
+	Property AlphaThreshold : AlphaThreshold;
+	bool AlphaTripped;
+	string SmokeItem;
+	Property SmokeItem : SmokeItem;
+	
+	Default
+	{
+		RenderStyle "Add";
+		Alpha 1.0;
+		Scale 1.0;
+		RJBasicSmoke.FadeOutRate 0.1;
+		ICBMFire.AlphaThreshold 0.8;
+		ICBMFire.SmokeItem "ICBMSmoke";
+	}
+	
+	override void postbeginplay()
+	{
+		super.postbeginplay();
+		FlipXY(true,true);
+		AlphaTripped = false;
+	}
+	
+	override void Tick()
+	{
+		super.Tick();
+		If(!AlphaTripped && Alpha < AlphaThreshold)
+		{
+			self.A_SpawnItemEx(SmokeItem,0.0,0.0,0.0,vel.x,vel.y,vel.z);
+			AlphaTripped = True;
+		}
+	}
+	
+	States
+	{
+		Spawn:
+			TNT1 A 1;
+			TNT1 A 0 A_Jump(256, "Spawn1", "Spawn2", "Spawn3", "Spawn4");
+		Spawn1:
+			FLA1 B 0 BRIGHT;
+			Goto Main;
+		Spawn2:
+			FLA1 B 0 BRIGHT;
+			Goto Main;
+		Spawn3:
+			FLA1 B 0 BRIGHT;
+			Goto Main;
+		Spawn4:
+			FLA1 B 0 BRIGHT;
+			Goto Main;
+		Main:
+			"####" "#" 2 A_FadeOut(FadeOutRate);
+			"####" "#" 0 A_SetScale(Scale.x * 0.8);
+			Loop;
+		//Death:
+			//TNT1 A 0 A_SpawnItemEx("ICBMSmoke",0.0,0.0,0.0,vel.x,vel.y,vel.z);
+			//TNT1 A -1;
+			//stop;
+	}
+}
+
+Class ICBMFire2 : RJBasicSmoke
+{
+
+	Default
+	{
+		RenderStyle "Add";
+		Alpha 1.0;
+		Scale 1.0;
+		RJBasicSmoke.FadeOutRate 0.1;
+	}
+	
+	override void postbeginplay()
+	{
+		super.postbeginplay();
+		FlipXY(true,true);
+	}
+
+	States
+	{
+		Spawn:
+			TNT1 A 1;
+			TNT1 A 0 A_Jump(256, "Spawn1", "Spawn2", "Spawn3", "Spawn4");
+		Spawn1:
+			FLA1 B 0 BRIGHT;
+			Goto Main;
+		Spawn2:
+			FLA1 B 0 BRIGHT;
+			Goto Main;
+		Spawn3:
+			FLA1 B 0 BRIGHT;
+			Goto Main;
+		Spawn4:
+			FLA1 B 0 BRIGHT;
+			Goto Main;
+		Main:
+			"####" "#" 2 A_FadeOut(FadeOutRate);
+			"####" "#" 0 A_SetScale(Scale.x * 0.8);
+			Loop;
+	}
+}
+
+
+
+Class ICBMSmoke : RJBasicSmoke
+{
+	Default
+	{
+		Scale 4.0;
+		Alpha 0.8;
+		RJBasicSmoke.FadeOutRate 0.003;//0.002;
+		RJBasicSmoke.ConstXYZ -2.0, -1.0, 0.0;
+	}
+	
+	override void postbeginplay()
+	{
+		super.postbeginplay();
+		FlipXY(true,false);
+		//ConstX += frandom(0.1,2.9);
+		//ConstY += frandom(0.1,2.9);
+		ConstantVelocity.x = frandom(0.0,1.5);
+		ConstantVelocity.y = frandom(0.0,0.7);
+		//console.PrintF("%f actual vel %f", ConstX, vel.x);
+	}
+	
+	States
+	{
+		Spawn:
+			TNT1 A 1;
+			TNT1 A 0 A_Jump(256, "Spawn1", "Spawn2", "Spawn3", "Spawn4");
+		Spawn1:
+			NSMK A 0;
+			Goto Main;
+		Spawn2:
+			NSMK B 0;
+			Goto Main;
+		Spawn3:
+			NSMK C 0;
+			Goto Main;
+		Spawn4:
+			NSMK D 0;
+			Goto Main;
+		Main:
+			"####" "#" 2 A_FadeOut(FadeOutRate);
+			Loop;
+	}
+
+}
+//just sort of a wrapper to make doing this in the map easier
+Class ICBMLaunchBase : Actor
+{
+	Default
+	{
+		+NOINTERACTION;
+	}
+	
+	States
+	{
+		Spawn:
+			TNT1 A 1;
+			TNT1 A 0 A_SpawnItemEx("ICBMFire",
+									0.0,0.0,0.0,
+									frandom(-15.0, 15.0),
+									frandom(-15.0, 15.0),
+									frandom(6.0, 10.0));
+			goto Death;
+		Death:
+			TNT1 A -1;
+			stop;
+	}
+}

@@ -1,0 +1,84 @@
+class RJSpecialFire : Actor
+{
+	Default
+	{
+		+NOINTERACTION;
+	}
+	
+	States
+	{
+		Spawn:
+			TNT1 AA 1;
+		Perform:
+			TNT1 A 1 A_SpawnItemEx("SpecialFire",
+									frandom(-64.0, 64.0),
+									frandom(-64.0, 64.0),
+									frandom(1.0, 8.0),
+									frandom(1.0, 3.0),
+									frandom(1.0, 2.0),
+									frandom(3.0, 5.0));
+			loop;
+	}
+}
+
+class SpecialFire : ICBMFire
+{
+	Default
+	{
+		Scale 0.2;
+		ICBMFire.SmokeItem "SpecialSmoke";
+	}
+}
+
+class SpecialSmoke : ICBMSmoke
+{
+	Default
+	{
+		Scale 0.5;
+		RJBasicSmoke.FadeOutRate 0.05;
+		RJBasicSmoke.ConstXYZ 0.0, 0.0, 0.0;
+	}
+}
+
+class RJSpecialFire2 : Actor
+{
+	Default
+	{
+		+NOINTERACTION;
+	}
+	
+	States
+	{
+		Spawn:
+			TNT1 AA 1;
+		Perform:
+			TNT1 A 1 A_SpawnItemEx("SpecialFire2",
+									frandom(-64.0, 64.0),
+									frandom(-64.0, 64.0),
+									frandom(1.0, 8.0),
+									frandom(1.0, 3.0),
+									frandom(1.0, 2.0),
+									frandom(3.0, 5.0));
+			loop;
+	}
+}
+
+
+class SpecialFire2 : ICBMFire
+{
+	Default
+	{
+		Scale 0.4;
+		ICBMFire.SmokeItem "SpecialSmoke2";
+	}
+}
+
+class SpecialSmoke2 : ICBMSmoke
+{
+	Default
+	{
+		Scale 0.9;
+		RJBasicSmoke.FadeOutRate 0.01;
+		RJBasicSmoke.ConstXYZ 0.0, 0.0, 0.0;
+	}
+}

@@ -1,0 +1,191 @@
+class RJDebrisBase : Actor
+{
+	/*
+	Base actor for a piece of bouncing debris
+	Assumes 8 rotation sprites.
+	*/
+	string TrailItem;
+	int SpinIndex;
+	int SpinSpeed, SpinMin, SpinMax, Lifetime;
+	Property SpinMin : SpinMin;
+	Property SpinMax : SpinMax;
+	Property LifeTime : LifeTime;
+	Property TrailItem : TrailItem;
+	
+	Default
+	{
+		Radius 4;
+		Height 4;
+		Mass 1;
+		Gravity 0.5;
+		
+		Scale 1.0;
+		Alpha 1.0;
+		
+		+NOBLOCKMAP;
+		+THRUACTORS;
+
+		+MISSILE;
+		
+		+USEBOUNCESTATE
+		+BOUNCEONWALLS;
+		+BOUNCEONFLOORS;
+		+BOUNCEONCEILINGS;
+		+DONTBOUNCEONSKY;
+
+		-ALLOWBOUNCEONACTORS;
+		-BOUNCEONACTORS
+		
+		BounceFactor 0.7;
+		WallBounceFactor 0.7;
+		BounceCount 4;
+		
+		BounceSound "";
+		
+		RJDebrisBase.SpinMin 1; //~4.3 rotations a second
+		RJDebrisBase.SpinMax 2; //~2.1 rps
+		RJDebrisBase.LifeTime 350;//10 seconds. Does not start until the debris is on the ground.
+		RJDebrisBase.TrailItem "";
+		
+	}
+	
+	void FlipX()
+	{
+		if(random(0,1) == 1)
+		{
+			self.scale.x = -self.scale.x;
+		}
+	}
+	
+	Override void PostBeginPlay()
+	{
+		super.PostBeginPlay();
+		FlipX();
+		SpinSpeed = random(SpinMin,SpinMax);
+		SpinIndex = 0;
+	}
+	
+	States
+	{
+		Spawn:
+			RJD1 AA 0;
+			goto Perform;
+		/*
+		Because there doesn't seem to be a way to tell if an actor has bounced without using the bounce state
+		we have to do this jankery. "SpinIndex" tracks the last frame of animation the actor was in, then returns to it
+		once out of the bounce state in order to keep things smooth visually.
+		*/
+		Bounce:
+			#### # 0
+			{
+				//every bounce will slow the rate of spin
+				SpinSpeed ++;
+			}
+			goto Perform;
+		Perform:
+			#### # 0
+			{
+				If(SpinIndex >= 8)
+				{
+					SpinIndex = 0;
+				}
+			}
+			#### # 0 A_Jump(256, (1 +SpinIndex));
+			#### ABCDEFGH 1 
+			{
+				A_SetTics(SpinSpeed);
+				SpinIndex ++;
+				If(TrailItem)
+				{
+					A_SpawnItemEx(TrailItem,random(-1,1),random(-1,1),random(-1,1),self.vel.x/4, self.vel.y/4, self.vel.z/4,0,0,64,0);
+				}
+			}
+			loop;
+		Death:
+			#### # 0
+			{
+				bMOVEWITHSECTOR = True;//solves the gibs Wile E. Coyote-ing after the floor changes height
+			}
+			#### # 35 A_SetTics(LifeTime);
+			stop;
+	}
+}
+
+Class RJRiotShieldChunk : RJDebrisBase
+{
+	Default
+	{
+		BounceSound "RJChunkBounce";
+		RJDebrisBase.TrailItem "shotSmoke";
+	}
+}
+
+Class RJShieldChunk1 : RJRiotShieldChunk
+{
+	States
+	{
+		Spawn:
+			RJD1 AA 0;
+			goto Perform;
+	}
+}
+
+Class RJShieldChunk2 : RJRiotShieldChunk
+{
+	States
+	{
+		Spawn:
+			RJD2 AA 0;
+			goto Perform;
+	}
+}
+
+Class RJShieldChunk3 : RJRiotShieldChunk
+{
+	States
+	{
+		Spawn:
+			RJD3 AA 0;
+			goto Perform;
+	}
+}
+
+Class RJShieldChunk4 : RJRiotShieldChunk
+{
+	States
+	{
+		Spawn:
+			RJD4 AA 0;
+			goto Perform;
+	}
+}
+
+Class RJShieldChunk5 : RJRiotShieldChunk
+{
+	States
+	{
+		Spawn:
+			RJD5 AA 0;
+			goto Perform;
+	}
+}
+
+Class RJShieldChunk6 : RJRiotShieldChunk
+{
+	States
+	{
+		Spawn:
+			RJD6 AA 0;
+			goto Perform;
+	}
+}
+
+Class RJShieldChunk7 : RJRiotShieldChunk
+{
+	States
+	{
+		Spawn:
+			RJD7 AA 0;
+			goto Perform;
+	}
+}

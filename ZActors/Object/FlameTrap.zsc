@@ -1,0 +1,37 @@
+Class RJFlameTrap : SwitchableDecoration
+{
+	Default
+	{
+		+NOINTERACTION;
+		+NEVERTARGET;
+		+NODAMAGETHRUST;
+		DamageType "Fire";
+	}
+	
+	States
+	{
+		Inactive:
+		Spawn:
+			FTRP A 1;
+			FTRP A 10;
+			loop;
+		Active:
+			FTRP A 105;
+			FTRP A 3 BRIGHT;
+			FTRP B 3 BRIGHT A_StartSound("RJFlame", CHAN_BODY);
+			FTRP C 3 BRIGHT;
+			FTRP D 3 BRIGHT A_Explode(15, 48, 0, False, 0);
+			FTRP E 3 BRIGHT;
+			FTRP F 3 BRIGHT A_Explode(15, 48, 0, False, 0);
+			FTRP G 3 BRIGHT;
+			FTRP H 3 BRIGHT A_Explode(15, 48, 0, False, 0);
+			FTRP I 3 BRIGHT;
+			FTRP J 3 BRIGHT A_Explode(15, 48, 0, False, 0);
+			FTRP K 3 BRIGHT;
+			FTRP L 3 BRIGHT A_Explode(15, 48, 0, False, 0);
+			FTRP M 3 BRIGHT;
+			FTRP N 3 BRIGHT A_Explode(15, 48, 0, False, 0);
+			FTRP OP 3 BRIGHT;
+			loop;
+	}
+}
