@@ -1,0 +1,61 @@
+#library "Radio"
+#include "zcommon.acs"
+
+Script 1221 (void)
+{
+     delay(70);
+     if (Checkinventory("radiochannel")==1)
+	 {
+     ambientsound("radio/channel1",127);
+	 delay(135);
+	 Hudmessage(s:"Voice: Red, you've got movement up on your six, over";HUDMSG_PLAIN | HUDMSG_LOG, 1, CR_GOLD, 0.1, 0.15, 6.0);
+	 delay(140);
+	 Hudmessage(s:"Voice: Red, do you copy?";HUDMSG_PLAIN | HUDMSG_LOG, 1, CR_GOLD, 0.1, 0.15, 6.0);
+	 delay(105);
+	 Hudmessage(s:"Voice: Yeah, it's just that scavenger, headed into the Flooded District.";HUDMSG_PLAIN | HUDMSG_LOG, 1, CR_GOLD, 0.1, 0.15, 6.0);
+	 delay(140);
+	 Hudmessage(s:"Voice: Huh. Rip, over.";HUDMSG_PLAIN | HUDMSG_LOG, 1, CR_GOLD, 0.1, 0.15, 6.0);
+	 delay(140);
+	 Hudmessage(s:"Voice: (laughs) Yeah, Rip. Over and out.";HUDMSG_PLAIN | HUDMSG_LOG, 1, CR_GOLD, 0.1, 0.15, 6.0);
+	 }
+	 if (Checkinventory("radiochannel")==3)
+	 {
+     ambientsound("radio/channel3",127);
+	 delay(35);
+	 Hudmessage(s:"signal: (Strange tones and unfamiliar speech) ";HUDMSG_PLAIN | HUDMSG_LOG, 1, CR_GOLD, 0.1, 0.15, 6.0);
+	 }
+	  if (Checkinventory("radiochannel")==4)
+	 {
+     ambientsound("radio/channel4",127);
+	 delay(35);
+	 Hudmessage(s:"Voice: Good morning wasteland, you are listening to Properity radio-";HUDMSG_PLAIN | HUDMSG_LOG, 1, CR_GOLD, 0.1, 0.15, 6.0);
+	 delay(140);
+	 Hudmessage(s:"Voice: the time is 14:45 and the weather is still irradiated-";HUDMSG_PLAIN | HUDMSG_LOG, 1, CR_GOLD, 0.1, 0.15, 6.0);
+	 delay(140);
+	 Hudmessage(s:"Voice: Let any caravans know that we are still open for trade, and if you are a raider-.";HUDMSG_PLAIN | HUDMSG_LOG, 1, CR_GOLD, 0.1, 0.15, 6.0);
+	 delay(120);
+	 Hudmessage(s:"Voice: You. Can. Eat. A. Dick!";HUDMSG_PLAIN | HUDMSG_LOG, 1, CR_GOLD, 0.1, 0.15, 6.0);
+	 }
+	 if (Checkinventory("radiochannel")==5)
+	 {
+     ambientsound("radio/channel5",127);
+	 delay(60);
+	 Hudmessage(s:"Voice: Mayday! I'm out by the old creek-";HUDMSG_PLAIN | HUDMSG_LOG, 1, CR_GOLD, 0.1, 0.15, 6.0);
+	 delay(70);
+	 Hudmessage(s:"Voice: I've got raider punks up my ass!";HUDMSG_PLAIN | HUDMSG_LOG, 1, CR_GOLD, 0.1, 0.15, 6.0);
+	 delay(140);
+	 Hudmessage(s:"Voice: Checkpoint three is a trap! I repeat, ch-";HUDMSG_PLAIN | HUDMSG_LOG, 1, CR_GOLD, 0.1, 0.15, 6.0);
+	 }
+	 if (Checkinventory("radiochannel")==6)
+	 {
+     ambientsound("radio/channel6",127);
+	 delay(135);
+	 Hudmessage(s:"Voice: The contract is waiting. 6-2-0-1-6.";HUDMSG_PLAIN | HUDMSG_LOG, 1, CR_RED, 0.1, 0.15, 6.0);
+	 delay(170);
+	 Hudmessage(s:"Voice: The contract is waiting. 6-2-0-1-6.";HUDMSG_PLAIN | HUDMSG_LOG, 1, CR_RED, 0.1, 0.15, 6.0);
+	 }
+	 else
+	 {
+	 Print(s:"No station found");
+	 }
+}

@@ -1,0 +1,48 @@
+brightmap texture SCOBRD02
+{
+	map SCOGLO02
+}
+
+brightmap texture SCOBRD03
+{
+	map SCOGLO03
+}
+
+brightmap texture SCOBRD04
+{
+	map SCOGLO04
+}
+brightmap texture SUBGLOW
+{
+	map SUBGLBM
+}
+Object RJFlameTrap
+{
+  frame FTRPB { light Cylinder1 }
+  frame FTRPC { light Cylinder2 }
+  frame FTRPD { light Cylinder2 }
+  frame FTRPE { light Cylinder2 }
+  frame FTRPF { light Cylinder2 }
+  frame FTRPG { light Cylinder2 }
+  frame FTRPH { light Cylinder2 }
+  frame FTRPI { light Cylinder2 }
+  frame FTRPJ { light Cylinder2 }
+  frame FTRPK { light Cylinder2 }
+  frame FTRPL { light Cylinder2 }
+  frame FTRPM { light Cylinder2 }
+  frame FTRPN { light Cylinder2 }
+  frame FTRPO { light Cylinder1 }
+  frame FTRPP { light Cylinder1 }
+
+}
+brightmap sprite ICBMA0
+{
+	map ICBMB0
+}
+
+//Gearbox
+HardwareShader postprocess scene
+{
+  Name   "gb_blur"
+  Shader "shaders/mfx_bss_blur.fp" 330
+}

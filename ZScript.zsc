@@ -1,0 +1,327 @@
+//Gearbox
+version "4.7.1"
+
+#include "ZScripts/gearbox/weapon_data.zs"
+#include "ZScripts/gearbox/weapon_data_loader.zs"
+#include "ZScripts/gearbox/printer.zs"
+
+#include "ZScripts/MD5/MD5.zs"
+#include "ZScripts/gearbox/custom_weapon_order_storage.zs"
+
+#include "ZScripts/gearbox/activity.zs"
+#include "ZScripts/gearbox/input.zs"
+#include "ZScripts/gearbox/input_processor.zs"
+#include "ZScripts/gearbox/event_processor.zs"
+#include "ZScripts/gearbox/sounds.zs"
+
+#include "ZScripts/gearbox/weapon_menu.zs"
+#include "ZScripts/gearbox/inventory_menu.zs"
+
+#include "ZScripts/gearbox/inventory_user.zs"
+
+#include "ZScripts/gearbox/sender.zs"
+
+#include "ZScripts/gearbox/netevent_processor.zs"
+#include "ZScripts/gearbox/changer.zs"
+
+#include "ZScripts/gearbox/view_model.zs"
+
+// Displaying data on screen.
+#include "ZScripts/gearbox/display/dim.zs"
+#include "ZScripts/gearbox/display/blur.zs"
+#include "ZScripts/gearbox/display/blocky_view.zs"
+#include "ZScripts/gearbox/display/text_view.zs"
+#include "ZScripts/gearbox/display/fade_in_out.zs"
+#include "ZScripts/gearbox/display/caption.zs"
+
+#include "ZScripts/gearbox/options.zs"
+#include "ZScripts/gearbox/font_selector.zs"
+
+// Weapon Wheel implementation.
+#include "ZScripts/gearbox/wheel/view.zs"
+#include "ZScripts/gearbox/wheel/controller.zs"
+#include "ZScripts/gearbox/wheel/controller_model.zs"
+#include "ZScripts/gearbox/wheel/inner_indexer.zs"
+#include "ZScripts/gearbox/wheel/indexer.zs"
+#include "ZScripts/gearbox/wheel/multiwheel.zs"
+#include "ZScripts/gearbox/wheel/multiwheel_mode.zs"
+#include "ZScripts/gearbox/wheel/text.zs"
+#include "ZScripts/gearbox/wheel/screen.zs"
+
+// Utility tools.
+#include "ZScripts/gearbox/tools/cvar.zs"
+#include "ZScripts/gearbox/tools/log.zs"
+#include "ZScripts/gearbox/tools/texture_cache.zs"
+#include "ZScripts/gearbox/tools/ammo.zs"
+
+// Helper classes gearbox/that wrap access to game information provided by the engine.
+#include "ZScripts/gearbox/engine/level.zs"
+#include "ZScripts/gearbox/engine/weapon_watcher.zs"
+#include "ZScripts/gearbox/engine/player.zs"
+
+#include "ZScripts/gearbox/freezer.zs"
+
+#include "ZScripts/gearbox/event_handler.zs"
+
+#include "ZScripts/gearbox/service/service.zs"
+#include "ZScripts/gearbox/service/icon_service.zs"
+#include "ZScripts/gearbox/service/hide_service.zs"
+
+// Libraries
+#include "ZScripts/m_gizmos/previous_weapon.zs"
+#include "ZScripts/zabor/event_handler.zs"
+
+//UseToPickups Item Bracket Highlighter
+#include "ZScripts/UseToPickup/INIFile.zc"
+// See https://gitlab.com/Gutawer/gzdoom-gutamatics/
+#include "ZScripts/U2P_Gutamatics/Include.zsc"
+
+#include "ZScripts/UseToPickup/UseToPickup.zc"
+#include "ZScripts/UseToPickup/ActorClassInfo.zc"
+#include "ZScripts/UseToPickup/DrawContext.zc"
+#include "ZScripts/UseToPickup/ItemReachabilityTracer.zc"
+#include "ZScripts/UseToPickup/PlayerSettings.zc"
+#include "ZScripts/UseToPickup/PlayerState.zc"
+#include "ZScripts/UseToPickup/ActorAdjustedGeometry.zc"
+#include "ZScripts/UseToPickup/ItemHighlight.zc"
+
+
+
+//Ashes Zscript
+#include "ZActors/Debug/RadiusDebug.zc"
+#include "ZActors/Effects/Debris.zsc"
+#include "ZActors/Enemy/ManSlayer.zsc"
+#include "ZActors/Object/FlameTrap.zsc"
+#include "ZActors/Object/Minuteman.zsc"
+#include "ZActors/Object/SpecialFire.zsc"
+//inventory stripping for final maps
+class FinalStrip : EventHandler
+{
+	//misc hand curated list of quest items to take from you
+	static const string QuestItems[]=
+	{
+		"LosingTicket",
+		"WinningTicket",
+		"QuestticketMojo15",
+		"QuestticketMojo30",
+		"QuestticketMojo60",
+		"QuestticketDogs15",
+		"QuestticketDogs30",
+		"QuestticketDogs60",
+		"QuestBattery",
+		"QuestBriefcase",
+		"QuestLocket",
+		"QuestC4",
+		"QuestJerrycan",
+		"QuestFuse",
+		"QuestPrimers",
+		"QuestTitanBad",
+		"QuestMedicines",
+		"QuestHarmonica",
+		"QuestHazSuit",
+		"QuestDisk",
+		"QuestCartridge",
+		"QuestSeeds",
+		"QuestSpores",
+		"QuestKey"
+	};
+	
+	bool ItemIsOnlist(String TestItem)
+	{
+		For(int i = 0; i < QuestItems.Size(); i++)
+		{
+			If(TestItem == QuestItems[i])
+			{
+				return True;
+			}
+		}
+		
+		return False;
+	}
+	
+	//acts basically like an ENTER ACS script.
+	override void PlayerEntered(PlayerEvent e)
+	{
+		
+		//retrieve the info for the player that triggered this
+		PlayerInfo playeri = players[e.PlayerNumber];
+		//then get reference to the actual player pawn
+		PlayerPawn player = playeri.mo;
+		
+		array<Inventory> Items;
+		Items.clear();
+		//the fucky thing on the end is a ternary expression. neat.
+		//basically: condition? A:B. if condition true, return A, else B.
+		for(inventory item = player.inv; item != null; item=!item?null:item.inv)
+		{
+			if (ItemIsOnlist(item.getclassname()))
+			{
+				
+				let SickItemDude = Inventory(item);
+				Items.push(SickItemDude);
+			}
+		}
+		
+		for(int i = 0; i < Items.size(); i++)
+		{
+			
+			string ItemName = Items[i].getclassname();
+			//console.printf("Taking quest item %s", ItemName);
+			player.A_TakeInventory(ItemName);
+
+		}
+		
+	}
+}
+class ArenaStrip : EventHandler//declared in MAPINFO
+{
+	//misc hand curated list of quest items to take from you as well
+	static const string QuestItems[]=
+	{
+		"LosingTicket",
+		"WinningTicket",
+		"QuestticketMojo15",
+		"QuestticketMojo30",
+		"QuestticketMojo60",
+		"QuestticketDogs15",
+		"QuestticketDogs30",
+		"QuestticketDogs60",
+		"QuestBattery",
+		"QuestBriefcase",
+		"QuestLocket",
+		"QuestC4",
+		"QuestJerrycan",
+		"QuestFuse",
+		"QuestPrimers",
+		"QuestTitanBad",
+		"QuestMedicines"
+	};
+	
+	bool ItemIsOnlist(String TestItem)
+	{
+		For(int i = 0; i < QuestItems.Size(); i++)
+		{
+			If(TestItem == QuestItems[i])
+			{
+				return True;
+			}
+		}
+		
+		return False;
+	}
+	
+	//acts basically like an ENTER ACS script.
+	override void PlayerEntered(PlayerEvent e)
+	{
+		Vector3 spawnpos = (0,0,0);
+		/*
+			Create an actor iterator to look for our spawn spots TID.
+			The TID is totally arbitrary. Make sure that it matches the spot on the map.
+		*/
+		actoriterator spots = Level.CreateActorIterator(4);
+		actor spot;
+		/*
+			this is really only "iterating" through 1 thing ATM.
+			But just in case I accidentally add another thing with the same ID
+		*/
+		While(spot = spots.Next())
+		{
+			If(MapSpot(spot))
+			{
+				//Found it!
+				spawnpos = spot.pos;
+			}
+		}
+		Vector3 spawnofs = (32,32,64);
+		//retrieve the info for the player that triggered this
+		PlayerInfo playeri = players[e.PlayerNumber];
+		//then get reference to the actual player pawn
+		PlayerPawn player = playeri.mo;
+		//this array will hold references to any weapons the player holds
+		array<Weapon> Weapons;
+		Weapons.clear();
+		array<Inventory> Items;
+		Items.clear();
+		//the fucky thing on the end is a ternary expression. neat.
+		//basically: condition? A:B. if condition true, return A, else B.
+		for(inventory item = player.inv; item != null; item=!item?null:item.inv)
+		{
+			//as we iterate through the players inventory, we check if the item is a weapon
+			if(Weapon(item))
+			{
+				//if so we make a reference to it, and push that reference into the array
+				let SickGunBro = Weapon(item);
+				if(!SickGunBro.bWimpy_Weapon && !SickGunBro.bUndroppable)
+				//if(!SickGunBro.bMeleeWeapon && !SickGunBro.bUndroppable)
+				{
+					Weapons.push(SickGunBro);
+				}
+			}
+			else if (ItemIsOnlist(item.getclassname()))
+			{
+				
+				let SickItemDude = Inventory(item);
+				Items.push(SickItemDude);
+			}
+		}
+
+		//Now strip and respawn the weapons
+		//I could just do this as the weapon is found, but there was a reason for this...
+		//^^^Its because removing an item in the middle of iterating through all your items fucks things up
+		for(int i = 0; i < Weapons.size(); i++)
+		{
+			//iterate through the previously created array
+			string WepName = Weapons[i].getclassname();
+			//console.printf("Weapon Removed: %s", WepName);
+			player.A_TakeInventory(WepName);
+			//and spawn the weapon you just took away at the designated spot.
+			player.Spawn(WepName,
+			((spawnpos.x - spawnofs.x) + frandom(0,spawnofs.x*2),
+			(spawnpos.y - spawnofs.y) + frandom(0,spawnofs.y*2),
+			spawnpos.z + spawnofs.z));
+		}
+		
+		for(int i = 0; i < Items.size(); i++)
+		{
+			
+			string ItemName = Items[i].getclassname();
+			//console.printf("Taking quest item %s", ItemName);
+			player.A_TakeInventory(ItemName);
+
+		}
+		
+	}
+}
+
+
+
+Class RJSkyViewpoint : SkyViewpoint
+{
+	/*
+	Why?
+	So the viewpoint flood fills all the sky in the map (because it has a TID of 0)
+	Then we set the TID so we actually do stuff with this actor.
+	The skies remain unchanged.
+	*/
+	int ChangeDelay;
+	
+	override void PostBeginPlay()
+	{
+		super.postbeginplay();
+		ChangeDelay = 1;
+	}
+	
+	override void Tick()
+	{
+		super.tick();
+		If(ChangeDelay > 0)
+		{
+			ChangeDelay --;
+		}
+		Else If(ChangeDelay == 0)
+		{
+			ChangeDelay = -1;
+			self.ChangeTID(args[1]);
+		}
+	}
+}

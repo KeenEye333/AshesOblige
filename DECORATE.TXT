@@ -1,0 +1,6234 @@
+//==============================================================================
+// Ashes Oblige Decorate
+//==============================================================================
+// Effects
+//==============================================================================
+#Include Actors/Effects/Effects.txt //Misc specials
+//==============================================================================
+// Weapons
+//==============================================================================
+#Include Actors/Weapons/Crowbar.txt //Cro-bar
+#Include Actors/Weapons/Hammer.txt //Pile Bunker/jackhammer
+#Include Actors/Weapons/Revolver.txt //.45 Revolver
+#Include Actors/Weapons/Glock.txt //9mm Autoloader
+#Include Actors/Weapons/Shotgun.txt //Pump-action
+#Include Actors/Weapons/Sawedoff.txt //Sawed-off
+#Include Actors/Weapons/Ingram.txt //Machine Pistol
+#Include Actors/Weapons/MBlaster.txt //Master Blaster
+#Include Actors/Weapons/Musket.txt //Junker Musket
+#Include Actors/Weapons/PipeBomb.txt //Pipe Bombs
+#Include Actors/Weapons/AR15.txt //Military Rifle
+#Include Actors/Weapons/KillerPig.txt //Killer P.I.G.
+#Include Actors/Weapons/Lantern.txt //Solar Lantern
+#Include Actors/Weapons/Lazergun.txt //uselessjokeweapon
+#Include Actors/Weapons/Fal.txt // Added by KeenEye
+//==============================================================================
+// Ashes Enemies
+//==============================================================================
+#Include Actors/Enemies/BurnDeathHuman.txt
+#Include Actors/Enemies/CannibalMaster.txt
+#Include Actors/Enemies/Destroyer.txt
+#Include Actors/Enemies/EnemySpawners.txt
+#Include Actors/Enemies/Gasbag.txt
+#Include Actors/Enemies/GasBagNursery.txt
+#Include Actors/Enemies/Gemini.txt
+#Include Actors/Enemies/GrrlThug.txt
+#Include Actors/Enemies/Haunt.txt
+#Include Actors/Enemies/LaughingTom.txt
+#Include Actors/Enemies/Lurker.txt
+#Include Actors/Enemies/Marlon.txt //bugged
+#Include Actors/Enemies/Matango.txt
+#Include Actors/Enemies/MonsterInventoryChecks.txt
+// #Include Actors/Enemies/NeutralEnemies.txt bugged
+#Include Actors/Enemies/NewGuardTroppers.txt
+#Include Actors/Enemies/Overseer.txt
+#Include Actors/Enemies/Phantom.txt
+#Include Actors/Enemies/PistolThug.txt
+#Include Actors/Enemies/Pitfiend.txt
+#Include Actors/Enemies/RevolverThug.txt
+#Include Actors/Enemies/RivelRiders.txt
+#Include Actors/Enemies/ScabbieSavage.txt
+#Include Actors/Enemies/ShotgunThug.txt
+#Include Actors/Enemies/SporeMortar.txt
+#Include Actors/Enemies/Steiner.txt //bugged
+#Include Actors/Enemies/Vinaya.txt
+//==============================================================================
+// Items
+//==============================================================================
+//Keys
+#Include Actors/Items/Keys/AshesBlueCard.txt
+#Include Actors/Items/Keys/AshesYellowCard.txt
+#Include Actors/Items/Ammo.txt //Ammunition pickups
+#Include Actors/Items/Armor.txt //Armor pickups
+#Include Actors/Items/Health.txt //Health pickups
+#Include Actors/Items/Power.txt //Inventory and powerups
+#Include Actors/Items/Journal.txt // Journal tracker items
+//==============================================================================
+// Actors
+//==============================================================================
+#Include Actors/Player/Player.txt //The Good
+//#Include Actors/Enemies/Enemies.txt //The Bad
+#Include Actors/Props/props.txt //And The Ugly
+#Include Actors/npc/npcs.txt // and a few assholes more
+#Include Actors/Player/Tesla79.txt //and the horse you rode in on
+#Include Actors/Player/LUCY.txt //and your little dog too
+//==============================================================================
+
+ACTOR Radiationcount : Inventory
+{
+    Inventory.Amount 1
+    Inventory.MaxAmount 100
+	Inventory.InterHubAmount 0
+    -INVBAR
+}
+//This tracks all the RadiationCount entites in RN
+//There's Very Low, Low, Medium, High and Very High
+// Very Low - 1 rad per 4 seconds
+// Low - 1 rad per 2 seconds
+// Medium-Low - 1 Rad per second
+// Medium-High - 2 Rad per second
+// High - 5 Rad per second
+// Very High - 10 Rad per second
+// Extreme - 20 Rad per second
+
+ACTOR RadiationVeryLow 1067
+{
+//$Category HazardActors
+  Radius 64
+  Height 64
+  +NOTRIGGER
+  +NOBLOCKMONST
+  +NOBLOCKMAP
+  +DONTSPLASH
+  +NOCLIP
+  +CANPASS
+  RenderStyle None
+  States
+  {
+  Spawn:
+    TNT1 A 1
+    Loop
+  }
+}
+
+ACTOR RadiationLow : RadiationVeryLow 1068
+{
+//$Category HazardActors
+  States
+  {
+  Spawn:
+    TNT1 A 1
+    Loop
+  }
+}
+
+ACTOR RadiationMediumLow : RadiationVeryLow 1069
+{
+//$Category HazardActors
+  States
+  {
+  Spawn:
+    TNT1 A 1
+    Loop
+  }
+}
+
+ACTOR RadiationMediumHigh : RadiationVeryLow 1070
+{
+//$Category HazardActors
+  States
+  {
+  Spawn:
+    TNT1 A 1
+    Loop
+  }
+}
+
+ACTOR RadiationHigh : RadiationVeryLow 1071
+{
+//$Category HazardActors
+  States
+  {
+  Spawn:
+    TNT1 A 1
+    Loop
+  }
+}
+
+ACTOR RadiationVeryHigh : RadiationVeryLow 1072
+{
+//$Category HazardActors
+  States
+  {
+  Spawn:
+    TNT1 A 1
+    Loop
+  }
+}
+
+ACTOR RadiationExtreme : RadiationVeryLow 1073
+{
+//$Category HazardActors
+  States
+  {
+  Spawn:
+    TNT1 A 1
+    Loop
+  }
+}
+ACTOR AshesRedCard : CustomInventory replaces Redcard
+{
+  Inventory.PickupMessage "Got the red access card"
+  Inventory.Icon "STKEYS2"
+  scale 0.7
+  States
+  {
+  Spawn:
+    RKEY A 10
+    RKEY A 10 Bright
+    Loop
+  Pickup:
+	TNT1 A 1 A_GiveInventory("Redcard",1)
+	stop
+  }
+}
+ACTOR AshesSilverKey : CustomInventory replaces Blueskull
+{
+  Inventory.PickupMessage "Got the Silver Utility Key"
+  Inventory.Icon "STKEYS3"
+  scale 0.8
+  States
+  {
+  Spawn:
+    BSKU A 10
+    BSKU A 10 Bright
+    Loop
+  Pickup:
+	TNT1 A 1 A_GiveInventory("BlueSkull",1)
+	stop
+  }
+}
+ACTOR AshesBronzeKey : CustomInventory replaces Redskull
+{
+  Inventory.PickupMessage "Got the Bronze Room Key"
+  Inventory.Icon "STKEYS5"
+  scale 0.8
+  States
+  {
+  Spawn:
+    RSKU A 10
+    RSKU A 10 Bright
+    Loop
+  Pickup:
+	TNT1 A 1 A_GiveInventory("RedSkull",1)
+	stop
+  }
+}
+ACTOR AshesGoldKey : CustomInventory replaces Yellowskull
+{
+  Inventory.PickupMessage "Got the Gold Security Key"
+  Inventory.Icon "STKEYS4"
+  scale 0.8
+  States
+  {
+  Spawn:
+    YSKU A 10
+    YSKU A 10 Bright
+    Loop
+  Pickup:
+	TNT1 A 1 A_GiveInventory("YellowSkull",1)
+	stop
+  }
+}
+ACTOR PigWeaponPieces: Inventory  //For Project Pig
+{
+    Inventory.Amount 1
+    Inventory.MaxAmount 3
+    -INVBAR
+}
+actor PigPieceOne : PigWeaponPieces 1300
+{
+  Inventory.Amount 1
+  Inventory.PickupMessage "Got the... Pig Processing Machine??"
+  Inventory.PickupSound "items/capssmall"
+  scale 0.8
+  +COUNTITEM
+  states
+  {
+  Spawn:
+    PPC1 A 15
+	PPC1 A 5 bright
+    loop
+  }
+}
+actor PigPiecetwo : PigWeaponPieces 1301
+{
+  Inventory.Amount 1
+  Inventory.PickupMessage "Got the car shop Air gun!!"
+  Inventory.PickupSound "items/capssmall"
+  scale 0.8
+  +COUNTITEM
+  states
+  {
+  Spawn:
+    PPC2 A 15
+	PPC2 A 5 bright
+    loop
+  }
+}
+actor PigPiecethree : PigWeaponPieces 1302
+{
+  Inventory.Amount 1
+  Inventory.PickupMessage "Got the gas saw mechanism!!"
+  Inventory.PickupSound "items/capssmall"
+  scale 0.8
+  +COUNTITEM
+  states
+  {
+  Spawn:
+    PPC3 A 15
+	PPC3 A 5 bright
+    loop
+  }
+}
+Actor ItemAthena: Inventory 
+{
+    +NOTDMATCH
+	+FLOORCLIP
+    +COUNTITEM
+	+INVENTORY.INVBAR
+	scale 0.6
+	Inventory.Interhubamount 1
+	Inventory.MaxAmount 1
+	Inventory.Icon "IATNA0"
+	Inventory.PickupMessage "Got the ATHENA macguffin."
+	Inventory.PickupSound "misc/p_pkup"
+	conversationId 121
+	Tag "A statue of Athena, solid gold."
+	States
+	{
+	Spawn:
+		IATN A 15
+		IATN A 5 bright
+        loop
+	}
+} 
+ACTOR YourStuff : CustomInventory 312
+{
+  Inventory.PickupMessage "Got some of your things"
+  scale 0.8
+  States
+  {
+  Spawn:
+    YSTF A 10
+    YSTF A 10 Bright
+    Loop
+  Pickup:
+	TNT1 A 1 A_GiveInventory("crowbar",1)
+	TNT1 A 1 A_GiveInventory("ItemAthena",1)
+	TNT1 A 1 A_GiveInventory("batteries",75)
+	stop
+  }
+}
+actor PsychicMutantCutscene: actor 313
+ {
+  Health 100000
+  PainChance 255
+  Speed 0
+  Radius 20
+  Height 56
+  Monster
+  +NEVERTARGET
+  +NOSPLASHALERT
+  +FLOORCLIP
+  +MISSILEMORE
+  +MISSILEEVENMORE
+  +NEVERRESPAWN
+  +ISMONSTER
+  +NODAMAGE
+  States
+  {
+   Spawn:
+    PSYC A 10 A_turretlook
+    loop
+   Anim1:
+    PSYC ABCDEEEEFGHIJ 4
+    goto idle1
+   Idle1:
+    PSYC J 4
+	loop
+   Talk1:
+    PSYC KLM 4
+	goto speaking1
+   Speaking1:
+    PSYC MMMMMMMMMMMMMMMMMMMM 4
+	goto finished1
+   Finished1:
+    PSYC LKJ 4
+	goto idle1 
+   Talk2:
+    PSYC RSTU 4
+	goto speaking2
+   Speaking2:
+    PSYC UUUUUUUUUU 4
+	goto finished2
+   finished2:
+    PSYC UTSR 4
+	goto idle2
+   Idle2:
+    PSYC N 4
+	loop
+   Finish1:
+    PSYC OPQEEDCBA 4
+	goto spawn
+   See:
+    PSYC A 10 A_chase
+    Loop
+   Pain:
+    PSYC A 1 A_ChangeFlag("FRIENDLY", FALSE)
+    PSYC A 8 Fast A_Pain
+    Goto See
+	}
+	}
+actor PsychicMutantStanding: actor
+ {
+  Health 100000
+  PainChance 0
+  Speed 0
+  Radius 20
+  Height 56
+  +NOSPLASHALERT
+  +FLOORCLIP
+  +NODAMAGE
+  States
+  {
+   Spawn:
+    PSYS A 10
+    loop
+	}
+	}
+actor WarlordCutscene: actor 314
+ {
+  Health 100000
+  PainChance 255
+  Speed 0
+  Radius 20
+  Height 56
+  Monster
+  +NEVERTARGET
+  +NOSPLASHALERT
+  +FLOORCLIP
+  +MISSILEMORE
+  +MISSILEEVENMORE
+  +NEVERRESPAWN
+  +ISMONSTER
+  +NODAMAGE
+  States
+  {
+   Spawn:
+    WRLD A 10 A_turretlook
+    loop
+   Reveal:
+    WRLD ABCDEFGHIJK 5
+	goto stand1
+   Stand1:
+    WRLD K 4
+	loop
+   TALK1:
+    WRLD LMONPLMOOPPMLLMNNNLK 5
+	goto stand1
+   Turn1:
+    WRLD LPQR 5
+	goto stand2
+   Stand2:
+    WRLD R 5
+	loop
+   TALK2:
+    WRLD RSVVTUUTSVVSVSTVUSUVTRSR 5
+	goto stand2
+   Talk3:
+    WRLD LMNNNNNNNML 4
+	goto stand1
+   See:
+    WRLD A 10 A_chase
+    Loop
+   Pain:
+    WRLD A 1 A_ChangeFlag("FRIENDLY", FALSE)
+    WRLD A 8 Fast A_Pain
+    Goto See
+	}
+	}
+	
+actor BLACKHAWK
+ {
+  Health 100000
+  PainChance 0
+  Speed 5
+  Radius 64
+  Height 128
+  Monster
+  scale 1.5
+  +NEVERTARGET
+  +NOSPLASHALERT
+  +NOGRAVITY
+  +NEVERRESPAWN
+  +ISMONSTER
+  +NODAMAGE
+  +FLOAT
+  -COUNTKILL
+  States
+  {
+   Spawn:
+    BHWK ABCABCDEF 4 A_turretlook
+    loop
+   See:
+	BHWK A 0 A_CHASE
+    BHWK A 2 A_FACETARGET
+    BHWK A 2 A_recoil(-6)
+	BHWK B 0 A_CHASE
+    BHWK B 2 A_FACETARGET
+    BHWK B 2 A_recoil(-6)
+	BHWK C 0 A_CHASE
+    BHWK C 2 A_FACETARGET
+    BHWK C 2 A_recoil(-6)
+	BHWK A 0 A_CHASE
+    BHWK A 2 A_FACETARGET
+    BHWK A 2 A_recoil(-6)
+	BHWK B 0 A_CHASE
+    BHWK B 2 A_FACETARGET
+    BHWK B 2 A_recoil(-6)
+	BHWK C 0 A_CHASE
+    BHWK C 2 A_FACETARGET
+    BHWK C 2 A_recoil(-6)
+	BHWK D 0 A_CHASE
+    BHWK D 2 A_FACETARGET
+    BHWK D 2 A_recoil(-6)
+	BHWK E 0 A_CHASE
+    BHWK E 2 A_FACETARGET
+    BHWK E 2 A_recoil(-6)
+	BHWK F 0 A_CHASE
+    BHWK F 2 A_FACETARGET
+    BHWK F 2 A_recoil(-6)
+    Loop
+   Pain:
+    BHWK A 0
+    Goto See
+	}
+	}
+actor ManslayerCutscene: actor 316
+ {
+  Health 100000
+  PainChance 255
+  Speed 0
+  Radius 10
+  Height 30
+  Monster
+  scale 0.8
+  +NEVERTARGET
+  +NOSPLASHALERT
+  +FLOORCLIP
+  +MISSILEMORE
+  +MISSILEEVENMORE
+  +NEVERRESPAWN
+  +ISMONSTER
+  +NODAMAGE
+  States
+  {
+   Spawn:
+    SLYR A 10 A_turretlook
+    loop
+   Reveal:
+    SLYR A 4
+    SLYR C 4 A_PlaySound ("weapons/SHOTGR", CHAN_item)
+	SLYR EFGFGH 4
+	goto stand1
+   Stand1:
+    SLYR H 4
+	loop
+   See:
+    SLYR H 4
+	loop
+   Pain:
+    SLYR A 1 A_ChangeFlag("FRIENDLY", FALSE)
+    SLYR A 8 Fast A_Pain
+    Goto See
+	}
+	}
+ACTOR Dialogtoken1: Inventory  //GateCaptainCheck- both towns
+{
+    Inventory.Amount 1
+    Inventory.MaxAmount 999
+	Inventory.InterHubAmount 0
+    -INVBAR
+}
+ACTOR Dialogtoken2: Dialogtoken1 //MetViolet //heard about roamers
+{
+}
+ACTOR Dialogtoken3: Dialogtoken1 //PorcelainDescription //visited roamers
+{
+}
+ACTOR Dialogtoken4: Dialogtoken1 //VioletQuest //SheriffTrust
+{
+}
+ACTOR Dialogtoken5: Dialogtoken1 //OutlawMichonne //OutlawBadlands
+{
+}
+ACTOR Dialogtoken6: Dialogtoken1 //MichonneDiscount //tunnelscleared
+{
+}
+ACTOR Dialogtoken7: Dialogtoken1 //SeenCityTrucks //DomeSeedsQuest
+{
+}
+ACTOR Dialogtoken8: Dialogtoken1 //PorcelainJoined //SilverQuest
+{
+}
+ACTOR Dialogtoken9: Dialogtoken1 //Pitfightquest //DomeSporesQuest
+{
+}
+ACTOR Dialogtoken10: Dialogtoken1 //SavedPorcelain //TunnelsQuest
+{
+}
+ACTOR Dialogtoken11: Dialogtoken1 //BikeRepaired //BaronAppointment
+{
+}
+ACTOR Dialogtoken12: Dialogtoken1 //WalkerDescription //Suitquest
+{
+}
+ACTOR Dialogtoken13: Dialogtoken1 //RegenFight //SmileyQuest
+{
+}
+ACTOR Dialogtoken14: Dialogtoken1 //Frnzyfight //Roamersquest
+{
+}
+ACTOR Dialogtoken15: Dialogtoken1 //Titanfight //RebelsQuest
+{
+}
+ACTOR Dialogtoken16: Dialogtoken1 //MojoKilled //RoamersKilled
+{
+}
+ACTOR Dialogtoken17: Dialogtoken1 //Mojowon //Won Race
+{
+}
+ACTOR Dialogtoken18: Dialogtoken1 //VicIntroduced //RoamersSabotaged
+{
+}
+ACTOR Dialogtoken19: Dialogtoken1 //Refugeesaved //Gotbike
+{
+}
+ACTOR Dialogtoken20: Dialogtoken1 //finalgift //SpecialTasksAuthority
+{
+}
+ACTOR Beastchecktoken: Dialogtoken1 //only to check beast is near
+{
+}
+ACTOR Gamerchecktoken: Dialogtoken1 //only to check game is changed
+{
+}
+ACTOR MoralityToken: Inventory  //GeneralMoralityChecker
+{
+    Inventory.Amount 1
+    Inventory.MaxAmount 5
+	Inventory.InterHubAmount 0
+    -INVBAR
+	+IGNORESKILL
+}
+ACTOR GoodEndingToken: Inventory  //GeneralMoralityChecker
+{
+    Inventory.Amount 1
+    Inventory.MaxAmount 5
+	Inventory.InterHubAmount 0
+    -INVBAR
+	+IGNORESKILL
+}
+ACTOR GoldenEndingToken: Inventory  //GeneralMoralityChecker
+{
+    Inventory.Amount 1
+    Inventory.MaxAmount 5
+	Inventory.InterHubAmount 0
+    -INVBAR
+	+IGNORESKILL
+}
+ACTOR DocCheckToken: Inventory  //GeneralMoralityChecker
+{
+    Inventory.Amount 1
+    Inventory.MaxAmount 1
+	Inventory.InterHubAmount 0
+    -INVBAR
+	+IGNORESKILL
+}
+ACTOR LosingTicket : Inventory
+{
+ Inventory.Amount 1
+ Inventory.MaxAmount 1
+ Inventory.InterHubAmount 0
+    -INVBAR
+}
+ACTOR WinningTicket : Inventory
+{
+ Inventory.Amount 1
+ Inventory.MaxAmount 1
+ Inventory.InterHubAmount 0
+    -INVBAR
+}
+Actor QuestticketMojo15 : Inventory
+{
+Inventory.Amount 1
+Inventory.MaxAmount 1
+Inventory.InterHubAmount 0
+-invbar
+}
+Actor QuestticketMojo30 : Inventory
+{
+Inventory.Amount 1
+Inventory.MaxAmount 1
+Inventory.InterHubAmount 0
+-invbar
+}
+Actor QuestticketMojo60 : Inventory
+{
+Inventory.Amount 1
+Inventory.MaxAmount 1
+Inventory.InterHubAmount 0
+-invbar
+}
+Actor QuestticketDogs15 : Inventory
+{
+Inventory.Amount 1
+Inventory.MaxAmount 1
+Inventory.InterHubAmount 0
+-invbar
+}
+Actor QuestticketDogs30 : Inventory
+{
+Inventory.Amount 1
+Inventory.MaxAmount 1
+Inventory.InterHubAmount 0
+-invbar
+}
+Actor QuestticketDogs60 : Inventory
+{
+Inventory.Amount 1
+Inventory.MaxAmount 1
+Inventory.InterHubAmount 0
+-invbar
+}
+ACTOR BarWater : Stimpack
+{
+  Inventory.Amount 10
+  Inventory.PickupMessage "Got a cool glass of water."
+  Inventory.PickupSound "items/foodpickup"
+  Inventory.MaxAmount 100
+  +ALWAYSPICKUP
+  scale 0.4
+  States
+  {
+  Spawn:
+    BON1 A -1
+    Stop
+  }
+}
+ACTOR BarFood : Stimpack
+{
+  Inventory.Amount 50
+  Inventory.PickupMessage "Got some Food."
+  Inventory.PickupSound "items/foodpickup"
+  Inventory.MaxAmount 100
+  scale 0.4
+  +ALWAYSPICKUP
+  States
+  {
+  Spawn:
+    BON1 A -1
+    Stop
+  }
+}
+ACTOR DocHeal : custominventory
+{
+Inventory.PickupMessage "Got patched up!"
+  States
+  {
+  Pickup:
+     TNT1 A 0 HealThing(70)
+     stop
+  } 
+}
+ACTOR Chips : Ammo
+{
+ Inventory.Amount 1
+ Inventory.MaxAmount 10000
+ Ammo.BackPackMaxAmount 10000
+ +IGNORESKILL
+}
+ACTOR TwentyChips : Chips
+{
+ Inventory.Amount 20
+ +IGNORESKILL
+}
+ACTOR TwentyFiveChips : Chips
+{
+ Inventory.Amount 25
+ +IGNORESKILL
+}
+ACTOR FortyChips : Chips
+{
+ Inventory.Amount 40
+ +IGNORESKILL
+}
+ACTOR FortyFiveChips : Chips
+{
+ Inventory.Amount 45
+ +IGNORESKILL
+}
+ACTOR FiddyChips : Chips
+{
+ Inventory.Amount 50
+ +IGNORESKILL
+}
+ACTOR SixtyChips : Chips
+{
+ Inventory.Amount 60
+ +IGNORESKILL
+}
+ACTOR EightyChips : Chips
+{
+ Inventory.Amount 80
+ +IGNORESKILL
+}
+ACTOR NinetyChips : Chips
+{
+ Inventory.Amount 90
+ +IGNORESKILL
+}
+ACTOR HundredChips : Chips
+{
+ Inventory.Amount 100
+ +IGNORESKILL
+}
+ACTOR Onefiddychips : Chips
+{
+ Inventory.Amount 150
+ +IGNORESKILL
+}
+ACTOR HundredEightyChips : Chips
+{
+ Inventory.Amount 180
+ +IGNORESKILL
+}
+ACTOR twohundredchips : Chips
+{
+ Inventory.Amount 200
+ +IGNORESKILL
+}
+ACTOR threehundredchips : Chips
+{
+ Inventory.Amount 300
+ +IGNORESKILL
+}
+actor CrapJunk : RandomSpawner
+{
+    DropItem "JUNKtools"
+    DropItem "JUNKspares"
+    DropItem "JUNKgear"
+    DropItem "JUNKnuts"
+	DropItem "JUNKcable"
+	DropItem "JUNKpipe"
+}
+actor JUNKtools : Chips 10492
+{
+  Inventory.Amount 5
+  Inventory.PickupMessage "Got some junk."
+  Inventory.PickupSound "items/capssmall"
+  scale 0.4
+  +COUNTITEM
+  states
+  {
+  Spawn:
+    SEL1 A 15
+	SEL1 A 5 bright
+    loop
+  }
+}
+actor JUNKspares : JUNKtools 10493
+{
+  Inventory.Amount 5
+  states
+  {
+  Spawn:
+    SEL1 B 15
+	SEL1 B 5 bright
+	loop
+  }
+}
+actor JUNKgear : JUNKtools 10494
+{
+  Inventory.Amount 5
+  states
+  {
+  Spawn:
+    SEL1 C 15
+	SEL1 C 5 bright
+	loop
+  }
+}
+actor JUNKnuts : JUNKtools 10495
+{
+  Inventory.Amount 5
+  states
+  {
+  Spawn:
+    SEL1 D 15
+	SEL1 D 5 bright
+	loop
+  }
+}
+actor JUNKcable : JUNKtools 10496
+{
+  Inventory.Amount 5
+  states
+  {
+  Spawn:
+    SEL1 E 15
+	SEL1 E 5 bright
+	loop
+  }
+}
+actor JUNKpipe : JUNKtools 10497
+{
+  Inventory.Amount 5
+  states
+  {
+  Spawn:
+    SEL1 F 15
+	SEL1 F 5 bright
+	loop
+  }
+}
+actor CollectableZan : JUNKtools 10499
+{
+  Inventory.Amount 100
+  Inventory.PickupMessage "Got collectable 1/4! Time for Axe-tion!"
+  Inventory.PickupSound "items/Hedonsecret"
+  scale 0.3
+  states
+  {
+  Spawn:
+    PZAN A 15
+	PZAN A 5 bright
+	loop
+  }
+}
+actor CollectableD20 : JUNKtools 10500
+{
+  Inventory.Amount 100
+  Inventory.PickupMessage "Got collectable 2/4.... You feel someone judging you..."
+  Inventory.PickupSound "items/DIEROLL"
+  scale 0.7
+  states
+  {
+  Spawn:
+    D20C ABCDEFEDCB 4
+	loop
+  }
+}
+actor CollectableSNC : JUNKtools 10501
+{
+	Inventory.Amount 100
+	Inventory.PickupMessage "Got collectable 3/4! Contract accepted. Welcome, Brigador."
+	Inventory.PickupSound "GREATLEADERISDEAD"
+	scale 0.3
+	states
+	{
+		Spawn:
+		CSNC A 15
+		CSNC A 5 bright
+		loop
+	}
+}
+actor CollectablePrime : JUNKtools 
+{
+	Inventory.Amount 100
+	Inventory.PickupMessage "Got collectable 4/4! That's Prime!"
+	Inventory.PickupSound "Items/Primeroar"
+	scale 0.3
+	states
+	{
+		Spawn:
+		GZLA A 15
+		GZLA A 5 bright
+		loop
+	}
+}
+actor SprayCan 10498
+{
+  Health 10
+  Speed 0
+  Height 15
+  scale 0.6
+  BloodColor "#FF0000"
+  +SOLID
+  +SHOOTABLE
+  +TELESTOMP
+  +CANPASS
+   deathsound "break/box"
+  States
+  {
+  Spawn:
+    SPRY A -1
+    Loop
+  Death:
+    NULL A 0 A_Scream
+	NULL A 0 A_NoBlocking
+	NULL AAAAAAAAA 0 A_SpawnItemEX("blood", 0, 0, random (3, 5), random (-5, 5), random (-5, 5), random (1, 2), 0, 0, 30)
+    NULL A 0 A_SpawnItemEx ("DebrisPiece1", 0, 0, random (3, 5), random (-5, 5), random (-5, 5), random (1, 2), 0, 0, 30)
+    NULL A 0 A_SpawnItemEx ("DebrisPiece1", 0, 0, random (3, 5), random (-5, 5), random (-5, 5), random (1, 2), 0, 0, 30)
+    NULL A 0 A_SpawnItemEx ("DebrisPiece1", 0, 0, random (3, 5), random (-5, 5), random (-5, 5), random (1, 2), 0, 0, 30)
+    NULL A 0 A_SpawnItemEx ("DebrisPiece1", 0, 0, random (3, 5), random (-5, 5), random (-5, 5), random (1, 2), 0, 0, 30)
+    Stop
+  }
+}
+actor spraypaint
+{
+  Radius 2
+  Height 2
+  health 2
+  Speed 70
+  Damage 0
+  BloodColor "#FF0000"
+  decal BloodSplat
+  DeathSound "imp/shotx"
+  Projectile
+  -NOGRAVITY
+  States
+  {
+  Spawn:
+    TNT1 A 1 A_SpawnItemEX("spraytrail", random(-2, 2), 0, random(-2, 2), 0, 0, 0, random(0, 360))
+    loop
+  Death:
+    TNT1 A 4
+    stop
+  }
+}
+actor SprayTrail
+{
+  Radius 2
+  Height 2
+  scale 0.3
+  renderstyle translucent
+  alpha 0.4
+  BloodColor "#FF0000"
+  +NOINTERACTION
+  States
+  {
+  Spawn:
+    GBGO ABCD 3 A_FadeOut(0.2)
+    stop
+  }
+  }
+Actor WoodBarricade: actor 310
+{
+  Health 50
+  Speed 15
+  Height 48
+  radius 32
+  mass 1000000
+  +SOLID
+  +SHOOTABLE
+  +NOBLOOD
+  +DROPOFF
+  +DONTTHRUST
+  +TELESTOMP
+  +CANPASS
+  damagefactor crowdamage, 2.0
+  deathsound "break/wood"
+  States
+  {
+  Spawn:
+    TNT1 A -1
+    Loop
+  Death:
+    NULL A 0 A_Scream
+	NULL A 0 A_NoBlocking
+    NULL A 0 A_SpawnItemEx ("wooddebris", 0, 0, random (3, 5), random (-5, 5), random (-5, 5), random (1, 2), 0, 0, 30)
+    NULL A 0 A_SpawnItemEx ("wooddebris", 0, 0, random (3, 5), random (-5, 5), random (-5, 5), random (1, 2), 0, 0, 30)
+    NULL A 0 A_SpawnItemEx ("wooddebris", 0, 0, random (3, 5), random (-5, 5), random (-5, 5), random (1, 2), 0, 0, 30)
+    NULL A 0 A_SpawnItemEx ("wooddebris", 0, 0, random (3, 5), random (-5, 5), random (-5, 5), random (1, 2), 0, 0, 30)
+    NULL A 0 A_SpawnItemEx ("wooddebris", 0, 0, random (3, 10), random (-5, 10), random (-10, 5), random (1, 2), 0, 0, 30)
+	NULL A 0 A_SpawnItemEx ("wooddebris", 0, 0, random (3, 10), random (-5, 10), random (-10, 5), random (1, 2), 0, 0, 30)
+    Stop
+  }
+}
+Actor Woodbarricadecutscene: woodbarricade 317
+{
+  deathsound "break/wood"
+  +NOGRAVITY
+  States
+  {
+  Spawn:
+    TNT1 A -1
+    Loop
+  Death:
+    NULL A 0 A_Scream
+	NULL A 0 A_NoBlocking
+    NULL A 0 A_SpawnItemEx ("wooddebrisslow", 0, 0, random (3, 5), random (-5, 5), random (-5, 5), random (1, 2), 0, 0, 30)
+    NULL A 0 A_SpawnItemEx ("wooddebrisslow", 0, 0, random (3, 5), random (-5, 5), random (-5, 5), random (1, 2), 0, 0, 30)
+    NULL A 0 A_SpawnItemEx ("wooddebrisslow", 0, 0, random (3, 5), random (-5, 5), random (-5, 5), random (1, 2), 0, 0, 30)
+    NULL A 0 A_SpawnItemEx ("wooddebrisslow", 0, 0, random (3, 5), random (-5, 5), random (-5, 5), random (1, 2), 0, 0, 30)
+    NULL A 0 A_SpawnItemEx ("wooddebrisslow", 0, 0, random (3, 10), random (-5, 10), random (-10, 5), random (1, 2), 0, 0, 30)
+	NULL A 0 A_SpawnItemEx ("wooddebrisslow", 0, 0, random (3, 10), random (-5, 10), random (-10, 5), random (1, 2), 0, 0, 30)
+	NULL A 0 A_SpawnItemEx ("wooddebrisslow", 0, 0, random (3, 5), random (-5, 5), random (-5, 5), random (1, 2), 0, 0, 30)
+	NULL A 0 A_SpawnItemEx ("wooddebrisslow", 0, 0, random (3, 10), random (-5, 10), random (-10, 5), random (1, 2), 0, 0, 30)
+    NULL A 0 A_SpawnItemEx ("wooddebrisslow", 0, 0, random (3, 10), random (-5, 10), random (-10, 5), random (1, 2), 0, 0, 30)
+    Stop
+  }
+}
+ACTOR PROPDustFall 311
+{
+	Radius 16
+	Height 42
+	renderstyle add
+	alpha 0.4
+	-solid
+    +Nogravity
+	States
+	{
+	Spawn:
+		DFAL ABCDEFGHIKJ 5
+		DFAL KLMNOPPPPPPPPPP 5 A_fadeout(0.15)
+		stop
+	}
+}
+ACTOR WoodDebris : actor
+{ 
+    +MISSILE
+	+DROPOFF
+	+NOTELEPORT
+	+FORCEXYBILLBOARD
+	+GHOST
+	+DONTSPLASH
+	Mass 10
+	Damage 0
+	-NOBLOCKMAP
+	-NOGRAVITY
+	+Randomize
+	Radius 3
+	Height 3
+	Speed 6
+	bouncetype "doom"
+	BounceFactor 0.5
+	Scale .8
+	Alpha 1.0
+	States
+	{
+	Spawn:
+		TNT1 A 0
+		TNT1 A 0 Thing_ChangeTID(0,390)
+		TNT1 A 0 A_Jump(256,1,2,3,4,5,6,7,8)
+		WDB1 ABCDEFGHI 1 
+		Goto Spawn+3
+	Death:
+		TNT1 A 0 
+		TNT1 A 0 A_jump(256,"death1","death2","death3")
+	Death1:
+		WDB1 L 200
+		TNT1 A 1
+		Stop
+	Death2:
+		WDB1 J 200
+		TNT1 A 1
+		Stop
+	Death3:
+		WDB1 K 200
+		TNT1 A 1
+		Stop
+	}
+}
+ACTOR WoodDebrisslow : wooddebris
+{ 
+	+NOBLOCKMAP
+	Mass 5
+	Damage 0
+	+NOGRAVITY
+	+Randomize
+	Radius 3
+	Height 3
+	Speed 1
+	bouncetype "doom"
+	BounceFactor 0.5
+	Scale .6
+	Alpha 1.0
+	States
+	{
+	Spawn:
+		TNT1 A 0
+		TNT1 A 0 Thing_ChangeTID(0,390)
+		TNT1 A 0 A_Jump(256,1,2,3,4,5,6,7,8)
+		WDB1 ABCDEFGHI 4 
+		loop
+	Death:
+		TNT1 A 0 
+		TNT1 A 0 A_jump(256,"death1","death2","death3")
+	Death1:
+		WDB1 L 200
+		TNT1 A 1
+		Stop
+	Death2:
+		WDB1 J 200
+		TNT1 A 1
+		Stop
+	Death3:
+		WDB1 K 200
+		TNT1 A 1
+		Stop
+	}
+}
+Actor FootstepsWalker 
+{
+  speed 15
++NOBLOCKMAP
+  +NOSECTOR
+  +NOGRAVITY
+  +DONTSPLASH
+  +Floorhugger
+  projectile
+  damage 0
+  states
+  {
+  spawn:
+  TNT1 AAAAAAAAAAAA 20 a_playsound("footstep/default",CHAN_BODY)
+  death:
+  TNT1 A -1
+  stop
+}
+}
+Actor Footstepsrunner 
+{
+  speed 20
++NOBLOCKMAP
+  +NOSECTOR
+  +NOGRAVITY
+  +DONTSPLASH
+  +Floorhugger
+  projectile
+  damage 0
+  states
+  {
+  spawn:
+  TNT1 AAAAAAAAAAAAAAAAAAAAAAAAAA 10 a_playsound("footstep/default",CHAN_BODY)
+  death:
+  TNT1 A -1
+  stop
+}
+}
+ACTOR PistolDropperNew:  RandomSpawner 361
+{
+ DropItem "Pistol"
+}
+ actor RadRoach: actor 362
+ {
+  Obituary "%o was killed by a... RADROACH???"
+  Health 1
+  Radius 8
+  Height 8
+  Mass 1000
+  Speed 8
+  scale 0.4
+  PainChance 256
+  DeathSound "roach/squish"
+  ActiveSound "roach/active"
+  bloodcolor "tan"
+  Monster
+  +FLOORCLIP
+  +FRIGHTENED
+  +NOTARGET
+  +CANTSEEK
+  +CANNOTPUSH
+  -CANUSEWALLS
+  +THRUSPECIES
+  +AMBUSH
+  +LOOKALLAROUND
+  -COUNTKILL
+  +ISMONSTER
+  +TOUCHY
+  States
+  {
+  Spawn:
+    ROCH A 4 A_Look
+    loop
+  See:
+    ROCH AB 2 A_Chase
+    loop
+  Death:
+  Xdeath:
+    ROCH A 1 A_Scream
+	ROCH A 1 A_NoBlocking
+    ROCH C 20 
+    ROCH C -1
+    stop
+  Raise:
+    ROCH CBA 5
+    goto See
+  }
+}
+ACTOR PropGeneric
+{
+  Radius 20
+  Height 16
+  +NOBLOCKMAP
+  States
+	{
+	Spawn:
+		PLAY A -1
+		Stop
+	}
+}
+Actor Propminehat: PropGeneric 492
+{
+States
+  {
+  Spawn:
+    MHLM A -1
+    STOP
+  }
+}
+Actor Proppickaxe: PropGeneric 493
+{
+States
+  {
+  Spawn:
+    PAXE A -1
+    STOP
+  }
+}
+Actor WalkerCutscene: PropGeneric
+{
+States
+  {
+  Spawn:
+    WLK2 ABC 4 bright
+    loop
+  }
+}
+ACTOR PropMotorcycle: TallGreenColumn 335
+{
+    scale 0.9
+	Radius 16
+	Height 40
+	ProjectilePassHeight -16
+	+SOLID
+	States
+	{
+	Spawn:
+		BIKE A -1
+		Stop
+	}
+}
+ACTOR PropMotorcycleBroke: TallGreenColumn 336
+{
+    scale 0.9
+	Radius 16
+	Height 40
+	ProjectilePassHeight -16
+	+SOLID
+	States
+	{
+	Spawn:
+		BIK2 A -1
+		Stop
+	}
+}
+ACTOR PropMotorcycleBroke2: TallGreenColumn 360
+{
+    scale 0.9
+	Radius 16
+	Height 40
+	ProjectilePassHeight -16
+	+SOLID
+	States
+	{
+	Spawn:
+		BIK3 A -1
+		Stop
+	}
+}
+ACTOR PropMotorcycleBroke3: TallGreenColumn 363
+{
+    scale 0.9
+	Radius 16
+	Height 40
+	ProjectilePassHeight -16
+	+SOLID
+	States
+	{
+	Spawn:
+		BIK4 A -1
+		Stop
+	}
+}
+ACTOR PropRubbishBagEmpty: TallGreenColumn 337
+{
+	Health 20
+  Speed 10
+  Height 15
+  +SOLID
+  +SHOOTABLE
+  +NOBLOOD
+  +TELESTOMP
+  +CANPASS
+   deathsound "break/box"
+  States
+  {
+  Spawn:
+    RBAG A -1
+    Loop
+  Death:
+    NULL A 0 A_Scream
+	NULL A 0 A_NoBlocking
+    NULL A 0 A_SpawnItemEx ("DebrisPiece1", 0, 0, random (3, 5), random (-5, 5), random (-5, 5), random (1, 2), 0, 0, 30)
+    NULL A 0 A_SpawnItemEx ("DebrisPiece2", 0, 0, random (3, 5), random (-5, 5), random (-5, 5), random (1, 2), 0, 0, 30)
+    NULL A 0 A_SpawnItemEx ("DebrisPiece2", 0, 0, random (3, 5), random (-5, 5), random (-5, 5), random (1, 2), 0, 0, 30)
+    NULL A 0 A_SpawnItemEx ("DebrisPiece1", 0, 0, random (3, 5), random (-5, 5), random (-5, 5), random (1, 2), 0, 0, 30)
+    Stop
+  }
+}
+ACTOR PropExtinguisher 367
+{
+  Health 30
+  Speed 10
+  Height 16
+  scale 1
+  +SOLID
+  +SHOOTABLE
+  +NOBLOOD
+  +TELESTOMP
+  +CANPASS
+   deathsound "weapons/explodedistant"
+  States
+  {
+  Spawn:
+    FEXT A -1
+    Loop
+  Death:
+    FEXT A 0 a_playsound("explode/medium")
+    FEXT B 4 A_Scream
+	FEXT C 4 A_NoBlocking
+    NULL A 0 A_SpawnItemEx ("DebrisPiece1", 0, 0, random (3, 5), random (-5, 5), random (-5, 5), random (1, 2), 0, 0, 30)
+    NULL A 0 A_SpawnItemEx ("DebrisPiece2", 0, 0, random (3, 5), random (-5, 5), random (-5, 5), random (1, 2), 0, 0, 30)
+    NULL A 0 A_SpawnItemEx ("DebrisPiece2", 0, 0, random (3, 5), random (-5, 5), random (-5, 5), random (1, 2), 0, 0, 30)
+    NULL A 0 A_SpawnItemEx ("DebrisPiece1", 0, 0, random (3, 5), random (-5, 5), random (-5, 5), random (1, 2), 0, 0, 30)
+	FEXT D 4 A_Explode(80,192)
+	FEXT EFGHIJK 4
+    Stop
+  }
+}
+ACTOR PropRubbishBagJunk: PropRubbishBagEmpty 338
+{
+    DropItem "crapjunk"
+}
+Actor PropBricks1: PropGeneric 345
+{
+States
+  {
+  Spawn:
+    BRIK A -1
+    STOP
+  }
+}
+Actor PropBricks2: PropGeneric 346
+{
+scale 1
+States
+  {
+  Spawn:
+    BRIC A -1
+    STOP
+  }
+}
+Actor PropBricks3: PropGeneric 347
+{
+scale 1
+States
+  {
+  Spawn:
+    BLOK A -1
+    STOP
+  }
+}
+Actor PropGrasstuft: PropGeneric 351
+{
+scale 1
+States
+  {
+  Spawn:
+    TUFT A -1
+    STOP
+  }
+}
+Actor PropSewerbush: PropGeneric 364
+{
+scale 1
+States
+  {
+  Spawn:
+    SCRB A -1
+    STOP
+  }
+}
+Actor PropBonePile: PropGeneric 365
+{
+scale 1
+States
+  {
+  Spawn:
+    BPIL A -1
+    STOP
+  }
+}
+Actor PropScrub: PropGeneric 366
+{
+scale .6
+States
+  {
+  Spawn:
+    SCRB B -1
+    STOP
+  }
+}
+Actor PropFungusAmungus: PropGeneric 382
+{
+scale 0.8
+States
+  {
+  Spawn:
+    FUNG A -1
+    STOP
+  }
+}
+Actor PropBarStool: PropGeneric 383
+{
+States
+  {
+  Spawn:
+    STOL A -1
+    STOP
+  }
+}
+Actor PropElectricLamp: PropGeneric 386
+{
+States
+  {
+  Spawn:
+    SLMP A 10
+	SLMP A 0 A_Jump (240, 2)
+	SLMP B 5
+	SLMP A 5
+    loop
+  }
+}
+Actor PropCeilingLight: SwitchableDecoration 388
+{
+ Health 15
+ Radius 20
+  Height 32
+  mass 10000000
+  +SPAWNCEILING
+  +NOGRAVITY
+ +DONTFALL
+  +NOBLOOD
+  +SOLID
+  +SHOOTABLE
+States
+  {
+  active:
+    LSHD B 1 bright 
+  Spawn:
+    LSHD B -1 bright
+	stop
+  Inactive:
+    LSHD A -1 
+	stop
+  Death:
+    LSHD C 0 A_NOBLOCKING
+    LSHD C -1
+	stop
+  }
+}
+Actor PropCeilingLightunlit: PropCeilingLight 389
+{
+  States
+  {
+  Spawn:
+    Goto Super::Inactive
+  }
+}
+Actor PropCeilingLighttrashed: PropCeilingLight 390
+{
+  States
+  {
+  Spawn:
+    Goto Super::death
+  }
+}
+Actor PropArmoredLight: SwitchableDecoration 
+{
+ Radius 20
+  Height 30
+  mass 10000000
+  +SPAWNCEILING
+  +NOGRAVITY
+ +DONTFALL
+States
+  {
+  active:
+    ALGT B 1 bright 
+  Spawn:
+    ALGT B -1 bright
+	stop
+  Inactive:
+    ALGT A -1 
+	stop
+  }
+}
+Actor PropArmoredLightunlit: PropArmoredLight 
+{
+  States
+  {
+  Spawn:
+    Goto Super::Inactive
+  }
+}
+Actor PropEmergencyLight: SwitchableDecoration 
+{
+ Radius 20
+  Height 30
+  mass 10000000
+  +SPAWNCEILING
+  +NOGRAVITY
+ +DONTFALL
+States
+  {
+  active:
+    ELGT B 1 bright 
+  Spawn:
+    ELGT B -1 bright
+	stop
+  Inactive:
+    ELGT A -1 
+	stop
+  }
+}
+Actor PropEmergencyLightunlit: PropEmergencyLight 
+{
+  States
+  {
+  Spawn:
+    Goto Super::Inactive
+  }
+}
+Actor PropSirenLightCeiling: SwitchableDecoration
+{
+ Radius 8
+  Height 16
+  mass 10000000
+  +SPAWNCEILING
+  +NOGRAVITY
+ +DONTFALL
+  -SOLID
+States
+  {
+  active:
+    KLAX A 5 bright
+  spawn:
+    KLAX A 0 A_PlaySound ("strobelight", CHAN_item)
+    KLAX ABCD 5 bright
+	loop
+  Inactive:
+    KLAX A -1 
+	stop
+  }
+}
+Actor PropSirenLightFloor: SwitchableDecoration
+{
+ Radius 8
+  Height 16
+  mass 10000000
+  -SOLID
+States
+  {
+  active:
+    KL2X A 0 A_PlaySound ("strobelight", CHAN_item)
+    KL2X A 5 bright
+  spawn:
+    KL2X ABCD 5 bright
+	loop
+  Inactive:
+    KL2X A -1 
+	stop
+  }
+}
+Actor PropSirenLightOrange: SwitchableDecoration
+{
+ Radius 8
+  Height 16
+  mass 10000000
+  -SOLID
+States
+  {
+  active:
+    KL3X A 0 A_PlaySound ("strobelight", CHAN_item)
+    KL3X A 5 bright
+  spawn:
+    KL3X ABCD 5 bright
+	loop
+  Inactive:
+    KL3X A -1 
+	stop
+  }
+}
+ACTOR AshesBigTree1 500
+{
+	Radius 16
+	Height 128
+	+SOLID
+	States
+	{
+	Spawn:
+		TRE1 A -1
+		Stop
+	}
+}
+ACTOR AshesBigTree2 501
+{
+	Radius 16
+	Height 128
+	+SOLID
+	States
+	{
+	Spawn:
+		TRE2 A -1
+		Stop
+	}
+}
+ACTOR AshesBigTree3 502
+{
+	Radius 16
+	Height 128
+	+SOLID
+	States
+	{
+	Spawn:
+		TRE3 A -1
+		Stop
+	}
+}
+ACTOR AshesBigTree4 503
+{
+	Radius 16
+	Height 128
+	+SOLID
+	States
+	{
+	Spawn:
+		TRE4 A -1
+		Stop
+	}
+}
+ACTOR AshesBigTree5 504
+{
+	Radius 16
+	Height 128
+	+SOLID
+	States
+	{
+	Spawn:
+		TRE5 A -1
+		Stop
+	}
+}
+ACTOR AshesBigTree6 505
+{
+	Radius 16
+	Height 128
+	+SOLID
+	States
+	{
+	Spawn:
+		TRE6 A -1
+		Stop
+	}
+}
+ACTOR AshesBigTree7 506
+{
+	Radius 16
+	Height 128
+	+SOLID
+	States
+	{
+	Spawn:
+		TRE7 A -1
+		Stop
+	}
+}
+Actor PropMothra 490
+{
+ Radius 8
+  Height 64
+  mass 10000000
+  +SPAWNCEILING
+  +NOGRAVITY
+ +DONTFALL
+  -SOLID
+States
+  {
+  spawn:
+    M0th abcdefghijkl 3 
+	m0th m 3 A_jump(96,"backward")
+	loop
+  backward:
+    m0th amlkjihgfedc 3
+	m0th b 3 A_jump(96,"spawn")
+    loop
+  }
+}
+ACTOR  propbiglight: Column replaces Column
+{
+	Radius 16
+	Height 42
+	ProjectilePassHeight -16
+	+SOLID
+	States
+	{
+	Spawn:
+		COLU A -1
+		stop
+	}
+}
+ACTOR QuestBriefcase : Inventory 300
+{
+    +NOTDMATCH
+	+FLOORCLIP
+    +COUNTITEM
+	+INVENTORY.INVBAR
+	scale 0.6
+	Inventory.Interhubamount 1
+	Inventory.MaxAmount 1
+	Inventory.Icon "ICASA0"
+	Inventory.PickupMessage "Got the briefcase computer."
+	Inventory.PickupSound "misc/p_pkup"
+	conversationId 121
+	Tag "A small computer, built into a briefcase"
+	States
+	{
+	Spawn:
+		QCAS A 15
+		QCAS A 5 bright
+        loop
+	}
+}
+ACTOR QuestBattery : Inventory 301
+{
+    +NOTDMATCH
+	+FLOORCLIP
+    +COUNTITEM
+	+INVENTORY.INVBAR
+	scale 0.6
+	Inventory.Interhubamount 1
+	Inventory.MaxAmount 1
+	Inventory.Icon "IVLTA0"
+	Inventory.PickupMessage "Got the Battery part."
+	Inventory.PickupSound "misc/p_pkup"
+	conversationId 122
+	Tag "A Tesla-glide battery"
+	States
+	{
+	Spawn:
+		QVLT A 15
+		QVLT A 5 bright
+        loop
+	}
+}
+ACTOR QuestLocket : Inventory 302
+{
+    +NOTDMATCH
+	+FLOORCLIP
+    +COUNTITEM
+	+INVENTORY.INVBAR
+	scale 0.6
+	Inventory.Interhubamount 1
+	Inventory.MaxAmount 1
+	Inventory.Icon "ILKTA0"
+	Inventory.PickupMessage "Got an old locket?"
+	Inventory.PickupSound "misc/p_pkup"
+	conversationId 122
+	Tag "A silver locket with ornate decoration."
+	States
+	{
+	Spawn:
+		QLKT A 15
+		QLKT A 5 bright
+        loop
+	}
+}
+ACTOR QuestHarmonica : Inventory
+{
+    +NOTDMATCH
+	+FLOORCLIP
+    +COUNTITEM
+	+INVENTORY.INVBAR
+	scale 0.8
+	Inventory.Interhubamount 1
+	Inventory.MaxAmount 1
+	Inventory.Icon "IHRMA0"
+	Inventory.PickupMessage "Got a harmonica?"
+	Inventory.PickupSound "misc/p_pkup"
+	conversationId 122
+	Tag "A silver harmonica."
+	States
+	{
+	Spawn:
+		QHRM A 15
+		QHRM A 5 bright
+        loop
+	}
+}
+ACTOR QuestC4 : Inventory 303
+{
+    +NOTDMATCH
+	+FLOORCLIP
+    +COUNTITEM
+	+INVENTORY.INVBAR
+	scale 0.7
+	Inventory.Interhubamount 1
+	Inventory.MaxAmount 1
+	Inventory.Icon "ITNTA0"
+	Inventory.PickupMessage "Got a timed explosive device."
+	Inventory.PickupSound "misc/p_pkup"
+	conversationId 122
+	Tag "An explosive device with a timer, marked 'C4'."
+	States
+	{
+	Spawn:
+		QTNT A 15
+		QTNT A 5 bright
+        loop
+	}
+}
+ACTOR QuestJerrycan : Inventory 384
+{
+    +NOTDMATCH
+	+FLOORCLIP
+    +COUNTITEM
+	+INVENTORY.INVBAR
+	scale 0.6
+	Inventory.Interhubamount 1
+	Inventory.MaxAmount 1
+	Inventory.Icon "IJERA0"
+	Inventory.PickupMessage "Got the Jerrycan of Gasoline."
+	Inventory.PickupSound "misc/p_pkup"
+	conversationId 121
+	Tag "A half-full jerrycan of gasoline"
+	States
+	{
+	Spawn:
+		QJER A 15
+		QJER A 5 bright
+        loop
+	}
+}
+ACTOR QuestFuse : Inventory 375
+{
+    +NOTDMATCH
+	+FLOORCLIP
+    +COUNTITEM
+	+INVENTORY.INVBAR
+	scale 0.5
+	Inventory.Interhubamount 1
+	Inventory.MaxAmount 1
+	Inventory.Icon "IFUSA0"
+	Inventory.PickupMessage "Got the Fuse."
+	Inventory.PickupSound "misc/p_pkup"
+	conversationId 600
+	Tag "A 60Amp FUSE"
+	States
+	{
+	Spawn:
+		QFUS A 15
+		QFUS A 5 bright
+		loop
+	}
+}
+ACTOR QuestHazSuit : Inventory 
+{
+    +NOTDMATCH
+	+FLOORCLIP
+    +COUNTITEM
+	+INVENTORY.INVBAR
+	scale 1.0
+	Inventory.Interhubamount 1
+	Inventory.MaxAmount 1
+	Inventory.Icon "IHZMA0"
+	Inventory.PickupMessage "Got the pristine Hazmat suit."
+	Inventory.PickupSound "misc/p_pkup"
+	Tag "A Pristine Hazmat suit"
+	States
+	{
+	Spawn:
+		HZMT A 15
+		HZMT A 5 bright
+		loop
+	}
+}
+ACTOR QuestPrimers : Inventory 377
+{
+    +NOTDMATCH
+	+FLOORCLIP
+    +COUNTITEM
+	+INVENTORY.INVBAR
+	scale 0.5
+	Inventory.Interhubamount 1
+	Inventory.MaxAmount 1
+	Inventory.Icon "IPRMA0"
+	Inventory.PickupMessage "Got the box of primers."
+	Inventory.PickupSound "misc/p_pkup"
+	conversationId 556
+	Tag "A box of ammo primers"
+	States
+	{
+	Spawn:
+		QPRM A 15
+		QPRM A 5 bright
+		loop
+	}
+}
+ACTOR QuestDisk : Inventory 369
+{
+    +NOTDMATCH
+	+FLOORCLIP
+    +COUNTITEM
+	+INVENTORY.INVBAR
+	scale 0.5
+	Inventory.Interhubamount 1
+	Inventory.MaxAmount 1
+	Inventory.Icon "IDSKA0"
+	Inventory.PickupMessage "Got the storage disk."
+	Inventory.PickupSound "misc/p_pkup"
+	conversationId 514
+	Tag "An encrypted storage disk"
+	States
+	{
+	Spawn:
+		QDSK A 15
+		QDSK A 5 bright
+		loop
+	}
+}
+ACTOR QuestTitanBad : Inventory 469
+{
+    +NOTDMATCH
+	+FLOORCLIP
+    +COUNTITEM
+	+INVENTORY.INVBAR
+	scale 0.6
+	Inventory.Interhubamount 1
+	Inventory.MaxAmount 1
+	Inventory.Icon "ITBDA0"
+	Inventory.PickupMessage "Got the... really nasty looking stim."
+	Inventory.PickupSound "misc/p_pkup"
+	conversationId 420
+	Tag "A dirty looking stim marked 'TITAN'"
+	States
+	{
+	Spawn:
+		QTBD A 15
+		QTBD A 5 bright
+        loop
+	}
+}
+ACTOR QuestMedicines : Inventory 478
+{
+    +NOTDMATCH
+	+FLOORCLIP
+    +COUNTITEM
+	+INVENTORY.INVBAR
+	scale 0.7
+	Inventory.Interhubamount 1
+	Inventory.MaxAmount 1
+	Inventory.Icon "IMDSA0"
+	Inventory.PickupMessage "Got the box of meds."
+	Inventory.PickupSound "misc/p_pkup"
+	conversationId 121
+	Tag "A big container of various medicines."
+	States
+	{
+	Spawn:
+		QMDS A 15
+		QMDS A 5 bright
+        loop
+	}
+}
+ACTOR QuestCartridge : Inventory
+{
+    +NOTDMATCH
+	+FLOORCLIP
+    +COUNTITEM
+	+INVENTORY.INVBAR
+	scale 0.4
+	Inventory.Interhubamount 1
+	Inventory.MaxAmount 1
+	Inventory.Icon "ICRTA0"
+	Inventory.PickupMessage "Got the videogame cartridge."
+	Inventory.PickupSound "misc/p_pkup"
+	Tag "A game cartridge titled 'Homesick Alien' "
+	States
+	{
+	Spawn:
+		QCRT A 15
+		QCRT A 5 bright
+        loop
+	}
+}
+ACTOR RadioChannel : Inventory
+{
+    Inventory.Amount 1
+    Inventory.MaxAmount 20
+	Inventory.Interhubamount 0
+    -INVBAR
+}
+ACTOR QuestRadio : CustomInventory 
+{
+    +NOTDMATCH
+	+FLOORCLIP
+    +COUNTITEM
+	+INVENTORY.INVBAR
+	scale 0.6
+	Inventory.Interhubamount 1
+	Inventory.MaxAmount 1
+	Inventory.Icon "IRADA0"
+	Inventory.PickupMessage "Got the wind-up radio."
+	Inventory.PickupSound "misc/p_pkup"
+	conversationId 121
+	Tag "A 'Maxi-Tune 3000' Wind-up Radio"
+	States
+	{
+	Spawn:
+		QRAD A 15
+		QRAD A 5 bright
+        loop
+	Use:
+	    TNT1 A 0
+		TNT1 A 0 A_playsound("radio/windup",CHAN_7,1,false,ATTN_NONE)
+	channel1:
+	    tnt1 A 0 ACS_execute(1221)
+		tnt1 A 0 
+		fail
+	}
+}
+ACTOR QuestSeeds : Inventory
+{
+    +NOTDMATCH
+	+FLOORCLIP
+    +COUNTITEM
+	+INVENTORY.INVBAR
+	scale 0.8
+	Inventory.Interhubamount 1
+	Inventory.MaxAmount 1
+	Inventory.Icon "ISDSA0"
+	Inventory.PickupMessage "Got the experimental seeds."
+	Inventory.PickupSound "misc/p_pkup"
+	Tag "A bag of seeds, marked 'Alpha-1'"
+	States
+	{
+	Spawn:
+		QSDS A 15
+		QSDS A 5 bright
+        loop
+	}
+}
+ACTOR QuestSpores : Inventory
+{
+    +NOTDMATCH
+	+FLOORCLIP
+    +COUNTITEM
+	+INVENTORY.INVBAR
+	scale 0.8
+	Inventory.Interhubamount 1
+	Inventory.MaxAmount 5
+	Inventory.Icon "ISPRA0"
+	Inventory.PickupMessage "Got the gasbag spores."
+	Inventory.PickupSound "misc/p_pkup"
+	Tag "A clutch of pupating gasbag spores"
+	States
+	{
+	Spawn:
+		QSPR A 15
+		QSPR A 5 bright
+        loop
+	}
+}
+ACTOR QuestKey : Inventory
+{
+    +NOTDMATCH
+	+FLOORCLIP
+    +COUNTITEM
+	+INVENTORY.INVBAR
+	scale 0.6
+	Inventory.Interhubamount 1
+	Inventory.MaxAmount 1
+	Inventory.Icon "IKEYA0"
+	Inventory.PickupMessage "Got the key to the north gate."
+	Inventory.PickupSound "misc/p_pkup"
+	conversationId 121
+	Tag "A large key marked 'north blockhouse'"
+	States
+	{
+	Spawn:
+		QKEY A 15
+		QKEY A 5 bright
+        loop
+	}
+}
+actor Corpse1 : DeadZombieMan 392
+{
+	Skip_Super
+	DropItem None
+	scale 0.7
+	States
+	{
+	Spawn:
+		CPS1 A -1
+		Stop
+	}
+}
+actor Corpse2 : Corpse1 393
+{
+    scale 1
+	States
+	{
+	Spawn:
+		CPS2 A -1
+		Stop
+	}
+}
+actor Corpse3 : corpse1 394
+{
+	States
+	{
+	Spawn:
+		CPS3 A -1
+		Stop
+	}
+}
+actor Corpse4 : corpse1 395
+{
+	States
+	{
+	Spawn:
+		CPS4 A -1
+		Stop
+	}
+}
+actor Corpse5 : corpse1 396
+{
+    scale 1
+	States
+	{
+	Spawn:
+		CPS5 A -1
+		Stop
+	}
+}
+actor Corpse6 : corpse1 397
+{
+	States
+	{
+	Spawn:
+		CPS6 A -1
+		Stop
+	}
+}
+actor Corpse7 : DeadZombieMan 454
+{
+	Skip_Super
+	DropItem None
+	scale 0.9
+	States
+	{
+	Spawn:
+		GARD K -1
+		Stop
+	}
+}
+actor Corpse8 : corpse1 13109 //damnnnnnnnnnn
+{
+    scale 1
+	States
+	{
+	Spawn:
+		CPS7 A -1
+		Stop
+	}
+}
+actor DeadNewGuard1 : corpse1 320
+{
+    scale 1
+	States
+	{
+	Spawn:
+		DNG1 A -1
+		Stop
+	}
+}
+actor DeadNewGuard2 : corpse1 321
+{
+    scale 1
+	States
+	{
+	Spawn:
+		DNG2 A -1
+		Stop
+	}
+}
+actor DeadNewGuard3 : corpse1 322
+{
+    scale 1
+	States
+	{
+	Spawn:
+		DNG3 A -1
+		Stop
+	}
+}
+actor DeadNewGuard4 : corpse1 323
+{
+    scale 1
+	States
+	{
+	Spawn:
+		DNG4 A -1
+		Stop
+	}
+}
+actor Hangedman1: corpse1 376
+{
+  Radius 16
+  Height 48
+  scale 0.8
+  +SOLID
+  +NOGRAVITY
+  +SPAWNCEILING
+  States
+  {
+  Spawn:
+    HANG A -1
+    Stop
+  }
+}
+actor Hangedbag: corpse1 
+{
+  Radius 16
+  Height 90
+  scale 0.8
+  +SOLID
+  +NOGRAVITY
+  +SPAWNCEILING
+  States
+  {
+  Spawn:
+    HANG B -1
+    Stop
+  }
+}
+ACTOR PROPBurningDrum: BurningBarrel replaces BurningBarrel 
+{
+  Radius 15
+  Height 30
+  ProjectilePassHeight -16
+  +SOLID
+  scale 0.8
+  States
+  {
+  Spawn:
+    FCAN A 0 Bright
+    FCAN A 0 Bright A_PlaySoundEx ("Amb/firecrackle", "SoundSlot5", 1, -1)
+    //Fall through
+  Bubble:
+    FCAN ABCD 4 Bright
+    Loop
+  }
+}
+ACTOR PROPSpitroast: PropBurningDrum 477 
+{
+  Radius 15
+  Height 32
+  ProjectilePassHeight -16
+  +SOLID
+  States
+  {
+  Spawn:
+    SPRS A 0
+    SPRS A 0 A_PlaySoundEx ("Amb/firecrackle", "SoundSlot5", 1, -1)
+    //Fall through
+  Bubble:
+    SPRS ABCD 4 
+    Loop
+  }
+}
+ACTOR PROPToilet: PropBiglight 357 //the ubiquitous duke toilet returns!
+{
+    Health 90
+	Radius 5
+	Height 32
+	scale 0.8
+	ProjectilePassHeight -16
+	Mass 2000
+	woundhealth 40
+	+SOLID
+	+SHOOTABLE
+	+DONTTHRUST
+	+NOBLOOD
+	deathsound "break/bin"
+	States
+	{
+	Spawn:
+		TOIL A -1
+		stop
+	Wound:
+    NULL A 0 A_SpawnItemEx ("DebrisPiece2", 0, 0, random (3, 5), random (-5, 5), random (-5, 5), random (1, 2), 0, 0, 30)
+    NULL A 0 A_SpawnItemEx ("DebrisPiece2", 0, 0, random (3, 5), random (-5, 5), random (-5, 5), random (1, 2), 0, 0, 30)
+	NULL A 0 A_SpawnItemEx ("DebrisPiece2", 0, 0, random (3, 5), random (-5, 5), random (-5, 5), random (1, 2), 0, 0, 30)
+    NULL A 0 A_SpawnItemEx ("DebrisPiece2", 0, 0, random (3, 5), random (-5, 5), random (-5, 5), random (1, 2), 0, 0, 30)
+	Woundloop:
+	    TOIL B -1
+		STOP
+	Death:
+	    ToIL C 1
+    NULL A 0 A_Scream
+	NULL A 0 A_NoBlocking
+    NULL A 0 A_SpawnItemEx ("DebrisPiece2", 0, 0, random (3, 5), random (-5, 5), random (-5, 5), random (1, 2), 0, 0, 30)
+    NULL A 0 A_SpawnItemEx ("DebrisPiece2", 0, 0, random (3, 5), random (-5, 5), random (-5, 5), random (1, 2), 0, 0, 30)
+    NULL A 0 A_SpawnItemEx ("DebrisPiece2", 0, 0, random (3, 5), random (-5, 5), random (-5, 5), random (1, 2), 0, 0, 30)
+    NULL A 0 A_SpawnItemEx ("DebrisPiece2", 0, 0, random (3, 5), random (-5, 5), random (-5, 5), random (1, 2), 0, 0, 30)
+    NULL A 0 A_SpawnItemEx ("DebrisPiece2", 0, 0, random (3, 5), random (-5, 5), random (-5, 5), random (1, 2), 0, 0, 30)
+	    Toil C -1
+    Stop 
+	}
+}
+ACTOR PROPHospitalDrip: PropBiglight 358 //
+{
+	Radius 6
+	Height 96
+	ProjectilePassHeight -16
+	+SOLID
+	States
+	{
+	Spawn:
+		DDRP A -1
+		stop
+	}
+}
+Actor PropMusuemStatue 471
+{
+  Height 64
+  radius 16
+  scale 0.9
+  +DONTTHRUST
+  +SOLID
+  +SHOOTABLE
+  +NOBLOOD
+  +TELESTOMP
+  +CANPASS
+   deathsound "break/box"
+  States
+  {
+  Spawn:
+    MUST A -1
+    Loop
+  //Death:
+   // Death:
+   // MAN1 B 1 A_Scream
+	//NULL A 0 A_NoBlocking
+   // MAN1 A 0 A_SpawnItemEx ("DebrisPiece2", 0, 0, random (3, 5), random (-5, 5), random (-5, 5), random (1, 2), 0, 0, 30)
+   // MAN1 A 0 A_SpawnItemEx ("DebrisPiece2", 0, 0, random (3, 5), random (-5, 5), random (-5, 5), random (1, 2), 0, 0, 30)
+   // MAN1 A 0 A_SpawnItemEx ("DebrisPiece2", 0, 0, random (3, 5), random (-5, 5), random (-5, 5), random (1, 2), 0, 0, 30)
+   // MAN1 A 0 A_SpawnItemEx ("DebrisPiece2", 0, 0, random (3, 5), random (-5, 5), random (-5, 5), random (1, 2), 0, 0, 30)
+	//MAN1 B -1
+   // loop
+  }
+}
+ACTOR PropChairStanding 475
+{
+  Health 40
+  Speed 10
+  Height 32
+  deathsound "break/bin"
+  scale 1
+  +SOLID
+  +SHOOTABLE
+  +NOBLOOD
+  +DROPOFF
+  +SLIDESONWALLS
+  +PUSHABLE
+  +TELESTOMP
+  +CANPASS
+
+  States
+  {
+  Spawn:
+    CHAR A -1
+    Loop
+  Death:
+     NULL A 0 A_Scream
+	NULL A 0 A_NoBlocking
+	CHAR B 2
+    NULL A 0 A_SpawnItemEx ("DebrisPiece2", 0, 0, random (3, 5), random (-5, 5), random (-5, 5), random (1, 2), 0, 0, 30)
+    NULL A 0 A_SpawnItemEx ("DebrisPiece2", 0, 0, random (3, 5), random (-5, 5), random (-5, 5), random (1, 2), 0, 0, 30)
+	CHAR C 2
+    NULL A 0 A_SpawnItemEx ("DebrisPiece2", 0, 0, random (3, 5), random (-5, 5), random (-5, 5), random (1, 2), 0, 0, 30)
+    NULL A 0 A_SpawnItemEx ("DebrisPiece2", 0, 0, random (3, 5), random (-5, 5), random (-5, 5), random (1, 2), 0, 0, 30)
+    NULL A 0 A_SpawnItemEx ("DebrisPiece2", 0, 0, random (3, 5), random (-5, 5), random (-5, 5), random (1, 2), 0, 0, 30)
+	CHAR D -1
+    loop
+  }
+}
+Actor PropMonitor 378
+{
+  Health 30
+  Speed 10
+  Height 16
+  radius 16
+  scale 0.6
+  +SOLID
+  +SHOOTABLE
+  +NOBLOOD
+  +DROPOFF
+  +DONTTHRUST
+  +TELESTOMP
+  +CANPASS
+  deathsound "break/bin"
+  States
+  {
+  Spawn:
+    MNTR A -1
+    Loop
+  Death:
+    NULL A 0 A_Scream
+	NULL A 0 A_NoBlocking
+    NULL A 0 A_SpawnItemEx ("DebrisPiece2", 0, 0, random (3, 5), random (-5, 5), random (-5, 5), random (1, 2), 0, 0, 30)
+    NULL A 0 A_SpawnItemEx ("DebrisPiece2", 0, 0, random (3, 5), random (-5, 5), random (-5, 5), random (1, 2), 0, 0, 30)
+    NULL A 0 A_SpawnItemEx ("DebrisPiece2", 0, 0, random (3, 5), random (-5, 5), random (-5, 5), random (1, 2), 0, 0, 30)
+    NULL A 0 A_SpawnItemEx ("DebrisPiece2", 0, 0, random (3, 5), random (-5, 5), random (-5, 5), random (1, 2), 0, 0, 30)
+    NULL A 0 A_SpawnItemEx ("DebrisPiece2", 0, 0, random (3, 5), random (-5, 5), random (-5, 5), random (1, 2), 0, 0, 30)
+    Stop
+  }
+}
+Actor PropDrumkit 379
+{
+  Health 50
+  Speed 10
+  Height 32
+  radius 32
+  scale 0.8
+  +SOLID
+  +SHOOTABLE
+  +NOBLOOD
+  +DROPOFF
+  +DONTTHRUST
+  +TELESTOMP
+  +CANPASS
+  deathsound "break/bin"
+  States
+  {
+  Spawn:
+    DRUM A -1
+    Loop
+  Death:
+    NULL A 0 A_Scream
+	NULL A 0 A_NoBlocking
+    NULL A 0 A_SpawnItemEx ("DebrisPiece2", 0, 0, random (3, 5), random (-5, 5), random (-5, 5), random (1, 2), 0, 0, 30)
+    NULL A 0 A_SpawnItemEx ("DebrisPiece2", 0, 0, random (3, 5), random (-5, 5), random (-5, 5), random (1, 2), 0, 0, 30)
+    NULL A 0 A_SpawnItemEx ("DebrisPiece2", 0, 0, random (3, 5), random (-5, 5), random (-5, 5), random (1, 2), 0, 0, 30)
+    NULL A 0 A_SpawnItemEx ("DebrisPiece2", 0, 0, random (3, 5), random (-5, 5), random (-5, 5), random (1, 2), 0, 0, 30)
+    NULL A 0 A_SpawnItemEx ("DebrisPiece2", 0, 0, random (3, 5), random (-5, 5), random (-5, 5), random (1, 2), 0, 0, 30)
+    Stop
+  }
+}
+Actor PropMicrophoneStand 380
+{
+  Health 30
+  Speed 10
+  Height 56
+  radius 8
+  scale 0.8
+  +SOLID
+  +SHOOTABLE
+  +NOBLOOD
+  +DROPOFF
+  +DONTTHRUST
+  +TELESTOMP
+  +CANPASS
+  deathsound "break/bin"
+  States
+  {
+  Spawn:
+    MCRO A -1
+    Loop
+  Death:
+    NULL A 0 A_Scream
+	NULL A 0 A_NoBlocking
+    NULL A 0 A_SpawnItemEx ("DebrisPiece2", 0, 0, random (3, 5), random (-5, 5), random (-5, 5), random (1, 2), 0, 0, 30)
+    NULL A 0 A_SpawnItemEx ("DebrisPiece2", 0, 0, random (3, 5), random (-5, 5), random (-5, 5), random (1, 2), 0, 0, 30)
+    NULL A 0 A_SpawnItemEx ("DebrisPiece2", 0, 0, random (3, 5), random (-5, 5), random (-5, 5), random (1, 2), 0, 0, 30)
+    NULL A 0 A_SpawnItemEx ("DebrisPiece2", 0, 0, random (3, 5), random (-5, 5), random (-5, 5), random (1, 2), 0, 0, 30)
+    NULL A 0 A_SpawnItemEx ("DebrisPiece2", 0, 0, random (3, 5), random (-5, 5), random (-5, 5), random (1, 2), 0, 0, 30)
+    Stop
+  }
+}
+Actor CONTCardboxEmpty 340
+{
+  Health 15
+  Speed 10
+  Height 15
+  scale 0.7
+  +SOLID
+  +SHOOTABLE
+  +NOBLOOD
+  +TELESTOMP
+  +CANPASS
+   deathsound "break/box"
+  States
+  {
+  Spawn:
+    BOX1 A -1
+    Loop
+  Death:
+    NULL A 0 A_Scream
+	NULL A 0 A_NoBlocking
+    NULL A 0 A_SpawnItemEx ("DebrisPiece1", 0, 0, random (3, 5), random (-5, 5), random (-5, 5), random (1, 2), 0, 0, 30)
+    NULL A 0 A_SpawnItemEx ("DebrisPiece1", 0, 0, random (3, 5), random (-5, 5), random (-5, 5), random (1, 2), 0, 0, 30)
+    NULL A 0 A_SpawnItemEx ("DebrisPiece1", 0, 0, random (3, 5), random (-5, 5), random (-5, 5), random (1, 2), 0, 0, 30)
+    NULL A 0 A_SpawnItemEx ("DebrisPiece1", 0, 0, random (3, 5), random (-5, 5), random (-5, 5), random (1, 2), 0, 0, 30)
+    Stop
+  }
+}
+Actor CONTCardboxJunk: CONTCardBoxEmpty 341
+{
+   DropItem "crapjunk"
+}
+Actor CONTCardboxRoach: CONTCardBoxEmpty   342
+{
+   DropItem "Radroach"
+}
+Actor CONTCardboxAmmo: CONTCardBoxEmpty  343
+{
+   DropItem "FortyFiveLoose", 255, 3
+}
+Actor CONTGiftJunk: CONTCardBoxEmpty 467
+{
+   DropItem "crapjunk"
+States
+  {
+  Spawn:
+    PRS1 A -1
+    Loop
+  Death:
+    NULL A 0 A_Scream
+	NULL A 0 A_NoBlocking
+    NULL A 0 A_SpawnItemEx ("DebrisPiece1", 0, 0, random (3, 5), random (-5, 5), random (-5, 5), random (1, 2), 0, 0, 30)
+    NULL A 0 A_SpawnItemEx ("DebrisPiece1", 0, 0, random (3, 5), random (-5, 5), random (-5, 5), random (1, 2), 0, 0, 30)
+    NULL A 0 A_SpawnItemEx ("DebrisPiece1", 0, 0, random (3, 5), random (-5, 5), random (-5, 5), random (1, 2), 0, 0, 30)
+    NULL A 0 A_SpawnItemEx ("DebrisPiece1", 0, 0, random (3, 5), random (-5, 5), random (-5, 5), random (1, 2), 0, 0, 30)
+    Stop
+  }
+}
+Actor CONTGiftJunk2: CONTCardBoxEmpty 465
+{
+   DropItem "crapjunk"
+States
+  {
+  Spawn:
+    PRS2 A -1
+    Loop
+  Death:
+    NULL A 0 A_Scream
+	NULL A 0 A_NoBlocking
+    NULL A 0 A_SpawnItemEx ("DebrisPiece1", 0, 0, random (3, 5), random (-5, 5), random (-5, 5), random (1, 2), 0, 0, 30)
+    NULL A 0 A_SpawnItemEx ("DebrisPiece1", 0, 0, random (3, 5), random (-5, 5), random (-5, 5), random (1, 2), 0, 0, 30)
+    NULL A 0 A_SpawnItemEx ("DebrisPiece1", 0, 0, random (3, 5), random (-5, 5), random (-5, 5), random (1, 2), 0, 0, 30)
+    NULL A 0 A_SpawnItemEx ("DebrisPiece1", 0, 0, random (3, 5), random (-5, 5), random (-5, 5), random (1, 2), 0, 0, 30)
+    Stop
+  }
+}
+Actor CONTGiftammo: CONTCardBoxEmpty 466
+{
+   DropItem "FortyFiveLoose", 255, 6
+States
+  {
+  Spawn:
+    PRS1 A -1
+    Loop
+  Death:
+    NULL A 0 A_Scream
+	NULL A 0 A_NoBlocking
+    NULL A 0 A_SpawnItemEx ("DebrisPiece1", 0, 0, random (3, 5), random (-5, 5), random (-5, 5), random (1, 2), 0, 0, 30)
+    NULL A 0 A_SpawnItemEx ("DebrisPiece1", 0, 0, random (3, 5), random (-5, 5), random (-5, 5), random (1, 2), 0, 0, 30)
+    NULL A 0 A_SpawnItemEx ("DebrisPiece1", 0, 0, random (3, 5), random (-5, 5), random (-5, 5), random (1, 2), 0, 0, 30)
+    NULL A 0 A_SpawnItemEx ("DebrisPiece1", 0, 0, random (3, 5), random (-5, 5), random (-5, 5), random (1, 2), 0, 0, 30)
+    Stop
+  }
+}
+Actor PropBottlescrate1
+{
+  Health 30
+  Speed 10
+  Height 16
+  radius 16
+  scale 0.6
+  +SOLID
+  +SHOOTABLE
+  +NOBLOOD
+  +DROPOFF
+  +DONTTHRUST
+  +TELESTOMP
+  +CANPASS
+  deathsound "break/wood"
+  States
+  {
+  Spawn:
+    BCR1 A -1
+    Loop
+  Death:
+    NULL A 0 A_Scream
+	NULL A 0 A_NoBlocking
+    NULL A 0 A_SpawnItemEx ("DebrisPiece2", 0, 0, random (3, 5), random (-5, 5), random (-5, 5), random (1, 2), 0, 0, 30)
+    NULL A 0 A_SpawnItemEx ("DebrisPiece2", 0, 0, random (3, 5), random (-5, 5), random (-5, 5), random (1, 2), 0, 0, 30)
+    NULL A 0 A_SpawnItemEx ("wooddebris", 0, 0, random (3, 5), random (-5, 5), random (-5, 5), random (1, 2), 0, 0, 30)
+    NULL A 0 A_SpawnItemEx ("wooddebris", 0, 0, random (3, 5), random (-5, 5), random (-5, 5), random (1, 2), 0, 0, 30)
+    NULL A 0 A_SpawnItemEx ("wooddebris", 0, 0, random (3, 5), random (-5, 5), random (-5, 5), random (1, 2), 0, 0, 30)
+    NULL A 0 A_SpawnItemEx ("DebrisPiece2", 0, 0, random (3, 5), random (-5, 5), random (-5, 5), random (1, 2), 0, 0, 30)
+    Stop
+  }
+}
+Actor PropBottlescrate2: PropBottlescrate1
+{
+  States
+  {
+  Spawn:
+    BCR2 A -1
+    Loop
+  Death:
+    NULL A 0 A_Scream
+	NULL A 0 A_NoBlocking
+    NULL A 0 A_SpawnItemEx ("DebrisPiece2", 0, 0, random (3, 5), random (-5, 5), random (-5, 5), random (1, 2), 0, 0, 30)
+     NULL A 0 A_SpawnItemEx ("wooddebris", 0, 0, random (3, 5), random (-5, 5), random (-5, 5), random (1, 2), 0, 0, 30)
+    NULL A 0 A_SpawnItemEx ("wooddebris", 0, 0, random (3, 5), random (-5, 5), random (-5, 5), random (1, 2), 0, 0, 30)
+    NULL A 0 A_SpawnItemEx ("wooddebris", 0, 0, random (3, 5), random (-5, 5), random (-5, 5), random (1, 2), 0, 0, 30)
+    NULL A 0 A_SpawnItemEx ("DebrisPiece2", 0, 0, random (3, 5), random (-5, 5), random (-5, 5), random (1, 2), 0, 0, 30)
+    Stop
+  }
+}
+Actor PropBottlescrate3: PropBottlescrate1
+{
+  States
+  {
+  Spawn:
+    BCR3 A -1
+    Loop
+  Death:
+    NULL A 0 A_Scream
+	NULL A 0 A_NoBlocking
+     NULL A 0 A_SpawnItemEx ("wooddebris", 0, 0, random (3, 5), random (-5, 5), random (-5, 5), random (1, 2), 0, 0, 30)
+    NULL A 0 A_SpawnItemEx ("wooddebris", 0, 0, random (3, 5), random (-5, 5), random (-5, 5), random (1, 2), 0, 0, 30)
+    NULL A 0 A_SpawnItemEx ("wooddebris", 0, 0, random (3, 5), random (-5, 5), random (-5, 5), random (1, 2), 0, 0, 30)
+    NULL A 0 A_SpawnItemEx ("DebrisPiece2", 0, 0, random (3, 5), random (-5, 5), random (-5, 5), random (1, 2), 0, 0, 30)
+    NULL A 0 A_SpawnItemEx ("DebrisPiece2", 0, 0, random (3, 5), random (-5, 5), random (-5, 5), random (1, 2), 0, 0, 30)
+    Stop
+  }
+}
+Actor PropXmasTree: CONTCardBoxEmpty 468
+{
+Scale 1.0
+States
+  {
+  Spawn:
+    XTRE A -1
+    Loop
+  Death:
+    NULL A 0 A_Scream
+	NULL A 0 A_NoBlocking
+    NULL A 0 A_SpawnItemEx ("DebrisPiece1", 0, 0, random (3, 5), random (-5, 5), random (-5, 5), random (1, 2), 0, 0, 30)
+    NULL A 0 A_SpawnItemEx ("DebrisPiece1", 0, 0, random (3, 5), random (-5, 5), random (-5, 5), random (1, 2), 0, 0, 30)
+    NULL A 0 A_SpawnItemEx ("DebrisPiece1", 0, 0, random (3, 5), random (-5, 5), random (-5, 5), random (1, 2), 0, 0, 30)
+    NULL A 0 A_SpawnItemEx ("DebrisPiece1", 0, 0, random (3, 5), random (-5, 5), random (-5, 5), random (1, 2), 0, 0, 30)
+    Stop
+  }
+}
+Actor CONTTrashcanEmpty 348
+{
+  Health 30
+  Speed 10
+  Height 48
+  +SOLID
+  +SHOOTABLE
+  +NOBLOOD
+  +DROPOFF
+  +DONTTHRUST
+  +TELESTOMP
+  +CANPASS
+  deathsound "break/bin"
+  States
+  {
+  Spawn:
+    TRSC A -1
+    Loop
+  Death:
+    NULL A 0 A_Scream
+	NULL A 0 A_NoBlocking
+    NULL A 0 A_SpawnItemEx ("DebrisPiece2", 0, 0, random (3, 5), random (-5, 5), random (-5, 5), random (1, 2), 0, 0, 30)
+    NULL A 0 A_SpawnItemEx ("DebrisPiece2", 0, 0, random (3, 5), random (-5, 5), random (-5, 5), random (1, 2), 0, 0, 30)
+    NULL A 0 A_SpawnItemEx ("DebrisPiece2", 0, 0, random (3, 5), random (-5, 5), random (-5, 5), random (1, 2), 0, 0, 30)
+    NULL A 0 A_SpawnItemEx ("DebrisPiece2", 0, 0, random (3, 5), random (-5, 5), random (-5, 5), random (1, 2), 0, 0, 30)
+    NULL A 0 A_SpawnItemEx ("DebrisPiece2", 0, 0, random (3, 5), random (-5, 5), random (-5, 5), random (1, 2), 0, 0, 30)
+    Stop
+  }
+}
+Actor CONTTrashcanShard: CONTTrashcanEmpty 349
+{
+  DropItem "armorbonus"
+}
+Actor CONTTrashcanRoaches: CONTTrashcanEmpty 350
+{
+  DropItem "Radroach", 30
+  DropItem "Radroach", 40
+  DropItem "Radroach"
+}
+ACTOR DebrisPiece1
+{
+    -NOBLOCKMAP
+	-NOGRAVITY
+	+Randomize
+	gravity 0.5
+	mass 10
+	Radius 3
+	Height 3
+	Speed 10
+	bouncetype "doom"
+	BounceFactor 0.4
+	Scale .5
+  States
+  {
+  Spawn:
+    DEB1 ABC 4
+    DEB1 D 4 A_Jump (128, "DeathA")
+    DEB1 ABC 4
+    DEB1 D 4 A_Jump (128, "DeathB")
+    Loop
+  DeathA:
+    DEB1 A 30 A_Jump (192, "DeathA2")
+    DEB1 A 500
+	DEB1 A 1 A_CheckSight(1)
+	Wait
+	TNT1 A 1
+	Stop
+  DeathB:
+    DEB1 B 30 A_Jump (192, "DeathB2")
+    DEB1 B 500
+	DEB1 B 1 A_CheckSight(1)
+	Wait
+	TNT1 A 1
+	Stop
+  DeathA2:
+    DEB1 C 500
+	DEB1 C 1 A_CheckSight(1)
+	Wait
+	TNT1 A 1
+	Stop
+  DeathB2:
+    DEB1 D 500
+	DEB1 D 1 A_CheckSight(1)
+	Wait
+	TNT1 A 1
+	Stop
+  }
+}
+ACTOR DebrisPiece2 : DebrisPiece1
+{
+   translation 0
+   States
+  {
+  Spawn:
+    DEB2 ABC 4
+    DEB2 D 4 A_Jump (128, "DeathA")
+    DEB2 ABC 4
+    DEB2 D 4 A_Jump (128, "DeathB")
+    Loop
+  DeathA:
+    DEB2 A 30 A_Jump (192, "DeathA2")
+    DEB2 A 500
+	DEB2 A 1 A_CheckSight(1)
+	Wait
+	TNT1 A 1
+	Stop
+  DeathB:
+    DEB2 B 30 A_Jump (192, "DeathB2")
+    DEB2 B 500
+	DEB2 B 1 A_CheckSight(1)
+	Wait
+	TNT1 A 1
+	Stop
+  DeathA2:
+    DEB2 C 500
+	DEB2 C 1 A_CheckSight(1)
+	Wait
+	TNT1 A 1
+	Stop
+  DeathB2:
+    DEB2 D 500
+	DEB2 D 1 A_CheckSight(1)
+	Wait
+	TNT1 A 1
+	Stop
+  }
+}
+ACTOR GlassDebrisLarge 
+{
+health 4
+radius 4
+height 4
+mass 1
+speed 45
+scale 0.5
+gravity 0.3
+renderstyle translucent
+alpha 0.7
++NOTELEPORT
++NOBLOCKMAP
+states
+	{
+	Spawn:
+	GLAS A 1
+    GLAS A 4 A_Jump (128, "1")
+    GLAS B 4 A_Jump (128, "1")
+    GLAS C 4 
+	 goto crash
+	Crash:
+	 "----" A 1 A_FadeOut(0.01)
+    Wait
+	}
+}
+actor RIGS: actor 429
+ {
+  Health 40
+  PainChance 255
+  Speed 0
+  Radius 20
+  Height 56
+  Monster
+  +NEVERTARGET
+  -COUNTKILL
+  +NOSPLASHALERT
+  +FLOORCLIP
+  +MISSILEMORE
+  +MISSILEEVENMORE
+  +NEVERRESPAWN
+  +ISMONSTER
+  +NODAMAGE
+  MinMissileChance 150
+  AttackSound "weapons/pistol"
+  DeathSound "*death"
+  PainSound "*pain50"
+  Obituary "%o was shot for disturbing the peace."
+  States
+  {
+   Spawn:
+    RIGS A 30 A_turretlook
+	RIGS A 1 A_jump(24,"fidget1")
+	RIGS A 1 A_jump(24,"fidget2")
+	RIGS A 1 A_jump(24,"fidget3")
+    Loop
+	Fidget1:
+	RIGS ABCCCCCBA 5
+	goto spawn
+	Fidget2:
+	RIGS ADEEEDA 5
+	goto spawn
+	Fidget3:
+	RIGS AIJJJJIA 5
+	goto spawn
+   See:
+    RIGS A 10 A_chase
+    Loop
+   greetings:
+    RIGS ADEDFGGHGA 5 A_turretlook
+    goto spawn
+   Yes:
+    RIGS A 1 A_jump(64,"yes3")
+	RIGS A 1 A_jump(64,"yes4")
+	RIGS A 0 A_jump(64,"yes2")
+    RIGS FGHFFGFF 5
+	goto spawn
+   Yes2:
+    RIGS FGHIJJIAFGFF 5
+	goto spawn
+   Yes3:
+    RIGS DEDAFGFFHG 5
+	goto spawn
+   Yes4: 
+    RIGS ABCBAFGFFH 5
+	goto spawn
+   Pain:
+    RIGS V 1 A_ChangeFlag("FRIENDLY", FALSE)
+    RIGS A 8 Fast A_Pain
+    Goto See
+   Death:
+    RIGS A 4
+    RIGS A 4 A_Scream
+    RIGS A 4
+    RIGS A 3
+    RIGS A 3 A_NoBlocking
+    RIGS A 3
+    RIGS A -1
+    Stop
+	}
+	}
+actor Kyle: actor
+ {
+  Health 40
+  PainChance 255
+  Speed 0
+  Radius 20
+  Height 56
+  Monster
+  +NEVERTARGET
+  -COUNTKILL
+  +NOSPLASHALERT
+  +FLOORCLIP
+  +MISSILEMORE
+  +MISSILEEVENMORE
+  +NEVERRESPAWN
+  +ISMONSTER
+  +NODAMAGE
+  MinMissileChance 150
+  AttackSound "weapons/pistol"
+  DeathSound "*death"
+  PainSound "*pain50"
+  Obituary "%o was shot by Kyle."
+  States
+  {
+   Spawn:
+    KYL1 ABCD 5 A_turretlook
+    Loop
+	Fidget1:
+	KYL1 ABCCCCCBA 5
+	goto spawn
+	Fidget2:
+	KYL1 ADEEEDA 5
+	goto spawn
+	Fidget3:
+	KYL1 AIJJJJIA 5
+	goto spawn
+   See:
+    KYL1 A 10 A_chase
+    Loop
+   greetings:
+    KYL1 ABCD 5 A_turretlook
+    goto spawn
+   Yes:
+    KYL1 A 1 A_jump(64,"yes3")
+	KYL1 A 1 A_jump(64,"yes4")
+	KYL1 A 0 A_jump(64,"yes2")
+    KYL1 ABCD 5
+	goto spawn
+   Yes2:
+    KYL1 ABCD 5
+	goto spawn
+   Yes3:
+    KYL1 ABCD 5
+	goto spawn
+   Yes4: 
+    KYL1 ABCD 5
+	goto spawn
+   Pain:
+    RIGS V 1 A_ChangeFlag("FRIENDLY", FALSE)
+    RIGS A 8 Fast A_Pain
+    Goto See
+   Death:
+    RIGS A 4
+    RIGS A 4 A_Scream
+    RIGS A 4
+    RIGS A 3
+    RIGS A 3 A_NoBlocking
+    RIGS A 3
+    RIGS A -1
+    Stop
+	}
+	}
+actor MEL: actor
+ {
+  Health 60
+  PainChance 255
+  Speed 0
+  Radius 20
+  Height 56
+  Monster
+  +NEVERTARGET
+  -COUNTKILL
+  +NOSPLASHALERT
+  +FLOORCLIP
+  +MISSILEMORE
+  +MISSILEEVENMORE
+  +NEVERRESPAWN
+  +ISMONSTER
+  +NODAMAGE
+  MinMissileChance 150
+  AttackSound "weapons/pistol"
+  DeathSound "*death"
+  PainSound "*pain50"
+  Obituary "%o was shot by Kyle."
+  States
+  {
+   Spawn:
+    MELG A 5 A_turretlook
+    Loop
+   See:
+    MELG A 10 A_chase
+    Loop
+   greetings:
+    MELG A 5 A_turretlook
+    goto spawn
+   Yes:
+    MELG A 1 A_jump(64,"yes3")
+	MELG A 1 A_jump(64,"yes4")
+	MELG A 0 A_jump(64,"yes2")
+    MELG A 5
+	goto spawn
+   Yes2:
+    MELG A 5
+	goto spawn
+   Yes3:
+    MELG A 5
+	goto spawn
+   Yes4: 
+    MELG A 5
+	goto spawn
+   Pain:
+    MELG A 5 A_ChangeFlag("FRIENDLY", FALSE)
+    MELG A 5 Fast A_Pain
+    Goto See
+   Death:
+    RIGS A 4
+    RIGS A 4 A_Scream
+    RIGS A 4
+    RIGS A 3
+    RIGS A 3 A_NoBlocking
+    RIGS A 3
+    RIGS A -1
+    Stop
+	}
+	}
+actor ShadyTrader1: actor 430
+ {
+  Health 100000
+  PainChance 255
+  Speed 0
+  Radius 20
+  Height 56
+  Monster
+  scale 0.8
+  +NEVERTARGET
+  -COUNTKILL
+  +NOSPLASHALERT
+  +FLOORCLIP
+  +MISSILEMORE
+  +MISSILEEVENMORE
+  +NEVERRESPAWN
+  +ISMONSTER
+  +NODAMAGE
+  States
+  {
+   Spawn:
+    TRD1 A 6 A_turretlook
+    Loop
+   See:
+    TRD1 A 10 A_chase
+    Loop
+   greetings:
+    TRD1 BGKLMLLMLMLLMLMLKGBA 5
+    goto spawn
+   Yes:
+    TRD1 A 1 A_jump(96,"yes3")
+	TRD1 A 0 A_jump(64,"yes2")
+    TRD1 BGKLMLMLMLLKGFECBA 5
+	goto spawn
+   Yes2:
+    TRD1 ABCDCDEFGFGEDCBB 5
+	goto spawn
+   Yes3:
+    TRD1 ABCDEFGHGFDCBCA 5
+	goto spawn
+   Pain:
+    TRD1 A 1 A_ChangeFlag("FRIENDLY", FALSE)
+    TRD1 A 8 Fast A_Pain
+    Goto See
+	}
+	}
+actor ShadyTrader2: actor 470
+ {
+  Health 100000
+  PainChance 255
+  Speed 0
+  Radius 20
+  Height 56
+  Monster
+  +NEVERTARGET
+  -COUNTKILL
+  +NOSPLASHALERT
+  +FLOORCLIP
+  +MISSILEMORE
+  +MISSILEEVENMORE
+  +NEVERRESPAWN
+  +ISMONSTER
+  +NODAMAGE
+  States
+  {
+   Spawn:
+    TRD2 A 6 A_turretlook
+    Loop
+   See:
+    TRD2 A 10 A_chase
+    Loop
+   greetings:
+    TRD2 ABCBCACBABC 5
+    goto spawn
+   Yes:
+    TRD2 A 1 A_jump(128,"yes2")
+    TRD2 ABCBACABACACB 5
+	goto spawn
+   Yes2:
+    TRD2 ABCBCBCCBACBAABA 5
+	goto spawn
+   Pain:
+    TRD2 A 1 A_ChangeFlag("FRIENDLY", FALSE)
+    TRD2 A 8 Fast A_Pain
+    Goto See
+	}
+	}
+actor ShadyDealer: actor 491
+ {
+  Health 100000
+  PainChance 255
+  Speed 0
+  Radius 20
+  Height 56
+  Monster
+  +NEVERTARGET
+  -COUNTKILL
+  +NOSPLASHALERT
+  +FLOORCLIP
+  +MISSILEMORE
+  +MISSILEEVENMORE
+  +NEVERRESPAWN
+  +ISMONSTER
+  +NODAMAGE
+  States
+  {
+   Spawn:
+    SHDY A 6 A_turretlook
+    Loop
+   See:
+    SHDY A 10 A_chase
+    Loop
+   greetings:
+    SHDY ABABBABABBAABABA 5
+    goto spawn
+   Yes:
+    SHDY A 1 A_jump(128,"yes2")
+	SHDY A 1 A_jump(128,"yes3")
+    SHDY DDAEEABBABAAABA 5
+	goto spawn
+   Yes2:
+    SHDY ABEFEFFEFEABA 5
+	goto spawn
+   Yes3:
+    SHDY ABCDCDAFABABABA 5
+	goto spawn
+   Pain:
+    SHDY A 1 A_ChangeFlag("FRIENDLY", FALSE)
+    SHDY A 8 Fast A_Pain
+    Goto See
+	}
+	}
+actor VIOLET: actor 431
+ {
+  Health 100000
+  PainChance 255
+  Speed 0
+  Radius 20
+  Height 56
+  Monster
+  +NEVERTARGET
+  -COUNTKILL
+  +NOSPLASHALERT
+  +FLOORCLIP
+  +MISSILEMORE
+  +MISSILEEVENMORE
+  +NEVERRESPAWN
+  +ISMONSTER
+  +NODAMAGE
+  States
+  {
+   Spawn:
+    VIOL A 20 A_turretlook
+	VIOL A 1 A_jump(30,"fidget1") 
+    loop
+   Fidget1:
+    VIOL F 4
+	VIOL GHIJIHIJIHGGGHIJIHG 5
+    VIOL GGF 4
+	goto spawn
+   GREETINGS:
+    VIOL ABCDEDCDEDCBA 5
+	goto spawn
+    Yes:
+    VIOL A 1 A_jump(64,"yes3")
+	VIOL A 1 A_jump(64,"yes4")
+	VIOL A 0 A_jump(64,"yes2")
+    VIOL ALMNBQTSTRQPOBA 5
+	goto spawn
+   Yes2:
+    VIOL BPQRSTUUTSPQBA 5
+	goto spawn
+   Yes3:
+    VIOL ALKLKMONLMOMNA 5
+	goto spawn
+   Yes4: 
+    VIOL MONLMLOMNMOMLKLA 5
+	goto spawn
+   See:
+    VIOL A 10 A_chase
+    Loop
+   Pain:
+    VIOL A 1 A_ChangeFlag("FRIENDLY", FALSE)
+    VIOL A 8 Fast A_Pain
+    Goto See
+	}
+	}
+actor VIOLETsad: actor
+ {
+  Health 100000
+  PainChance 255
+  Speed 0
+  Radius 20
+  Height 56
+  Monster
+  +NEVERTARGET
+  -COUNTKILL
+  +NOSPLASHALERT
+  +FLOORCLIP
+  +MISSILEMORE
+  +MISSILEEVENMORE
+  +NEVERRESPAWN
+  +ISMONSTER
+  +NODAMAGE
+  States
+  {
+   Spawn:
+    VIOL K 20 A_turretlook
+	VIOL K 1 A_jump(30,"fidget1") 
+    loop
+   Fidget1:
+    VIOL F 4
+	VIOL GHIJIHIJIHGGGHIJIHG 5
+    VIOL GGF 4
+	goto spawn
+   GREETINGS:
+    VIOL KKSTUSTUSUK 5
+	goto spawn
+    Yes:
+    VIOL KKSTUSUTSUSTK 5
+	goto spawn
+   See:
+    VIOL A 10 A_chase
+    Loop
+   Pain:
+    VIOL A 1 A_ChangeFlag("FRIENDLY", FALSE)
+    VIOL A 8 Fast A_Pain
+    Goto See
+	}
+	}
+actor DOC2: actor
+ {
+  Health 100000
+  PainChance 255
+  Speed 0
+  Radius 20
+  Height 56
+  Monster
+  +NEVERTARGET
+  -COUNTKILL
+  +NOSPLASHALERT
+  +FLOORCLIP
+  +MISSILEMORE
+  +MISSILEEVENMORE
+  +NEVERRESPAWN
+  +ISMONSTER
+  +NODAMAGE
+  States
+  {
+   Spawn:
+    DOC2 ABCD 5 A_turretlook
+	DOC2 A 1 A_jump(30,"fidget1") 
+    loop
+   Fidget1:
+    DOC2 A 4
+	DOC2 BCDCDCDHIJJJIH 5
+    DOC2 BA 4
+	goto spawn
+   GREETINGS:
+    DOC2 AEFGHFGHGFHEEHEFGA 5
+	goto spawn
+    Yes:
+    DOC2 A 1 A_jump(64,"yes3")
+	DOC2 A 0 A_jump(64,"yes2")
+    DOC2 AEFGHFGHGFHEEHEFGA 5
+	goto spawn
+   Yes2:
+    DOC2 HIJKLMNONMKLMOKLJIH 5
+	goto spawn
+   Yes3:
+    DOC2 HIJPQRSRSQSRSQPJIHA 5
+	goto spawn
+   See:
+    DOC2 A 10 A_chase
+    Loop
+   Pain:
+    DOC2 A 1 A_ChangeFlag("FRIENDLY", FALSE)
+    DOC2 A 8 Fast A_Pain
+    Goto See
+	}
+	}
+actor LeatherWorker: actor
+ {
+  Health 100000
+  PainChance 255
+  Speed 0
+  Radius 20
+  Height 56
+  Monster
+  +NEVERTARGET
+  -COUNTKILL
+  +NOSPLASHALERT
+  +FLOORCLIP
+  +MISSILEMORE
+  +MISSILEEVENMORE
+  +NEVERRESPAWN
+  +ISMONSTER
+  +NODAMAGE
+  States
+  {
+   Spawn:
+    LWRK ABCDDCCBBAA 2 A_turretlook
+    loop
+   GREETINGS:
+    LWRK AGEGGEFEFFEFEFEFA 5
+	goto spawn
+    Yes:
+    LWRK A 1 A_jump(64,"yes3")
+	LWRK A 0 A_jump(64,"yes2")
+    LWRK AGEGGEFEFFEFEFEFA 5
+	goto spawn
+   Yes2:
+    LWRK HIJKKJJIIHHIJKKJJIIHH 5
+	goto spawn
+   Yes3:
+    LWRK LMNMNNMOPOPPOPQPQOOMLA 5
+	goto spawn
+   See:
+    LWRK A 10 A_chase
+    Loop
+   Pain:
+    LWRK A 1 A_ChangeFlag("FRIENDLY", FALSE)
+    LWRK A 8 Fast A_Pain
+    Goto See
+	}
+	}
+actor PATCH: actor
+ {
+  Health 100000
+  PainChance 255
+  Speed 0
+  Radius 20
+  Height 56
+  Monster
+  +NEVERTARGET
+  -COUNTKILL
+  +NOSPLASHALERT
+  +FLOORCLIP
+  +MISSILEMORE
+  +MISSILEEVENMORE
+  +NEVERRESPAWN
+  +ISMONSTER
+  +NODAMAGE
+  States
+  {
+   Spawn:
+    MEC2 ABCD 5 A_turretlook
+	MEC2 A 1 A_jump(30,"fidget1") 
+    loop
+   Fidget1:
+    MEC2 ABCD 5 
+	goto spawn
+   GREETINGS:
+    MEC2 ABCD 5
+	goto spawn
+    Yes:
+    MEC2 A 1 A_jump(64,"yes3")
+	MEC2 A 1 A_jump(64,"yes4")
+	MEC2 A 0 A_jump(64,"yes2")
+    MEC2 ABCD 5
+	goto spawn
+   Yes2:
+    MEC2 ABCD 5
+	goto spawn
+   Yes3:
+    MEC2 ABCD 5
+	goto spawn
+   Yes4: 
+    MEC2 ABCD 5
+	goto spawn
+   See:
+    MEC2 ABCD 10 A_chase
+    Loop
+   Pain:
+    MEC2 ABCD 1 A_ChangeFlag("FRIENDLY", FALSE)
+    MEC2 ABCD 8 Fast A_Pain
+    Goto See
+	}
+	}	
+actor BlackWaterSurvivor: actor 13117
+ {
+  Health 60
+  PainChance 255
+  Speed 0
+  Radius 20
+  Height 56
+  Monster
+  +NEVERTARGET
+  -COUNTKILL
+  +NOSPLASHALERT
+  +FLOORCLIP
+  +MISSILEMORE
+  +MISSILEEVENMORE
+  +NEVERRESPAWN
+  +ISMONSTER
+  +NODAMAGE
+  MinMissileChance 150
+  AttackSound "weapons/pistol"
+  DeathSound "*death"
+  PainSound "*pain50"
+  Obituary "%o was shot by Kyle."
+  States
+  {
+   Spawn:
+    BWS1 A 5 A_turretlook
+    Loop
+   See:
+    BWS1 A 10 A_chase
+    Loop
+   greetings:
+    BWS1 A 5 A_turretlook
+    goto spawn
+   Yes:
+    BWS1 A 1 A_jump(64,"yes3")
+	BWS1 A 1 A_jump(64,"yes4")
+	BWS1 A 0 A_jump(64,"yes2")
+    BWS1 A 5
+	goto spawn
+   Yes2:
+    BWS1 A 5
+	goto spawn
+   Yes3:
+    BWS1 A 5
+	goto spawn
+   Yes4: 
+    BWS1 A 5
+	goto spawn
+   Pain:
+    BWS1 A 5 A_ChangeFlag("FRIENDLY", FALSE)
+    BWS1 A 5 Fast A_Pain
+    Goto See
+   Death:
+    BWS1 A 4
+    BWS1 A 4 A_Scream
+    BWS1 A 4
+    BWS1 A 3
+    BWS1 A 3 A_NoBlocking
+    BWS1 A 3
+    BWS1 A -1
+    Stop
+	}
+	}
+actor DOC: actor 432
+ {
+  Health 100000
+  PainChance 255
+  Speed 0
+  Radius 20
+  Height 56
+  Monster
+  +NEVERTARGET
+  -COUNTKILL
+  +NOSPLASHALERT
+  +FLOORCLIP
+  +MISSILEMORE
+  +MISSILEEVENMORE
+  +NEVERRESPAWN
+  +ISMONSTER
+  +NODAMAGE
+  States
+  {
+  Spawn:
+    DOC1 A 20 A_turretlook
+	DOC1 A 1 A_jump(24,"fidget1")
+	DOC1 A 1 A_jump(24,"fidget2")
+    loop
+   Fidget1:
+    DOC1 B 5
+	DOC1 CBCBCBCB 5
+    DOC1 A 5
+	goto spawn
+   Fidget2:
+    DOC1 DEF 5
+	DOC1 F 30
+    DOC1 EDA 5
+	goto spawn
+Greetings:
+	DOC1 GHIJHGIJHIG 6
+	goto spawn
+ Yes:
+	DOC1 A 0 A_jump(96,"yes2")
+    DOC1 GHIJHIJHGIJGIH 6
+	goto spawn
+   Yes2:
+    DOC1 KLMNMLKLMNMLKGHIG 6
+	goto spawn
+   See:
+    DOC1 A 10 A_chase
+    Loop
+   Pain:
+    DOC1 V 1 A_ChangeFlag("FRIENDLY", FALSE)
+    DOC1 A 8 Fast A_Pain
+    Goto See
+	}
+	}
+actor OldCoot: actor 413
+ {
+  ConversationID 5
+  Health 100000
+  PainChance 256
+  Speed 0
+  Radius 20
+  Height 56
+  Monster
+  +NEVERTARGET
+  -COUNTKILL
+  +NOSPLASHALERT
+  +FLOORCLIP
+  +MISSILEMORE
+  +MISSILEEVENMORE
+  +NEVERRESPAWN
+  +ISMONSTER
+  +NODAMAGE
+  States
+  {
+   Spawn:
+    COOT A 6 A_turretlook
+    Loop
+   See:
+    COOT A 10 A_chase
+    Loop
+   Pain:
+    COOT A 1 A_ChangeFlag("FRIENDLY", FALSE)
+    COOT A 8 Fast A_Pain
+    Goto See
+	}
+	}
+actor Refugee1: actor 472
+ {
+  Health 100000
+  PainChance 256
+  Speed 0
+  Radius 20
+  Height 56
+  Monster
+  +NEVERTARGET
+  -COUNTKILL
+  +NOSPLASHALERT
+  +FLOORCLIP
+  +MISSILEMORE
+  +MISSILEEVENMORE
+  +NEVERRESPAWN
+  +ISMONSTER
+  +NODAMAGE
+  States
+  {
+   Spawn:
+    RFG1 A 6 A_turretlook
+    Loop
+   See:
+    RFG1 A 10 A_chase
+    Loop
+   Pain:
+    RFG1 A 1 A_ChangeFlag("FRIENDLY", FALSE)
+    RFG1 A 8 Fast A_Pain
+    Goto See
+	}
+	}
+Actor Refugee2: refugee1 473
+{
+States
+  {
+   Spawn:
+    RFG2 A 6 A_turretlook
+    Loop
+   See:
+    RFG2 A 10 A_chase
+    Loop
+   Pain:
+    RFG2 A 1 A_ChangeFlag("FRIENDLY", FALSE)
+    RFG2 A 8 Fast A_Pain
+    Goto See
+	}
+	}
+Actor Refugee3: refugee1 474
+{
+States
+  {
+   Spawn:
+    RFG3 A 6 A_turretlook
+    Loop
+   See:
+    RFG3 A 10 A_chase
+    Loop
+   Pain:
+    RFG3 A 1 A_ChangeFlag("FRIENDLY", FALSE)
+    RFG3 A 8 Fast A_Pain
+    Goto See
+	}
+	}
+actor Beastmaster: actor
+ {
+  Health 100000
+  PainChance 256
+  Speed 0
+  Radius 20
+  Height 56
+  Monster
+  +NEVERTARGET
+  -COUNTKILL
+  +NOSPLASHALERT
+  +FLOORCLIP
+  +MISSILEMORE
+  +MISSILEEVENMORE
+  +NEVERRESPAWN
+  +ISMONSTER
+  +NODAMAGE
+  States
+  {
+   Spawn:
+    BMSR A 6 A_turretlook
+    Loop
+   See:
+    BMSR A 10 A_chase
+    Loop
+   Pain:
+    BMSR A 1 A_ChangeFlag("FRIENDLY", FALSE)
+    BMSR A 8 Fast A_Pain
+    Goto See
+	}
+	}
+actor Rufus: actor 479
+ {
+  Health 100000
+  PainChance 256
+  Speed 0
+  Radius 20
+  Height 56
+  Monster
+  +NEVERTARGET
+  -COUNTKILL
+  +NOSPLASHALERT
+  +FLOORCLIP
+  +MISSILEMORE
+  +MISSILEEVENMORE
+  +NEVERRESPAWN
+  +ISMONSTER
+  +NODAMAGE
+  States
+  {
+   Spawn:
+    RUF1 A 6 A_turretlook
+    Loop
+   See:
+    RUF1 A 10 A_chase
+    Loop
+   Pain:
+    RUF1 A 1 A_ChangeFlag("FRIENDLY", FALSE)
+    RUF1 A 8 Fast A_Pain
+    Goto See
+	}
+	}
+actor Victor: actor 480
+ {
+  Health 100000
+  PainChance 256
+  Speed 0
+  Radius 20
+  Height 56
+  Monster
+  +NEVERTARGET
+  -COUNTKILL
+  +NOSPLASHALERT
+  +FLOORCLIP
+  +MISSILEMORE
+  +MISSILEEVENMORE
+  +NEVERRESPAWN
+  +ISMONSTER
+  +NODAMAGE
+  States
+  {
+   Spawn:
+    VIC1 A 6 A_turretlook
+    Loop
+   See:
+    VIC1 A 10 A_chase
+    Loop
+   Pain:
+    VIC1 A 1 A_ChangeFlag("FRIENDLY", FALSE)
+    VIC1 A 8 Fast A_Pain
+    Goto See
+	}
+	}
+actor Loser1: actor 416
+ {
+  Health 10000000
+  PainChance 255
+  Speed 6
+  Radius 20
+  Height 56
+  Monster
+  +NEVERTARGET
+  -COUNTKILL
+  +NOSPLASHALERT
+  +FLOORCLIP
+  +MISSILEMORE
+  +MISSILEEVENMORE
+  +NEVERRESPAWN
+  +ISMONSTER
+  +FRIGHTENED
+  +NODAMAGE
+  Obituary "%o was stabbed for disturbing the peace."
+  States
+  {
+   Spawn:
+    LOSR AABB 3 A_WANDER
+	LOSR A 0 A_look2
+	LOSR CCDD 3 A_WANDER
+	LOSR D 0 A_LOOK2
+    Loop
+   See:
+    LOSR AABBCCDD 3 A_chase
+    Loop	
+   greetings:
+    LOSR V 10
+    goto spawn
+   Pain:
+    LOSR V 5 A_ChangeFlag("FRIENDLY", FALSE)
+	goto see
+	}
+	}
+Actor Loser2: Loser1 417
+{
+ States
+  {
+   Spawn:
+    LSR2 AABB 3 A_WANDER
+	LSR2 A 0 A_look2
+	LSR2 CCDD 3 A_WANDER
+	LSR2 D 0 A_LOOK2
+    Loop
+   greetings:
+    LSR2 V 6 A_look2
+    Loop
+   See:
+    LSR2 AABBCCDD 3 A_chase
+    goto spawn
+	Pain:
+    LSR2 V 5 A_ChangeFlag("FRIENDLY", FALSE)
+	goto see
+	}
+	}
+actor TraderSitting1: actor 418
+ {
+  Health 10000000
+  PainChance 255
+  Speed 0
+  Radius 20
+  Height 56
+  Monster
+  +NEVERTARGET
+  -COUNTKILL
+  +NOSPLASHALERT
+  +FLOORCLIP
+  +MISSILEMORE
+  +MISSILEEVENMORE
+  +NEVERRESPAWN
+  +ISMONSTER
+  +NODAMAGE
+  MinMissileChance 150
+  Obituary "%o was shot for disturbing the peace."
+  States
+  {
+   Spawn:
+    SIT1 A 6 A_turretlook
+    Loop
+   See:
+    SIT1 A 10 A_chase
+    Loop
+   PAIN:
+    SIT1 A 5 A_ChangeFlag("FRIENDLY", FALSE)
+	goto see
+	}
+	}
+actor TraderSitting2: TraderSitting1 419
+ {
+  States
+  {
+   Spawn:
+    SIT2 A 6 A_turretlook
+    Loop
+   See:
+    SIT2 A 10 A_chase
+    Loop
+   PAIN:
+    SIT2 A 5 A_ChangeFlag("FRIENDLY", FALSE)
+	goto see
+	}
+	}
+actor TraderSitting3: TraderSitting1
+ {
+  States
+  {
+   Spawn:
+    TRD3 A 6 A_turretlook
+    Loop
+   See:
+    TRD3 A 10 A_chase
+    Loop
+   PAIN:
+    TRD3 A 5 A_ChangeFlag("FRIENDLY", FALSE)
+	goto see
+	}
+	}
+actor Weirdo: actor 456
+ {
+  Health 10000000
+  PainChance 255
+  Speed 0
+  Radius 20
+  Height 56
+  Monster
+  +NEVERTARGET
+  -COUNTKILL
+  +NOSPLASHALERT
+  +FLOORCLIP
+  +MISSILEMORE
+  +MISSILEEVENMORE
+  +NEVERRESPAWN
+  +ISMONSTER
+  +NODAMAGE
+  MinMissileChance 150
+  Obituary "%o was shot for disturbing the peace."
+  States
+  {
+   Spawn:
+    WRDO A 6 A_turretlook
+    Loop
+   See:
+    WRDO A 10 A_chase
+    Loop
+   Greetings:
+   DOC1 A 0 A_jump(96,"greetings2")
+   DOC1 A 0 A_jump(96,"greetings3")
+	WRDO ABABFGHGFGABAABAAB 5
+	goto spawn
+    Greetings2:
+	WRDO ABCDEDCECEDCFGCDEDCA 5
+	goto spawn
+	 Greetings3:
+	WRDO ABEFGHFHFGGABBAFGHHGA 5
+	goto spawn
+   PAIN:
+    SIT1 V 5 A_ChangeFlag("FRIENDLY", FALSE)
+	goto see
+	}
+	}
+Actor Trash1: PropGeneric 444
+{
+scale 1.0
+States
+  {
+  Spawn:
+    TRSH A -1
+    STOP
+  }
+}
+Actor Trash2: PropGeneric 445
+{
+scale 0.6
+States
+  {
+  Spawn:
+    TRSH B -1
+    STOP
+  }
+}
+Actor Trash3: PropGeneric 446
+{
+scale 1.0
+States
+  {
+  Spawn:
+    TRSH C -1
+    STOP
+  }
+}
+Actor Trash4: PropGeneric 447
+{
+scale 1.0
+States
+  {
+  Spawn:
+    TRSH D -1
+    STOP
+  }
+}
+Actor Trash5: PropGeneric 448
+{
+scale 1.0
+States
+  {
+  Spawn:
+    TRSH E -1
+    STOP
+  }
+}
+Actor Trash6: PropGeneric 449
+{
+scale 1.0
+States
+  {
+  Spawn:
+    TRSH F -1
+    STOP
+  }
+}
+Actor Trash7: PropGeneric 450
+{
+scale 1.0
+States
+  {
+  Spawn:
+    TRSH G -1
+    STOP
+  }
+}
+Actor Trash8: PropGeneric 451
+{
+scale 1.0
+States
+  {
+  Spawn:
+    TRSH H -1
+    STOP
+  }
+}
+Actor PropBucketStanding 452
+{
+  Health 10
+  Speed 10
+  Height 16
+  scale 0.8
+  +SOLID
+  +SHOOTABLE
+  +NOBLOOD
+  +DROPOFF
+  +DONTTHRUST
+  +TELESTOMP
+  +CANPASS
+  deathsound "break/bin"
+  States
+  {
+  Spawn:
+    BUK1 A -1
+    Loop
+  Death:
+    NULL A 0 A_Scream
+	NULL A 0 A_NoBlocking
+    BUK1 BCD 4
+	BUK1 E -1
+    Stop
+  }
+}
+actor PropbucketFallen : PropBucketStanding 453
+{
+	Skip_Super
+	DropItem None
+	States
+	{
+	Spawn:
+		BUK1 E -1
+		Stop
+	}
+}
+ACTOR WorkBenchTalker : Actor 437
+{
+  Health 10000000
+  PainChance 200
+  Speed 0
+  Radius 20
+  Height 56
+  Monster
+  +NEVERTARGET
+  -COUNTKILL
+  +NOSPLASHALERT
+  +FLOORCLIP
+  +MISSILEMORE
+  +MISSILEEVENMORE
+  +NEVERRESPAWN
+  +STANDSTILL
+  +DONTTHRUST
+  +INVULNERABLE
+  States
+	{
+	Spawn:
+	VICE A 15
+	VICE A 5 bright
+    loop
+	}
+}
+ACTOR PropATHENA : SkullColumn 436
+{
+  +FLOORCLIP
+  States
+	{
+	Spawn:
+		ATNA A -1
+		Stop
+	}
+}
+actor CONSOLE01: actor 438
+ {
+ Health 10000000
+  PainChance 200
+  Speed 0
+  Radius 20
+  Height 56
+  Monster
+  +NEVERTARGET
+  -COUNTKILL
+  +NOSPLASHALERT
+  +FLOORCLIP
+  +MISSILEMORE
+  +MISSILEEVENMORE
+  +NEVERRESPAWN
+  +STANDSTILL
+  +DONTTHRUST
+  +INVULNERABLE
+  States
+  {
+   Spawn:
+    TNT1 A 10 
+    Loop
+	}
+	}
+Actor CONSOLE02: CONSOLE01 330
+{
+}
+Actor CONSOLE03: CONSOLE01 13108
+{
+}
+Actor Chasetarget: CONSOLE01
+{
+-solid
+radius 10
+}
+ACTOR SMILEYPRISON : Actor 439
+{
+  Health 10000000
+  PainChance 200
+  Speed 0
+  Radius 20
+  Height 56
+  Monster
+  +NEVERTARGET
+  -COUNTKILL
+  +NOSPLASHALERT
+  +FLOORCLIP
+  +MISSILEMORE
+  +MISSILEEVENMORE
+  +NEVERRESPAWN
+  +STANDSTILL
+  +DONTTHRUST
+  +INVULNERABLE
+  States
+	{
+	Spawn:
+	SMLY A 10
+    loop
+	}
+}
+actor Wheeler: actor 499
+ {
+  Health 100000
+  PainChance 255
+  Speed 0
+  Radius 20
+  Height 56
+  Monster
+  +NEVERTARGET
+  -COUNTKILL
+  +NOSPLASHALERT
+  +FLOORCLIP
+  +MISSILEMORE
+  +MISSILEEVENMORE
+  +NEVERRESPAWN
+  +ISMONSTER
+  +NODAMAGE
+  +FRIENDLY
+  States
+  {
+   Spawn:
+    WHLR ABCDEBACAEDCBBAEC 5 A_turretlook
+	WHLR A 1 A_jump(30,"fidget1") 
+    loop
+   Fidget1:
+	WHLR BCDEEAFFCBBEAAEC 5
+	goto spawn
+   GREETINGS:
+    WHLR AFJJFKMNOPONPNONPMA 5
+	goto spawn
+    Yes:
+    WHLR A 1 A_jump(64,"yes3")
+	WHLR A 1 A_jump(64,"yes4")
+	WHLR A 0 A_jump(64,"yes2")
+    WHLR QRSDRSSQBRSDDDQSSR 5
+	goto spawn
+   Yes2:
+    WHLR FGHIGHFIHHFIHFA 5
+	goto spawn
+   Yes3:
+    WHLR FJJFFGHIGFADQSS 5
+	goto spawn
+   Yes4: 
+    WHLR QRSDRSSQBRFGHIFADA 5
+	goto spawn
+   See:
+    WHLR A 10 A_chase
+    Loop
+   Pain:
+    WHLR A 1 A_ChangeFlag("FRIENDLY", FALSE)
+    WHLR A 8 Fast A_Pain
+    Goto See
+	}
+	}
+actor WaterBaron: actor 520
+ {
+  Health 100000
+  PainChance 255
+  Speed 0
+  Radius 20
+  Height 56
+  Monster
+  +NEVERTARGET
+  -COUNTKILL
+  +NOSPLASHALERT
+  +FLOORCLIP
+  +MISSILEMORE
+  +MISSILEEVENMORE
+  +NEVERRESPAWN
+  +ISMONSTER
+  +NODAMAGE
+  +FRIENDLY
+  States
+  {
+   Spawn:
+    BRON ABCDCBADAABDACA 5 A_turretlook
+	BRON A 1 A_jump(30,"fidget1") 
+	BRON A 1 A_jump(30,"fidget2")
+	BRON A 1 A_jump(30,"fidget3")
+	BRON A 1 A_jump(30,"fidget4")
+    loop
+   Fidget1:
+	BRON EFGHIA 5
+	goto spawn
+   Fidget2:
+	BRON KLMNMNMNMNMNMLA 5
+	goto spawn
+   Fidget3:
+	BRON LMNNRSUUUUSRNA 5
+	goto spawn
+   Fidget4:
+	BRON ABCCCIHGFEDDDEFGHIA 5
+	goto spawn
+   GREETINGS:
+    BRON ABCDCBADAABDACA 5
+	goto spawn
+    Yes:
+    BRON A 1 A_jump(64,"yes3")
+	BRON A 1 A_jump(64,"yes4")
+	BRON A 0 A_jump(64,"yes2")
+    BRON JKLAJLKAJKLLKAJLKAKKLAJKA 5
+	goto spawn
+   Yes2:
+    BRON NMOPQPOQPPQOPOOPQOPQOPPQONMA 5
+	goto spawn
+   Yes3:
+    BRON NMOPQPQPOPNMLKJKJLAKJLAKKA 5
+	goto spawn
+   Yes4: 
+    BRON MNRSTUVWTUVWUVWVWUTVWVUTTRNMA 5
+	goto spawn
+   See:
+    BRON A 10 A_chase
+    Loop
+   Pain:
+    BRON A 1 A_ChangeFlag("FRIENDLY", FALSE)
+    BRON A 8 Fast A_Pain
+    Goto See
+	}
+	}
+Actor BreakbleBottle1 398
+{
+  Health 5
+  Height 8
+  radius 8
+  scale 0.8
+  +SOLID
+  +SHOOTABLE
+  +NOBLOOD
+  +TELESTOMP
+  +CANPASS
+   deathsound "break/glass"
+  States
+  {
+  Spawn:
+    BOTL A -1
+    Loop
+  Death:
+    Death:
+    NULL A 0 A_Scream
+	NULL A 0 A_NoBlocking
+    NULL A 0 A_SpawnItemEx ("DebrisPiece2", 0, 0, random (3, 5), random (-5, 5), random (-5, 5), random (1, 2), 0, 0, 30)
+    NULL A 0 A_SpawnItemEx ("DebrisPiece2", 0, 0, random (3, 5), random (-5, 5), random (-5, 5), random (1, 2), 0, 0, 30)
+    NULL A 0 A_SpawnItemEx ("DebrisPiece2", 0, 0, random (3, 5), random (-5, 5), random (-5, 5), random (1, 2), 0, 0, 30)
+    NULL A 0 A_SpawnItemEx ("DebrisPiece2", 0, 0, random (3, 5), random (-5, 5), random (-5, 5), random (1, 2), 0, 0, 30)
+    Stop
+  }
+}
+Actor BreakbleBottle2: BreakbleBottle1 399
+{
+states
+{
+spawn:
+   BOTL B -1
+   loop
+   }
+   }
+Actor BreakbleBottle3: BreakbleBottle1 400
+{
+states
+{
+spawn:
+   BOTL C -1
+   loop
+   }
+   }
+Actor BreakbleBottle4: BreakbleBottle1 401
+{
+states
+{
+spawn:
+   BOTL D -1
+   loop
+   }
+   }
+Actor PropMannequin1 460
+{
+  Health 30
+  Height 64
+  radius 16
+  scale 0.9
+  +DONTTHRUST
+  +SOLID
+  +SHOOTABLE
+  +NOBLOOD
+  +TELESTOMP
+  +CANPASS
+   deathsound "break/box"
+  States
+  {
+  Spawn:
+    MAN1 A -1
+    Loop
+  Death:
+    Death:
+    MAN1 B 1 A_Scream
+	NULL A 0 A_NoBlocking
+    MAN1 A 0 A_SpawnItemEx ("DebrisPiece2", 0, 0, random (3, 5), random (-5, 5), random (-5, 5), random (1, 2), 0, 0, 30)
+    MAN1 A 0 A_SpawnItemEx ("DebrisPiece2", 0, 0, random (3, 5), random (-5, 5), random (-5, 5), random (1, 2), 0, 0, 30)
+    MAN1 A 0 A_SpawnItemEx ("DebrisPiece2", 0, 0, random (3, 5), random (-5, 5), random (-5, 5), random (1, 2), 0, 0, 30)
+    MAN1 A 0 A_SpawnItemEx ("DebrisPiece2", 0, 0, random (3, 5), random (-5, 5), random (-5, 5), random (1, 2), 0, 0, 30)
+	MAN1 B -1
+    loop
+  }
+}
+Actor PropMannequin2: PropMannequin1 461
+{
+  States
+  {
+  Spawn:
+    MAN2 A -1
+    Loop
+  Death:
+    Death:
+    MAN2 B 1 A_Scream
+	NULL A 0 A_NoBlocking
+    MAN2 B 0 A_SpawnItemEx ("DebrisPiece2", 0, 0, random (3, 5), random (-5, 5), random (-5, 5), random (1, 2), 0, 0, 30)
+    MAN2 B 0 A_SpawnItemEx ("DebrisPiece2", 0, 0, random (3, 5), random (-5, 5), random (-5, 5), random (1, 2), 0, 0, 30)
+    MAN2 B 0 A_SpawnItemEx ("DebrisPiece2", 0, 0, random (3, 5), random (-5, 5), random (-5, 5), random (1, 2), 0, 0, 30)
+    MAN2 B 0 A_SpawnItemEx ("DebrisPiece2", 0, 0, random (3, 5), random (-5, 5), random (-5, 5), random (1, 2), 0, 0, 30)
+	MAN2 B -1
+    loop
+  }
+}
+Actor PropMannequin3: PropMannequin1 462
+{
+  States
+  {
+  Spawn:
+    MAN3 A -1
+    Loop
+  Death:
+    Death:
+    MAN3 B 1 A_Scream
+	NULL A 0 A_NoBlocking
+    MAN3 B 0 A_SpawnItemEx ("DebrisPiece2", 0, 0, random (3, 5), random (-5, 5), random (-5, 5), random (1, 2), 0, 0, 30)
+    MAN3 B 0 A_SpawnItemEx ("DebrisPiece2", 0, 0, random (3, 5), random (-5, 5), random (-5, 5), random (1, 2), 0, 0, 30)
+    MAN3 B 0 A_SpawnItemEx ("DebrisPiece2", 0, 0, random (3, 5), random (-5, 5), random (-5, 5), random (1, 2), 0, 0, 30)
+    MAN3 B 0 A_SpawnItemEx ("DebrisPiece2", 0, 0, random (3, 5), random (-5, 5), random (-5, 5), random (1, 2), 0, 0, 30)
+	MAN3 B -1
+    loop
+  }
+}
+Actor PropMannequin4: PropMannequin1 463
+{
+  States
+  {
+  Spawn:
+    MAN4 A -1
+    Loop
+  Death:
+    Death:
+    MAN4 B 1 A_Scream
+	NULL A 0 A_NoBlocking
+    MAN4 B 0 A_SpawnItemEx ("DebrisPiece2", 0, 0, random (3, 5), random (-5, 5), random (-5, 5), random (1, 2), 0, 0, 30)
+    MAN4 B 0 A_SpawnItemEx ("DebrisPiece2", 0, 0, random (3, 5), random (-5, 5), random (-5, 5), random (1, 2), 0, 0, 30)
+    MAN4 B 0 A_SpawnItemEx ("DebrisPiece2", 0, 0, random (3, 5), random (-5, 5), random (-5, 5), random (1, 2), 0, 0, 30)
+    MAN4 B 0 A_SpawnItemEx ("DebrisPiece2", 0, 0, random (3, 5), random (-5, 5), random (-5, 5), random (1, 2), 0, 0, 30)
+	MAN4 B -1
+    loop
+  }
+}
+Actor PropJessyMan: PropMannequin1 476
+{
+  Health 100000
+  States
+  {
+  Spawn:
+    JMAN A -1
+    Loop
+  Death:
+    Death:
+    MAN4 B 1 A_Scream
+	NULL A 0 A_NoBlocking
+    MAN4 B 0 A_SpawnItemEx ("DebrisPiece2", 0, 0, random (3, 5), random (-5, 5), random (-5, 5), random (1, 2), 0, 0, 30)
+    MAN4 B 0 A_SpawnItemEx ("DebrisPiece2", 0, 0, random (3, 5), random (-5, 5), random (-5, 5), random (1, 2), 0, 0, 30)
+    MAN4 B 0 A_SpawnItemEx ("DebrisPiece2", 0, 0, random (3, 5), random (-5, 5), random (-5, 5), random (1, 2), 0, 0, 30)
+    MAN4 B 0 A_SpawnItemEx ("DebrisPiece2", 0, 0, random (3, 5), random (-5, 5), random (-5, 5), random (1, 2), 0, 0, 30)
+	MAN4 B -1
+    loop
+  }
+}
+Actor VarniCutscene: PropMannequin1 
+{
+  Health 100000
+  scale 0.7
+  States
+  {
+  Spawn:
+    VRNI A -1
+    Loop
+  Death:
+    Death:
+    MAN4 B 1 A_Scream
+	NULL A 0 A_NoBlocking
+    MAN4 B 0 A_SpawnItemEx ("DebrisPiece2", 0, 0, random (3, 5), random (-5, 5), random (-5, 5), random (1, 2), 0, 0, 30)
+    MAN4 B 0 A_SpawnItemEx ("DebrisPiece2", 0, 0, random (3, 5), random (-5, 5), random (-5, 5), random (1, 2), 0, 0, 30)
+    MAN4 B 0 A_SpawnItemEx ("DebrisPiece2", 0, 0, random (3, 5), random (-5, 5), random (-5, 5), random (1, 2), 0, 0, 30)
+    MAN4 B 0 A_SpawnItemEx ("DebrisPiece2", 0, 0, random (3, 5), random (-5, 5), random (-5, 5), random (1, 2), 0, 0, 30)
+	MAN4 B -1
+    loop
+  }
+}
+Actor PropBigCat 464
+{
+  Health 45
+  Height 48
+  radius 32
+  scale 0.9
+  +DONTTHRUST
+  +SOLID
+  +SHOOTABLE
+  +NOBLOOD
+  +TELESTOMP
+  +CANPASS
+   deathsound "break/box"
+  States
+  {
+  Spawn:
+    BCAT A -1
+    Loop
+  Death:
+    Death:
+    NULL A 0 A_Scream
+	NULL A 0 A_NoBlocking
+    NULL A 0 A_SpawnItemEx ("DebrisPiece2", 0, 0, random (3, 5), random (-5, 5), random (-5, 5), random (1, 2), 0, 0, 30)
+    NULL A 0 A_SpawnItemEx ("DebrisPiece2", 0, 0, random (3, 5), random (-5, 5), random (-5, 5), random (1, 2), 0, 0, 30)
+    NULL A 0 A_SpawnItemEx ("DebrisPiece2", 0, 0, random (3, 5), random (-5, 5), random (-5, 5), random (1, 2), 0, 0, 30)
+    NULL A 0 A_SpawnItemEx ("DebrisPiece2", 0, 0, random (3, 5), random (-5, 5), random (-5, 5), random (1, 2), 0, 0, 30)
+	NULL A 1
+    STOP
+  }
+}
+ACTOR GlassDebris
+{
+ spawnid 334
+health 4
+radius 4
+height 4
+mass 1
+speed 45
+scale 0.5
+gravity 0.3
+renderstyle translucent
+alpha 0.7
++CORPSE
++NOTELEPORT
++NOBLOCKMAP
++RANDOMIZE
+states
+	{
+	Spawn:
+	 GLAS ABC 5
+	 loop
+	Crash:
+	 GLAS C 20
+	 stop
+	}
+}
+Actor Glassspawner
+{
+    health 7
+    Radius 16
+	Height 64
+	ProjectilePassHeight -16
+	renderstyle add
+	-SOLID
+	States
+	{
+	Spawn:
+    NULL A 0 A_SpawnItemEx ("glassdebris", 64, 0, random (3, 5), random (-5, 5), random (-5, 5), random (1, 2), 0, 0, 30)
+    NULL A 0 A_SpawnItemEx ("glassdebris", 64, 0, random (3, 5), random (-5, 5), random (-5, 5), random (1, 2), 0, 0, 30)
+    NULL A 0 A_SpawnItemEx ("glassdebris", 64, 0, random (3, 5), random (-5, 5), random (-5, 5), random (1, 2), 0, 0, 30)
+    NULL A 0 A_SpawnItemEx ("glassdebris", 64, 0, random (3, 5), random (-5, 5), random (-5, 5), random (1, 2), 0, 0, 30)
+	NULL A 0 A_SpawnItemEx ("glassdebris", 64, 0, random (3, 5), random (-5, 5), random (-5, 5), random (1, 2), 0, 0, 30)
+	Stop
+	}
+	}
+Actor Lantern1: Hangedman1 405
+{
+  Radius 16
+  Height 24
+  scale 0.6
+  -SOLID
+  +NOGRAVITY
+  +SPAWNCEILING
+  States
+  {
+  Spawn:
+    LMP1 A -1
+    Stop
+	}
+}
+Actor Lantern2: lantern1 406
+{
+  States
+  {
+  Spawn:
+    LMP2 A -1
+    Stop
+	}
+}
+Actor PropBarBulb 407
+{
+  Radius 8
+  Height 14
+  scale 0.9
+  -SOLID
+  +NOGRAVITY
+  +SPAWNCEILING
+  States
+  {
+  Spawn:
+    BULB A -1
+    Stop
+	}
+}
+Actor PropBarBulb2: PropBarBulb  408
+{
+  States
+  {
+  Spawn:
+    BULB B -1
+    Stop
+	}
+}
+Actor PropBarBulb3: PropBarBulb  409
+{
+  States
+  {
+  Spawn:
+    BULB C -1
+    Stop
+	}
+}
+Actor PropCandles1 420
+{
+ Radius 6
+  Height 16
+  -SOLID
+  States
+  {
+  Spawn:
+    CDL1 ABC 2
+    loop
+	}
+}
+Actor PropCandles2: PropCandles1 421
+{
+  States
+  {
+  Spawn:
+    CDL2 ABC 3
+    loop
+	}
+}
+Actor PropCandles3: PropCandles1 422
+{
+  States
+  {
+  Spawn:
+    CDL3 ABC 3
+    loop
+	}
+}
+Actor PropFirepit: PropCandles1 411
+{
+ Radius 8
+  Height 8
+  scale 0.6
+  ProjectilePassHeight -16
+  +SOLID
+  DamageType Fire
+  States
+  {
+  Spawn:
+		  FPIT A 0 Bright
+          FPIT A 0 Bright A_PlaySoundEx ("Amb/firecrackle", "SoundSlot5", 1, -1)
+    //Fall through
+    Crackle:
+          FPIT ABCD 5 Bright 
+          Loop
+	}
+}
+Actor Elecspark: PropCandles1 13115
+{
+ Radius 8
+  Height 8
+  scale 0.8
+  alpha 0.8
+  ProjectilePassHeight -16
+  -SOLID
+  DamageType Electricity
+  States
+  {
+ Spawn:
+		TNT1 AAAAAAAAAA 5
+		TNT1 A 1 A_jump(128,"Zap1")
+	ZAP1:
+	    SPKS A 4 bright A_playsound("flora/zap1", CHAN_VOICE)
+		goto spawn
+	ZAP2:
+	    SPKS B 4 bright A_playsound("flora/zap1", CHAN_VOICE)
+		goto spawn
+}
+}
+Actor PropWaterDrops 410
+{
+-solid
++Nogravity
+ Radius 20
+ Height 23
+ alpha 0.6
+  States
+  {
+  Spawn:
+    TNT1 A 2 a_jump(128,"looping")
+	TNT1 A 2 a_jump(128,"looping")
+	TNT1 A 2 a_jump(128,"looping")
+	TNT1 A 2 a_jump(128,"looping")
+  looping:
+    RNDP BCDEFGHI 2
+    goto spawn
+  }
+  }
+
+ACTOR PROPLensFlare 402
+{
+	Radius 16
+	Height 42
+	renderstyle translucent
+	alpha 0.3
+	-solid
+    +Nogravity
+	+FORCEXYBILLBOARD
+	States
+	{
+	Spawn:
+		LENS A -1 //remember to add code for 16 times the God-rays
+		stop
+	}
+}
+ACTOR PROPEyesInTheDark
+{
+	Radius 16
+	Height 42
+	renderstyle add
+	alpha 0.0
+	-solid
+    +Nogravity
+	+FORCEXYBILLBOARD
+	States
+	{
+	Spawn:
+		E1TD A -1 
+		stop
+	Activate:
+	    E1TD AAA 2 bright A_FadeIn(0.2)
+		E1TD A 0 bright A_playsound("EYES/INTHEDARK",CHAN_VOICE)
+		E1TD AAAAA 2 bright A_FadeIn(0.2)
+		E1TD A 90 bright
+		E1TD AAAAAAAAAA 2 bright A_FADEOUT
+		EITD A 1
+		stop
+	}
+}
+ACTOR PropShoppingCart 423
+{
+  Radius 16
+    Height 38
+    Mass 500000
+    MaxStepHeight 16
+	scale 0.6
+	health 70
+ deathsound "break/bin"
+    +PUSHABLE
+    +NOBLOOD
+    +SHOOTABLE
+    +CANPASS
+    +ACTLIKEBRIDGE
+    +SOLID
+
+  States
+  {
+  Spawn:
+    TRO1 A 1
+    goto pushing
+  pushing:
+    TRO1 A 8 A_LookEx(LOF_NOSOUNDCHECK, 0, 64, 0, 360) 
+    loop
+   See:
+    TRO1 A 0 A_JumpIf((velx != 0 || vely != 0), "Moving")
+    goto Spawn
+  Moving:
+     TRO1 A 35 A_PlaySound("special/shopcartmove", CHAN_AUTO)
+     goto Spawn 
+  Death:
+     NULL A 0 A_Scream
+	NULL A 0 A_NoBlocking
+    NULL A 0 A_SpawnItemEx ("DebrisPiece2", 0, 0, random (3, 5), random (-5, 5), random (-5, 5), random (1, 2), 0, 0, 30)
+    NULL A 0 A_SpawnItemEx ("DebrisPiece2", 0, 0, random (3, 5), random (-5, 5), random (-5, 5), random (1, 2), 0, 0, 30)
+    NULL A 0 A_SpawnItemEx ("DebrisPiece2", 0, 0, random (3, 5), random (-5, 5), random (-5, 5), random (1, 2), 0, 0, 30)
+    NULL A 0 A_SpawnItemEx ("DebrisPiece2", 0, 0, random (3, 5), random (-5, 5), random (-5, 5), random (1, 2), 0, 0, 30)
+    NULL A 0 A_SpawnItemEx ("DebrisPiece2", 0, 0, random (3, 5), random (-5, 5), random (-5, 5), random (1, 2), 0, 0, 30)
+    Stop
+  }
+}
+Actor DustLauncher 440
+{
+Radius 20
+Height 30
+Mass 3000
++NOBLOCKMAP
++NODAMAGETHRUST
++BLOODLESSIMPACT
++NOSECTOR
++INVISIBLE
+states
+{
+spawn:
+TNT1 A 0
+TNT1 A 50
+TNT1 A 1 A_spawnitemex("Dustcloud", 0, 0, 0, 5, 0, 0, 0, SXF_TRANSFERPOINTERS)
+TNT1 A 300
+loop
+}
+}
+Actor RJCinematicDustLauncher : SwitchableDecoration//launch a fast dust cloud on activation then goes inert
+{
+	Radius 20
+	Height 30
+	Mass 3000
+	+NOINTERACTION
+	+NOBLOCKMAP
+	+NODAMAGETHRUST
+	+BLOODLESSIMPACT
+	+NOSECTOR
+	+INVISIBLE
+	
+	states
+	{
+		Inactive:
+		spawn:
+			TNT1 A 1
+			TNT1 A 20
+			loop
+		Active:
+			TNT1 A 0
+			TNT1 A 0 A_SpawnItemEx("Dustcloud",0,0,0,20,0,0,0,0,0,0)
+			stop
+		
+	}
+}
+Actor DustCloud
+{
+  speed 5
+  Radius 20
+  Height 30
+  friction 1.5
+   Mass 0x7fffffff
+  +NOGRAVITY
+  +FLOORHUGGER
+  +NOBLOCKMAP
+  +DROPOFF
+  +NODAMAGETHRUST
+  +DONTSPLASH
+  +BLOODLESSIMPACT
+   RenderStyle add
+  Alpha 0.2
+  states
+  {
+  Spawn:
+  TNT1 A 4
+  DU5T ABCDEFGH 4
+  death:
+  DU5T IIJJJKKKLLLLLMMMMNNNNNOOOOO 2 A_fadeout(0.01)
+   Stop
+   }
+   }
+ACTOR SkullTrophy1 700
+{
+  Radius 8
+  Height 64
+  ProjectilePassHeight -16
+  +SOLID
+  States
+  {
+  Spawn:
+    SKPL A -1
+    Stop
+  }
+}
+ACTOR SkullTrophy2: SkullTrophy1 701
+{
+ States
+  {
+  Spawn:
+    SKPL B -1
+    Stop
+  }
+}
+ACTOR SkullTrophy3: SkullTrophy1 702
+{
+  States
+  {
+  Spawn:
+    SKPL C -1
+    Stop
+  }
+}
+ACTOR SkullTrophy4: SkullTrophy1 703
+{
+  States
+  {
+  Spawn:
+    SKPL D -1
+    Stop
+  }
+}
+ACTOR SkullTrophy5: SkullTrophy1 704
+{
+  States
+  {
+  Spawn:
+    SKPL E -1
+    Stop
+  }
+}
+ 
+ 
+ //BIG NUKE EFFECT
+ // Credits: PillowBlaster - Russian Overkill
+
+Actor Nuke 315
+{
+ +NoBlockmap
+ +NoGravity
+ +NoInteraction
+ +EXTREMEDEATH
+ Radius 0
+ Height 0
+ States
+ {
+  Spawn:
+   TNT1 A 0 NoDelay A_PlaySound("World/bigbang",1,1)
+   TNT1 A 0 A_Quake(7, 100, 0, 8096, "none")
+   TNT1 A 1 A_Explode(1000, 190, 1)
+   TNT1 A 0 A_SpawnItemEx("NukeBoom",0,0,0,0,0,0,0,SXF_TRANSFERPOINTERS)
+   //TNT1 A 0 A_SpawnItemEx("KaBoomer",0,0,0,0,0,0,0,SXF_TRANSFERPOINTERS)
+   TNT1 A 0 A_SpawnItemEx("NukeBoomLethal",0,0,0,0,0,0,0,SXF_TRANSFERPOINTERS)
+   TNT1 A 0 A_SpawnItemEx("NukeFlare", 0, 0, 0, 0, 0, 0, 0)
+   TNT1 A 25 A_SpawnItemEx("NukeFloor", 0, 0, 0, 0, 0, 0, 0)
+   TNT1 AA 0 A_SpawnItemEx("NukeSmokeFloor", 0, 0, 0, 0, 0, 0, 0)
+   TNT1 A 0 A_SpawnItemEx("NukePillar", 0, 0, 0, 0, 0, 10, 0)
+   TNT1 A 105 A_SpawnItemEx("NukeSmokePillar", 0, 0, 0, 0, 0, 10, 0)
+   TNT1 A 0 A_SpawnItemEx("NukeMushroom", 0, 0, 800, 0, 0, 0, 0)
+   TNT1 AA 0 A_SpawnItemEx("NukeSmokeMushroom", 0, 0, 800, 0, 0, 0, 0)
+   Stop
+ }
+}
+Actor Nukecutscene
+{
+ +NoBlockmap
+ +NoGravity
+ +NoInteraction
+ +EXTREMEDEATH
+ Radius 0
+ Height 0
+ States
+ {
+  Spawn:
+   TNT1 A 0 NoDelay A_PlaySound("World/bigbang",1,1)
+   TNT1 A 0 A_Quake(7, 100, 0, 8096, "none")
+   TNT1 A 1 A_Explode(10, 10, 1)
+   TNT1 A 0 A_SpawnItemEx("NukeBoom",0,0,0,0,0,0,0,SXF_TRANSFERPOINTERS)
+   //TNT1 A 0 A_SpawnItemEx("KaBoomer",0,0,0,0,0,0,0,SXF_TRANSFERPOINTERS)
+   TNT1 A 0 A_SpawnItemEx("NukeBoom",0,0,0,0,0,0,0,SXF_TRANSFERPOINTERS)
+   TNT1 A 0 A_SpawnItemEx("NukeFlare", 0, 0, 0, 0, 0, 0, 0)
+   TNT1 A 25 A_SpawnItemEx("NukeFloor", 0, 0, 0, 0, 0, 0, 0)
+   TNT1 AA 0 A_SpawnItemEx("NukeSmokeFloor", 0, 0, 0, 0, 0, 0, 0)
+   TNT1 A 0 A_SpawnItemEx("NukePillar", 0, 0, 0, 0, 0, 10, 0)
+   TNT1 A 105 A_SpawnItemEx("NukeSmokePillar", 0, 0, 0, 0, 0, 10, 0)
+   TNT1 A 0 A_SpawnItemEx("NukeMushroom", 0, 0, 800, 0, 0, 0, 0)
+   TNT1 AA 0 A_SpawnItemEx("NukeSmokeMushroom", 0, 0, 800, 0, 0, 0, 0)
+   Stop
+ }
+}
+
+Actor NukeBoom
+{
+ +NoBlockmap
+ +NoGravity
+ +EXTREMEDEATH
+ +ForceRadiusDmg
+ DamageType "Superweapon"
+ States
+ {
+  Spawn:
+   TNT1 A 0
+   TNT1 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 2 A_Explode(50, 10, 1, 1)
+   Stop
+ }
+}
+
+Actor NukeBoomLethal
+{
+ +NoBlockmap
+ +NoGravity
+ +EXTREMEDEATH
+ +ForceRadiusDmg
+ DamageType "Superweapon"
+ States
+ {
+  Spawn:
+   TNT1 A 0
+   TNT1 AAAAAAAAAA 6 A_Explode(5000, 768, 1)
+   Stop
+ }
+}
+
+Actor NukeFire : Nuke
+{
+ RenderStyle Add
+ +NoInteraction
+ +DONTSPLASH
+ +EXPLODEONWATER
+ Scale 2
+ States
+ {
+  Spawn:
+   TNT1 AA 0 A_Jump(196, "Spawn2", "Spawn3", "Spawn4")
+   FLA1 A 1 Bright A_FadeOut(0.01)
+   Wait
+  Spawn2:
+   TNT1 A 0 A_Explode(100,256,1)
+   FLA2 A 1 Bright A_FadeOut(0.01)
+   Wait
+  Spawn3:
+   TNT1 A 0 A_Explode(100,256,1)
+   FLA3 A 1 Bright A_FadeOut(0.01)
+   Wait
+  Spawn4:
+   TNT1 A 0 A_Explode(100,256,1)
+   FLA4 A 1 Bright A_FadeOut(0.01)
+   Wait
+ }
+}
+
+Actor NukeSmoke : Nuke
+{
+ Scale 4
+ +NoInteraction
+ +DONTSPLASH
+ +EXPLODEONWATER
+ Alpha 0.6
+ States
+ {
+  Spawn:
+   TNT1 A 0 NoDelay A_Jump(256, "Spawn1", "Spawn2", "Spawn3", "Spawn4")
+  Spawn1:
+   NSMK A 0
+   Goto Main
+  Spawn2:
+   NSMK B 0
+   Goto Main
+  Spawn3:
+   NSMK C 0
+   Goto Main
+  Spawn4:
+   NSMK D 0
+   Goto Main
+  Main:
+   "####" "#" 2 A_FadeOut(0.007)
+   Loop
+ }
+}
+
+Actor NukeFlare : NukeFire
+{
+ Scale 8
+ +NoInteraction
+ States
+ {
+  Spawn:
+   FLAR A 1 Bright A_FadeOut(0.005)
+   Wait
+ }
+}
+
+Actor NukeFloor : Nuke
+{
+ States
+ {
+  Spawn:
+   TNT1 A 0
+   TNT1 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 1 A_SpawnItemEx("NukeFire", 0, 0, 0, 0.00001 * Random(0, 300000), 0.00001 * Random(0, 300000), 0, Random(0, 359), 128, 0)
+   Stop
+ }
+}
+
+Actor NukeSmokeFloor : Nuke
+{
+ States
+ {
+  Spawn:
+   TNT1 A 0
+   TNT1 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 1 A_SpawnItemEx("NukeSmoke", 0, 0, 0, 0.00001 * Random(0, 300000), 0.00001 * Random(0, 300000), 0, Random(0, 359), 128, 0)
+   Stop
+ }
+}
+
+Actor NukePillar : Nuke
+{
+ States
+ {
+  Spawn:
+   TNT1 A 0
+   TNT1 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 1 A_SpawnItemEx("NukeFire", 0, 0, 0, 0.00001 * Random(0, 100000), 0.00001 * Random(0, 100000), Random(0, -3), Random(0, 359), 128, 0)
+   TNT1 A 0 A_SpawnItem("NukeSmokering", 0, 0, 0)
+   TNT1 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 1 A_SpawnItemEx("NukeFire", 0, 0, 0, 0.00001 * Random(0, 100000), 0.00001 * Random(0, 100000), Random(0, -3), Random(0, 359), 128, 0)
+   Stop
+ }
+}
+
+Actor NukeSmokePillar : Nuke
+{
+ States
+ {
+  Spawn:
+   TNT1 A 0
+   TNT1 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 1 A_SpawnItemEx("NukeSmoke", 0, 0, 0, 0.00001 * Random(0, 100000), 0.00001 * Random(0, 100000), 0.00001 * Random(0, -400000), Random(0, 359), 128, 0)
+   Stop
+ }
+}
+
+Actor NukeMushroom : Nuke
+{
+ States
+ {
+  Spawn:
+   TNT1 A 0
+   TNT1 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 1 A_SpawnItemEx("NukeFire", 0, 0, 0, 0.00001 * Random(0, 250000), 0.00001 * Random(0, 250000), 0.00001 * Random(-100000, 100000), Random(0, 359), 128, 0)
+   Stop
+ }
+}
+
+Actor NukeSmokeMushroom : Nuke
+{
+ States
+ {
+  Spawn:
+   TNT1 A 0
+   TNT1 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 1 A_SpawnItemEx("NukeSmoke", 0, 0, 0, 0.00001 * Random(0, 250000), 0.00001 * Random(0, 250000), 0.00001 * Random(-100000, 100000), Random(0, 359), 128, 0)
+   Stop
+ }
+}
+
+Actor NukeSmokering : Nuke
+{
+ States
+ {
+  Spawn:
+   TNT1 A 0
+   TNT1 A 0 A_SpawnItemEx("NukeSmoke", 0, 0, 0, 4, 0, 0, 0, 0, 0)
+   TNT1 A 0 A_SpawnItemEx("NukeSmoke", 0, 0, 0, 4, 0, 0, 20, 0, 0)
+   TNT1 A 0 A_SpawnItemEx("NukeSmoke", 0, 0, 0, 4, 0, 0, 40, 0, 0)
+   TNT1 A 0 A_SpawnItemEx("NukeSmoke", 0, 0, 0, 4, 0, 0, 60, 0, 0)
+   TNT1 A 0 A_SpawnItemEx("NukeSmoke", 0, 0, 0, 4, 0, 0, 80, 0, 0)
+   TNT1 A 0 A_SpawnItemEx("NukeSmoke", 0, 0, 0, 4, 0, 0, 100, 0, 0)
+   TNT1 A 0 A_SpawnItemEx("NukeSmoke", 0, 0, 0, 4, 0, 0, 120, 0, 0)
+   TNT1 A 0 A_SpawnItemEx("NukeSmoke", 0, 0, 0, 4, 0, 0, 140, 0, 0)
+   TNT1 A 0 A_SpawnItemEx("NukeSmoke", 0, 0, 0, 4, 0, 0, 160, 0, 0)
+   TNT1 A 0 A_SpawnItemEx("NukeSmoke", 0, 0, 0, 4, 0, 0, 180, 0, 0)
+   TNT1 A 0 A_SpawnItemEx("NukeSmoke", 0, 0, 0, 4, 0, 0, 200, 0, 0)
+   TNT1 A 0 A_SpawnItemEx("NukeSmoke", 0, 0, 0, 4, 0, 0, 220, 0, 0)
+   TNT1 A 0 A_SpawnItemEx("NukeSmoke", 0, 0, 0, 4, 0, 0, 240, 0, 0)
+   TNT1 A 0 A_SpawnItemEx("NukeSmoke", 0, 0, 0, 4, 0, 0, 260, 0, 0)
+   TNT1 A 0 A_SpawnItemEx("NukeSmoke", 0, 0, 0, 4, 0, 0, 280, 0, 0)
+   TNT1 A 0 A_SpawnItemEx("NukeSmoke", 0, 0, 0, 4, 0, 0, 300, 0, 0)
+   TNT1 A 0 A_SpawnItemEx("NukeSmoke", 0, 0, 0, 4, 0, 0, 320, 0, 0)
+   TNT1 A 0 A_SpawnItemEx("NukeSmoke", 0, 0, 0, 4, 0, 0, 340, 0, 0)
+   Stop
+ }
+}
+
+
+Actor RJSubTerminal : Actor
+{
+	radius 12
+	height 20
+	+NOGRAVITY
+	renderstyle none
+	
+	states
+	{
+		spawn:
+			TNT1 A -1
+			stop
+	}
+}
+Actor RJCattails1 : PropGeneric
+{
+	xscale 0.5
+	yscale 0.5
+	States
+	{
+		Spawn:
+			RJCT A -1
+			Stop
+	}
+}
+
+Actor RJCattails2 : PropGeneric
+{
+	xscale -0.5
+	yscale 0.5
+	States
+	{
+		Spawn:
+			RJCT A -1
+			Stop
+	}
+}
+
+//replacment for the old RJTree actors
+//Can get rid of sprites RJTRA0 - RJTRD0
+ACTOR RJTree1
+{
+	+NOINTERACTION
+	//Scale 2.0
+	XScale 2.0
+	YScale 2.0
+	
+	States
+	{
+		Spawn:
+			RJTR E -1
+			Stop
+	}
+}
+
+ACTOR RJTree2 : RJTree1
+{
+	YScale 2.4
+}
+
+ACTOR RJTree3 : RJTree1
+{
+	XScale -2.0
+}
+
+ACTOR RJTree4 : RJTree1
+{
+	XScale -2.0
+	YScale 2.4
+}
+ACTOR RJTree5 : RJTree1
+{
+	XScale 1.0
+	YScale 1.0
+}
+
+Actor RJRainSpawner
+{
+	height 1
+	radius 1
+
+	+NOCLIP
+	+NOINTERACTION
+	+NOBLOCKMAP
+	+NOGRAVITY
+	
+	states
+	{
+		spawn:
+			TNT1 A 0
+			TNT1 A 1 //A_Log("Spawner Tried")
+			stop
+	}
+
+}
+
+//was based on the rain resource from R667
+Actor RJRainDrop
+{
+	+Missile
+	+NoBlockMap
+	+NoTeleport
+	+NoGravity//since we assume the drop is already at its terminal velocity by the time it reaches you
+	+DONTSPLASH
+	Height 6
+	Radius 2
+	//Renderstyle Translucent
+	//Alpha 0.9
+	Scale 1
+	//Xscale 1.0
+	//Yscale 2.5
+	States
+	{
+		Spawn:
+			RNDR A 0
+			//RNDR A 0 A_Log("Drop Tried")
+			RNDR A 1 A_SetAngle(0)
+			RNDR A 1 A_ChangeVelocity(3,0,-40, CVF_RELATIVE)
+			Fall:
+			RNDR A 60 A_JumpIf(WaterLevel > 0, "Death")//2 seconds, then terminate
+			Goto SilentDeath
+		Death:
+			//RNDR A 0 
+			RNDR A 3
+			RNDR BCDEFGH 3 A_FadeOut(0.15)
+			//Stop  - will this break?
+		SilentDeath:
+			TNT1 A 0
+			Stop
+	}
+}
+
+actor FloraDevilsEggplant1 
+{
+  Health 10
+  Speed 0
+  Height 15
+  scale 0.8
+  mass 10000
+  BloodColor "Purple"
+  -SOLID
+  +SHOOTABLE
+  +TELESTOMP
+  +CANPASS
+  +DONTTHRUST
+   deathsound "flora/death"
+  States
+  {
+  Spawn:
+    DVGP A 20
+    Loop
+  Death:
+    DVGP C 5 A_Scream
+	DVGP D 5 A_NoBlocking
+	DVGP EFGH 5
+	DVGP I -1
+    Stop
+  }
+}
+actor FloraDevilsEggplant2: FloraDevilsEggplant1
+{
+  States
+  {
+  Spawn:
+    DVGP B 20
+    Loop
+  Death:
+    DVGP C 5 A_Scream
+	DVGP D 5 A_NoBlocking
+	DVGP EFGH 5
+	DVGP I -1
+    Stop
+  }
+}
+actor FloraBoomerBerry1 
+{
+  Health 20
+  Speed 0
+  Height 15
+  mass 100000
+  BloodColor "brown"
+  -SOLID
+  +SHOOTABLE
+  +TELESTOMP
+  +CANPASS
+  +DONTTHRUST
+   deathsound "flora/death"
+  States
+  {
+  Spawn:
+    BBRY A 20
+    Loop
+  Death:
+    BBRY C 5 bright A_Scream
+	BBRY D 5 bright A_NoBlocking
+	BBRY D 0 a_playsound("explode/medium")
+	NULL A 0 A_SpawnItemEx ("DebrisPiece1", 0, 0, random (3, 5), random (-5, 5), random (-5, 5), random (1, 2), 0, 0, 30)
+    NULL A 0 A_SpawnItemEx ("DebrisPiece2", 0, 0, random (3, 5), random (-5, 5), random (-5, 5), random (1, 2), 0, 0, 30)
+    NULL A 0 A_SpawnItemEx ("DebrisPiece2", 0, 0, random (3, 5), random (-5, 5), random (-5, 5), random (1, 2), 0, 0, 30)
+    NULL A 0 A_SpawnItemEx ("DebrisPiece1", 0, 0, random (3, 5), random (-5, 5), random (-5, 5), random (1, 2), 0, 0, 30)
+	MISL CD 4 bright
+	MISL E 4 bright A_Explode(80,192)
+	MISL FGHIJ 4 bright
+	BBRY E -1
+    Stop
+  }
+}
+actor FloraBoomerBerry2: FloraBoomerBerry1  
+{
+  States
+  {
+  Spawn:
+    BBRY B 20
+    Loop
+  Death:
+    BBRY C 5 bright A_Scream
+	BBRY D 5 bright A_NoBlocking
+	BBRY D 0 a_playsound("explode/medium")
+	NULL A 0 A_SpawnItemEx ("DebrisPiece1", 0, 0, random (3, 5), random (-5, 5), random (-5, 5), random (1, 2), 0, 0, 30)
+    NULL A 0 A_SpawnItemEx ("DebrisPiece2", 0, 0, random (3, 5), random (-5, 5), random (-5, 5), random (1, 2), 0, 0, 30)
+    NULL A 0 A_SpawnItemEx ("DebrisPiece2", 0, 0, random (3, 5), random (-5, 5), random (-5, 5), random (1, 2), 0, 0, 30)
+    NULL A 0 A_SpawnItemEx ("DebrisPiece1", 0, 0, random (3, 5), random (-5, 5), random (-5, 5), random (1, 2), 0, 0, 30)
+	MISL CD 4 bright
+	MISL E 4 bright A_Explode(80,192)
+	MISL FGHIJ 4 bright
+	BBRY E -1
+    Stop
+  }
+}
+actor FloraBlackHagsHat 
+{
+  Health 20
+  Speed 0
+  Height 32
+  scale 0.8
+  BloodColor "green"
+  mass 10000
+  -SOLID
+  +SHOOTABLE
+  +TELESTOMP
+  +CANPASS
+  +DONTTHRUST
+   deathsound "flora/death"
+  States
+  {
+  Spawn:
+    HHHT A 0 a_playsound("plant/breath")
+    HHHT ABCDEFFEDCBA 5
+    Loop
+  Death:
+    HHHT G 3 A_Scream
+	HHHT H 3 A_NoBlocking
+	HHHT IJKL 3
+	HHHT M -1
+    Stop
+  }
+}
+ACTOR FloraWitchesLantern1 
+{
+    scale 0.9
+	Radius 8
+	Height 32
+	-solid
+	-shootable
+	+DONTTHRUST
+	ProjectilePassHeight -8
+	States
+	{
+	Spawn:
+		WLNN ABCDEF 5
+		loop
+	}
+}
+ACTOR FloraWitchesLantern2 
+{
+    scale 0.9
+	Radius 8
+	Height 32
+	-solid
+	-shootable
+	+DONTTHRUST
+	ProjectilePassHeight -8
+	States
+	{
+	Spawn:
+		WLNN HGIJK 5 
+		loop
+	}
+}
+ACTOR FloraWitchesLantern3
+{
+    scale 0.9
+	Radius 8
+	Height 32
+	-solid
+	-shootable
+	ProjectilePassHeight -8
+	+SPAWNCEILING
+    +NOGRAVITY
+	+DONTTHRUST
+	States
+	{
+	Spawn:
+		WLNN LMNOPQQPONM 5 
+		loop
+	}
+}
+actor FloraLopingLonghair
+ {
+  Health 10000000
+  PainChance 255
+  Speed 30
+  Radius 20
+  Height 64
+  Monster
+  +NEVERTARGET
+  -COUNTKILL
+  +NOSPLASHALERT
+  +FLOORCLIP
+  +MISSILEMORE
+  +MISSILEEVENMORE
+  +NEVERRESPAWN
+  +ISMONSTER
+  +NODAMAGE
+  +FRIGHTENED
+  +DONTTHRUST
+  Obituary "Was somehow killed by a tree."
+  States
+  {
+   Spawn:
+    LOLO A 10 A_look
+    Loop
+   See:
+    LOLO A 3 A_playsound("Plant/run", CHAN_VOICE)
+	LOLO BCDEFGHIJK 4
+   chase:
+    LOLO KLMN 3 A_chase
+	loop
+   Pain:
+    LOLO K 5
+	goto chase
+	}
+	}
+ACTOR FloraDemonFuzz1 
+{
+    scale 1
+	Radius 16
+	Height 64
+	ProjectilePassHeight -8
+	Obituary "%o was caught licking the Demon Fuzz."
+	-SOLID
+	+NOGRAVITY
+	+DONTTHRUST
+	+ISMONSTER
+	+NOBLOOD
+	States
+	{
+	Spawn:
+		DFUZ AAAAAAAAAAAA 5
+		DFUZ A 1 A_jump(64,"Zap2")
+		DFUZ A 1 A_jump(128,"Zap3")
+	ZAP1:
+	    DFUZ A 0 A_playsound("flora/zap1", CHAN_VOICE)
+	    DFUZ BCD 3
+		DFUZ D 0 A_explode(15,32,XF_NOTMISSILE)
+		DFUZ DEF 3
+		goto spawn
+	ZAP2:
+	    DFUZ A 0 A_playsound("flora/zap1", CHAN_VOICE)
+	    DFUZ GHI 3
+		DFUZ D 0 A_explode(15,32,XF_NOTMISSILE)
+		DFUZ JKLMN 3
+		goto spawn
+	Zap3:
+	    DFUZ A 0 A_playsound("flora/zap2", CHAN_VOICE)
+	    DFUZ OPQRS 3
+		DFUZ D 0 A_explode(30,96,XF_NOTMISSILE)
+		DFUZ TUVWXY 3
+		goto spawn
+	    
+	}
+}
+ACTOR FloraDemonFuzz2 
+{
+    scale 1
+	Radius 16
+	Height 64
+	ProjectilePassHeight -8
+	Obituary "%o was caught licking the Demon Fuzz."
+	-SOLID
+	+NOGRAVITY
+	+DONTTHRUST
+	+ISMONSTER
+	+NOBLOOD
+	States
+	{
+	Spawn:
+		DF2Z AAAAAAAAAAAA 7
+		DF2Z A 1 A_jump(64,"Zap2")
+	ZAP1:
+	    DF2Z A 0 A_playsound("flora/zap1", CHAN_VOICE)
+	    DF2Z HIJK 3
+		DF2Z D 0 A_explode(10,32,XF_NOTMISSILE)
+		DF2Z LMNOPQA 3
+		goto spawn
+	ZAP2:
+	    DF2Z A 0 A_playsound("flora/zap2", CHAN_VOICE)
+	    DF2Z BCDEFG 2
+		DF2Z D 0 A_explode(20,64,XF_NOTMISSILE)
+		DF2Z GFEDCBA 3
+		goto spawn    
+	}
+}
+actor FloraGutweed
+{
+  Health 35
+  Speed 0
+  Height 24
+  scale 1.0
+  mass 10000
+  BloodColor "orange"
+  -SOLID
+  +SHOOTABLE
+  +TELESTOMP
+  +CANPASS
+  +DONTTHRUST
+   deathsound "flora/death"
+  States
+  {
+  Spawn:
+    GWEE A 20
+    Loop
+  Death:
+    GWEE BC 5 A_Scream
+	GWEE D 5 A_NoBlocking
+	GWEE EFG 5
+	GWEE H -1
+    Stop
+  }
+}
+ACTOR FloraArchingBetty1 
+{
+    scale 0.9
+	Radius 32
+	Height 64
+	ProjectilePassHeight -8
+	-SOLID
+	-SHOOTABLE
+	+DONTTHRUST
+	States
+	{
+	Spawn:
+		FABY A -1
+		stop
+	}
+}
+ACTOR FloraArchingBetty2
+{
+    scale 0.9
+	Radius 32
+	Height 64
+	ProjectilePassHeight -8
+	-SOLID
+	-SHOOTABLE
+	+DONTTHRUST
+	States
+	{
+	Spawn:
+		FABY B -1
+		stop
+	}
+}
+ACTOR FloraItchingLeek 
+{
+	Radius 32
+	Height 64
+	mass 10000
+	ProjectilePassHeight -8
+	-SOLID
+	-SHOOTABLE
+	+DONTTHRUST
+	States
+	{
+	Spawn:
+		ITLE ABCDE 5
+		loop
+	}
+}
+ACTOR FloraLiveCorn1 
+{
+	Radius 16
+	Height 96
+	ProjectilePassHeight -8
+	+SOLID
+	-SHOOTABLE
+	+DONTTHRUST
+	States
+	{
+	Spawn:
+		CRN1 A -1
+		stop
+	}
+}
+ACTOR FloraLiveCorn2 
+{
+	Radius 16
+	Height 96
+	ProjectilePassHeight -8
+	+SOLID
+	-SHOOTABLE
+	+DONTTHRUST
+	States
+	{
+	Spawn:
+		CRN2 A -1
+		stop
+	}
+}
+ACTOR FloraDyingCorn1 
+{
+	Radius 16
+	Height 96
+	ProjectilePassHeight -8
+	+SOLID
+	-SHOOTABLE
+	+DONTTHRUST
+	States
+	{
+	Spawn:
+		CRN3 A -1
+		stop
+	}
+}
+ACTOR FloraDyingCorn2 
+{
+	Radius 16
+	Height 96
+	ProjectilePassHeight -8
+	+SOLID
+	-SHOOTABLE
+	+DONTTHRUST
+	States
+	{
+	Spawn:
+		CRN4 A -1
+		stop
+	}
+}
+Actor PropLabBeaker1 
+{
+  Health 5
+  Height 8
+  radius 8
+  scale 0.7
+  +SOLID
+  +SHOOTABLE
+  +NOBLOOD
+  +TELESTOMP
+  +CANPASS
+   deathsound "break/glass"
+  States
+  {
+  Spawn:
+    LAB1 A -1
+    Loop
+  Death:
+    Death:
+    NULL A 0 A_Scream
+	NULL A 0 A_NoBlocking
+    NULL A 0 A_SpawnItemEx ("DebrisPiece2", 0, 0, random (3, 5), random (-5, 5), random (-5, 5), random (1, 2), 0, 0, 30)
+    NULL A 0 A_SpawnItemEx ("DebrisPiece2", 0, 0, random (3, 5), random (-5, 5), random (-5, 5), random (1, 2), 0, 0, 30)
+    NULL A 0 A_SpawnItemEx ("DebrisPiece2", 0, 0, random (3, 5), random (-5, 5), random (-5, 5), random (1, 2), 0, 0, 30)
+    NULL A 0 A_SpawnItemEx ("DebrisPiece2", 0, 0, random (3, 5), random (-5, 5), random (-5, 5), random (1, 2), 0, 0, 30)
+    Stop
+  }
+}
+Actor PropLabBeaker2 : PropLabBeaker1
+{
+  States
+  {
+  Spawn:
+    LAB2 A -1
+    Loop
+  Death:
+    Death:
+    NULL A 0 A_Scream
+	NULL A 0 A_NoBlocking
+    NULL A 0 A_SpawnItemEx ("DebrisPiece2", 0, 0, random (3, 5), random (-5, 5), random (-5, 5), random (1, 2), 0, 0, 30)
+    NULL A 0 A_SpawnItemEx ("DebrisPiece2", 0, 0, random (3, 5), random (-5, 5), random (-5, 5), random (1, 2), 0, 0, 30)
+    NULL A 0 A_SpawnItemEx ("DebrisPiece2", 0, 0, random (3, 5), random (-5, 5), random (-5, 5), random (1, 2), 0, 0, 30)
+    NULL A 0 A_SpawnItemEx ("DebrisPiece2", 0, 0, random (3, 5), random (-5, 5), random (-5, 5), random (1, 2), 0, 0, 30)
+    Stop
+  }
+}
+Actor PropLabPetri1 : PropLabBeaker1
+{
+  States
+  {
+  Spawn:
+    LAB3 A -1
+    Loop
+  Death:
+    Death:
+    NULL A 0 A_Scream
+	NULL A 0 A_NoBlocking
+    NULL A 0 A_SpawnItemEx ("DebrisPiece2", 0, 0, random (3, 5), random (-5, 5), random (-5, 5), random (1, 2), 0, 0, 30)
+    NULL A 0 A_SpawnItemEx ("DebrisPiece2", 0, 0, random (3, 5), random (-5, 5), random (-5, 5), random (1, 2), 0, 0, 30)
+    NULL A 0 A_SpawnItemEx ("DebrisPiece2", 0, 0, random (3, 5), random (-5, 5), random (-5, 5), random (1, 2), 0, 0, 30)
+    NULL A 0 A_SpawnItemEx ("DebrisPiece2", 0, 0, random (3, 5), random (-5, 5), random (-5, 5), random (1, 2), 0, 0, 30)
+    Stop
+  }
+}
+Actor PropLabPetri2 : PropLabBeaker1
+{
+  States
+  {
+  Spawn:
+    LAB4 A -1
+    Loop
+  Death:
+    Death:
+    NULL A 0 A_Scream
+	NULL A 0 A_NoBlocking
+    NULL A 0 A_SpawnItemEx ("DebrisPiece2", 0, 0, random (3, 5), random (-5, 5), random (-5, 5), random (1, 2), 0, 0, 30)
+    NULL A 0 A_SpawnItemEx ("DebrisPiece2", 0, 0, random (3, 5), random (-5, 5), random (-5, 5), random (1, 2), 0, 0, 30)
+    NULL A 0 A_SpawnItemEx ("DebrisPiece2", 0, 0, random (3, 5), random (-5, 5), random (-5, 5), random (1, 2), 0, 0, 30)
+    NULL A 0 A_SpawnItemEx ("DebrisPiece2", 0, 0, random (3, 5), random (-5, 5), random (-5, 5), random (1, 2), 0, 0, 30)
+    Stop
+  }
+}
+Actor PropLabTubes1 : PropLabBeaker1
+{
+  States
+  {
+  Spawn:
+    LAB5 A -1
+    Loop
+  Death:
+    Death:
+    NULL A 0 A_Scream
+	NULL A 0 A_NoBlocking
+    NULL A 0 A_SpawnItemEx ("DebrisPiece2", 0, 0, random (3, 5), random (-5, 5), random (-5, 5), random (1, 2), 0, 0, 30)
+    NULL A 0 A_SpawnItemEx ("DebrisPiece2", 0, 0, random (3, 5), random (-5, 5), random (-5, 5), random (1, 2), 0, 0, 30)
+    NULL A 0 A_SpawnItemEx ("DebrisPiece2", 0, 0, random (3, 5), random (-5, 5), random (-5, 5), random (1, 2), 0, 0, 30)
+    NULL A 0 A_SpawnItemEx ("DebrisPiece2", 0, 0, random (3, 5), random (-5, 5), random (-5, 5), random (1, 2), 0, 0, 30)
+    Stop
+  }
+}
+Actor PropLabTubes2 : PropLabBeaker1
+{
+  States
+  {
+  Spawn:
+    LAB6 A -1
+    Loop
+  Death:
+    Death:
+    NULL A 0 A_Scream
+	NULL A 0 A_NoBlocking
+    NULL A 0 A_SpawnItemEx ("DebrisPiece2", 0, 0, random (3, 5), random (-5, 5), random (-5, 5), random (1, 2), 0, 0, 30)
+    NULL A 0 A_SpawnItemEx ("DebrisPiece2", 0, 0, random (3, 5), random (-5, 5), random (-5, 5), random (1, 2), 0, 0, 30)
+    NULL A 0 A_SpawnItemEx ("DebrisPiece2", 0, 0, random (3, 5), random (-5, 5), random (-5, 5), random (1, 2), 0, 0, 30)
+    NULL A 0 A_SpawnItemEx ("DebrisPiece2", 0, 0, random (3, 5), random (-5, 5), random (-5, 5), random (1, 2), 0, 0, 30)
+    Stop
+  }
+}
+Actor PropLabMicroscope : PropLabBeaker1
+{
+scale 1.0
+  deathsound "break/bin"
+  States
+  {
+  Spawn:
+    LAB7 A -1
+    Loop
+  Death:
+    Death:
+    NULL A 0 A_Scream
+	NULL A 0 A_NoBlocking
+    NULL A 0 A_SpawnItemEx ("DebrisPiece2", 0, 0, random (3, 5), random (-5, 5), random (-5, 5), random (1, 2), 0, 0, 30)
+    NULL A 0 A_SpawnItemEx ("DebrisPiece2", 0, 0, random (3, 5), random (-5, 5), random (-5, 5), random (1, 2), 0, 0, 30)
+    NULL A 0 A_SpawnItemEx ("DebrisPiece2", 0, 0, random (3, 5), random (-5, 5), random (-5, 5), random (1, 2), 0, 0, 30)
+    NULL A 0 A_SpawnItemEx ("DebrisPiece2", 0, 0, random (3, 5), random (-5, 5), random (-5, 5), random (1, 2), 0, 0, 30)
+    Stop
+  }
+}
+Actor PropLabCactus1 : PropLabBeaker1
+{
+  States
+  {
+  Spawn:
+    LAB8 A -1
+    Loop
+  Death:
+    Death:
+    NULL A 0 A_Scream
+	NULL A 0 A_NoBlocking
+    NULL A 0 A_SpawnItemEx ("DebrisPiece2", 0, 0, random (3, 5), random (-5, 5), random (-5, 5), random (1, 2), 0, 0, 30)
+    NULL A 0 A_SpawnItemEx ("DebrisPiece2", 0, 0, random (3, 5), random (-5, 5), random (-5, 5), random (1, 2), 0, 0, 30)
+    NULL A 0 A_SpawnItemEx ("DebrisPiece2", 0, 0, random (3, 5), random (-5, 5), random (-5, 5), random (1, 2), 0, 0, 30)
+    NULL A 0 A_SpawnItemEx ("DebrisPiece2", 0, 0, random (3, 5), random (-5, 5), random (-5, 5), random (1, 2), 0, 0, 30)
+    Stop
+  }
+}
+Actor PropLabCactus2 : PropLabBeaker1
+{
+  States
+  {
+  Spawn:
+    LAB9 A -1
+    Loop
+  Death:
+    Death:
+    NULL A 0 A_Scream
+	NULL A 0 A_NoBlocking
+    NULL A 0 A_SpawnItemEx ("DebrisPiece2", 0, 0, random (3, 5), random (-5, 5), random (-5, 5), random (1, 2), 0, 0, 30)
+    NULL A 0 A_SpawnItemEx ("DebrisPiece2", 0, 0, random (3, 5), random (-5, 5), random (-5, 5), random (1, 2), 0, 0, 30)
+    NULL A 0 A_SpawnItemEx ("DebrisPiece2", 0, 0, random (3, 5), random (-5, 5), random (-5, 5), random (1, 2), 0, 0, 30)
+    NULL A 0 A_SpawnItemEx ("DebrisPiece2", 0, 0, random (3, 5), random (-5, 5), random (-5, 5), random (1, 2), 0, 0, 30)
+    Stop
+  }
+}
+Actor RJBunkerTerminal : RJSubTerminal{}
+//Roamer camp npc stuff
+Actor RJPlayerToken : Dialogtoken1{}
+
+Actor RJPlayerToken_RoamerWarehouse : RJPlayerToken{}//player entered the roamer warehouse without appropriate permission
+
+Actor RJNPCHostilityToken : Inventory{}//given to actors when player breaks the rules
+Actor RJPlayerToken_KnowHauer : RJPlayerToken{}//player met or knows about hauer
+Actor RJPlayerToken_KnowBike : RJPlayerToken{}//player knows about Hauer and the bike
+Actor RJPlayerToken_KilledHauer : RJPlayerToken{}//player killed hauer
+Actor RJPlayerToken_KnowProsperity : RJPlayerToken{}//player went to or knows about prosperity
+Actor RJPlayerToken_RoamerAccess : RJPlayerToken{}//player can get into the roamer compound peacefully
+Actor RJPlayerToken_Poisonedwell : RJPlayerToken{}//player has tainted at least one water source
+Actor RJPlayerToken_timechecker : RJPlayerToken{}//player has waited until later
+Actor RJPlayerToken_CompressedDog : RJPlayerToken{}//player engaged in animal cruelty
+Actor RJPlayerToken_SigmaLaunch : RJPlayerToken{}//sigma end token
+Actor RJPlayerToken_RoamerScavs : RJPlayerToken{}//player learned the roamers are looking for scavs
+
+ACTOR HundredTwentyChips : Chips
+{
+ Inventory.Amount 120
+ +IGNORESKILL
+}
+
+ACTOR CutsceneTracer : FastProjectile 13058 //special cutscene tracer to fuck with players
+{   
+    Damage (random(50,70))
+	alpha 0.8
+	Speed 150
+	fastspeed 170
+	Radius 2
+	Height 2
+	PROJECTILE
+	renderstyle add
+	+BLOODSPLATTER
+	Scale 0.7
+	MissileType ""
+	MissileHeight 8
+	Decal "BulletChip"
+	DeathSound "Bullet/ricochet"
+	spawnid 13058
+	States
+	{
+	Spawn:
+	    TNT1 A 0 NoDelay
+		TRAC A 5 BRIGHT A_ChangeVelocity(velx*2, vely*2, velz*2, CVF_REPLACE)
+		Loop
+	Death:
+		CPUF A 0 BRIGHT
+	Crash:
+	    CPUF A 0 A_JUMP(128, "ALTDEATH")
+		CPUF AB 1 BRIGHT A_Scream
+		CPUF C 2 BRIGHT 
+		CPUF DE 2 BRIGHT
+		Stop
+	AltDeath:
+	    PIN2 A 0 A_JUMP(128, "ALTDEATH")
+		TNT1 A 0 A_SpawnItem("shotSmoke")
+		PIN2 AB 1 BRIGHT A_Scream
+		PIN2 C 2 BRIGHT 
+		PIN2 DEFGH 2 BRIGHT
+		Stop
+	XDeath:
+		TNT1 A 3 A_PlaySound("Bullet/Flesh")
+		Stop
+	}
+}
+ACTOR CutsceneSkull : FastProjectile 13070 //special cutscene skull to fuck players with
+{   
+    Damage 0
+	alpha 0.9
+	Speed 30
+	fastspeed 170
+	Radius 2
+	Height 2
+	PROJECTILE
+	+SEEKERMISSILE
+	Scale 2.0
+	MissileType ""
+	MissileHeight 8
+	Decal "BulletChip"
+	DeathSound "Bullet/ricochet"
+	spawnid 13070
+	States
+	{
+	Spawn:
+		NMSK A 4 BRIGHT A_Seekermissile(0,2,SMF_LOOK)
+		TNT1 A 0 A_SpawnItemEx("NukeSmoke", 0, 0, 0, 0, 0, 0, 0)
+		NMSK B 4 BRIGHT A_Seekermissile(0,2,SMF_LOOK)
+		TNT1 A 0 A_SpawnItemEx("NukeSmoke", 0, 0, 0, 0, 0, 0, 0)
+		NMSK C 4 BRIGHT A_Seekermissile(0,2,SMF_LOOK)
+		TNT1 A 0 A_SpawnItemEx("NukeSmoke", 0, 0, 0, 0, 0, 0, 0)
+		NMSK D 4 BRIGHT A_Seekermissile(0,2,SMF_LOOK)
+		TNT1 A 0 A_SpawnItemEx("NukeSmoke", 0, 0, 0, 0, 0, 0, 0)
+		Loop
+	Death:
+		NMSK A 0 BRIGHT
+		Stop
+	}
+}
+Actor RJPlayerToken_SabotageRoamers : RJPlayerToken{}//player has agreed to sabotage the roamers
+Actor RJPlayerToken_WarehouseSus : RJPlayerToken{}//HAHAHA LE FUNNY AMOGUS SUS HAHAHAHA kill yourself
+Actor RJPlayerToken_WarehouseSusClear : RJPlayerToken{}
+Actor RJPlayerToken_TankSus : RJPlayerToken{}
+Actor RJPlayerToken_TankSusClear : RJPlayerToken{}
+Actor RJBombPoint : SwitchableDecoration
+{
+	+NOGRAVITY
+	+USESPECIAL
+	renderstyle translucent
+	alpha 0.4
+	radius 8
+	height 32
+	
+	states
+	{
+		spawn:
+			TNT1 A 1
+			TNT1 A 35
+			loop
+		outofrange:
+			TNT1 A 5
+		active:
+			TNT1 A 5 A_CheckRange(256.0, "outofrange", true)
+			RTNT A 5 BRIGHT
+			TNT1 A 5
+			RTNT A 5 BRIGHT
+			TNT1 A 5
+			RTNT A 5 BRIGHT
+			TNT1 A 5
+			RTNT A 5 BRIGHT
+			loop
+		inactive:
+			TNT1 A 5
+			loop
+		
+	}
+}
+
+Actor RJBombStatic : Actor
+{
+	+NOGRAVITY
+	+NOBLOCKMAP
+	+NOINTERACTION
+	radius 8
+	height 32
+	
+	states
+	{
+		spawn:
+			QTNT A 1
+			QTNT A -1
+			stop
+
+	}
+}
+ACTOR BagOfC4 : CustomInventory 
+{
+  Inventory.PickupMessage "Got some thermite bombs!"
+  scale 0.8
+  States
+  {
+  Spawn:
+    YSTF A 10
+    YSTF A 10 Bright
+    Loop
+  Pickup:
+	TNT1 A 1 A_GiveInventory("RJQuestC4",4)
+	stop
+  }
+}
+ACTOR RJQuestC4 : QuestC4
+{
+	Inventory.Interhubamount 4
+	Inventory.MaxAmount 4
+}
+
+Actor VarniThing1
+{
+scale 0.7
+ Radius 6
+  Height 16
+  -SOLID
+  States
+  {
+  Spawn:
+    VTN1 A -1
+    stop
+	}
+}
+Actor VarniThing2
+{
+scale 0.6
+ Radius 6
+  Height 16
+  -SOLID
+  States
+  {
+  Spawn:
+    VTN1 B -1
+    stop
+	}
+}
+Actor VarniThing3
+{
+scale 0.6
+ Radius 6
+  Height 16
+  -SOLID
+  States
+  {
+  Spawn:
+    VTN1 C -1
+    stop
+	}
+}
+Actor VarniThing4
+{
+scale 0.5
+ Radius 6
+  Height 24
+  +SPAWNCEILING
+  +NOGRAVITY
+  -SOLID
+  States
+  {
+  Spawn:
+    VTN1 D -1
+    stop
+	}
+}
+Actor VarniThing5: BreakbleBottle1
+{
+scale 0.5
+states
+{
+spawn:
+   VTN1 E -1
+   stop
+   }
+   }
+Actor VarniThing6: BreakbleBottle1
+{
+scale 0.5
+states
+{
+spawn:
+   VTN1 F -1
+   stop
+   }
+   }
+
+Actor MutantCrowd: PropGeneric 13099
+{
+States
+  {
+  Spawn:
+    MCRD A Random(35, 50)
+	MCRD BCCCCCCB 4
+    loop
+  }
+}
+ACTOR PropRJMotorcycle2: PropMotorcycle //inert motorcycle for 27
+{
+	scale 0.8
+	States
+	{
+		Spawn:
+			B2KE A -1
+			Stop
+	}
+}
+ACTOR DummyQuestSpores
+{
+    +NOINTERACTION
+	scale 0.8
+	
+	radius 2
+	height 2
+	
+	States
+	{
+	Spawn:
+		QSPR AA 5
+		//QSPR A 5 bright
+        loop
+	}
+}
+//common sense is not so common
+ACTOR DummyTripPipeMine: SwitchableDecoration 12997
+{
+	Radius 12
+	Height 16
+	Mass 1000000
+	Health 10
+	Damage 1
+	SeeSound "weapons/tripplace"
+	deathsound "weapons/tripwire"
+	Activation THINGSPEC_DEFAULT | THINGSPEC_ACTIVATE
+	ExplosionDamage 192
+	ExplosionRadius 128
+	+USESPECIAL
+	Speed 0
+	scale 0.5
+	+NOBLOOD
+	+SHOOTABLE
+	+EXTREMEDEATH
+	+CANBOUNCEWATER
+	+FLOORCLIP
+	+FLOORHUGGER
+	+MISSILE
+	+SOLID
+	+TOUCHY
+	Obituary "%o is a dumb idiot who wasn't paying attention and somehow got killed by this."
+	
+	States
+   {
+   Spawn:
+      TBOM A 0 A_Gravity
+      TBOM A 25
+	  TBOM B 3
+      Loop
+   Xdeath:
+	  TBOM A 15 a_scream
+	  TBOM A 0 ACS_Execute(30,0)//one off item so i'm ok with this
+   Death:
+    TNT1 A 2 A_SpawnItemEx("HEExplode")
+	TNT1 A 0 A_PlaySound("weapons/grenexplode", CHAN_ITEM, 1.0, 0, 0.5)	
+	TNT1 A 0 //A_explode
+	TNT1 A 0 //A_AlertMonsters
+    Stop
+   Active:
+    TNT1 A 0 A_PlaySound("weapons/tripdisarm", CHAN_WEAPON)	
+    TNT1 A 0 A_spawnItemEx("Pipebomb")
+	stop
+   }
+}
+

@@ -1,0 +1,583 @@
+#library "JOURNAL"
+#include "zcommon.acs"
+
+script 1984 (void)
+{
+    ACS_NamedExecute("showjournal",0);
+	localambientsound("questgeneric",127);
+}
+
+//Following code was developed by Ramon.Dexter with help from cocka and Popsoap10. Minor alterations for quest details. --Vostyok
+
+
+//JOURNAL DISPLAY
+//==----------------------------------------------------------------==
+global int 32:showJournal;
+script "showJournal" (void) //this is used to open and close the journal screen; I used KEYCONF to assign a key to this script
+{
+   if(showJournal==0)
+   {
+      ACS_NamedExecute("displayJournal2",0);
+   }
+   
+   else if(showJournal==1)
+   {            
+      ACS_NamedExecute("eraseDisplayedJournal",0);      
+   }
+}
+
+bool m01QuestActive[9] ={false, false, false, false, false, false, false, false, false}; // Initializing to false - to indicate if quest if active or not
+str m01Quest[9]  ={"", "","","","","","","", ""};                 // Initializing to an empty string - here goes script infotext
+str m01QuestActivity[9] ={"", "","","","","","","", ""};         // Initializing to an empty string - quest activity comment
+
+
+script "displayJournal2" (void)
+{ 
+   //(snip) uses custom graphics and header for Journal. Header and background code removed --- Vostyok
+   SetHudSize(640, 480, 0);
+ if (CheckInventory("JournalMap1")==0)
+ {
+  if (CheckInventory("JournalPage1")==1)
+      {
+	   m01QuestActive[0] = true;         // m02quest01active = true;
+       m01Quest[0] = "Is this real?"; // m02Quest01 = "This is quest 01";
+       m01QuestActivity[0] = "\c[red]Or is it all a dream?";   // m02quest01activity = "active";
+	  }
+  }
+   if (CheckInventory("JournalMap1")==1)
+  {
+      if (CheckInventory("JournalPage1")==1)
+	  {
+	   m01QuestActive[0] = true;         // m02quest01active = true;
+       m01Quest[0] = "Finish bike repairs."; // m02Quest01 = "This is quest 01";
+       m01QuestActivity[0] = "\c[red]-Talk to Rigs.";   // m02quest01activity = "active";
+	  }
+	  if (CheckInventory("JournalPage1")>1)
+	  {
+	   m01QuestActive[0] = true;         // m02quest01active = true;
+       m01Quest[0] = "Finish bike repairs."; // m02Quest01 = "This is quest 01";
+       m01QuestActivity[0] = "\c[red]-Find Parts.";   // m02quest01activity = "active";
+	  }
+	   if (CheckInventory("JournalPage1")>2)
+	  {
+	   m01QuestActive[0] = true;         // m02quest01active = true;
+       m01Quest[0] = "Finish bike repairs."; // m02Quest01 = "This is quest 01";
+       m01QuestActivity[0] = "\c[green]-Done!";   // m02quest01activity = "active";
+	  }
+	  if (CheckInventory("JournalPage2")==1)
+	  {
+	    m01QuestActive[1] = true;         // m02quest02active = true;
+        m01Quest[1] = "Find Gasoline."; // m02Quest02 = "This is quest 02";
+        m01QuestActivity[1] = "\c[red]-Search City.";   // m02quest02activity = "active";
+	  }
+	  if (CheckInventory("JournalPage2")>1)
+	  {
+	    m01QuestActive[1] = true;         // m02quest02active = true;
+        m01Quest[1] = "Find Gasoline."; // m02Quest02 = "This is quest 02";
+        m01QuestActivity[1] = "\c[green]-Done!";   // m02quest02activity = "active";
+	  }
+	   if (CheckInventory("JournalPage3")==1)
+	  {
+	    m01QuestActive[2] = true;         // m02quest03active = true;
+        m01Quest[2] = "Find Battery."; // m02Quest03 = "This is quest 02";
+        m01QuestActivity[2] = "\c[red]-Search City.";   // m02quest03activity = "active";
+	  }
+	   if (CheckInventory("JournalPage3")>1)
+	  {
+	    m01QuestActive[2] = true;         // m02quest03active = true;
+        m01Quest[2] = "Find Battery."; // m02Quest03 = "This is quest 02";
+        m01QuestActivity[2] = "\c[green]-Done!";   // m02quest03activity = "active";
+	  }
+	   if (CheckInventory("JournalPage4")==1)
+	  {
+        m01QuestActive[3] = true;         // m02quest04active = true;
+        m01Quest[3] = "Find missing scav."; // m02Quest04 = "This is quest 02";
+        m01QuestActivity[3] = "\c[red]-Search subway.";   // m02quest04activity = "active";
+	  }
+	   if (CheckInventory("JournalPage4")>1)
+	  {
+        m01QuestActive[3] = true;         // m02quest04active = true;
+        m01Quest[3] = "Find missing scav."; // m02Quest04 = "This is quest 02";
+        m01QuestActivity[3] = "\c[red]-Tell Violet.";   // m02quest04activity = "active";
+	  }
+	   if (CheckInventory("JournalPage4")>2)
+	  {
+        m01QuestActive[3] = true;         // m02quest04active = true;
+        m01Quest[3] = "Find missing scav."; // m02Quest04 = "This is quest 02";
+        m01QuestActivity[3] = "\c[green]-Done!";   // m02quest04activity = "active";
+	  }
+	  if (CheckInventory("JournalPage5")==1)
+	  {
+        m01QuestActive[4] = true;         // m02quest05active = true;
+        m01Quest[4] = "Find Ammo Primers."; // m02Quest05 = "This is quest 02";
+        m01QuestActivity[4] = "\c[red]-Check Flooded District.";   // m02quest05activity = "active";
+	  }
+	   if (CheckInventory("JournalPage5")>1)
+	  {
+        m01QuestActive[4] = true;         // m02quest05active = true;
+        m01Quest[4] = "Find Ammo Primers."; // m02Quest05 = "This is quest 02";
+        m01QuestActivity[4] = "\c[red]-Find a buyer.";   // m02quest05activity = "active";
+	  }
+	   if (CheckInventory("JournalPage5")>2)
+	  {
+        m01QuestActive[4] = true;         // m02quest05active = true;
+        m01Quest[4] = "Find Ammo Primers."; // m02Quest05 = "This is quest 02";
+        m01QuestActivity[4] = "\c[green]-Done!";   // m02quest05activity = "active";
+	  }
+	  if (CheckInventory("JournalPage6")==1)
+	  {
+       m01QuestActive[5] = true;         // m02quest06active = true;
+       m01Quest[5] = "Find Medicine."; // m02Quest06 = "This is quest 02";
+       m01QuestActivity[5] = "\c[red]-Search City.";   // m02quest06activity = "active";
+	  }
+      if (CheckInventory("JournalPage6") >1)
+	  {
+       m01QuestActive[5] = true;         // m02quest06active = true;
+       m01Quest[5] = "Find Medicine."; // m02Quest06 = "This is quest 02";
+       m01QuestActivity[5] = "\c[red]-Find a buyer.";   // m02quest06activity = "active";
+	  }
+	  if (CheckInventory("JournalPage6")>2)
+	  {
+       m01QuestActive[5] = true;         // m02quest06active = true;
+       m01Quest[5] = "Find Medicine."; // m02Quest06 = "This is quest 02";
+       m01QuestActivity[5] = "\c[green]-Done!";   // m02quest06activity = "active";
+	  }
+	  if (CheckInventory("JournalPage7")==1)
+	   {
+       m01QuestActive[6] = true;         // m02quest07active = true;
+       m01Quest[6] = "Help Dealer with Mojo."; // m02Quest07 = "This is quest 02";
+       m01QuestActivity[6] = "\c[red]-Find a stim.";   // m02quest07activity = "active";
+       }
+	    if (CheckInventory("JournalPage7")>1)
+	   {
+       m01QuestActive[6] = true;         // m02quest07active = true;
+       m01Quest[6] = "Help Dealer with Mojo."; // m02Quest07 = "This is quest 02";
+       m01QuestActivity[6] = "\c[green]-Done!";   // m02quest07activity = "active";
+       }
+	    if (CheckInventory("JournalPage8")==1)
+	   {
+        m01QuestActive[7] = true;         // m02quest08active = true;
+        m01Quest[7] = "Find General's camp."; // m02Quest08 = "This is quest 02";
+        m01QuestActivity[7] = "\c[red]-Search The Gap";   // m02quest08activity = "active";
+       }
+	   if (CheckInventory("JournalPage8")>1)
+	   {
+        m01QuestActive[7] = true;         // m02quest08active = true;
+        m01Quest[7] = "Find General's camp."; // m02Quest08 = "This is quest 02";
+        m01QuestActivity[7] = "\c[green]-Done!";   // m02quest08activity = "active";
+       }
+	    if (CheckInventory("JournalPage9")==1)
+	   {
+        m01QuestActive[8] = true;         // m02quest09active = true;
+        m01Quest[8] = "Head North"; // m02Quest09 = "This is quest 02";
+        m01QuestActivity[8] = "\c[red]-Leave City";   // m02quest09activity = "active";
+       }
+}
+ if (CheckInventory("JournalMap2")==1)
+  {
+      if (CheckInventory("JournalPage1")==1)
+	  {
+	   m01QuestActive[0] = true;         // m02quest01active = true;
+       m01Quest[0] = "Look for Bike."; // m02Quest01 = "This is quest 01";
+       m01QuestActivity[0] = "\c[red]-Talk to locals.";   // m02quest01activity = "active";
+	  }
+	  if (CheckInventory("JournalPage1")==2)
+	  {
+	   m01QuestActive[0] = true;         // m02quest01active = true;
+       m01Quest[0] = "Look for Bike."; // m02Quest01 = "This is quest 01";
+       m01QuestActivity[0] = "\c[red]-Deal with roamers.";   // m02quest01activity = "active";
+	  }
+	  if (CheckInventory("JournalPage1")==3)
+	  {
+	   m01QuestActive[0] = true;         // m02quest01active = true;
+       m01Quest[0] = "Look for Bike."; // m02Quest01 = "This is quest 01";
+       m01QuestActivity[0] = "\c[red]-Deal with Hauer.";   // m02quest01activity = "active";
+	  }
+	   if (CheckInventory("JournalPage1")>3)
+	  {
+	   m01QuestActive[0] = true;         // m02quest01active = true;
+       m01Quest[0] = "Look for Bike."; // m02Quest01 = "This is quest 01";
+       m01QuestActivity[0] = "\c[green]-Done!";   // m02quest01activity = "active";
+	  }
+	  if (CheckInventory("JournalPage2")==1)
+	  {
+	    m01QuestActive[1] = true;         // m02quest02active = true;
+        m01Quest[1] = "Find a way north."; // m02Quest02 = "This is quest 02";
+        m01QuestActivity[1] = "\c[red]-talk to locals.";   // m02quest02activity = "active";
+	  }
+	  if (CheckInventory("JournalPage2")>1)
+	  {
+	    m01QuestActive[1] = true;         // m02quest02active = true;
+        m01Quest[1] = "Find a way north."; // m02Quest02 = "This is quest 02";
+        m01QuestActivity[1] = "\c[green]-Done!";   // m02quest02activity = "active";
+	  }
+	   if (CheckInventory("JournalPage3")==1)
+	  {
+	    m01QuestActive[2] = true;         // m02quest03active = true;
+        m01Quest[2] = "Clear gas tunnels."; // m02Quest03 = "This is quest 02";
+        m01QuestActivity[2] = "\c[red]-Find entrance.";   // m02quest03activity = "active";
+	  }
+	   if (CheckInventory("JournalPage3")>1)
+	  {
+	    m01QuestActive[2] = true;         // m02quest03active = true;
+        m01Quest[2] = "Clear gas tunnels."; // m02Quest03 = "This is quest 02";
+        m01QuestActivity[2] = "\c[green]-Done!";   // m02quest03activity = "active";
+	  }
+	   if (CheckInventory("JournalPage4")==1)
+	  {
+        m01QuestActive[3] = true;         // m02quest04active = true;
+        m01Quest[3] = "Find missing scavs."; // m02Quest04 = "This is quest 02";
+        m01QuestActivity[3] = "\c[red]-Search ruins.";   // m02quest04activity = "active";
+	  }
+	   if (CheckInventory("JournalPage4")>1)
+	  {
+        m01QuestActive[3] = true;         // m02quest04active = true;
+        m01Quest[3] = "Find missing scavs."; // m02Quest04 = "This is quest 02";
+        m01QuestActivity[3] = "\c[red]-see Silver.";   // m02quest04activity = "active";
+	  }
+	   if (CheckInventory("JournalPage4")>2)
+	  {
+        m01QuestActive[3] = true;         // m02quest04active = true;
+        m01Quest[3] = "Find missing scavs."; // m02Quest04 = "This is quest 02";
+        m01QuestActivity[3] = "\c[green]-Done!";   // m02quest04activity = "active";
+	  }
+	  if (CheckInventory("JournalPage5")==1)
+	  {
+        m01QuestActive[4] = true;         // m02quest05active = true;
+        m01Quest[4] = "Find plant samples."; // m02Quest05 = "This is quest 02";
+        m01QuestActivity[4] = "\c[red]-Check out the dome.";   // m02quest05activity = "active";
+	  }
+	   if (CheckInventory("JournalPage5")>1)
+	  {
+        m01QuestActive[4] = true;         // m02quest05active = true;
+        m01Quest[4] = "Find plant samples."; // m02Quest05 = "This is quest 02";
+        m01QuestActivity[4] = "\c[red]-Find a buyer.";   // m02quest05activity = "active";
+	  }
+	   if (CheckInventory("JournalPage5")>2)
+	  {
+        m01QuestActive[4] = true;         // m02quest05active = true;
+        m01Quest[4] = "Find plant samples."; // m02Quest05 = "This is quest 02";
+        m01QuestActivity[4] = "\c[green]-Done!";   // m02quest05activity = "active";
+	  }
+	  if (CheckInventory("JournalPage6")==1)
+	  {
+       m01QuestActive[5] = true;         // m02quest06active = true;
+       m01Quest[5] = "Find spore samples."; // m02Quest06 = "This is quest 02";
+       m01QuestActivity[5] = "\c[red]-Find the source.";   // m02quest06activity = "active";
+	  }
+      if (CheckInventory("JournalPage6") >1)
+	  {
+       m01QuestActive[5] = true;         // m02quest06active = true;
+       m01Quest[5] = "Find spore samples."; // m02Quest06 = "This is quest 02";
+       m01QuestActivity[5] = "\c[red]-Find a buyer.";   // m02quest06activity = "active";
+	  }
+	  if (CheckInventory("JournalPage6")>2)
+	  {
+       m01QuestActive[5] = true;         // m02quest06active = true;
+       m01Quest[5] = "Find spore samples."; // m02Quest06 = "This is quest 02";
+       m01QuestActivity[5] = "\c[green]-Done!";   // m02quest06activity = "active";
+	  }
+	  if (CheckInventory("JournalPage7")==1)
+	   {
+       m01QuestActive[6] = true;         // m02quest07active = true;
+       m01Quest[6] = "Resolve the conflict."; // m02Quest07 = "This is quest 02";
+       m01QuestActivity[6] = "\c[red]-Question locals.";   // m02quest07activity = "active";
+       }
+	    if (CheckInventory("JournalPage7")==2)
+	   {
+       m01QuestActive[6] = true;         // m02quest07active = true;
+       m01Quest[6] = "Resolve the conflict."; // m02Quest07 = "This is quest 02";
+       m01QuestActivity[6] = "\c[red]-Destroy ammo dump.";   // m02quest07activity = "active";
+       }
+	    if (CheckInventory("JournalPage7")==3)
+	   {
+       m01QuestActive[6] = true;         // m02quest07active = true;
+       m01Quest[6] = "Resolve the conflict."; // m02Quest07 = "This is quest 02";
+       m01QuestActivity[6] = "\c[red]-infect prosperity.";   // m02quest07activity = "active";
+       }
+	    if (CheckInventory("JournalPage7")==4)
+	   {
+       m01QuestActive[6] = true;         // m02quest07active = true;
+       m01Quest[6] = "Resolve the conflict."; // m02Quest07 = "This is quest 02";
+       m01QuestActivity[6] = "\c[red]-infect town/ bomb Roamers.";   // m02quest07activity = "active";
+       }
+	    if (CheckInventory("JournalPage7")>4)
+	   {
+       m01QuestActive[6] = true;         // m02quest07active = true;
+       m01Quest[6] = "Resolve the conflict."; // m02Quest07 = "This is quest 02";
+       m01QuestActivity[6] = "\c[green]-Done!";   // m02quest07activity = "active";
+       }
+	    if (CheckInventory("JournalPage8")==1)
+	   {
+        m01QuestActive[7] = true;         // m02quest08active = true;
+        m01Quest[7] = "Free smiley, or not."; // m02Quest08 = "This is quest 02";
+        m01QuestActivity[7] = "\c[red]-talk to guard.";   // m02quest08activity = "active";
+       }
+	   if (CheckInventory("JournalPage8")==2)
+	   {
+        m01QuestActive[7] = true;         // m02quest08active = true;
+        m01Quest[7] = "Free smiley, or not."; // m02Quest08 = "This is quest 02";
+        m01QuestActivity[7] = "\c[red]-find stash.";   // m02quest08activity = "active";
+       }
+	   if (CheckInventory("JournalPage8")>2)
+	   {
+        m01QuestActive[7] = true;         // m02quest08active = true;
+        m01Quest[7] = "Free smiley, or not."; // m02Quest08 = "This is quest 02";
+        m01QuestActivity[7] = "\c[green]-reminder: kill Smiley";   // m02quest08activity = "active";
+       }
+	    if (CheckInventory("JournalPage9")==1)
+	   {
+        m01QuestActive[8] = true;         // m02quest09active = true;
+        m01Quest[8] = "Find Sigma"; // m02Quest09 = "This is quest 02";
+        m01QuestActivity[8] = "\c[red]-Leave Badlands";   // m02quest09activity = "active";
+       }
+}
+
+   if (CheckInventory("JournalMap1")>0 || CheckInventory("JournalMap2")>0)
+   { 
+      if (CheckInventory("JournalMapupdate")==1)
+     { 
+      SetFont("JRNMB0"); //not really necessary, just journal screen background
+	   SetHudSize(640, 480, 0);
+      HudMessage(s:"A"; HUDMSG_PLAIN, 7021, 0, 360.0, 480.2, 0); //journal background 
+     }
+   if (CheckInventory("JournalMapupdate")==2)
+     { 
+      SetFont("JRNMC0"); //not really necessary, just journal screen background
+	   SetHudSize(640, 480, 0);
+      HudMessage(s:"A"; HUDMSG_PLAIN, 7021, 0, 360.0, 480.2, 0); //journal background 
+     }
+   if (CheckInventory("JournalMapupdate")==3)
+     { 
+      SetFont("JRNMD0"); //not really necessary, just journal screen background
+	   SetHudSize(640, 480, 0);
+      HudMessage(s:"A"; HUDMSG_PLAIN, 7021, 0, 360.0, 480.2, 0); //journal background 
+     }
+      if (CheckInventory("JournalMapupdate")==0)
+	  {
+      SetFont("JRNMA0"); //not really necessary, just journal screen background
+	   SetHudSize(640, 480, 0);
+      HudMessage(s:"A"; HUDMSG_PLAIN, 7021, 0, 360.0, 480.2, 0); //journal background 
+      }
+   }
+   else if(CheckInventory("JournalMap1")<1 || CheckInventory("JournalMap2")<1)
+   {
+         SetFont("JRNBA0"); //not really necessary, just journal screen background
+	   SetHudSize(640, 480, 0);
+      HudMessage(s:"A"; HUDMSG_PLAIN, 7021, 0, 360.0, 480.2, 0); //journal background 
+   }
+   SetFont("journalfont");
+   //and here the magic begins
+   for(int counter=0; counter < 9; counter++) // Loop through every quest, used for aadding new lines; change counter < 3  if you have more than 3 quests
+   {
+      if(m01QuestActive[counter] == true) // If this quest is active...
+      {
+         //print(i:counter);
+		  SetHudSize(0, 0, 0);
+          HudMessage(s: m01Quest[counter]; //quest text, according to counter value; when m01quest[counter] is true, counter counts +1 and hudmessages are drawn.
+                     HUDMSG_PLAIN, 7001 + counter, CR_Black, 0.61, 0.43 + (counter * 0.05), 0);
+          HudMessage(s: m01QuestActivity[counter];  //quest status
+                     HUDMSG_PLAIN, 7010 + counter, CR_Red, 0.64, 0.45 + (counter *0.05), 0);
+       
+      }
+   }
+ 
+   
+   showJournal = 1;
+}
+
+
+
+script "eraseDisplayedJournal" (void) //up to 9 quests could be used in this script...if you want to use more quests, you have to add hudmsgs...ot modify it to used the 'counter' :)
+{
+   HudMessage(s:""; //nadpis
+            HUDMSG_PLAIN, 7000, CR_GRAY, 0.75, 0.3, 0);
+   HudMessage(s:""; //quest 1
+            HUDMSG_PLAIN, 7001, CR_GRAY, 0.7, 0.4, 0);
+   HudMessage(s:""; //quest 2
+            HUDMSG_PLAIN, 7002, CR_GRAY, 0.7, 0.45, 0);
+   HudMessage(s:""; //quest 3
+            HUDMSG_PLAIN, 7003, CR_GRAY, 0.7, 0.5, 0);
+   HudMessage(s:""; //quest 1 note
+            HUDMSG_PLAIN, 7004, CR_GRAY, 0.9, 0.4, 0);
+   HudMessage(s:""; //quest 2 note
+            HUDMSG_PLAIN, 7005, CR_GRAY, 0.9, 0.45, 0);
+   HudMessage(s:""; //quest 3 note
+            HUDMSG_PLAIN, 7006, CR_GRAY, 0.9, 0.5, 0);
+   HudMessage(s:"";
+            HUDMSG_PLAIN, 7007, 0, 0.6, 0.3, 0);
+   HudMessage(s:"";
+            HUDMSG_PLAIN, 7008, 0, 0.6, 0.6, 0);
+   HudMessage(s:"";
+            HUDMSG_PLAIN, 7009, 0, 0.6, 0.6, 0);
+   HudMessage(s:"";
+            HUDMSG_PLAIN, 7010, 0, 0.6, 0.6, 0);
+    HudMessage(s:"";
+            HUDMSG_PLAIN, 7011, 0, 0.6, 0.6, 0);
+	 HudMessage(s:"";
+            HUDMSG_PLAIN, 7012, 0, 0.6, 0.6, 0);
+	 HudMessage(s:"";
+            HUDMSG_PLAIN, 7013, 0, 0.6, 0.6, 0);
+	 HudMessage(s:"";
+            HUDMSG_PLAIN, 7014, 0, 0.6, 0.6, 0);
+	 HudMessage(s:"";
+            HUDMSG_PLAIN, 7015, 0, 0.6, 0.6, 0);
+	 HudMessage(s:"";
+            HUDMSG_PLAIN, 7016, 0, 0.6, 0.6, 0);
+	 HudMessage(s:"";
+            HUDMSG_PLAIN, 7017, 0, 0.6, 0.6, 0);
+	 HudMessage(s:"";
+            HUDMSG_PLAIN, 7018, 0, 0.6, 0.6, 0);
+	 HudMessage(s:"";
+            HUDMSG_PLAIN, 7019, 0, 0.6, 0.6, 0);
+	 HudMessage(s:"";
+            HUDMSG_PLAIN, 7020, 0, 0.6, 0.6, 0);
+	HudMessage(s:"";
+            HUDMSG_PLAIN, 7021, 0, 0.6, 0.6, 0);
+   showJournal = 0;
+}
+
+//==----------------------------------------------------------------==
+//
+//=====================================================================================
+
+
+
+//Map01 quests
+//==------------------------------------------------------------------------------------------==
+//this is made, so you will be able to individually assign quests with individual text and comment
+//mXXquestXX is used to start the quest
+//mXXquestXXcompleted is used to finish the quest
+script "m01Quest01" (void)
+{
+   m01QuestActive[0] = true;         // m02quest01active = true;
+   m01Quest[0] = "Check on bike repairs."; // m02Quest01 = "This is quest 01";
+   m01QuestActivity[0] = "Talk to Rigs.";   // m02quest01activity = "active";
+}
+script "m01Quest01updated" (void)
+{
+   m01QuestActivity[0] = "Find new parts.";   // m02quest01activity = "active";
+}
+script "m01quest01completed" (void)
+{
+   m01QuestActivity[0] = "\c[green]Done!";
+   //XP = XP + 400;
+}
+
+script "m01Quest02" (void)
+{
+   m01QuestActive[1] = true;         // m02quest02active = true;
+   m01Quest[1] = "Find Gasoline."; // m02Quest02 = "This is quest 02";
+   m01QuestActivity[1] = "Search City.";   // m02quest02activity = "active";
+}
+script "m01quest02completed" (void)
+{
+   m01QuestActivity[1] = "\c[green]Done!";
+   //XP = XP + 400;
+}
+
+script "m01Quest03" (void)
+{
+   m01QuestActive[2] = true;         // m02quest03active = true;
+   m01Quest[2] = "Find Battery."; // m02Quest03 = "This is quest 02";
+   m01QuestActivity[2] = "Search City.";   // m02quest03activity = "active";
+}
+script "m01quest03updated" (void)
+{
+   m01QuestActivity[2] = "\c[red]Ask around for clues.";
+}
+script "m01quest03completed" (void)
+{
+   m01QuestActivity[2] = "\c[green]Done!";
+   //XP = XP + 400;
+}
+
+script "m01Quest04" (void)
+{
+   m01QuestActive[3] = true;         // m02quest04active = true;
+   m01Quest[3] = "Find missing scav."; // m02Quest04 = "This is quest 02";
+   m01QuestActivity[3] = "Search subway.";   // m02quest04activity = "active";
+}
+script "m01quest04completed" (void)
+{
+   m01QuestActivity[3] = "\c[green]Rescued!";
+   //XP = XP + 400;
+}
+script "m01quest04Failed" (void)
+{
+   m01QuestActivity[3] = "\c[red]She's dead.";
+   //XP = XP + 400;
+}
+
+script "m01Quest05" (void)
+{
+   m01QuestActive[4] = true;         // m02quest05active = true;
+   m01Quest[4] = "Find Ammo Primers."; // m02Quest05 = "This is quest 02";
+   m01QuestActivity[4] = "Check Flooded District.";   // m02quest05activity = "active";
+}
+script "m01quest05updated" (void)
+{
+   m01Quest[4] = "Found Ammo Primers."; // m02Quest05 = "This is quest 02";
+   m01QuestActivity[4] = "\c[red]Find a buyer.";
+   //XP = XP + 400;
+}
+script "m01quest05completed" (void)
+{
+   m01QuestActivity[4] = "\c[green]Sold!";
+   //XP = XP + 400;
+   Print(s:"Find Ammo Primers.");
+}
+
+script "m01Quest06" (void)
+{
+   m01QuestActive[5] = true;         // m02quest06active = true;
+   m01Quest[5] = "Find buyer for meds."; // m02Quest06 = "This is quest 02";
+   m01QuestActivity[5] = "Find a trader.";   // m02quest06activity = "active";
+}
+script "m01quest06completed" (void)
+{
+   m01QuestActivity[5] = "\c[green]Sold!";
+   //XP = XP + 400;
+   Print(s:"Find buyer for meds.");
+}
+
+script "m01Quest07" (void)
+{
+   m01QuestActive[6] = true;         // m02quest07active = true;
+   m01Quest[6] = "Help dealer."; // m02Quest07 = "This is quest 02";
+   m01QuestActivity[6] = "Find a stim.";   // m02quest07activity = "active";
+}
+script "m01quest07completed" (void)
+{
+   m01QuestActivity[6] = "\c[green]Done!";
+   //XP = XP + 400;
+}
+script "m01quest07Failed" (void)
+{
+   m01QuestActivity[6] = "\c[red]fight finished.";
+   //XP = XP + 400;
+}
+
+script "m01Quest08" (void)
+{
+   m01QuestActive[7] = true;         // m02quest08active = true;
+   m01Quest[7] = "Find General's camp."; // m02Quest08 = "This is quest 02";
+   m01QuestActivity[7] = "Search The Gap";   // m02quest08activity = "active";
+}
+script "m01quest08completed" (void)
+{
+   m01QuestActivity[7] = "\c[green]Done!";
+}
+
+script "m01Quest09" (void)
+{
+   m01QuestActive[8] = true;         // m02quest09active = true;
+   m01Quest[8] = "Found a bomb?!?"; // m02Quest09 = "This is quest 02";
+   m01QuestActivity[8] = "Find a use for it.";   // m02quest09activity = "active";
+}
+script "m01quest09completed" (void)
+{
+   m01QuestActivity[8] = "\c[green]Done!";
+}
+//==------------------------------------------------------------------------------------------==
+//=====================================================================================

@@ -1,0 +1,1632 @@
+namespace = "ZDoom";
+
+conversation
+{
+	actor = "WorkBenchTalker";
+	page //1
+	{
+		name = "Workbench";
+		panel = "MBENCH01";
+		dialog = "Select a weapon category to begin work on.";
+		choice
+		{
+			text = "Pistols.";
+			nextpage = 2;
+		}
+		choice
+		{
+			text = "Shotguns.";
+			nextpage = 5;
+		}
+		choice
+		{
+			text = "Rifles.";
+			nextpage = 11;
+		}
+		choice
+		{
+			text = "Heavy.";
+			nextpage = 8;
+		}
+	}
+page //2
+	{
+		name = "Workbench";
+		panel = "MBENCH02";
+		dialog = "Select a weapon to modify.";
+		choice
+		{
+			text = ".45 Revolver ++";
+			nextpage = 14;
+			Require
+			{
+			   Item= "Revolver3";
+			   Amount = 1;
+			}
+		}
+		choice
+		{
+			text = ".45 Revolver +";
+			nextpage = 13;
+			Require
+			{
+			   Item= "Revolver2";
+			   Amount = 1;
+			}
+			exclude
+			{
+			   Item= "Revolver3";
+			   Amount = 1;
+			}
+			exclude
+			{
+			   Item= "Revolver";
+			   Amount = 1;
+			}
+		}
+		choice
+		{
+			text = ".45 Revolver";
+			nextpage = 3;
+			Require
+			{
+			   Item= "Revolver";
+			   Amount = 1;
+			}
+			exclude
+			{
+			   Item= "Revolver2";
+			   Amount = 1;
+			}
+			exclude
+			{
+			   Item= "Revolver3";
+			   Amount = 1;
+			}
+		}
+    choice
+		{
+			text = "9mm Autoloader ++";
+			nextpage = 24;
+			Require
+			{
+			   Item= "Glock3";
+			   Amount = 1;
+			}
+		}
+   choice
+		{
+			text = "9mm Autoloader +";
+			nextpage = 23;
+			Require
+			{
+			   Item= "Glock2";
+			   Amount = 1;
+			}
+			exclude
+			{
+			   Item= "Glock";
+			   Amount = 1;
+			}
+			exclude
+			{
+			   Item= "Glock3";
+			   Amount = 1;
+			}
+		}
+   choice
+		{
+			text = "9mm Autoloader";
+			nextpage = 10;
+			Require
+			{
+			   Item= "Glock";
+			   Amount = 1;
+			}
+			exclude
+			{
+			   Item= "Glock2";
+			   Amount = 1;
+			}
+			exclude
+			{
+			   Item= "Glock3";
+			   Amount = 1;
+			}
+		}
+		choice
+		{
+			text = "9mm Machine Pistol ++";
+			nextpage = 22;
+			Require
+			{
+			   Item= "Ingram3";
+			   Amount = 1;
+			}
+		}
+		choice
+		{
+			text = "9mm Machine Pistol +";
+			nextpage = 21;
+			Require
+			{
+			   Item= "Ingram2";
+			   Amount = 1;
+			}
+			exclude
+			{
+			   Item= "Ingram";
+			   Amount = 1;
+			}
+			exclude
+			{
+			   Item= "Ingram3";
+			   Amount = 1;
+			}
+		}
+		choice
+		{
+			text = "9mm Machine Pistol";
+			nextpage = 4;
+			Require
+			{
+			   Item= "Ingram";
+			   Amount = 1;
+			}
+			exclude
+			{
+			   Item= "Ingram2";
+			   Amount = 1;
+			}
+			exclude
+			{
+			   Item= "Ingram3";
+			   Amount = 1;
+			}
+		}
+		choice
+		{
+			text = "Choose another category.";
+			nextpage = 1;
+		}
+	}
+page //3
+	{
+		name = "Workbench";
+		panel = "MBENCH03";
+		dialog = "Tier 1: Extended Barrel and improved sights (damage mod). Increases damage by 30%. Requires 150 junk to complete.";
+		link = 1;
+		ifitem
+		{
+		 item = "Revolver2";
+		 amount = 1;
+		 }
+		choice
+		{
+			text = "Install mod (150 junk).";
+			Giveitem = "RevolverBuild2";
+			CloseDialog = true;
+			Cost
+			{
+			   Item= "chips";
+			   Amount = 150;
+			}
+			Require
+			{
+			   Item= "Revolver";
+			   Amount = 1;
+			}
+			YesMessage = "You installed the Extended Barrel (DAMAGE MOD) !";
+			nomessage = "You lack the required parts.";
+		}
+		choice
+		{
+			text = "Choose another weapon.";
+			nextpage = 2;
+		}
+		choice
+		{
+			text = "Choose another category.";
+			nextpage = 1;
+		}
+	}
+page //4
+	{
+		name = "Workbench";
+		panel = "MBENCH15";
+		dialog = "Tier 1: Michonne Special (stealth mod). Reduces firing sound radius by 90%. Requires 150 junk to complete.";
+		link = 1;
+		ifitem
+		{
+		 item = "Ingram2";
+		 amount = 1;
+		 }
+		 choice
+		{
+			text = "Install mod (150 junk).";
+			YesMessage = "You built the Michonne Special (STEALTH MOD) !";
+			Giveitem = "Ingrambuild2";
+			CloseDialog = true;
+			Cost
+			{
+			   Item= "chips";
+			   Amount = 150;
+			}
+			Require
+			{
+			   Item= "Ingram";
+			   Amount = 1;
+			}
+			nomessage = "You lack the required parts.";
+		}
+		choice
+		{
+			text = "Choose another weapon.";
+			nextpage = 2;
+		}
+		choice
+		{
+			text = "Choose another category.";
+			nextpage = 1;
+		}
+	}
+page //5
+	{
+		name = "Workbench";
+		panel = "MBENCH02";
+		dialog = "Select a weapon to modify.";
+		choice
+		{
+			text = "Pump-action shotgun ++";
+			nextpage = 15;
+			Require
+			{
+			   Item= "Pumpaction3";
+			   Amount = 1;
+			}
+		}
+		choice
+		{
+			text = "Pump-action shotgun";
+			nextpage = 6;
+			Require
+			{
+			   Item= "pumpaction";
+			   Amount = 1;
+			}
+			exclude
+			{
+			   Item= "pumpaction2";
+			   Amount = 1;
+			}
+			exclude
+			{
+			   Item= "Pumpaction3";
+			   Amount = 1;
+			}
+		}
+		choice
+		{
+			text = "Pump-action shotgun +";
+			nextpage = 16;
+			Require
+			{
+			   Item= "pumpaction2";
+			   Amount = 1;
+			}
+			exclude
+			{
+			   Item= "pumpaction3";
+			   Amount = 1;
+			}
+			exclude
+			{
+			   Item= "pumpaction";
+			   Amount = 1;
+			}
+		}
+		choice
+		{
+			text = "Sawed-off shotgun";
+			nextpage = 7;
+			Require
+			{
+			   Item= "SawedOff";
+			   Amount = 1;
+			}
+			exclude
+			{
+			   Item= "SawedOff2";
+			   Amount = 1;
+			}
+			exclude
+			{
+			   Item= "SawedOff3";
+			   Amount = 1;
+			}
+			
+		}
+		choice
+		{
+			text = "Sawed-off shotgun +";
+			nextpage = 17;
+			Require
+			{
+			   Item= "SawedOff2";
+			   Amount = 1;
+			}
+			exclude
+			{
+			   Item= "SawedOff";
+			   Amount = 1;
+			}
+			exclude
+			{
+			   Item= "SawedOff3";
+			   Amount = 1;
+			}
+			
+		}
+		choice
+		{
+			text = "Sawed-off shotgun ++";
+			nextpage = 18;
+			Require
+			{
+			   Item= "SawedOff3";
+			   Amount = 1;
+			}
+			
+		}
+		choice
+		{
+			text = "Choose another category.";
+			nextpage = 1;
+		}
+	}
+    page //6
+	{
+		name = "Workbench";
+		panel = "MBENCH09";
+		dialog = "Tier 1: Bladed Pump (Bayonet mod). Improved melee attack Altfire. Requires 150 junk to complete.";
+		link = 1;
+		ifitem
+		{
+		 item = "pumpaction2";
+		 amount = 1;
+		 }
+		 choice
+		{
+			text = "Install mod (150 junk).";
+			YesMessage = "You built the Bladed Pump (BAYONET MOD) !";
+			Giveitem = "Pumpgunbuild2";
+			CloseDialog = true;
+			Cost
+			{
+			   Item= "chips";
+			   Amount = 150;
+			}
+			Require
+			{
+			   Item= "Pumpaction";
+			   Amount = 1;
+			}
+			nomessage = "You lack the required parts.";
+		}
+		choice
+		{
+			text = "Choose another weapon.";
+			nextpage = 5;
+		}
+		choice
+		{
+			text = "Choose another category.";
+			nextpage = 1;
+		}
+	}
+    page //7
+	{
+		name = "Workbench";
+		panel = "MBENCH12";
+		dialog = "Tier 1: Super Sawed-off (triple mod). Increases capacity and burst damage by 1/2. Requires 150 junk to complete.";
+		link = 1;
+		ifitem
+		{
+		 item = "SawedOff2";
+		 amount = 1;
+		 }
+		 choice
+		{
+			text = "Install mod (150 junk).";
+			YesMessage = "You built Super Sawed-off(TRIPLE MOD) !";
+			Giveitem = "SawedOffbuild2";
+			CloseDialog = true;
+			Cost
+			{
+			   Item= "chips";
+			   Amount = 150;
+			}
+			Require
+			{
+			   Item= "Sawedoff";
+			   Amount = 1;
+			}
+			nomessage = "You lack the required parts.";
+		}
+		choice
+		{
+			text = "Choose another weapon.";
+			nextpage = 5;
+		}
+		choice
+		{
+			text = "Choose another category.";
+			nextpage = 1;
+		}
+	}
+    page //8
+	{
+		name = "Workbench";
+		panel = "MBENCH02";
+		dialog = "Select a weapon to modify.";
+		choice
+		{
+			text = "Master Blaster";
+			nextpage = 9;
+			Require
+			{
+			   Item= "Napalmgun";
+			   Amount = 1;
+			}
+			exclude
+			{
+			   Item= "Napalmgun2";
+			   Amount = 1;
+			}
+			exclude
+			{
+			   Item= "Napalmgun3";
+			   Amount = 1;
+			}
+		}
+		choice
+		{
+			text = "Master Blaster +";
+			nextpage = 19;
+			Require
+			{
+			   Item= "Napalmgun2";
+			   Amount = 1;
+			}
+			exclude
+			{
+			   Item= "Napalmgun";
+			   Amount = 1;
+			}
+			exclude
+			{
+			   Item= "Napalmgun3";
+			   Amount = 1;
+			}
+		}
+		choice
+		{
+			text = "Master Blaster ++";
+			nextpage = 20;
+			Require
+			{
+			   Item= "Napalmgun3";
+			   Amount = 1;
+			}
+		}
+		 choice
+		{
+			text = "Killer P.I.G. ++";
+			nextpage = 32;
+			Require
+			{
+			   Item= "Killerpig3";
+			   Amount = 1;
+			}
+		}
+		choice
+		{
+			text = "Killer P.I.G. +";
+			nextpage = 31;
+			Require
+			{
+			   Item= "KillerPig2";
+			   Amount = 1;
+			}
+			exclude
+			{
+			   Item= "KillerPig";
+			   Amount = 1;
+			}
+			exclude
+			{
+			   Item= "KillerPig3";
+			   Amount = 1;
+			}
+		}
+		choice
+		{
+			text = "Killer P.I.G.";
+			nextpage = 30;
+			Require
+			{
+			   Item= "KillerPig";
+			   Amount = 1;
+			}
+			exclude
+			{
+			   Item= "KillerPig2";
+			   Amount = 1;
+			}
+			exclude
+			{
+			   Item= "KillerPig3";
+			   Amount = 1;
+			}
+		}
+		choice
+		{
+			text = "Project P.I.G.";
+			nextpage = 33;
+			Require
+			{
+			   Item= "PigPieceOne";
+			   Amount = 1;
+			}
+		}
+		choice
+		{
+			text = "Choose another category.";
+			nextpage = 1;
+		}
+	}
+	 page //9
+	{
+		name = "Workbench";
+		panel = "MBENCH18";
+		dialog = "Tier 1: High-pressure tank (capacity mod). Increases fuel capacity by 50%. Requires 150 junk to complete.";
+		link = 1;
+		ifitem
+		{
+		 item = "Napalmgun2";
+		 amount = 1;
+		 }
+		 choice
+		{
+			text = "Install mod (150 junk).";
+			YesMessage = "You installed the High-pressure tank (CAPACITY MOD) !";
+			Giveitem = "Napalmbuild2";
+			CloseDialog = true;
+			Cost
+			{
+			   Item= "chips";
+			   Amount = 150;
+			}
+			Require
+			{
+			   Item= "Napalmgun";
+			   Amount = 1;
+			}
+			nomessage = "You lack the required parts.";
+		}
+		choice
+		{
+			text = "Choose another weapon.";
+			nextpage = 8;
+		}
+		choice
+		{
+			text = "Choose another category.";
+			nextpage = 1;
+		}
+	}
+page //10
+	{
+		name = "Workbench";
+		panel = "MBENCH06";
+		dialog = "Tier 1: Tacticool Laser (accuracy mod). Decreases spread by 50%. Requires 150 junk to complete.";
+		link = 1;
+		ifitem
+		{
+		 item = "Glock2";
+		 amount = 1;
+		 }
+		 choice
+		{
+			text = "Install mod (150 junk).";
+			YesMessage = "You installed the Tacticool laser (ACCURACY MOD) !";
+			Giveitem = "Glockbuild2";
+			CloseDialog = true;
+			Cost
+			{
+			   Item= "chips";
+			   Amount = 150;
+			}
+			Require
+			{
+			   Item= "Glock";
+			   Amount = 1;
+			}
+			nomessage = "You lack the required parts.";
+		}
+		choice
+		{
+			text = "Choose another weapon.";
+			nextpage = 2;
+		}
+		choice
+		{
+			text = "Choose another category.";
+			nextpage = 1;
+		}
+	}
+ page //11
+	{
+		name = "Workbench";
+		panel = "MBENCH02";
+		dialog = "Select a weapon to modify.";
+		 choice
+		{
+			text = "Junker Musket ++";
+			nextpage = 29;
+			Require
+			{
+			   Item= "Junkermusket3";
+			   Amount = 1;
+			}
+		}
+		 choice
+		{
+			text = "Junker Musket +";
+			nextpage = 28;
+			Require
+			{
+			   Item= "Junkermusket2";
+			   Amount = 1;
+			}
+			exclude
+			{
+			   Item= "Junkermusket";
+			   Amount = 1;
+			}
+			exclude
+			{
+			   Item= "Junkermusket3";
+			   Amount = 1;
+			}
+		}
+		 choice
+		{
+			text = "Junker Musket";
+			nextpage = 12;
+			Require
+			{
+			   Item= "Junkermusket";
+			   Amount = 1;
+			}
+			exclude
+			{
+			   Item= "Junkermusket2";
+			   Amount = 1;
+			}
+			exclude
+			{
+			   Item= "Junkermusket3";
+			   Amount = 1;
+			}
+		}
+		 choice
+		{
+			text = "Military Rifle ++";
+			nextpage = 27;
+			Require
+			{
+			   Item= "m163";
+			   Amount = 1;
+			}
+		}
+   choice
+		{
+			text = "Military Rifle +";
+			nextpage = 26;
+			Require
+			{
+			   Item= "M162";
+			   Amount = 1;
+			}
+			exclude
+			{
+			   Item= "M16";
+			   Amount = 1;
+			}
+			exclude
+			{
+			   Item= "M163";
+			   Amount = 1;
+			}
+		}
+   choice
+		{
+			text = "Military Rifle";
+			nextpage = 25;
+			Require
+			{
+			   Item= "m16";
+			   Amount = 1;
+			}
+			exclude
+			{
+			   Item= "m162";
+			   Amount = 1;
+			}
+			exclude
+			{
+			   Item= "m163";
+			   Amount = 1;
+			}
+		}
+		 choice
+		{
+			text = "Lazergun ++";
+			nextpage = 38;
+			Require
+			{
+			   Item= "Lazergun3";
+			   Amount = 1;
+			}
+			exclude
+			{
+			   Item= "Lazergun";
+			   Amount = 1;
+			}
+			exclude
+			{
+			   Item= "Lazergun2";
+			   Amount = 1;
+			}
+		}
+   choice
+		{
+			text = "Lazer Gun +";
+			nextpage = 37;
+			Require
+			{
+			   Item= "Lazergun2";
+			   Amount = 1;
+			}
+			exclude
+			{
+			   Item= "Lazergun";
+			   Amount = 1;
+			}
+			exclude
+			{
+			   Item= "Lazergun3";
+			   Amount = 1;
+			}
+		}
+   choice
+		{
+			text = "Lazer gun";
+			nextpage = 36;
+			Require
+			{
+			   Item= "Lazergun";
+			   Amount = 1;
+			}
+			exclude
+			{
+			   Item= "Lazergun2";
+			   Amount = 1;
+			}
+			exclude
+			{
+			   Item= "Lazergun3";
+			   Amount = 1;
+			}
+		}
+		choice
+		{
+			text = "Choose another category.";
+			nextpage = 1;
+		}
+	}
+page //12
+	{
+		name = "Workbench";
+		panel = "MBENCH21";
+		dialog = "Tier 1: Repeater Mechanism (capacity mod). Convert from single-shot breechloader to three-shot magazine fed . Requires 150 junk to complete.";
+		link = 1;
+		ifitem
+		{
+		 item = "Junkermusket2";
+		 amount = 1;
+		 }
+		 choice
+		{
+			text = "Install mod (150 junk).";
+			YesMessage = "You installed the Repeater Mechanism (CAPACITY MOD) !";
+			Giveitem = "musketbuild2";
+			CloseDialog = true;
+			Cost
+			{
+			   Item= "chips";
+			   Amount = 150;
+			}
+			Require
+			{
+			   Item= "Junkermusket";
+			   Amount = 1;
+			}
+			nomessage = "You lack the required parts.";
+		}
+		choice
+		{
+			text = "Choose another weapon.";
+			nextpage = 11;
+		}
+		choice
+		{
+			text = "Choose another category.";
+			nextpage = 1;
+		}
+	}
+page //13
+	{
+		name = "Workbench";
+		panel = "MBENCH04";
+		dialog = "Tier 2: Custom trigger mech.(rate of fire mod). Tap fire rapidly to increase firing speed at increased recoil. Requires 150 junk to complete.";
+		link = 1;
+		ifitem
+		{
+		 item = "Revolver3";
+		 amount = 1;
+		 }
+		 choice
+		{
+			text = "Install mod (150 junk).";
+			Giveitem = "RevolverBuild3";
+			CloseDialog = true;
+			Cost
+			{
+			   Item= "chips";
+			   Amount = 150;
+			}
+			Require
+			{
+			   Item= "Revolver2";
+			   Amount = 1;
+			}
+			YesMessage = "You installed the custom trigger (ROF MOD) !";
+			nomessage = "You lack the required parts.";
+		}
+		choice
+		{
+			text = "Choose another weapon.";
+			nextpage = 2;
+		}
+		choice
+		{
+			text = "Choose another category.";
+			nextpage = 1;
+		}
+	}
+page //14
+	{
+		name = "Workbench";
+		panel = "MBENCH05";
+		dialog = "This weapon cannot be modified further.";
+		choice
+		{
+			text = "Choose another weapon.";
+			nextpage = 2;
+		}
+		choice
+		{
+			text = "Choose another category.";
+			nextpage = 1;
+		}
+	}
+page //15
+	{
+		name = "Workbench";
+		panel = "MBENCH11";
+		dialog = "This weapon cannot be modified further.";
+		choice
+		{
+			text = "Choose another weapon.";
+			nextpage = 5;
+		}
+		choice
+		{
+			text = "Choose another category.";
+			nextpage = 1;
+		}
+	}
+page //16
+	{
+		name = "Workbench";
+		panel = "MBENCH10";
+		dialog = "Tier 2: Desert Pump (Reload mod). External box magazine adaptor reduces loading times considerably. Camouflage pattern paint for desert survival. Requires 150 junk to complete.";
+		link = 1;
+		ifitem
+		{
+		 item = "Pumpaction3";
+		 amount = 1;
+		 }
+		 choice
+		{
+			text = "Install mod (150 junk).";
+			YesMessage = "You built the Desert Pump (RELOAD MOD) !";
+			Giveitem = "Pumpgunbuild3";
+			CloseDialog = true;
+			Cost
+			{
+			   Item= "chips";
+			   Amount = 150;
+			}
+			Require
+			{
+			   Item= "Pumpaction2";
+			   Amount = 1;
+			}
+			nomessage = "You lack the required parts.";
+		}
+		choice
+		{
+			text = "Choose another weapon.";
+			nextpage = 5;
+		}
+		choice
+		{
+			text = "Choose another category.";
+			nextpage = 1;
+		}
+	}
+ page //17
+	{
+		name = "Workbench";
+		panel = "MBENCH13";
+		dialog = "Tier 2: Super-Duper Sawed-off (recoil mod). Reduces recoil and spread of burst fire by 50%. Requires 150 junk to complete.";
+		link = 1;
+		ifitem
+		{
+		 item = "SawedOff3";
+		 amount = 1;
+		 }
+		 choice
+		{
+			text = "Install mod (150 junk).";
+			YesMessage = "You built the Super-duper Sawed-off (RECOIL MOD) !";
+			Giveitem = "SawedOffbuild3";
+			CloseDialog = true;
+			Cost
+			{
+			   Item= "chips";
+			   Amount = 150;
+			}
+			Require
+			{
+			   Item= "sawedoff2";
+			   Amount = 1;
+			}
+			nomessage = "You lack the required parts.";
+		}
+		choice
+		{
+			text = "Choose another weapon.";
+			nextpage = 5;
+		}
+		choice
+		{
+			text = "Choose another category.";
+			nextpage = 1;
+		}
+	}
+page //18
+	{
+		name = "Workbench";
+		panel = "MBENCH14";
+		dialog = "This weapon cannot be modified further.";
+		choice
+		{
+			text = "Choose another weapon.";
+			nextpage = 5;
+		}
+		choice
+		{
+			text = "Choose another category.";
+			nextpage = 1;
+		}
+	}
+ page //19
+	{
+		name = "Workbench";
+		panel = "MBENCH19";
+		dialog = "Tier 2: Jet-spray nozzles (range mod). Increases range of both fire modes considerably. Requires 150 junk to complete.";
+		link = 1;
+		ifitem
+		{
+		 item = "Napalmgun3";
+		 amount = 1;
+		 }
+		 choice
+		{
+			text = "Install mod (150 junk).";
+			YesMessage = "You installed the Jet-spray Nozzles (RANGE MOD) !";
+			Giveitem = "Napalmbuild3";
+			CloseDialog = true;
+			Cost
+			{
+			   Item= "chips";
+			   Amount = 150;
+			}
+			Require
+			{
+			   Item= "Napalmgun2";
+			   Amount = 1;
+			}
+			nomessage = "You lack the required parts.";
+		}
+		choice
+		{
+			text = "Choose another weapon.";
+			nextpage = 8;
+		}
+		choice
+		{
+			text = "Choose another category.";
+			nextpage = 1;
+		}
+	}
+page //20
+	{
+		name = "Workbench";
+		panel = "MBENCH20";
+		dialog = "This weapon cannot be modified further.";
+		choice
+		{
+			text = "Choose another weapon.";
+			nextpage = 8;
+		}
+		choice
+		{
+			text = "Choose another category.";
+			nextpage = 1;
+		}
+	}
+page //21
+	{
+		name = "Workbench";
+		panel = "MBENCH16";
+		dialog = "Tier 2: Michonne Ultra (handling mod). Double-magazines and full overhaul, improving stability and reload speed. Requires 150 junk to complete.";
+		link = 1;
+		ifitem
+		{
+		 item = "Ingram3";
+		 amount = 1;
+		 }
+		 choice
+		{
+			text = "Install mod (150 junk).";
+			YesMessage = "You built the Michonne ULTRA (HANDLING MOD) !";
+			Giveitem = "Ingrambuild3";
+			Cost
+			{
+			   Item= "chips";
+			   Amount = 150;
+			   CloseDialog = true;
+			}
+			Require
+			{
+			   Item= "Ingram2";
+			   Amount = 1;
+			}
+			nomessage = "You lack the required parts.";
+		}
+		choice
+		{
+			text = "Choose another weapon.";
+			nextpage = 2;
+		}
+		choice
+		{
+			text = "Choose another category.";
+			nextpage = 1;
+		}
+	}
+page //22
+	{
+		name = "Workbench";
+		panel = "MBENCH17";
+		dialog = "This weapon cannot be modified further.";
+		choice
+		{
+			text = "Choose another weapon.";
+			nextpage = 2;
+		}
+		choice
+		{
+			text = "Choose another category.";
+			nextpage = 1;
+		}
+	}
+page //23
+	{
+		name = "Workbench";
+		panel = "MBENCH07";
+		dialog = "Tier 2: Triple-shot trigger (burst mod). Adds a burst-fire altfire that fires three rounds rapid-fire. High recoil but devastating at close range. Requires 150 junk to complete.";
+		link = 1;
+		ifitem
+		{
+		 item = "Glock3";
+		 amount = 1;
+		 }
+		 choice
+		{
+			text = "Install mod (150 junk).";
+			YesMessage = "You installed the Triple-shot trigger!! (BURST MOD) !";
+			Giveitem = "Glockbuild3";
+			CloseDialog = true;
+			Cost
+			{
+			   Item= "chips";
+			   Amount = 150;
+			}
+			Require
+			{
+			   Item= "Glock2";
+			   Amount = 1;
+			}
+			nomessage = "You lack the required parts.";
+		}
+		choice
+		{
+			text = "Choose another weapon.";
+			nextpage = 2;
+		}
+		choice
+		{
+			text = "Choose another category.";
+			nextpage = 1;
+		}
+	}
+page //24
+	{
+		name = "Workbench";
+		panel = "MBENCH08";
+		dialog = "This weapon cannot be modified further.";
+		choice
+		{
+			text = "Choose another weapon.";
+			nextpage = 2;
+		}
+		choice
+		{
+			text = "Choose another category.";
+			nextpage = 1;
+		}
+	}
+page //25
+	{
+		name = "Workbench";
+		panel = "MBENCH24";
+		dialog = "Tier 1: Heavy Barrel (Full-auto mod). Full wood furniture and liberated firing mechanism enables full-automatic fire and better handling. Requires 150 junk to complete.";
+		link = 1;
+		ifitem
+		{
+		 item = "M162";
+		 amount = 1;
+		 }
+		 choice
+		{
+			text = "Install mod (150 junk).";
+			YesMessage = "You installed the Heavy Barrel (FULL-AUTO MOD) !";
+			Giveitem = "AR15build2";
+			CloseDialog = true;
+			Cost
+			{
+			   Item= "chips";
+			   Amount = 150;
+			}
+			Require
+			{
+			   Item= "M16";
+			   Amount = 1;
+			}
+			nomessage = "You lack the required parts.";
+		}
+		choice
+		{
+			text = "Choose another weapon.";
+			nextpage = 11;
+		}
+		choice
+		{
+			text = "Choose another category.";
+			nextpage = 1;
+		}
+	}
+page //26
+	{
+		name = "Workbench";
+		panel = "MBENCH25";
+		dialog = "Tier 2: Wasteland Commando (Launcher Mod). Mounts a spring-loaded pipebomb launcher. Use altfire to switch between rifle and launcher mode. Includes handy ammo display mod. Requires 150 junk to complete.";
+		link = 1;
+		ifitem
+		{
+		 item = "M163";
+		 amount = 1;
+		 }
+		 choice
+		{
+			text = "Install mod (150 junk).";
+			YesMessage = "You built the Wasteland Commando (LAUNCHER MOD) !";
+			Giveitem = "Ar15build3";
+			CloseDialog = true;
+			Cost
+			{
+			   Item= "chips";
+			   Amount = 150;
+			}
+			Require
+			{
+			   Item= "M162";
+			   Amount = 1;
+			}
+			nomessage = "You lack the required parts.";
+		}
+		choice
+		{
+			text = "Choose another weapon.";
+			nextpage = 11;
+		}
+		choice
+		{
+			text = "Choose another category.";
+			nextpage = 1;
+		}
+	}
+page //27
+	{
+		name = "Workbench";
+		panel = "MBENCH26";
+		dialog = "This weapon cannot be modified further.";
+		choice
+		{
+			text = "Choose another weapon.";
+			nextpage = 11;
+		}
+		choice
+		{
+			text = "Choose another category.";
+			nextpage = 1;
+		}
+	}
+page //28
+	{
+		name = "Workbench";
+		panel = "MBENCH22";
+		dialog = "Tier 2: Electromag Driver (charge mod). Increases maximum damage. Hold fire to charge, damage based on charge time. Insane idea. May not actually work. Requires 150 junk to complete.";
+		link = 1;
+		ifitem
+		{
+		 item = "Junkermusket3";
+		 amount = 1;
+		 }
+		 choice
+		{
+			text = "Install mod (150 junk).";
+			YesMessage = "You installed the Electromag driver (CHARGE MOD) !";
+			Giveitem = "musketbuild3";
+			CloseDialog = true;
+			Cost
+			{
+			   Item= "chips";
+			   Amount = 150;
+			}
+			Require
+			{
+			   Item= "Junkermusket2";
+			   Amount = 1;
+			}
+			nomessage = "You lack the required parts.";
+		}
+		choice
+		{
+			text = "Choose another weapon.";
+			nextpage = 11;
+		}
+		choice
+		{
+			text = "Choose another category.";
+			nextpage = 1;
+		}
+	}
+page //29
+	{
+		name = "Workbench";
+		panel = "MBENCH23";
+		dialog = "This weapon cannot be modified further.";
+		choice
+		{
+			text = "Choose another weapon.";
+			nextpage = 11;
+		}
+		choice
+		{
+			text = "Choose another category.";
+			nextpage = 1;
+		}
+	}
+ page //30
+	{
+		name = "Workbench";
+		panel = "MBENCH27";
+		dialog = "Tier 1: Barbecue P.I.G. (Salvo mod). Additional feed system and gas torch allows a burst of three slugs. Short range, incendiary effect. Requires 150 junk to complete.";
+		link = 1;
+		ifitem
+		{
+		 item = "Killerpig2";
+		 amount = 1;
+		 }
+		 choice
+		{
+			text = "Install mod (150 junk).";
+			YesMessage = "You built the Barbecue P.I.G. (SALVO MOD) !";
+			Giveitem = "Pigbuild2";
+			CloseDialog = true;
+			Cost
+			{
+			   Item= "chips";
+			   Amount = 150;
+			}
+			Require
+			{
+			   Item= "Killerpig";
+			   Amount = 1;
+			}
+			nomessage = "You lack the required parts.";
+		}
+		choice
+		{
+			text = "Choose another weapon.";
+			nextpage = 8;
+		}
+		choice
+		{
+			text = "Choose another category.";
+			nextpage = 1;
+		}
+	}
+ page //31
+	{
+		name = "Workbench";
+		panel = "MBENCH28";
+		dialog = "Tier 2: Turbo P.I.G. (Rate-Of-Fire mod). Improved motor layout allows a faster cyclic rate. Supremely overpowered. The ultimate handheld weapon. Requires 150 junk to complete.";
+		link = 1;
+		ifitem
+		{
+		 item = "Killerpig3";
+		 amount = 1;
+		 }
+		 choice
+		{
+			text = "Install mod (150 junk).";
+			YesMessage = "You built the TURBO P.I.G. (ROF MOD) !";
+			Giveitem = "Pigbuild3";
+			CloseDialog = true;
+			Cost
+			{
+			   Item= "chips";
+			   Amount = 150;
+			}
+			Require
+			{
+			   Item= "Killerpig2";
+			   Amount = 1;
+			}
+			nomessage = "You lack the required parts.";
+		}
+		choice
+		{
+			text = "Choose another weapon.";
+			nextpage = 8;
+		}
+		choice
+		{
+			text = "Choose another category.";
+			nextpage = 1;
+		}
+	}
+page //32
+	{
+		name = "Workbench";
+		panel = "MBENCH29";
+		dialog = "This weapon cannot be modified further. Probably for the best, in this case.";
+		choice
+		{
+			text = "Choose another weapon.";
+			nextpage = 8;
+		}
+		choice
+		{
+			text = "Choose another category.";
+			nextpage = 1;
+		}
+	}
+page //33
+	{
+		name = "Workbench";
+		panel = "MBENCH30";
+		dialog = "Project P.I.G - construction of an ultra-powerful, gas-powered weapon, using slugs as ammunition. Requires specialized parts to complete (1/3 collected).";
+		link = 34;
+		ifitem
+		{
+		 item = "PigPieceTwo";
+		 amount = 1;
+		 }
+		choice
+		{
+			text = "Choose another weapon.";
+			nextpage = 8;
+		}
+		choice
+		{
+			text = "Choose another category.";
+			nextpage = 1;
+		}
+	}
+page //34
+	{
+		name = "Workbench";
+		panel = "MBENCH31";
+		dialog = "Project P.I.G - construction of an ultra-powerful, gas-powered weapon, using slugs as ammunition. Requires specialized parts to complete (2/3 collected).";
+		link = 35;
+		ifitem
+		{
+		 item = "PigPieceThree";
+		 amount = 1;
+		 }
+		choice
+		{
+			text = "Choose another weapon.";
+			nextpage = 8;
+		}
+		choice
+		{
+			text = "Choose another category.";
+			nextpage = 1;
+		}
+	}
+page //35
+	{
+		name = "Workbench";
+		panel = "MBENCH32";
+		dialog = "Project P.I.G - construction of an ultra-powerful, gas-powered weapon, using slugs as ammunition. Requires specialized parts to complete (3/3 collected).";
+		 choice
+		{
+			text = "Construct the Pneumatic Incinerator Gun!";
+			YesMessage = "You constructed the Killer P.I.G!";
+			Giveitem = "Pigbuild1";
+			CloseDialog = true;
+			Cost
+			{
+			   Item= "PigPieceOne";
+			   Amount = 1;
+			}
+			nomessage = "You lack the required parts.";
+		}
+		choice
+		{
+			text = "Choose another weapon.";
+			nextpage = 8;
+		}
+		choice
+		{
+			text = "Choose another category.";
+			nextpage = 1;
+		}
+	}
+page //36
+	{
+		name = "Workbench";
+		panel = "MBENCH33";
+		dialog = "Tier 1: Green lazer (cosmetic mod). Changes harmless ruby lazer to harmless but cooler emerald lazer. Cosmetic only. Requires 150 junk to complete.";
+		link = 1;
+		ifitem
+		{
+		 item = "Lazergun2";
+		 amount = 1;
+		 }
+		choice
+		{
+			text = "Install mod (150 junk).";
+			Giveitem = "Lazerswap1";
+			CloseDialog = true;
+			Cost
+			{
+			   Item= "chips";
+			   Amount = 150;
+			}
+			Require
+			{
+			   Item= "Lazergun";
+			   Amount = 1;
+			}
+			YesMessage = "You installed the green lazer (COSMETIC MOD) !";
+			nomessage = "You lack the required parts.";
+		}
+		choice
+		{
+			text = "Choose another weapon.";
+			nextpage = 11;
+		}
+		choice
+		{
+			text = "Choose another category.";
+			nextpage = 1;
+		}
+	}
+page //37
+	{
+		name = "Workbench";
+		panel = "MBENCH34";
+		dialog = "Tier 2: Super-Lazer (experimental mod). Replace toy lazer parts with theoretically powerful anamalous materials. Can be built only once. Cannot be recharged. Only the finest junk will do. Requires 300 junk to complete.";
+		link = 1;
+		ifitem
+		{
+		 item = "Lazergun3";
+		 amount = 1;
+		 }
+		choice
+		{
+			text = "Install mod (150 junk).";
+			Giveitem = "Lazerswap2";
+			CloseDialog = true;
+			Cost
+			{
+			   Item= "chips";
+			   Amount = 300;
+			}
+			Require
+			{
+			   Item= "Lazergun2";
+			   Amount = 1;
+			}
+			YesMessage = "You built something terrifying (SUPER-LAZER MOD) !";
+			nomessage = "You lack the required parts.";
+		}
+		choice
+		{
+			text = "Choose another weapon.";
+			nextpage = 11;
+		}
+		choice
+		{
+			text = "Choose another category.";
+			nextpage = 1;
+		}
+	}
+	page //38
+	{
+		name = "Workbench";
+		panel = "MBENCH35";
+		dialog = "This weapon cannot be modified further. You no longer understand how it works.";
+		choice
+		{
+			text = "Choose another weapon.";
+			nextpage = 11;
+		}
+		choice
+		{
+			text = "Choose another category.";
+			nextpage = 1;
+		}
+	}
+}

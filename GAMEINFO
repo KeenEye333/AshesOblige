@@ -1,0 +1,4 @@
+STARTUPTITLE = "ASHES: OBLIGE v1.1"
+STARTUPCOLORS = "#000000", "#FF0000" 
+//"#784918", "#F3A718"
+StartupType = "Hexen"

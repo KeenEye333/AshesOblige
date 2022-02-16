@@ -1,0 +1,656 @@
+gameinfo
+{
+    titlemusic = "$MUSIC_INTRO"
+	creditpage = "CREDIT", "HELP2"
+	titletime = 5
+	finalemusic = "$MUSIC_VICTOR"
+	finaleflat = "FLOOR4_8"
+	finalepage = "HELP2", "VICTORY2", "ENDPIC"
+	infopage = "HELP1", "HELP2", "HELP3"
+	quitsound = "menu/quit1"
+	borderflat = "FLOOR7_2"
+	drawreadthis = true
+	intermissionmusic = "$MUSIC_INTER"
+ quitmessages = "Another day to live through. Better get started.", "You wanna get out of here? You talk to me.", "The catastrophic events you have just witnessed are, in all likelihood, less severe than the destruction that would actually occur in the event of a full nuclear strike against the United States. ", 
+ "Ariel! Ookla! Ride! ", "Let's play Global Thermonuclear War. ", "This is the way the world ends. Not with a bang but a whimper.", "It's the end of the world as we know it and I feel fine.", 
+ "You shall ride eternal. Shiny, and chrome!", "Oh what a day. What a lovely day! ", "You know, Albert, sometimes you can be such a putz...", "THERE IS NO PHONE RINGING, DAMMIT! ", "You going to kill me, Snake?", 
+ "Wouldn't it be great if wars could be fought just by the assholes who started them? ", " The Forbiddon Zone was once a paradise. Your kind made a wasteland of it, ages ago.", "What? You don't believe in Santa? "				   
+}
+
+// clearepisodes
+// episode MAP10
+// {
+// 	name = "Prologue"
+// 	picname = "M_EPI1"
+// 	key = "p"
+// }
+// episode INT0
+// {
+// 	name = "Afterglow"
+// 	picname = "M_EPI2"
+// 	key = "A"
+// }
+// cluster 1
+// {
+// hub
+// PIC = CUTBACK1
+// music = "$MUSIC_INTER"
+
+// exittext =
+// "It has been a few days now and I ",
+// "finally feel healed enough to move.",
+// "A good thing too, since my money and",
+// "good will with the town is running low...",
+// "",
+// "I've picked an area of the city not far",
+// "from the station that looks like it hasn't",
+// "been looted too heavily. Hopefully I can grab",
+// "some breakfast or tools, at least...",
+// "",
+// "Unfortunately, I don't have much in the way",
+// "of equipment. Just my revolver, crowbar, lantern,",
+// "a few bullets and an empty backpack. Guess I'm",
+// "back to square one again...",
+// "",
+// "Still, the place looks quiet, rad-count is low. ",
+// "This should be a good run, if my luck holds out..."
+// }
+// map MAP10 "A Nightmare"
+//     map MAP01 "A Nightmare"
+// {
+// 	sky1 = "sky2", 0.5
+// 	next = "Int0"
+// 	cluster = 1
+// 	outsidefog = "60 10 10"
+// 	fogdensity = 128
+// 	music = "$MUSIC_ADRIAN"
+// 	UnFreezeSinglePlayerConversations
+// 	resetitems
+// }
+// map Int0 "Afterglow"
+// {
+//     Levelnum = 30
+// 	next = "MAP11"
+// 	//secretnext = "MAP05"
+// 	sky1 = "AGSKY15", 0.5
+// 	cluster = 1
+// 	par = 310
+// 	music = ""
+// 	NoIntermission
+// 	FallingDamage
+// }
+// cluster 2
+// {
+// hub
+// PIC = CUTBACK2
+// music = "$MUSIC_INTER"
+
+// exittext =
+// "It feels good to be back on the road,",
+// "my ride feeling better than ever. My",
+// "little misadventure in the city was over,",
+// "and it was time to move on...",
+// "",
+// "While my previous job hadn't gone exactly",
+// "as I had planned, I've managed to do pretty",
+// "well for myself, all things considered.",
+// "Hopefully I'll have more luck in the next...",
+// "",
+// "The question now was where to head next.",
+// "There didn't seem much point heading back",
+// "south, so I planned a route through the city",
+// "that should hopefully take me north...",
+// "",
+// "Whether that route still exists is still to be",
+// "seen, but I have a good feeling about today..."
+// }
+// map MAP11 "Back In The Game"
+// {
+// 	sky1 = "AGSKY11"
+// 	sky2 = "AGSKY12", 0.15
+// 	Doublesky
+// 	cluster = 2
+// 	outsidefog = "80 50 40"
+// 	fogdensity = 32
+// 	KeepFullInventory
+// 	music = "$MUSIC_STLKS2"
+// 	FallingDamage
+// 	UnFreezeSinglePlayerConversations
+// 	resetinventory
+// 	resethealth
+// }
+
+// map MAP12 "Undercity"
+// {
+// 	sky1 = "AGSKY11"
+// 	sky2 = "AGSKY12", 0.15
+// 	Doublesky
+// 	cluster = 2
+// 	outsidefog = "80 50 40"
+// 	fogdensity = 32
+// 	KeepFullInventory
+// 	music = "$MUSIC_SHAWN2"
+// 	FallingDamage
+// 	UnFreezeSinglePlayerConversations
+// }
+
+// map MAP13 "Motocrossed"
+// {
+// 	sky1 = "AGSKY11"
+// 	sky2 = "AGSKY12", 0.15
+// 	Doublesky
+// 	cluster = 2
+// 	KeepFullInventory
+// 	outsidefog = "80 50 40"
+// 	fogdensity = 32
+// 	music = "$MUSIC_RUNNI2"
+// 	FallingDamage
+// 	UnFreezeSinglePlayerConversations
+// }
+
+// map MAP14 "The Flooded District"
+// {
+// 	sky1 = "AGSKY11"
+// 	sky2 = "AGSKY12", 0.15
+// 	Doublesky
+// 	cluster = 2
+// 	outsidefog = "90 70 60"
+// 	fogdensity = 32
+// 	KeepFullInventory
+// 	music = "$MUSIC_THEDA2"
+// 	FallingDamage
+// 	UnFreezeSinglePlayerConversations
+// 	NoIntermission
+// }
+// map MAP15 "The Gap"
+// {
+// 	sky1 = "AGSKY11"
+// 	sky2 = "AGSKY12", 0.15
+// 	Doublesky
+// 	cluster = 2
+// 	outsidefog = "80 50 40"
+// 	fogdensity = 64
+// 	KeepFullInventory
+// 	music = "$MUSIC_DDTBL3"
+// 	FallingDamage
+// 	UnFreezeSinglePlayerConversations
+// }
+// map MAP16 "Return To The Spire"
+// {
+// 	sky1 = "AGSKY11"
+// 	sky2 = "AGSKY12", 0.15
+// 	Doublesky
+// 	cluster = 2
+// 	outsidefog = "80 50 40"
+// 	fogdensity = 38
+// 	KeepFullInventory
+// 	music = "$MUSIC_ADRIAN"
+// 	FallingDamage
+// 	UnFreezeSinglePlayerConversations
+// }
+// map INT1 "Leaving Michonne"
+// {
+//     Levelnum = 31
+// 	sky1 = "AGSKY11"
+// 	sky2 = "AGSKY12", 0.15
+// 	next = "MAP17"
+// 	Doublesky
+// 	cluster = 2
+// 	outsidefog = "80 50 40"
+// 	fogdensity = 32
+// 	KeepFullInventory
+// 	music = ""
+// 	FallingDamage
+// 	UnFreezeSinglePlayerConversations
+// 	NoIntermission
+// }
+// cluster 3
+// {
+// hub
+// PIC = CUTBACK3
+// music = "$MUSIC_INTER"
+
+// exittext =
+// "I don't know which is worse -",
+// "The thought of raiders and mutants somehow",
+// "working together, or being sold out by",
+// "my own kind...",
+// "",
+// "The cannibals do a good job giving",
+// "me a solid beating. In between blacking out",
+// "and trying to shield myself I'm able to ",
+// "catch a few interesting details...",
+// "",
+// "It seems the raiders were expecting to get",
+// "my stuff, but the mutants have other ideas,",
+// "leaving the punks with nothing except my bike.",
+// "I breaks my heart to watch them drag her away...",
+// "",
+// "Being eaten alive isn't how I hoped today would go.",
+// "At least it can't get any worse..."
+// }
+// map map17 "Escape From Atlanta"
+// {
+//     Levelnum = 17
+// 	sky1 = "AGSKY11"
+// 	sky2 = "AGSKY12", 0.15
+// 	Doublesky
+// 	cluster = 3
+// 	outsidefog = "80 50 40"
+// 	fogdensity = 32
+// 	KeepFullInventory
+// 	music = "$MUSIC_ULTIMA"
+// 	FallingDamage
+// 	UnFreezeSinglePlayerConversations
+// 	NoIntermission
+// }
+// cluster 4
+// {
+// hub
+// PIC = CUTBACK4
+// music = "$MUSIC_INTER"
+
+// exittext =
+// "I spend most of the night blindly ",
+// "stumbling through the tunnels. Often",
+// "I stop to catch a few breaths, before",
+// "the howls of my pursuers force me on...",
+// "",
+// "The echo of the pipes make it sound like",
+// "their enraged shrieks are all around me",
+// "and eventually I come to a stop, my legs give",
+// "way, and I lie down and wait for death...",
+// "",
+// "I awake to the heat of the sun on my face.",
+// "Amazingly, I have lived through the night.",
+// "Still, my hold hasn't been too great - my ",
+// "bike and the briefcase are still missing...",
+// "",
+// "I'll need to find high ground, get my bearings. ",
+// "I feel sorry for anyone who gets in my way..."
+// }
+// map INT2 "It Got worse"
+// {
+//     Levelnum = 34
+// 	sky1 = "AGSKY11"
+// 	sky2 = "AGSKY12", 0.15
+// 	Doublesky
+// 	cluster = 4
+// 	outsidefog = "80 50 40"
+// 	fogdensity = 32
+// 	KeepFullInventory
+// 	music = "$MUSIC_ADRIAN"
+// 	FallingDamage
+// 	UnFreezeSinglePlayerConversations
+// 	NoIntermission
+// }
+// map MAP18 "The Rink"
+// {
+// 	next = "MAP19"
+// 	levelnum = 18
+// 	sky1 = "RRSKY_11"
+// 	outsidefog = "021A2B"
+// 	fogdensity = 24
+// 	skyfog = 150
+// 	cluster = 4
+// 	music = ""//start blank but fades in manually shortly after map start
+	
+// 	EventHandlers = "ArenaStrip"
+	
+// 	NoIntermission
+// 	FallingDamage
+// 	UnFreezeSinglePlayerConversations
+// }
+// cluster 5
+// {
+// hub
+// PIC = CUTBACK5
+// music = "$MUSIC_INTER"
+
+// exittext =
+// "Crossing the mountains had been like stepping",
+// "into another world. Parched wasteland and ",
+// "crumbling asphalt gave way to rolling plains and",
+// "dense green woodland. Little showed there had ever been a war... ",
+// "",
+// "Below me lay the Badlands, and it wasn't immediately",
+// "obvious why it had earned such a name. From what I",
+// "had heard, poor soil, warring factions and dangerous",
+// "wildlife were to blame, yet I could see no sign of it...",
+// "",
+// "Smoke rose in the distance, heavy and constant. If I was",
+// "lucky, it would be from Prosperity, the local trading hub...",
+// "",
+// "That would be a good place to start looking for answers..."
+// }
+// map MAP19 "Badlands South"
+// {
+// 	next = "MAP20"
+// 	levelnum = 19
+// 	cluster = 5
+// 	music = "$MUSIC_AMPIE"
+// 	outsidefog = "80 50 40"
+// 	fogdensity = 32
+// 	sky1 = "AGSKY11"
+// 	sky2 = "AGSKY12", 0.15
+// 	Doublesky
+// 	KeepFullInventory
+// 	NoIntermission
+// 	FallingDamage
+// 	UnFreezeSinglePlayerConversations
+// }
+// map MAP20 "Dissarray"
+// {
+// 	next = "MAP21"
+// 	levelnum = 20
+// 	cluster = 5
+// 	music = "$MUSIC_TENSE"
+// 	outsidefog = "80 50 40"
+// 	fogdensity = 32
+// 	sky1 = "AGSKY11"
+// 	sky2 = "AGSKY12", 0.15
+// 	Doublesky
+// 	KeepFullInventory
+// 	NoIntermission
+// 	FallingDamage
+// 	UnFreezeSinglePlayerConversations
+// }
+// map MAP21 "Badlands"
+// {
+//     next = "MAP28"
+// 	secretnext = "MAP27"
+// 	sky1 = "AGSKY13"
+// 	cluster = 6
+// 	outsidefog = "FF ED 50"
+// 	fogdensity = 16
+// 	KeepFullInventory
+// 	music = "$MUSIC_COUNT2"
+// 	FallingDamage
+// 	NoIntermission
+// 	UnFreezeSinglePlayerConversations
+// }
+// map INT3 "BeastRiders"
+// {
+//     Levelnum = 33
+// 	sky1 = "AGSKY13"
+// 	cluster = 6
+// 	music = ""
+// 	outsidefog = "FF ED 50"
+// 	fogdensity = 16
+// 	KeepFullInventory
+// 	NoIntermission
+// 	FallingDamage
+// 	UnFreezeSinglePlayerConversations
+// }
+// map MAP22 "Outcast Site"
+// {
+// 	cluster = 6
+// 	outsidefog = "FF ED 50"
+// 	fogdensity = 16
+// 	sky1 = "AGSKY13"
+// 	music = "$MUSIC_STALKS"
+// 	KeepFullInventory
+// 	NoIntermission
+// 	FallingDamage
+// 	UnFreezeSinglePlayerConversations
+// }
+// map MAP23 "Pipeworks"
+// {
+// 	next = "MAP25"
+// 	levelnum = 23
+// 	cluster = 6
+// 	fogdensity = 192
+// 	sky1 = "AGSKY13"
+// 	music = "$MUSIC_COUNTD"
+// 	KeepFullInventory
+// 	NoIntermission
+// 	FallingDamage
+// 	UnFreezeSinglePlayerConversations
+// }
+// map MAP24 "JunkYard"
+// {
+// 	next = "MAP21"
+// 	levelnum = 24
+// 	cluster = 6
+// 	outsidefog = "FF ED 50"
+// 	fogdensity = 16
+// 	sky1 = "AGSKY13"
+// 	music = "$MUSIC_SHAWN"
+// 	KeepFullInventory
+// 	NoIntermission
+// 	//FallingDamage
+// 	UnFreezeSinglePlayerConversations
+// }
+// map MAP25 "Biodome"
+// {
+// 	levelnum = 25
+// 	cluster = 6
+// 	sky1 = "AGSKY13"
+// 	music = "D_OPENIN"
+// 	KeepFullInventory
+// 	NoIntermission
+// 	FallingDamage
+// 	UnFreezeSinglePlayerConversations
+// }
+// map MAP26 "Uptown"
+// {
+// 	sky1 = "AGSKY13"
+// 	cluster = 6
+// 	outsidefog = "FF ED 50"
+// 	fogdensity = 16
+// 	KeepFullInventory
+// 	music = "$MUSIC_COUNT2"
+// 	FallingDamage
+// 	NoIntermission
+// 	UnFreezeSinglePlayerConversations
+// }
+// cluster 6
+// {
+// hub
+// }
+// map MAP27 "Anomaly 210"
+// {
+// 	next = "MAP28"
+// 	levelnum = 27
+// 	cluster = 7
+// 	outsidefog = "E8 6C 2E"
+// 	fogdensity = 16
+// 	sky1 = "AGSKY14"
+// 	KeepFullInventory
+// 	NoIntermission
+// 	FallingDamage
+// 	UnFreezeSinglePlayerConversations
+	
+// 	EventHandlers = "FinalStrip"
+// }
+// cluster 7
+// {
+// hub
+// }
+// map MAP28 "Missile Gap"
+// {
+//     next = "MAP29"
+// 	cluster = 8
+// 	//outsidefog = "FF ED 50"
+// 	//fogdensity = 40
+// 	sky1 = "AGSKY16"
+// 	outsidefog = "660099"//"021A2B"
+// 	fogdensity = 2
+// 	skyfog = 40
+// 	KeepFullInventory
+// 	music = "$MUSIC_ULTIMA"
+// 	FallingDamage
+// 	UnFreezeSinglePlayerConversations
+	
+// 	EventHandlers = "FinalStrip"
+// }
+// map MAP29 "Epilogue"
+// {
+//     Next= endgame
+// 	{
+// 	hscroll = "PFUB2", "PFUB1" // scrolls horizontally from *right* to left. (the wiki is a lying fuck)
+// 	music = "$MUSIC_INTRO", 0
+// 	}
+// 	cluster = 8
+// 	//outsidefog = "FF ED 50"
+// 	//fogdensity = 40
+// 	sky1 = "AGSKY16"
+// 	skyfog = 40
+// 	KeepFullInventory
+// 	NoIntermission
+// 	music = "$MUSIC_DDTBLU"
+// 	UnFreezeSinglePlayerConversations
+// }
+// cluster 8
+// {
+// hub
+// PIC = CUTBACK6
+// music = "$MUSIC_INTER"
+
+// entertext =
+// "The road into the mountains was quiet.",
+// "Passing empty woodlands and rolling hills,",
+// "the only signs of previous life were the",
+// "rusting hulks of abandoned vehicles...",
+// "",
+// "About a mile into the journey however, I saw them.",
+// "",
+// "A great army, burning torches bobbing and weaving",
+// "through the darkness left by the setting sun. It",
+// "was impossible to count their numbers. All I knew",
+// "was that a didn't have nearly enough bullets for all of them...",
+// "",
+// "It would be a race against time to reach my destination.",
+// "In a few hours it would be swallowed by the horde..."
+// }
+// DoomEdNums
+// {
+// 	12000 = "RJSkyViewpoint"
+// 	12800 = "RJBunkerTerminal"
+// 	12801 = "RJRoamerShopDude"
+// 	12802 = "RJRoamerCrusherGuy"
+// 	12803 = "RJBombPoint"
+// 	12804 = "RJQuestC4"
+// 	12998 = "PropRJMotorcycle2"
+// 	12999 = "RJTree5"
+// 	13000 = "RJTree1"
+// 	13001 = "RJTree2"
+// 	13002 = "RJTree3"
+// 	13003 = "RJTree4"
+// 	13004 = "RJFlameTrap"
+// 	13005 = "RJSubTerminal"
+// 	13006 = "RJCattails1"
+// 	13007 = "RJCattails2"
+// 	13008 = "RJPistolThugTalkative"
+// 	13009 = "RJRevolverThugTalkative"
+// 	13010 = "RJShotgunThugTalkative"
+// 	13011 = "RJMachinegunThugTalkative"
+// 	13012 = "RJCrateGuy"
+// 	13013 = "RJSassy"
+// 	13014 = "RJPistolThugNeutral"
+// 	13015 = "RJRevolverThugNeutral"
+// 	13016 = "RJShotgunThugNeutral"
+// 	13017 = "RJMachinegunThugNeutral"
+// 	13018 = "RJWarehouseGuard"
+// 	13019 = "RJGateGuardA"
+// 	13020 = "RJGateGuardB"
+// 	13021 = "RJMainGateGuard"
+// 	13022 = "SporeMortar"
+// 	//13023 FYI: neutral pitfiend
+// 	13024 = "RJCinematicDustLauncher"
+// 	13025 = "PsychicMutantStanding"
+// 	13026 = "FloraDevilsEggplant1"
+// 	13027 = "FloraDevilsEggplant2"
+// 	13028 = "FloraBoomerBerry1"
+// 	13029 = "FloraBoomerBerry2"
+// 	13030 = "FloraBlackHagsHat"
+// 	13031 = "FloraWitchesLantern1"
+// 	13032 = "FloraWitchesLantern2"
+// 	13033 = "FloraWitchesLantern3"
+// 	13034 = "FloraLopingLonghair"
+// 	13035 = "FloraDemonFuzz1"
+// 	13036 = "FloraDemonFuzz2"
+// 	13037 = "FloraGutweed"
+// 	13038 = "FloraArchingbetty1"
+// 	13039 = "FloraArchingbetty2"
+// 	13040 = "FloraItchingLeek"
+// 	13041 = "PropLabBeaker1"
+// 	13042 = "PropLabBeaker2"
+// 	13043 = "PropLabPetri1"
+// 	13044 = "PropLabPetri2"
+// 	13045 = "PropLabTubes1"
+// 	13046 = "PropLabTubes2"
+// 	13047 = "PropLabMicroscope"
+// 	13048 = "PropLabCactus1"
+// 	13049 = "PropLabCactus2"
+// 	13050 = "FloraLivecorn1"
+// 	13051 = "FloraLivecorn2"
+// 	13052 = "FloraDyingcorn1"
+// 	13053 = "FloraDyingcorn2"
+//   //13054 = "motorcycle2"
+//   //13055 = "bike ammo"
+//   //13056 = "556 ammo"
+//     13057 = "QuestHazSuit"
+// 	13058 = "CutsceneTracer"
+// 	13059 = "LeatherWorker"
+// 	13060 = "Patch"
+//   //13061 = "Silver"
+//     13062 = "QuestSeeds"
+// 	13063 = "QuestSpores"
+//   //13064 = "BadlandsJailguard"
+//     13065 = "Doc2"
+// 	13066 = "PropArmoredLight"
+// 	13067 = "PropArmoredLightUnlit"
+// 	13068 = "PropEmergencyLight"
+// 	13069 = "PropEmergencyLightUnlit"
+// 	13070 = "CutsceneSkull"
+// 	13071 = "PropSirenLightCeiling"
+// 	13072 = "PropSirenLightFloor"
+// 	13073 = "PropSirenLightOrange"
+// 	13074 = "WalkerCutscene"
+//   //13075 = "GoonsBoss"
+//     13076 = "Beastmaster"
+// 	13077 = "VarniThing1"
+// 	13078 = "VarniThing2"
+// 	13079 = "VarniThing3"
+// 	13080 = "VarniThing4"
+// 	13081 = "VarniThing5"
+// 	13082 = "VarniThing6"
+// 	//13083 = "BadlandsARMORER"
+// 	//13084 = "Hauer"
+// 	//13085 = "HauerHostile"
+// 	//13086 = "Clyde"
+// 	13087 = "questcartridge"
+// 	//13088= "WeldingRaider"
+// 	//13089= "RJROAMERDOC"
+// 	13090 = "questkey"
+// 	13091 = "kyle"
+// 	//13092 = "MillerHealthy"
+// 	//13093 = "RiderRivalOne"
+// 	13094 = "Chasetarget"
+// 	13095 = "PropBottlescrate1"
+// 	13096 = "PropBottlescrate2"
+// 	13097 = "PropBottlescrate3"
+// 	//13098 = "Phantom"
+// 	13099 = "MutantCrowd"
+// 	13100 = "hangedbag"
+// 	//13101 = "MilitiaStayStill"
+// 	//13102 = "Lazergun"
+// 	//13103 = "RiderRivalTwo"
+// 	//13104 = "goldcrowbarspawn"
+// 	//13105 = "ProjectionPrime"
+// 	//13106 = "PsychicLastStand"
+// 	//13107 = "TheGeneral"
+// 	13108 = "Console03"
+// 	//13109 = "corpse8"
+// 	13110 = "BlackHawk"
+// 	13111 = "tradersitting3"
+// 	13112 = "PropEyesInTheDark"
+// 	//13113 = "PorcelainRescued"
+// 	13114 = "MEL"
+// 	13115 = "elecspark"
+// 	//13116 = "porcelaincutscene"
+// 	//13117 = "BlackWaterSurvivor"
+// 	13118 = "CollectablePrime"
+// 	13119 = "Varnicutscene"
+// }

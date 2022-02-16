@@ -1,0 +1,428 @@
+//Data reels
+texture optional UBOAT11
+	pic UBOAT11 tics 3
+	pic UBOAT12 tics 3
+	pic UBOAT13 tics 3
+	
+// Animated muddy waterfall
+texture optional FALL11
+	pic FALL11 tics 4
+	pic FALL12 tics 4
+	pic FALL13 tics 4
+	pic FALL14 tics 4
+	
+// Animated blue waterfall
+texture optional FALL21
+	pic FALL21 tics 4
+	pic FALL22 tics 4
+	pic FALL23 tics 4
+	pic FALL24 tics 4
+
+// Animated blue pipe
+texture optional 12TEX033
+	pic 12TEX033 tics 5
+	pic 12TEX034 tics 5
+	pic 12TEX035 tics 5
+	pic 12TEX036 tics 5
+	pic 12TEX037 tics 5
+
+// Animated flicker brightmap
+texture optional BIGFLK11
+	pic BIGFLK11 tics 3
+	pic BIGFLK12 tics 3
+	pic BIGFLK13 tics 3
+	pic BIGFLK14 tics 3
+
+// Animated brown pipe
+texture optional 12TEX042
+	pic 12TEX042 tics 5
+	pic 12TEX043 tics 5
+	pic 12TEX044 tics 5
+	pic 12TEX045 tics 5
+	pic 12TEX046 tics 5	
+	
+// Animated vent fan
+texture optional FAN11
+	pic FAN11 tics 4
+	pic FAN12 tics 4
+	pic FAN13 tics 4
+	pic FAN14 tics 4
+	pic FAN15 tics 4
+	pic FAN16 tics 4
+	pic FAN17 tics 4
+	
+// Animated retro gaming 
+texture optional GAMER1
+	pic GAMER1 tics 6
+	pic GAMER2 tics 6
+	pic GAMER3 tics 6
+	pic GAMER4 tics 6
+	pic GAMER5 tics 6
+	pic GAMER6 tics 6
+	pic GAMER7 tics 6
+	pic GAMER8 tics 6
+	pic GAMER9 tics 6
+	pic GAMER0 tics 6
+	
+// Animated 3-D! retro gaming 
+texture optional G2MER0
+	pic G2MER0 tics 8
+	pic G2MER1 tics 8
+	pic G2MER2 tics 8
+	pic G2MER0 tics 8
+	pic G2MER1 tics 8
+	pic G2MER2 tics 8
+	pic G2MER0 tics 8
+	pic G2MER1 tics 8
+	pic G2MER2 tics 8
+	pic G2MER3 tics 8
+	pic G2MER4 tics 20
+	pic G2MER5 tics 60
+	pic G2MER6 tics 8
+	pic G2MER7 tics 8
+	pic G2MER8 tics 8
+	pic G2MER9 tics 20
+	pic G2MER5 tics 60
+	
+// Animated Goon TV network
+texture optional GOONTV2
+	pic GOONTV2 tics 5
+	pic GOONTV3 tics 5
+	pic GOONTV4 tics 5
+	pic GOONTV5 tics 5
+	pic GOONTV2 tics 5
+	pic GOONTV3 tics 5
+	pic GOONTV4 tics 5
+	pic GOONTV5 tics 5
+	pic GOONTV9 tics 5
+	pic GOONTV5 tics 5
+	pic GOONTV6 tics 5
+	pic GOONTV7 tics 5
+	pic GOONTV8 tics 5
+	pic GOONTV9 tics 5
+	pic GOONTV5 tics 5
+	pic GOONTV6 tics 5
+	pic GOONTV7 tics 5
+	pic GOONTV8 tics 5
+	pic GOONTV9 tics 5
+	pic GOONTV2 tics 5
+	pic GOONTV3 tics 5
+	pic GOONTV4 tics 5
+	pic GOONTV5 tics 5
+	pic GOONTV5 tics 5
+	pic GOONTV9 tics 5
+	pic GOONTV5 tics 5
+	pic GOONTV6 tics 5
+	pic GOONTV7 tics 5
+	pic GOONTV8 tics 5
+	pic GOONTV9 tics 5
+	pic GOONTV5 tics 5
+	
+// Animated creepy water shimmer
+texture optional SUB41
+	pic SUB41 tics 6
+	pic SUB42 tics 6
+	pic SUB43 tics 6
+	
+//Who sticks their hands in the trash anyway fuck sake
+switch doom TRSHRC1 on sound opentrash
+pic TRSHRC2 tics 4
+pic TRSHRC3 tics 4
+
+//Silo switch that tells you to go fuck yourself
+switch doom SWSILO on sound opentrash
+pic SWSILO tics 4
+pic SWSIL2 tics 4
+
+//Pump station switch with vidya christmas lights
+switch doom GASSW1 on sound opentrash
+pic GASSW1 tics 5
+pic GASSW2 tics 5
+pic GASSW3 tics 10
+pic GASSW2 tics 5
+pic GASSW1 tics 10
+pic GASSW4 tics 10
+
+//Animated turnstiles. Because I have no fucking life.
+texture optional TSTIL2
+pic TSTIL3 tics 3
+pic TSTIL4 tics 3
+pic TSTIL5 tics 4
+pic TSTIL1 tics 3
+
+//Animated text monitor
+texture optional MONI001
+pic MONI001 tics 6
+pic MONI002 tics 6
+pic MONI001 tics 6
+pic MONI002 tics 5
+pic MONI003 tics 1
+pic MONI004 tics 2
+pic MONI005 tics 2
+pic MONI006 tics 1
+pic MONI003 tics 6
+
+//Animated map monitor
+texture optional MONI101
+pic MONI101 tics 16
+pic MONI102 tics 1
+pic MONI103 tics 1
+pic MONI104 tics 1
+
+//Animated secret map monitor
+texture optional MONI201
+pic MONI201 tics 16
+pic MONI202 tics 1
+pic MONI203 tics 1
+pic MONI204 tics 1
+
+//Animated gas terminal - danger
+texture optional GASCOM1
+pic GASCOM1 tics 5
+pic GASCOM2 tics 5
+pic GASCOM3 tics 5
+pic GASCOM4 tics 5
+pic GASCOM5 tics 5
+pic GASCOM6 tics 5
+
+//Animated gas terminal - safe
+texture optional GASCOM7
+pic GASCOM7 tics 5
+pic GASCOM8 tics 5
+pic GASCOM9 tics 5
+pic GASCOM10 tics 5
+pic GASCOM11 tics 5
+pic GASCOM12 tics 5
+
+// Animated blinking power bank
+texture optional CONS10
+	pic CONS10 tics 30
+	pic CONS11 tics 10
+	
+// Animated glitchyscreen
+texture optional CONS12
+	pic CONS12 tics 30
+	pic CONS13 tics 2
+	pic CONS14 tics 2
+	pic CONS15 tics 2
+	pic CONS13 tics 2
+	pic cons12 tics 10
+	pic cons13 tics 2
+	pic cons14 tics 2
+	
+// Animated static screen
+texture optional CONS17
+	pic CONS17 tics 4
+	pic CONS18 tics 4
+	pic CONS19 tics 4
+	pic CONS20 tics 4
+
+//Breakble glass
+switch doom GLASS11 on sound break/window 
+pic GLASS12 tics 4
+
+//calm gauge
+texture optional GAGE1
+	pic gage1 tics 3
+	pic gage2 tics 3
+
+//angry gauge
+texture optional GAGE4
+	pic gage4 tics 3
+	pic gage5 tics 3
+
+//furious gauge
+texture optional GAGE6
+	pic gage6 tics 2
+	pic gage7 tics 2
+	pic gage8 tics 2
+	
+// Animated flag of their fathers
+texture optional FLAG1
+	pic FLAG1 tics 6
+	pic FLAG2 tics 6
+	pic FLAG3 tics 6
+	pic FLAG2 tics 6
+	
+// Animated slime replacer
+texture optional SLIME01
+	pic SLIME02 tics 4
+	pic SLIME03 tics 4
+	pic SLIME04 tics 4
+	pic SLIME05 tics 4
+	pic SLIME06 tics 4
+	pic SLIME07 tics 4
+	pic SLIME08 tics 4
+	
+// Animated dusty lightbeam
+texture optional LBEAM11
+	pic LBEAM12 tics 3
+	pic LBEAM13 tics 3
+	pic LBEAM14 tics 3
+	pic LBEAM15 tics 3
+// Animated dusty lightbeam2
+texture optional LBEAM21
+	pic LBEAM22 tics 3
+	pic LBEAM23 tics 3
+	pic LBEAM24 tics 3
+	pic LBEAM25 tics 3
+
+// Animated Lava replacer that isn't actually lava
+// texture optional LAVA1
+// 	pic LAVA2 tics 3
+// 	pic LAVA3 tics 3
+// 	pic LAVA4 tics 3
+// 	pic LAVA5 tics 3
+// 	pic LAVA6 tics 3
+// 	pic LAVA7 tics 3
+// 	pic LAVA8 tics 3
+	
+// Animated vi'r voda
+texture optional Whirl1
+	pic Whirl2 tics 3
+	pic Whirl3 tics 3
+	pic Whirl4 tics 3
+	pic Whirl5 tics 3
+	pic Whirl6 tics 3
+	pic Whirl7 tics 3
+	pic Whirl8 tics 3
+	
+// Animated psychic barrier 
+texture optional FField1
+	pic FField1 tics 6
+	pic FField2 tics 6
+	pic FField3 tics 6
+	pic FField4 tics 6
+	pic FField5 tics 6
+	pic FField6 tics 6
+	pic FField7 tics 6
+	pic FField8 tics 6
+	
+//Duke did it first, but that's no bad thing
+switch doom FLAT2 on sound break/bin
+pic VENT11 tics 4
+
+switch doom EXIGAT on sound world/exitgate
+pic EXIGAT2 tics 10
+
+switch doom WALL35 on sound switches/exitbutn
+pic WALL36 tics 4
+
+//obed zdarma
+switch doom VEND23 on sound break/bin
+pic VEND13 tics 4
+
+//moldyoldvalve
+switch doom VALVE1 on sound ValveTurn
+pic VALVE2 tics 4
+pic VALVE3 tics 4 //still no halflife 3 wtf
+
+// Animated Radio receivers
+texture optional RADO2A
+	pic RADO2B tics 3
+	pic RADO2C tics 3
+	pic RADO2D tics 3
+	pic RADO2C tics 3
+	pic RADO2B tics 3
+
+// Animated 80's console
+texture optional CONS1
+	pic CONS1 tics 20
+	pic CONS2 tics 10
+	pic CONS3 tics 10
+	pic CONS4 tics 10
+	pic CONS5 tics 6
+	pic CONS6 tics 6
+	pic CONS7 tics 6
+	pic CONS8 tics 10
+	
+// Lightning sky1
+texture optional AGSKY12b
+	pic AGSKY12b tics 5
+	pic AGSKY12c tics 5
+	pic AGSKY12d tics 5
+	pic AGSKY12e tics 5
+	pic AGSKY12f tics 5
+	pic AGSKY12 tics 70
+	
+// Lightning sky2
+texture optional AGSKY12g
+	pic AGSKY12g tics 5
+	pic AGSKY12h tics 4
+	pic AGSKY12i tics 4
+	pic AGSKY12j tics 4
+	pic AGSKY12k tics 5
+	pic AGSKY12L tics 5
+	pic AGSKY12 tics 70
+	
+// Lightning sky3
+texture optional AGSKY12m
+	pic AGSKY12m tics 5
+	pic AGSKY12n tics 4
+	pic AGSKY12o tics 4
+	pic AGSKY12p tics 4
+	pic AGSKY12j tics 5
+	pic AGSKY12k tics 5
+	pic AGSKY12l tics 5
+	pic AGSKY12 tics 70
+	
+//communist computer
+texture optional SUBCM1
+	pic SUBCM1 tics 5
+	pic SUBCM2 tics 5
+	pic SUBCM3 tics 5
+	pic SUBCM4 tics 5
+	pic SUBCM5 tics 5
+	pic SUBCM6 tics 5
+	pic SUBCM7 tics 5
+
+
+//angry communist computer
+texture optional SUBCM8
+	pic SUBCM8 tics 15
+	pic SUBCM9 tics 15
+	
+//Restored Hexen Animations
+
+warp flat fwater1
+warp flat fwater2
+warp flat fwater3
+warp flat fwater4
+
+warp2 flat lava1
+warp2 flat lava2
+warp2 flat lava3
+warp2 flat lava4
+
+warp flat blood1
+warp flat blood2
+warp flat blood3
+
+warp2 flat slime01
+warp2 flat slime02
+warp2 flat slime03
+warp2 flat slime04
+
+warp2 flat slime05
+warp2 flat slime06
+warp2 flat slime07
+warp2 flat slime08
+
+warp2 flat nukage1
+warp2 flat nukage2
+warp2 flat nukage3
+
+warp2 texture fireblu1
+warp2 texture fireblu2
+
+warp2 texture firelava
+warp2 texture firelav2
+warp2 texture firelav3
+
+warp2 texture firemag1
+warp2 texture firemag2
+warp2 texture firemag3
+
+warp2 texture firewall
+warp2 texture firewalA
+warp2 texture firewalB

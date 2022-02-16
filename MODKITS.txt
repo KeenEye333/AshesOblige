@@ -1,0 +1,174 @@
+#library "MODKITS"
+#include "zcommon.acs"
+
+Script "ModkitCheck" (void)
+{
+if(checkweapon("revolver"))
+{
+giveinventory("revolver2",1);
+takeinventory("revolver",1);
+PlaySound(0,"special/workbench",CHAN_ITEM);
+takeinventory("ItemModkit",1);
+Print(s:"You installed the Extended Barrel (DAMAGE MOD)!");
+setweapon("revolver2");
+terminate;
+}
+else if(checkweapon("revolver2"))
+{
+giveinventory("revolver3",1);
+takeinventory("revolver2",1);
+PlaySound(0,"special/workbench",CHAN_ITEM);
+takeinventory("ItemModkit",1);
+setweapon("revolver3");
+terminate;
+}
+else if(checkweapon("Glock"))
+{
+giveinventory("glock2",1);
+takeinventory("glock",1);
+PlaySound(0,"special/workbench",CHAN_ITEM);
+takeinventory("ItemModkit",1);
+setweapon("Glock2");
+terminate;
+}
+else if(checkweapon("Glock2"))
+{
+giveinventory("glock3",1);
+takeinventory("glock2",1);
+PlaySound(0,"special/workbench",CHAN_ITEM);
+takeinventory("ItemModkit",1);
+setweapon("Glock3");
+terminate;
+}
+else if(checkweapon("PumpAction"))
+{
+giveinventory("Pumpaction2",1);
+takeinventory("Pumpaction",1);
+PlaySound(0,"special/workbench",CHAN_ITEM);
+takeinventory("ItemModkit",1);
+setweapon("Pumpaction2");
+terminate;
+}
+else if(checkweapon("PumpAction2"))
+{
+giveinventory("Pumpaction3",1);
+takeinventory("Pumpaction2",1);
+PlaySound(0,"special/workbench",CHAN_ITEM);
+takeinventory("ItemModkit",1);
+setweapon("Pumpaction3");
+terminate;
+}
+else if(checkweapon("Sawedoff"))
+{
+giveinventory("Sawedoff2",1);
+takeinventory("Sawedoff",1);
+PlaySound(0,"special/workbench",CHAN_ITEM);
+takeinventory("ItemModkit",1);
+setweapon("Sawedoff2");
+terminate;
+}
+else if(checkweapon("Sawedoff2"))
+{
+giveinventory("Sawedoff3",1);
+takeinventory("Sawedoff2",1);
+PlaySound(0,"special/workbench",CHAN_ITEM);
+takeinventory("ItemModkit",1);
+setweapon("Sawedoff3");
+terminate;
+}
+else if(checkweapon("Ingram"))
+{
+giveinventory("Ingram2",1);
+takeinventory("Ingram",1);
+PlaySound(0,"special/workbench",CHAN_ITEM);
+takeinventory("ItemModkit",1);
+setweapon("Ingram2");
+terminate;
+}
+else if(checkweapon("Ingram2"))
+{
+giveinventory("Ingram3",1);
+takeinventory("Ingram2",1);
+PlaySound(0,"special/workbench",CHAN_ITEM);
+takeinventory("ItemModkit",1);
+setweapon("Ingram3");
+terminate;
+}
+else if(checkweapon("m16"))
+{
+giveinventory("m162",1);
+takeinventory("m16",1);
+PlaySound(0,"special/workbench",CHAN_ITEM);
+takeinventory("ItemModkit",1);
+setweapon("M162");
+terminate;
+}
+else if(checkweapon("m162"))
+{
+giveinventory("m163",1);
+takeinventory("m162",1);
+PlaySound(0,"special/workbench",CHAN_ITEM);
+takeinventory("ItemModkit",1);
+setweapon("M163");
+terminate;
+}
+else if(checkweapon("Napalmgun"))
+{
+giveinventory("Napalmgun2",1);
+takeinventory("Napalmgun",1);
+PlaySound(0,"special/workbench",CHAN_ITEM);
+takeinventory("ItemModkit",1);
+setweapon("Napalmgun2");
+terminate;
+}
+else if(checkweapon("Napalmgun2"))
+{
+giveinventory("Napalmgun3",1);
+takeinventory("Napalmgun2",1);
+PlaySound(0,"special/workbench",CHAN_ITEM);
+takeinventory("ItemModkit",1);
+setweapon("Napalmgun3");
+terminate;
+}
+else if(checkweapon("JunkerMusket"))
+{
+giveinventory("JunkerMusket2",1);
+takeinventory("JunkerMusket",1);
+PlaySound(0,"special/workbench",CHAN_ITEM);
+takeinventory("ItemModkit",1);
+setweapon("Junkermusket2");
+terminate;
+}
+else if(checkweapon("JunkerMusket2"))
+{
+giveinventory("JunkerMusket3",1);
+takeinventory("JunkerMusket2",1);
+PlaySound(0,"special/workbench",CHAN_ITEM);
+takeinventory("ItemModkit",1);
+setweapon("Junkermusket3");
+terminate;
+}
+else if(checkweapon("Killerpig"))
+{
+giveinventory("Killerpig2",1);
+takeinventory("Killerpig",1);
+PlaySound(0,"special/workbench",CHAN_ITEM);
+takeinventory("ItemModkit",1);
+setweapon("Killerpig2");
+terminate;
+}
+else if(checkweapon("Killerpig2"))
+{
+giveinventory("Killerpig3",1);
+takeinventory("Killerpig2",1);
+PlaySound(0,"special/workbench",CHAN_ITEM);
+takeinventory("ItemModkit",1);
+setweapon("Killerpig3");
+terminate;
+}
+else
+{
+Print(s:"This weapon cannot be modified further");
+terminate;
+}
+}

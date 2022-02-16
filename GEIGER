@@ -1,0 +1,173 @@
+#library "RADIAT"
+#include "zcommon.acs"
+ 
+//Radiation is gained by going into radioactive areas, you won't get it by
+//chillin around Nukage Barrels. Radiation
+//As long as you have a Hazard Suit, you will not gain radiation.
+//You may purge Radiation by using certain "Radiation Purger" areas you find.
+//And by using Detox Stims.
+//CODE BY XLightningstormL with minor modifications by Vostyok
+ 
+script "Geiger Counter" ENTER
+{
+    int x;
+    int y;
+    int z;
+    int UniqueNoClipTIDA;
+   
+    while(true)
+        {
+        x = GetActorX (0);
+        y = GetActorY (0);
+        z = GetActorZ (0) + 0.1;
+       
+        UniqueNoClipTIDA = UniqueTID();
+       
+        Spawn ("WanderingGeiger", x, y, z, UniqueNoClipTIDA);
+       
+        for (int i = 0; i < 5; i++ )
+            {
+            if(CheckProximity(UniqueNoClipTIDA, "RadiationVeryLow", 64.0, 1)||CheckProximity(UniqueNoClipTIDA, "RadiationLow", 96.0, 1)||CheckProximity(UniqueNoClipTIDA, "RadiationMediumLow", 96.0, 1)||CheckProximity(UniqueNoClipTIDA, "RadiationMediumHigh", 96.0, 1)||CheckProximity(UniqueNoClipTIDA, "RadiationHigh", 96.0, 1)||CheckProximity(UniqueNoClipTIDA, "RadiationVeryHigh", 96.0, 1)||CheckProximity(UniqueNoClipTIDA, "RadiationExtreme", 96.0, 1))
+                {
+                LocalAmbientSound("special/geiger", Random(50,127));
+                }
+            delay(5);
+            }
+       
+        Thing_Remove(UniqueNoClipTIDA);
+        }
+}
+Script "RADIATIONCLOUDDETECT" ENTER
+{
+if(CheckProximity(0, "Dustcloud", 128.0, 1) && !CheckInventory("PowerIronFeet"))
+{
+   GiveInventory("RadiationCount",2);
+   LocalAmbientSound("special/geigermed", 127);
+}
+delay(16);
+restart;
+}
+
+Script "RADIATION0DETECT" ENTER //7
+{
+if(CheckProximity(0, "RadiationVeryLow", 256.0, 1) && !CheckInventory("PowerIronFeet"))
+{
+   GiveInventory("RadiationCount",1);
+   LocalAmbientSound("special/geigerlow", 127);
+}
+delay(16);
+restart;
+}
+ 
+Script "RADIATION1DETECT" ENTER //8
+{
+if(CheckProximity(0, "RadiationLow", 256.0, 1) && !CheckInventory("PowerIronFeet"))
+{
+   GiveInventory("RadiationCount",1);
+   LocalAmbientSound("special/geigerlow", 127);
+}
+delay(14);
+restart;
+}
+ 
+Script "RADIATION2DETECT" ENTER //11
+{
+if(CheckProximity(0, "RadiationMediumLow", 256.0, 1) && !CheckInventory("PowerIronFeet"))
+{
+   GiveInventory("RadiationCount",2);
+   LocalAmbientSound("special/geigermed", 127);
+}
+delay(28);
+restart;
+}
+ 
+Script "RADIATION3DETECT" ENTER //12.5
+{
+if(CheckProximity(0, "RadiationMediumHigh", 256.0, 1) && !CheckInventory("PowerIronFeet"))
+{
+   GiveInventory("RadiationCount",2);
+   LocalAmbientSound("special/geigermed", 127);
+}
+delay(24);
+restart;
+}
+ 
+Script "RADIATION4DETECT" ENTER //12.5
+{
+if(CheckProximity(0, "RadiationHigh", 256.0, 1) && !CheckInventory("PowerIronFeet"))
+{
+   GiveInventory("RadiationCount",3);
+   LocalAmbientSound("special/geigerhigh", 127);
+}
+delay(24);
+restart;
+}
+ 
+Script "RADIATION5DETECT" ENTER //16
+{
+if(CheckProximity(0, "RadiationVeryHigh", 256.0, 1) && !CheckInventory("PowerIronFeet"))
+{
+   GiveInventory("RadiationCount",3);
+   LocalAmbientSound("special/geigerextreme", 127);
+}
+delay(18);
+restart;
+}
+ 
+Script "RADIATION6DETECT" ENTER //16
+{
+if(CheckProximity(0, "RadiationExtreme", 128.0, 1) && !CheckInventory("PowerIronFeet"))
+{
+   GiveInventory("RadiationCount",5);
+   LocalAmbientSound("special/geigerextreme", 127);
+}
+delay(12);
+restart;
+}
+ 
+Script "RadiationScript" ENTER
+{
+   int RadDelay;
+   
+   RadDelay = 1;
+ 
+   if (CheckInventory("RadiationCount") > 0)
+   {
+      if (CheckInventory("RadiationCount") >= 30  && CheckInventory("RadiationCount") < 50 && !CheckInventory("PowerIronFeet"))
+      {
+          DamageActor(0, AAPTR_DEFAULT, 0, AAPTR_NULL, 1, "RADS");
+          HudMessage (s:"*LIGHT IRRADIATION*";1,86,CR_YELLOW,-0.30,-0.88,2.0,2.0);
+		  TakeInventory("Radiationcount", 2);
+          delay(35);
+          restart;
+      }
+      else if (CheckInventory("RadiationCount") >= 50  && CheckInventory("RadiationCount") < 75 && !CheckInventory("PowerIronFeet"))
+      {
+          DamageActor(0, AAPTR_DEFAULT, 0, AAPTR_NULL, 2, "RADS");
+          HudMessage (s:"*MODERATE IRRADIATION*";1,86,CR_YELLOW,-0.30,-0.88,2.0,2.0);
+		  TakeInventory("Radiationcount", 2);
+          delay(35);
+          restart;
+      }
+      else if (CheckInventory("RadiationCount") >= 75  && CheckInventory("RadiationCount") < 90 && !CheckInventory("PowerIronFeet"))
+      {
+          DamageActor(0, AAPTR_DEFAULT, 0, AAPTR_NULL, 3, "RADS");
+          HudMessage (s:"*SERIOUS IRRADIATION*";1,86,CR_YELLOW,-0.30,-0.88,2.0,2.0);
+		  TakeInventory("Radiationcount", 2);
+          delay(35);
+          restart;
+      }
+      else if (CheckInventory("RadiationCount") >= 90  && CheckInventory("RadiationCount") < 100 && !CheckInventory("PowerIronFeet"))
+      {
+         DamageActor(0, AAPTR_DEFAULT, 0, AAPTR_NULL, 4, "RADS");
+          HudMessage (s:"*LETHAL IRRADIATION*";1,86,CR_YELLOW,-0.30,-0.88,2.0,2.0);
+		  TakeInventory("Radiationcount", 2);
+          delay(35);
+          restart;
+      }
+   }  
+   delay(16);
+   TakeInventory("Radiationcount", 1);
+   restart;
+}
+ 

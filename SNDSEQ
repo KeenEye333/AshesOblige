@@ -1,0 +1,72 @@
+:RJGate
+	door 51
+	playuntildone MetalGate
+	nostopcutoff
+end
+
+[RJDoorNormal
+	door 50
+	0		DoorOpenNormal
+	1		DoorCloseNormal
+	2		DoorOpenBlazing
+	3		DoorCloseBlazing
+]
+
+:PolyOpen
+   door 1
+   play      Firedoor 
+   nostopcutoff
+end
+
+:WoodDragged
+    door 10
+   playuntildone      wooddraggin
+end
+
+:FloorFallFX
+   platform 54
+   play      Floorfall
+   nostopcutoff
+end
+
+:Elevatordoors
+   door 2
+   play      elevator/doors 
+   nostopcutoff
+end
+
+:Traincar
+   door 4
+   play      traincar 
+   nostopcutoff
+end
+
+:Pipefill
+   platform 5
+   play   world/FloodFill 
+   nostopcutoff
+ end
+
+:Silence
+end
+
+:RJEDoor1
+	door 52
+	play RJElectricDoor1
+	stopsound RJElectricDoor1C
+end
+
+:PolyOpen
+   door 3
+   play      lightdoor 
+   nostopcutoff
+end
+
+:RJEDoor2
+	door 53
+	play RJBigDoorStart
+	playrepeat RJBigDoorRun
+	stopsound elevator/doors
+	
+end
+

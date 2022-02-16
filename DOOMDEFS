@@ -1,0 +1,404 @@
+pulselight BARREL
+{
+color 0.8 0.5 0.5
+size 40
+secondarySize 45
+interval 0.3
+offset 0 36 0
+}
+pulselight Campfire1
+{
+color 0.6 0.4 0.2
+size 96
+secondarySize 90
+interval 0.5
+offset 0 16 0
+}
+pulselight flourescence
+{
+color 0.4 1.0 0.4
+size 40
+secondarySize 70
+interval 5
+offset 0 32 0
+}
+pulselight flourescence2
+{
+color 0.2 0.4 1.0
+size 30
+secondarySize 35
+interval 5
+offset 0 48 0
+}
+pulselight flourescence3
+{
+color 0.2 0.4 1.0
+size 20
+secondarySize 25
+interval 5
+offset 0 32 0
+}
+pulselight flourescence4
+{
+color 0.2 0.4 1.0
+size 30
+secondarySize 35
+interval 5
+offset 0 0 0
+}
+pulselight CodexGlow
+{
+color 0.4 0.4 1.0
+size 20
+secondarySize 40
+interval 10
+offset 0 32 0
+}
+pointlight Searchlight1
+{
+    color 1.0 0.9 0.9
+    size 48
+    offset 0 8 0
+}
+pointlight ceilinglight1
+{
+    color 0.9 0.8 0.6
+    size 64
+    offset 0 -45 0
+}
+pointlight ceilinglight2
+{
+    color 0.7 0.1 0.1
+    size 48
+    offset 0 -32 0
+}
+pulselight gascookin
+{
+color 0.4 0.4 1.0
+size 10
+secondarySize 15
+interval 3
+offset 0 0 0
+}
+pointlight Fungus
+{
+    color 0.2 0.8 0.2
+    size 20
+    offset 0 16 0
+}
+pointlight eleclamp1
+{
+    color 1.0 0.8 0.9
+    size 30
+    offset 0 8 0
+}
+pulselight candlelight1
+{
+color 0.6 0.4 0.2
+size 12
+secondarySize 10
+interval 0.4
+offset 0 8 0
+}
+pulselight candlelight2
+{
+color 0.6 0.4 0.2
+size 14
+secondarySize 15
+interval 0.4
+offset 0 8 0
+}
+pointlight eleclamp2
+{
+    color 0.9 0.7 0.8
+    size 25
+    offset 0 8 0
+}
+pointlight LAMPLIGHT
+{
+color 0.8 0.6 0.6
+size 40
+offset 0 36 0
+}
+object PropCeilingLight
+{
+ frame LSHDB0 { light ceilinglight1 }
+}
+object PropCeilingLightunlit
+{
+ frame LSHDB0 { light ceilinglight1 }
+}
+object PropArmoredLight
+{
+ frame ALGTB0 { light ceilinglight1 }
+}
+object PropArmoredLightunlit
+{
+ frame ALGTB0 { light ceilinglight1 }
+}
+object PropEmergencyLight
+{
+ frame ELGTB0 { light ceilinglight2 }
+}
+object PropEmergencyLightunlit
+{
+ frame ELGTB0 { light ceilinglight2 }
+}
+Object PROPFungusAmungus
+{
+  frame FUNG { light Fungus }
+}
+Object PROPElectricLamp
+{
+  frame SLMPA0 { light eleclamp1 }
+  frame SLMPB0 { light eleclamp2 }
+}
+Object FloraDemonFuzz1 
+{
+ frame DFUZD0 { light flourescence2 }
+ frame DFUZE0 { light flourescence2 }
+ frame DFUZI0 { light flourescence2 }
+ frame DFUZJ0 { light flourescence1 }
+ frame DFUZS0 { light flourescence3 }
+ frame DFUZT0 { light flourescence3 }
+}
+Object FloraDemonFuzz2 
+{
+ frame DF2ZD0 { light flourescence2 }
+ frame DF2ZE0 { light flourescence2 }
+ frame DF2ZF0 { light flourescence2 }
+ frame DF2ZG0 { light flourescence1 }
+ frame DF2ZJ0 { light flourescence3 }
+ frame DF2ZK0 { light flourescence3 }
+}
+Object PROPBurningDrum
+{
+  frame FCAN { light BARREL }
+}
+Object PROPSpitroast
+{
+  frame SPRS { light campfire1 }
+}
+object lantern1
+{
+ frame LMP1A { light lamplight }
+ }
+ Object FloraWitchesLantern1 
+{
+  frame WLNN { light flourescence2 }
+}
+ Object FloraWitchesLantern2 
+{
+  frame WLNN { light flourescence3 }
+}
+ Object FloraWitchesLantern3 
+{
+  frame WLNN { light flourescence4 }
+}
+object PropLensFlare
+{
+ frame LENS { light searchlight1 }
+ }
+ object PropCandles1
+{
+ frame CDL1A { light candlelight1 }
+ frame CDL1B { light candlelight2 }
+ frame CDL1C { light candlelight1 }
+ }
+  object PropCandles2
+{
+ frame CDL2A { light candlelight2 }
+ frame CDL2B { light candlelight1 }
+ frame CDL2C { light candlelight1 }
+ }
+  object PropCandles3
+{
+ frame CDL3A { light candlelight2 }
+ frame CDL3B { light candlelight1 }
+ frame CDL3C { light candlelight2 }
+ }
+ object lantern2
+{
+ frame LMP2A { light lamplight }
+ }
+  object propfirepit
+{
+ frame FPITA { light campfire1 }
+ frame FPITB { light campfire1 }
+ frame FPITC { light campfire1 }
+ frame FPITD { light campfire1 }
+ }
+  object CutsceneSkull
+ {
+ frame NMSK {light barrel}
+ }
+  object CollectableD20
+ {
+ frame D20c { light CodexGlow }
+ }
+ Glow
+{
+	Flats
+	{
+
+		NUKAGE1
+		NUKAGE2
+		NUKAGE3
+		NUKAGE4
+		DOORBLU
+		DOORBLU2
+		DOORRED
+		DOORRED2
+		DOORYEL
+		DOORYEL2
+	}
+}
+
+brightmap texture CONS17
+{
+   map CONSGLOW
+}
+brightmap texture CONS18
+{
+   map CONSGLOW
+}
+brightmap texture CONS19
+{
+   map CONSGLOW
+}
+brightmap texture CONS20
+{
+   map CONSGLOW
+}
+brightmap texture CONS12
+{
+   map CONSGLOW
+}
+brightmap texture CONS13
+{
+   map CONSGLOW
+}
+brightmap texture CONS14
+{
+   map CONSGLOW
+}
+brightmap texture CONS15
+{
+   map CONSGLOW
+}
+brightmap texture SILO11
+{
+	map BIGFLK11
+}
+brightmap texture SILO12
+{
+	map BIGFLK11
+}
+brightmap texture SILO13
+{
+	map BIGFLK11
+}
+brightmap texture SILO14
+{
+	map BIGFLK11
+}
+brightmap texture SILO15
+{
+	map BIGFLK11
+}
+brightmap texture SILO16
+{
+	map BIGFLK11
+}
+brightmap texture SILO17
+{
+	map BIGFLK11
+}
+brightmap texture SILO18
+{
+	map BIGFLK11
+}
+brightmap texture SILO19
+{
+	map BIGFLK11
+}
+brightmap texture TAG21
+{
+   map TAG21B
+}
+brightmap texture TAG22
+{
+   map TAG22B
+}
+brightmap texture TAG32
+{
+   map TAG32B
+}
+brightmap texture TAG33
+{
+   map TAG33B
+}
+brightmap texture TAG34
+{
+   map TAG34B
+}
+brightmap texture TAG41
+{
+   map TAG41B
+}
+BrightMap Sprite WRLDR0
+{
+Map WRLLA0
+DisableFullBright
+}
+BrightMap Sprite WRLDS0
+{
+Map WRLLA0
+DisableFullBright
+}
+BrightMap Sprite WRLDT0
+{
+Map WRLLA0
+DisableFullBright
+}
+BrightMap Sprite WRLDU0
+{
+Map WRLLA0
+DisableFullBright
+}
+BrightMap Sprite WRLDV0
+{
+Map WRLLA0
+DisableFullBright
+}
+brightmap texture GASSW1
+{
+   map GASGLO
+}
+brightmap texture GASSW2
+{
+   map GASGLO
+}
+brightmap texture GASSW3
+{
+   map GASGLO
+}
+brightmap texture GASSW4
+{
+   map GASGLO
+}
+BrightMap Sprite BHWKD0
+{
+Map BHLTA0
+DisableFullBright
+}
+BrightMap Sprite BHWKE0
+{
+Map BHLTB0
+DisableFullBright
+}
+BrightMap Sprite BHWKF0
+{
+Map BHLTC0
+DisableFullBright
+}

@@ -1,0 +1,126 @@
+#library "RJCommon"
+#include "zcommon.acs"
+
+str RJFadingToSong = "";
+int RJMusicVolume = 1.0;
+
+function int clamp_volume (int InVolume)
+{
+	If(InVolume < 0.0)
+	{
+		//return 0;
+		InVolume = 0.0;
+	}
+	Else If (InVolume > 1.0)
+	{
+		//return 1;
+		InVolume = 1.0;
+	}
+	return InVolume;
+}
+
+//as we dont seem to have a way of telling what music is playing at map start, we have to prime the pump by calling this
+Script "RJSetupMusic" (int aRJMusName)
+{
+	RJMusicVolume = 1.0;
+	SetMusicVolume(RJMusicVolume);
+	RJFadingToSong = aRJMusName;
+	//Log(s:"Song init to ", s:RJFadingToSong);
+}
+
+//fades music to specified level at provided rate per tic
+Script "RJFadeToLevel"(int aRJRate, int aRJLevel)
+{
+	//ACS_NamedTerminate("RJChangeMusic", 0);
+	ACS_NamedTerminate("RJSetMusic", 0);
+	Int RJClampedLevel = clamp_volume(aRJLevel);
+	RJMusicVolume = clamp_volume(RJMusicVolume);
+	
+	//Log(s:"Fading to level ", f:RJClampedLevel, s:" At rate: ", f:aRJRate);
+	
+	bool Fading = True;
+	While(Fading == True)
+	{
+		
+		If(RJClampedLevel == RJMusicVolume)
+		{
+			Fading = False;
+			SetMusicVolume(RJMusicVolume);	
+		}
+		Else If(RJMusicVolume > RJClampedLevel)
+		{
+			RJMusicVolume -= aRJRate;
+			If(RJMusicVolume <= RJClampedLevel)
+			{
+				RJMusicVolume = RJClampedLevel;
+				Fading = False;
+			}
+			SetMusicVolume(RJMusicVolume);
+		}
+		Else If(RJMusicVolume < RJClampedLevel)
+		{
+			RJMusicVolume += aRJRate;
+			If(RJMusicVolume >= RJClampedLevel)
+			{
+				RJMusicVolume = RJClampedLevel;
+				Fading = False;
+			}
+			SetMusicVolume(RJMusicVolume);
+		}
+		//Log(s:"Fading ", f:RJMusicVolume);
+		Delay(1);
+	}
+}
+
+
+//fades out current music, waits then fades in new music
+Script "RJChangeMusic" (int aRJSong, int aRJOutRate, int aRJInRate, int aRJDelay)
+{
+	ACS_NamedTerminate("RJFadeToLevel", 0);
+	//quick check to clamp the volume between 0 and 1.0 since odd fade rates can put it there
+	//not a big deal, just might lead to a little imprecision in fade times
+	RJMusicVolume = clamp_volume(RJMusicVolume);
+	//Log(s:"Fade to is:", s:RJFadingToSong);
+	If(RJFadingToSong != aRJSong)
+	{//if a command to fade is recieved with the same song, we ignore it
+		//however if the song is different, fade to it.
+		//Log(s:"Music is different:", s:aRJSong);
+		ACS_NamedTerminate("RJSetMusic", 0);
+		Delay(1);
+		RJFadingToSong = aRJSong;
+		//ACS_NamedExecuteWithResult("RJSetMusic", aRJSong, aRJOutRate, aRJInRate, aRJDelay);
+		ACS_NamedExecute("RJSetMusic", 0, aRJOutRate, aRJInRate, aRJDelay);
+	}
+}
+
+Script "RJSetMusic" (int aRJOutRate, int aRJInRate, int aRJDelay)//int aRJSong,
+{
+	//fade out
+
+	while(RJMusicVolume > 0)
+	{
+		
+		RJMusicVolume -= aRJOutRate;
+		//Log(s:"Fading out: ", f:RJMusicVolume);
+		SetMusicVolume(RJMusicVolume);
+		Delay(1);
+	}
+	
+	//wait
+	//Log(s:"Waiting.");
+	delay(1 + aRJDelay);
+	
+	//set the new music
+	SetMusic(RJFadingToSong);
+	//Log(s:"Music changed to: ", s:RJFadingToSong);
+
+	//fade new song in
+    while(RJMusicVolume < 1.0)
+    {
+        
+		RJMusicVolume += aRJInRate;
+		//Log(s:"Fading In: ", f:RJMusicVolume);
+        SetMusicVolume(RJMusicVolume);
+        Delay(1);
+    }
+}

@@ -1,0 +1,26 @@
+fader AcidBurn
+{
+	DecayStart	0.5
+	DecayTime	2.0
+}
+decal AcidLower
+{
+	pic Acilow
+	x-scale 0.5
+    y-scale 0.5
+}
+ decal AcidSplat 360
+   {
+       pic AciSpl
+       x-scale 0.5
+       y-scale 0.5
+	   animator AcidBurn
+	   lowerdecal  Acidlower
+   }
+   
+  decal Knifescrape
+    { 
+        pic knwalg
+        x-scale 0.8
+        y-scale 0.8
+    }

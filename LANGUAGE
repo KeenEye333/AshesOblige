@@ -1,0 +1,228 @@
+[enu default] 
+
+TXT_RANDOM_GOON_01 = "Talk to the boss, scav.";
+TXT_RANDOM_GOON_02 = "Man, I hate pulling guard duty while there's a party on...";
+TXT_RANDOM_GOON_03 = "Fuck off, waster.";
+TXT_RANDOM_GOON_04 = "You wanna talk? Talk to the boss. Don't bother me.";
+TXT_RANDOM_GOON_05 = "This is Goon turf. Watch your fucking step, you dig?";
+TXT_RANDOM_GOON_06 = "I don' wanna talk to you.";
+TXT_RANDOM_GOON_07 = "Goon Squad! We're the meanest gang in the city! Anyone who says otherwise is a dead man!";
+TXT_RANDOM_GOON_08 = "You see these muscles? This is what a real man looks like! Ha ha ha!";
+TXT_RANDOM_GOON_09 = "You want trouble? Press use on me again, I dare you!";
+TXT_RANDOM_GOON_10 = "Jeez, you're annoying..."; 
+
+TXT_RANDOMGOODBYE_1 = "[Leave]";
+TXT_RANDOMGOODBYE_2 = "[Leave]";
+TXT_RANDOMGOODBYE_3 = "[Leave]";
+
+TXT_RANDOM_FIGHTFAN_01 = "You see the last fight? Awful. Exactly the kinda crappy writing that is driving away the fans.";
+TXT_RANDOM_FIGHTFAN_02 = "They couldn't find any big names this season, and you can really tell. They should have delayed the debut, instead of pushing a bunch of nobodies.";
+TXT_RANDOM_FIGHTFAN_03 = "The Tribal Vs Two-headed cow fight really split the fans. No one expected the cow to pull a gun. That was just cheap.";
+TXT_RANDOM_FIGHTFAN_04 = "We had a Trash-Hag break character. Jumped the fence and ripped a guy's face off. These amateurs are really killing the sport.";
+TXT_RANDOM_FIGHTFAN_05 = "I don't know why the call this season 'Pit Fight Extreme'. I don't think its that extreme at all. It just feels like regular pit fight.";
+TXT_RANDOM_FIGHTFAN_06 = "I do like how they've expanded the arena. It really gives a lot more tactical space and room for signature moves.";
+TXT_RANDOM_FIGHTFAN_07 = "The organisers tried calling these 'cage matches', once. Well, duh! It's pit fight! Every match is a cage match, idiots!";
+TXT_RANDOM_FIGHTFAN_08 = "I've been following the Beastly-Boys storyline. I'm really excited to see how they settle their feud with the Cajun-Cannibals.";
+TXT_RANDOM_FIGHTFAN_09 = "The writing in this season has been terrible. Most of the matches feel completely random. It's why there are so few talented fighters for this season.";
+TXT_RANDOM_FIGHTFAN_10 = "Last season was so much better. The six big fights were all good shows."; 
+
+TXT_RANDOM_TOWNGUARD1_01 = "There a problem?";
+TXT_RANDOM_TOWNGUARD1_02 = "At least the gangs have stopped fighting, for now.";
+TXT_RANDOM_TOWNGUARD1_03 = "It's quiet down here. Almost... too quiet.";
+TXT_RANDOM_TOWNGUARD1_04 = "Buzz off, scav. I haven't got time to talk.";
+TXT_RANDOM_TOWNGUARD1_05 = "You want a job? Go find us some coffee. ";
+TXT_RANDOM_TOWNGUARD1_06 = "Yes, the mutants are probably getting ready for another attack. But we'll be ready.";
+TXT_RANDOM_TOWNGUARD1_07 = "If you got questions, go see Violet or the Captain. I'm not a tour guide.";
+TXT_RANDOM_TOWNGUARD1_08 = "This all started 'cos of you scavengers.";
+TXT_RANDOM_TOWNGUARD1_09 = "Have you seen the price of nine-mil' rounds? Fucking outrageous.";
+TXT_RANDOM_TOWNGUARD1_10 = "Go away."; 
+
+
+TXT_RANDOM_TOWNTHUG1_01 = "I don't like your face.";
+TXT_RANDOM_TOWNTHUG1_02 = "Oh, you wanna party?";
+TXT_RANDOM_TOWNTHUG1_03 = "Go away.";
+TXT_RANDOM_TOWNTHUG1_04 = "What do you want?";
+TXT_RANDOM_TOWNTHUG1_05 = "What? Get lost. ";
+TXT_RANDOM_TOWNTHUG1_06 = "You're not my friend, scav.";
+TXT_RANDOM_TOWNTHUG1_07 = "Why are you here? You're not one of us.";
+TXT_RANDOM_TOWNTHUG1_08 = "Oh, you're a tough one, eh?";
+TXT_RANDOM_TOWNTHUG1_09 = "Stay out of the pit, chump. Heh heh heh!";
+TXT_RANDOM_TOWNTHUG1_10 = "If you wanna bet, go bother the organiser."; 
+
+TXT_RANDOM_TOWNTHUG2_01 = "What do you think you're doing?";
+TXT_RANDOM_TOWNTHUG2_02 = "Lot of people don't like you being here, scav. You better leave.";
+TXT_RANDOM_TOWNTHUG2_03 = "Got any spare bullets? If not, fuck off.";
+TXT_RANDOM_TOWNTHUG2_04 = "What are you lookin' at?";
+TXT_RANDOM_TOWNTHUG2_05 = "Get outta here. ";
+TXT_RANDOM_TOWNTHUG2_06 = "This place needs some better chow.";
+TXT_RANDOM_TOWNTHUG2_07 = "What the fuck is taking so long? I wanna see another fight!";
+TXT_RANDOM_TOWNTHUG2_08 = "Getting bored... Wanna shoot something.";
+TXT_RANDOM_TOWNTHUG2_09 = "Wanna have a little fun, scav?";
+TXT_RANDOM_TOWNTHUG2_10 = "You're boring me.";
+
+TXT_RANDOM_TOWNDUDE1_01 = "You came from the south, right? How's Florida?";
+TXT_RANDOM_TOWNDUDE1_02 = "If you need cash, there's a couple of traders in town.";
+TXT_RANDOM_TOWNDUDE1_03 = "Are the roads safe? I'm thinking of leaving this dump.";
+TXT_RANDOM_TOWNDUDE1_04 = "You find any tools? We're always looking for new ones.";
+TXT_RANDOM_TOWNDUDE1_05 = "Talk to Rigs or Violet for work, pal. ";
+TXT_RANDOM_TOWNDUDE1_06 = "I heard that there's a giant mutant that lives near the crater.";
+TXT_RANDOM_TOWNDUDE1_07 = "Sorry, pal. Did you want something?";
+TXT_RANDOM_TOWNDUDE1_08 = "You staying in town long? I don't suppose there's room for two on that bike?";
+TXT_RANDOM_TOWNDUDE1_09 = "Maybe if you helped us out a bit, we'd let you stay.";
+TXT_RANDOM_TOWNDUDE1_10 = "There was supposed to be a pit fight on today. I heard the champ has got cold feet."; 
+
+TXT_RANDOM_TOWNDUDE2_01 = "Look, I don't have time for drifters.";
+TXT_RANDOM_TOWNDUDE2_02 = "Look, don't bother me, and I won't bother you.";
+TXT_RANDOM_TOWNDUDE2_03 = "I don't think you belong here, friend.";
+TXT_RANDOM_TOWNDUDE2_04 = "Hi yourself, pal.";
+TXT_RANDOM_TOWNDUDE2_05 = "Talk to Rigs or Violet for work, pal. ";
+TXT_RANDOM_TOWNDUDE2_06 = "All of you newcomers better earn your keep.";
+TXT_RANDOM_TOWNDUDE2_07 = "Sorry, pal. Did you want something?";
+TXT_RANDOM_TOWNDUDE2_08 = "Damn refugees. Why did they have to come here?";
+TXT_RANDOM_TOWNDUDE2_09 = "Maybe if you helped us out a bit, we'd let you stay.";
+TXT_RANDOM_TOWNDUDE2_10 = "Why are you bothering me. There's plenty of work to be done around here.";
+
+TXT_RANDOM_REFUGEE1_01 = "We just came here for shelter. We won't bother anyone.";
+TXT_RANDOM_REFUGEE1_02 = "This station isn't as nice as our old one.";
+TXT_RANDOM_REFUGEE1_03 = "Look, I don't have anything. Leave me alone.";
+TXT_RANDOM_REFUGEE1_04 = "Don't look at me like that.";
+TXT_RANDOM_REFUGEE1_05 = "This place needs more guards. The cannibals will walk right over them. ";
+TXT_RANDOM_REFUGEE1_06 = "If the mutants are attacking the stations, how are we going to stop them here?";
+TXT_RANDOM_REFUGEE1_07 = "Where the hell are we supposed to sleep?";
+TXT_RANDOM_REFUGEE1_08 = "This is it, isn't it? There's nowhere left to run.";
+TXT_RANDOM_REFUGEE1_09 = "If you see a cannibal, run. You have no idea what those things can do!";
+TXT_RANDOM_REFUGEE1_10 = "Look, I don't feel like talking right now.";
+
+TXT_RANDOM_REFUGEE2_01 = "I'm sorry, I didn't mean to stare.";
+TXT_RANDOM_REFUGEE2_02 = "What am I going to do? I don't have anything left.";
+TXT_RANDOM_REFUGEE2_03 = "Look, I don't have anything. Leave me alone.";
+TXT_RANDOM_REFUGEE2_04 = "I'm sorry, sir. I wasn't looking at you.";
+TXT_RANDOM_REFUGEE2_05 = "I'm not here to cause trouble. ";
+TXT_RANDOM_REFUGEE2_06 = "Why are the mutants attacking now? There were never so many before.";
+TXT_RANDOM_REFUGEE2_07 = "What did we do to deserve this?";
+TXT_RANDOM_REFUGEE2_08 = "Please. We need food, and medicine!";
+TXT_RANDOM_REFUGEE2_09 = "It was awful. They killed everyone. Every man, woman and child they found.";
+TXT_RANDOM_REFUGEE2_10 = "Please, just leave us alone.";
+
+TXT_RANDOM_subWeirdo_01 = "Oh, hey! Didn't see you there!";
+TXT_RANDOM_subWeirdo_02 = "I built this place. All of it! Mostly the restrooms.";
+TXT_RANDOM_subWeirdo_03 = "They kicked me out because I'm 'lazy'. Pfft. And this is the thanks I get!";
+TXT_RANDOM_subWeirdo_04 = "Sometimes I sneak out at night, when everyone is asleep. I look behind the tents for food.";
+TXT_RANDOM_subWeirdo_05 = "Are you expecting me to say something funny?";
+TXT_RANDOM_subWeirdo_06 = "Don't tell anyone I'm here. You saw nothing.";
+TXT_RANDOM_subWeirdo_07 = "I think the station would still look better with more toilets. At least five more toilets. And a pool.";
+TXT_RANDOM_subWeirdo_08 = "Found any fun collectibles? I found a dead bird the other day. It's neat!";
+TXT_RANDOM_subWeirdo_09 = "Oh, sure. Help yourself to all my stuff. Not like I need it, right?";
+TXT_RANDOM_subWeirdo_10 = "I was saving that junk to buy burgers. Who uses junk as currency, anyway? Why not just use toilet paper? It's so much lighter."; 
+
+//roamers
+TXT_RANDOM_CRATEGUY_01 = "This box is heavy as fuck.";
+TXT_RANDOM_CRATEGUY_02 = "Who do I gotta kill to get a forklift around here?";
+TXT_RANDOM_CRATEGUY_03 = "Seriously, this damn crate weighs a ton.";
+TXT_RANDOM_CRATEGUY_04 = "Fuck you I'm takin' a break.";
+TXT_RANDOM_CRATEGUY_05 = "I got splinters from all these boxes.";
+TXT_RANDOM_CRATEGUY_06 = "They brought back this crate one time, know what was in it? Other, smaller crates.";
+TXT_RANDOM_CRATEGUY_07 = "It's 'crate' to see you! Hahahaha!";
+TXT_RANDOM_CRATEGUY_08 = "This crate weighs more than your mother!";
+TXT_RANDOM_CRATEGUY_09 = "If you aren't going to help me unload this shit, then you can fuck off.";
+TXT_RANDOM_CRATEGUY_10 = "Almost done with these boxes. Damn I'm beat.";
+
+TXT_RANDOM_ROAMERGUARD_01 = "I ain't in charge here.";
+TXT_RANDOM_ROAMERGUARD_02 = "Go away.";
+TXT_RANDOM_ROAMERGUARD_03 = "You talking to the wrong person scav.";
+TXT_RANDOM_ROAMERGUARD_04 = "I'm so bored I might shoot myself.";
+TXT_RANDOM_ROAMERGUARD_05 = "You trying to annoy me?";
+TXT_RANDOM_ROAMERGUARD_06 = "What's wrong with you?";
+TXT_RANDOM_ROAMERGUARD_07 = "Talk to the boss.";
+TXT_RANDOM_ROAMERGUARD_08 = "Longest shift ever...";
+TXT_RANDOM_ROAMERGUARD_09 = "Don't talk to me.";
+TXT_RANDOM_ROAMERGUARD_10 = "Talk to that guy, not me."; 
+
+TXT_RANDOM_ROAMERNEUTRAL_01 = "Can I help you?";
+TXT_RANDOM_ROAMERNEUTRAL_02 = "Not interested, go away.";
+TXT_RANDOM_ROAMERNEUTRAL_03 = "If you're here to trade, talk to someone else.";
+TXT_RANDOM_ROAMERNEUTRAL_04 = "Back off man, you're creeping me out.";
+TXT_RANDOM_ROAMERNEUTRAL_05 = "You ever hear of 'personal space'?";
+TXT_RANDOM_ROAMERNEUTRAL_06 = "Do you want something?";
+TXT_RANDOM_ROAMERNEUTRAL_07 = "Don't hassle me man!";
+TXT_RANDOM_ROAMERNEUTRAL_08 = "I had a long day on the road, and I ain't interested in talking.";
+TXT_RANDOM_ROAMERNEUTRAL_09 = "Just back off dude.";
+TXT_RANDOM_ROAMERNEUTRAL_10 = "Been driving all day..."; 
+
+TXT_RANDOM_ROAMERSASSY_01 = "You know how many crunches you gotta do to get a midriff like this? Damn right I'm gonna show it off.";
+TXT_RANDOM_ROAMERSASSY_02 = "Look I'm flattered, but the whole gas mask thing is creeping me out.";
+TXT_RANDOM_ROAMERSASSY_03 = "You aren't really my type.";
+TXT_RANDOM_ROAMERSASSY_04 = "I swear if one more of these punk motherfuckers tries to look up my skirt, I'm gonna fucking smack a bitch.";
+TXT_RANDOM_ROAMERSASSY_05 = "What's up buttercup?";
+TXT_RANDOM_ROAMERSASSY_06 = "Are you trying to get ventilated, creep?";
+TXT_RANDOM_ROAMERSASSY_07 = "You keep staring any longer I'll start charging you for it.";
+TXT_RANDOM_ROAMERSASSY_08 = "All these other bitches are so basic.";
+TXT_RANDOM_ROAMERSASSY_09 = "You trying to compensate for something?";
+TXT_RANDOM_ROAMERSASSY_10 = "Watch out, I bite."; 
+
+TXT_RANDOM_ROAMERFRIENDLYA_01 = "Man, people used to *pay* for gas. Bunch of dumbfucks if you ask me.";
+TXT_RANDOM_ROAMERFRIENDLYA_02 = "What are you looking at? Do I got something on my face?";
+TXT_RANDOM_ROAMERFRIENDLYA_03 = "Hey you wanna huff some chrome paint? It's a great time, I promise.";
+TXT_RANDOM_ROAMERFRIENDLYA_04 = "What's cookin' scav?";
+TXT_RANDOM_ROAMERFRIENDLYA_05 = "Man the old world had so many cars they just crushed the damn things and piled 'em up. Isn't that the craziest shit?";
+TXT_RANDOM_ROAMERFRIENDLYA_06 = "Man, I need some action.";
+TXT_RANDOM_ROAMERFRIENDLYA_07 = "This waiting around is driving me nuts.";
+TXT_RANDOM_ROAMERFRIENDLYA_08 = "I can't wait to be back on the road again.";
+TXT_RANDOM_ROAMERFRIENDLYA_09 = "All these other gangs are small time. You run with us, you run with the best.";
+TXT_RANDOM_ROAMERFRIENDLYA_10 = "We're gonna show these pussy town dwellers who's boss."; 
+
+TXT_RANDOM_ROAMERFRIENDLYB_01 = "It gets harder to find good oil and gas every year. One day there won't be any left, unless someone starts making the stuff again.";
+TXT_RANDOM_ROAMERFRIENDLYB_02 = "Hey, you got any duct tape?";
+TXT_RANDOM_ROAMERFRIENDLYB_03 = "They literally don't make 'em like they used to.";
+TXT_RANDOM_ROAMERFRIENDLYB_04 = "I'm surprised that old crane still works. Makes our lives easier.";
+TXT_RANDOM_ROAMERFRIENDLYB_05 = "These waster pussies don't get it. You don't 'own' nothing if you can't defend it.";
+TXT_RANDOM_ROAMERFRIENDLYB_06 = "One day we're gonna rule the whole wasteland, you'll see.";
+TXT_RANDOM_ROAMERFRIENDLYB_07 = "If you're ever out back, watch for muties. There were a few of 'em creeping around the other day.";
+TXT_RANDOM_ROAMERFRIENDLYB_08 = "There's a lot of good stuff in this yard. You just got to know what to look for.";
+TXT_RANDOM_ROAMERFRIENDLYB_09 = "I'm too hungover to do shit right now.";
+TXT_RANDOM_ROAMERFRIENDLYB_10 = "Hey if you see a nice set of rims out there, let me know alright?";
+
+//Prosperity folk
+TXT_RANDOM_WATERGUARD1_01 = "There a problem?";
+TXT_RANDOM_WATERGUARD1_02 = "If you catch any gangers on the road, they're fair game. They're not our people.";
+TXT_RANDOM_WATERGUARD1_03 = "Try not to draw attention to yourself out there. There's mutants all over.";
+TXT_RANDOM_WATERGUARD1_04 = "You been to the old plant ruins? Be careful around that place. It's definitely haunted.";
+TXT_RANDOM_WATERGUARD1_05 = "Hey, try and bring back any tobacco you find. We could really use some.";
+TXT_RANDOM_WATERGUARD1_06 = "If you have any problems, go see the Sheriff. I need to keep watch.";
+TXT_RANDOM_WATERGUARD1_07 = "Remember, the buying and selling of firearms is banned within Lowtown. Don't even try it.";
+TXT_RANDOM_WATERGUARD1_08 = "If those Roamer fucks try anything again, we'll be ready.";
+TXT_RANDOM_WATERGUARD1_09 = "If you're looking for work, go see Silver or the Sheriff.";
+TXT_RANDOM_WATERGUARD1_10 = "Remember, you have a week to stay here. Then you need to move on."; 
+
+TXT_RANDOM_WATERGUARD2_01 = "How did you even get up here?";
+TXT_RANDOM_WATERGUARD2_02 = "(Sigh) Why even build walls if people like you are just gonna get past them...";
+TXT_RANDOM_WATERGUARD2_03 = "Get out of here STALKER!";
+TXT_RANDOM_WATERGUARD2_04 = "I can drop a mutie with one shot from 200 paces. Give me a scope, and I can castrate him, too.";
+TXT_RANDOM_WATERGUARD2_05 = "Yeah!! PARKOUR!!";
+TXT_RANDOM_WATERGUARD2_06 = "That was some fancy gymnastics there, pal.";
+TXT_RANDOM_WATERGUARD2_07 = "You see the hidden treasure from here. Take a look yourself.";
+TXT_RANDOM_WATERGUARD2_08 = "The earth still looks flat from up here. Checkmate, idiots!";
+TXT_RANDOM_WATERGUARD2_09 = "Can I come down, now? I miss my wife and kids.";
+TXT_RANDOM_WATERGUARD2_10 = "Wow. I can see the next episode from up here!";
+
+TXT_RANDOM_WATERGUARD3_01 = "There a problem?";
+TXT_RANDOM_WATERGUARD3_02 = "Where did you come from? The east? Didn't think that trade route was still open.";
+TXT_RANDOM_WATERGUARD3_03 = "Don't try anything. We're watching you.";
+TXT_RANDOM_WATERGUARD3_04 = "Stay out of trouble, scavver.";
+TXT_RANDOM_WATERGUARD3_05 = "What is it?";
+TXT_RANDOM_WATERGUARD3_06 = "Don't bother me. I'm really busy guardin' stuff.";
+TXT_RANDOM_WATERGUARD3_07 = "Talk to the Sheriff. I'm not a tour guide.";
+TXT_RANDOM_WATERGUARD3_08 = "If those Roamer fucks try anything again, we'll be ready.";
+TXT_RANDOM_WATERGUARD3_09 = "Go hang out with that other scavenger. You're not my kind of people.";
+TXT_RANDOM_WATERGUARD3_10 = "Remember, you have a week to stay here. Then you need to clear out.";  
+
+TXT_RANDOM_WATERGUARD4_01 = "(spits on the floor) Fuck off, freak.";
+TXT_RANDOM_WATERGUARD4_02 = "Don't you be lookin' at me with those eyes.";
+TXT_RANDOM_WATERGUARD4_03 = "Don't try anything. We're watching you.";
+TXT_RANDOM_WATERGUARD4_04 = "You try anything, we're gonna have a problem. You don't want that.";
+TXT_RANDOM_WATERGUARD4_05 = "What is it? I'm not here to chat, scav.";
+TXT_RANDOM_WATERGUARD4_06 = "Don't talk to me. I'm busy guardin' stuff.";
+TXT_RANDOM_WATERGUARD4_07 = "Talk to the Sheriff. I'm not your buddy, pal.";
+TXT_RANDOM_WATERGUARD4_08 = "If those Roamer fucks try anything again, we'll be ready.";
+TXT_RANDOM_WATERGUARD4_09 = "Go hang out with that other scavenger. You're not my kind of people.";
+TXT_RANDOM_WATERGUARD4_10 = "Remember, one week. Then we throw you out.";

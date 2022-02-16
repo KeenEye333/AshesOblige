@@ -1,0 +1,587 @@
+pointlight flourescence
+{
+color 0.4 1.0 0.4
+size 20
+offset 0 8 0
+}
+pulselight flourescenceBig
+{
+color 0.4 1.0 0.4
+size 100
+secondarysize 90
+interval 0.5
+offset 0 4 0
+}
+pulselight psifield
+{
+color 0.7 0.1 0.7
+size 96
+secondarySize 90
+interval 0.5
+offset 0 32 0
+}
+pointlight Headlight1
+{
+color 0.8 0.7 0.5
+size 130
+offset 0 36 0
+}
+pointlight Lantern1
+{
+color 0.3 0.3 0.7
+size 130
+offset 0 36 0
+}
+pointlight forcefield1
+{
+color 0.7 0.3 0.6
+size 64
+offset 0 36 0
+}
+pulselight Cylinder1
+{
+color 0.4 0.4 0.8
+size 140
+secondarySize 160
+interval 0.3
+offset 0 36 0
+}
+pulselight Cylinder2
+{
+color 0.6 0.6 0.8
+size 140
+secondarySize 356
+interval 0.5
+offset 0 24 0
+}
+pointlight PsychicDark
+{
+    color 1 1 1
+    size 80
+	subtractive 1
+    offset 0 16 0
+}
+pointlight PsychicRed
+{
+    color 1 0.3 0.3
+    size 70
+	subtractive 1
+    offset 0 16 0
+}
+Object LanternGlow
+{
+  frame TNT1 { light Lantern1 }
+}
+Object HeadlightGlow
+{
+  frame TNT1 { light Headlight1}
+}
+Object Laserdot100w
+{
+  frame LDOTC { light Lantern1 }
+}
+Object PROPExplosiveCylinder
+{
+  frame bar1c { light Cylinder1 }
+  frame bar1d { light Cylinder1 }
+  frame bar1e { light Cylinder1 }
+  frame bexpa { light Cylinder1 }
+  frame bexpb { light Cylinder2 }
+  frame bexpc { light Cylinder2 }
+  frame bexpd { light Cylinder2 }
+  frame bexpe { light Cylinder2 }
+  frame bexpf { light Cylinder2 }
+}
+Object fiendspit
+{
+  frame BAl1 { light flourescence }
+}
+Object RADGRENADE
+{
+  frame RGRDN { light flourescencebig}
+  frame RGRDO { light flourescencebig}
+  frame RGRDP { light flourescencebig}
+  frame RGRDQ { light flourescencebig}
+  frame RGRDR { light flourescence}
+  frame RGRDS { light flourescence}
+  frame RGRDT { light flourescence}
+  frame RGRDU { light flourescence}
+}
+Object PsychicBall
+{
+  frame GHBL { light Psychicdark }
+}
+Object Vinaya
+{
+  frame PSYB { light Psifield }
+}
+Object TraumaBall
+{
+  frame PHBL { light Psychicred }
+}
+Object PsychicMutantForcefieldFake
+{
+  frame FFLDA { light forcefield1}
+  frame FFLDB { light forcefield1}
+  frame FFLDC { light forcefield1}
+}
+BrightMap Sprite PLAYA1
+{
+Map PLALA1
+DisableFullBright
+}
+BrightMap Sprite PLAYA2
+{
+Map PLALA2
+DisableFullBright
+}
+BrightMap Sprite PLAYA8
+{
+Map PLALA8
+DisableFullBright
+}
+BrightMap Sprite PLAYB1
+{
+Map PLALB1
+DisableFullBright
+}
+BrightMap Sprite PLAYB2
+{
+Map PLALB2
+DisableFullBright
+}
+BrightMap Sprite PLAYB8
+{
+Map PLALB8
+DisableFullBright
+}
+BrightMap Sprite PLAYC1
+{
+Map PLALC1
+DisableFullBright
+}
+BrightMap Sprite PLAYC2
+{
+Map PLALC2
+DisableFullBright
+}
+BrightMap Sprite PLAYC8
+{
+Map PLALC8
+DisableFullBright
+}
+BrightMap Sprite PLAYD1
+{
+Map PLALD1
+DisableFullBright
+}
+BrightMap Sprite PLAYD2
+{
+Map PLALD2
+DisableFullBright
+}
+BrightMap Sprite PLAYD8
+{
+Map PLALD8
+DisableFullBright
+}
+BrightMap Sprite PLAYE1
+{
+Map PLALE1
+DisableFullBright
+}
+BrightMap Sprite WLKRA1
+{
+Map WLKLA1
+DisableFullBright
+}
+BrightMap Sprite WLKRA2
+{
+Map WLKLA2
+DisableFullBright
+}
+BrightMap Sprite WLKRA8
+{
+Map WLKLA8
+DisableFullBright
+}
+BrightMap Sprite WLKRB1
+{
+Map WLKLB1
+DisableFullBright
+}
+BrightMap Sprite WLKRB2
+{
+Map WLKLB2
+DisableFullBright
+}
+BrightMap Sprite WLKRB8
+{
+Map WLKLB8
+DisableFullBright
+}
+BrightMap Sprite WLKRC1
+{
+Map WLKLC1
+DisableFullBright
+}
+BrightMap Sprite WLKRC2
+{
+Map WLKLC2
+DisableFullBright
+}
+BrightMap Sprite WLKRC8
+{
+Map WLKLC8
+DisableFullBright
+}
+BrightMap Sprite WLKRD1
+{
+Map WLKLD1
+DisableFullBright
+}
+BrightMap Sprite WLKRD2
+{
+Map WLKLD2
+DisableFullBright
+}
+BrightMap Sprite WLKRD8
+{
+Map WLKLD8
+DisableFullBright
+}
+BrightMap Sprite WLKRE1
+{
+Map WLKLE1
+DisableFullBright
+}
+BrightMap Sprite WLKRE2
+{
+Map WLKLE2
+DisableFullBright
+}
+BrightMap Sprite WLKRE8
+{
+Map WLKLE8
+DisableFullBright
+}
+BrightMap Sprite WLKRV0
+{
+Map WLKLV0
+DisableFullBright
+}
+BrightMap Sprite GHSTA1
+{
+Map GHBMA1
+DisableFullBright
+}
+BrightMap Sprite GHSTB1
+{
+Map GHBMA1
+DisableFullBright
+}
+BrightMap Sprite GHSTC1
+{
+Map GHBMA1
+DisableFullBright
+}
+BrightMap Sprite GHSTD1
+{
+Map GHBMA1
+DisableFullBright
+}
+BrightMap Sprite GHSTA2A8
+{
+Map GHBMB1B2
+DisableFullBright
+}
+BrightMap Sprite GHSTB2B8
+{
+Map GHBMB1B2
+DisableFullBright
+}
+BrightMap Sprite GHSTC2C8
+{
+Map GHBMB1B2
+DisableFullBright
+}
+BrightMap Sprite GHSTD2D8
+{
+Map GHBMB1B2
+DisableFullBright
+}
+BrightMap Sprite GHSTA3A7
+{
+Map GHBMC1C2
+DisableFullBright
+}
+BrightMap Sprite GHSTB3B7
+{
+Map GHBMC1C2
+DisableFullBright
+}
+BrightMap Sprite GHSTC3C7
+{
+Map GHBMC1C2
+DisableFullBright
+}
+BrightMap Sprite GHSTD3D7
+{
+Map GHBMC1C2
+DisableFullBright
+}
+BrightMap Sprite GHSTE0
+{
+Map GHBMD0
+DisableFullBright
+}
+BrightMap Sprite GHSTF0
+{
+Map GHBME0
+DisableFullBright
+}
+BrightMap Sprite GHSTG0
+{
+Map GHBMF0
+DisableFullBright
+}
+BrightMap Sprite GHSTH0
+{
+Map GHBMG0
+DisableFullBright
+}
+BrightMap Sprite GHSTI0
+{
+Map GHBMH0
+DisableFullBright
+}
+BrightMap Sprite TBOMB0
+{
+Map TBOMC0
+DisableFullBright
+}
+BrightMap Sprite DUKHA1
+{
+Map DUK2A1
+DisableFullBright
+}
+BrightMap Sprite DUKHA2A8
+{
+Map DUK2A2A8
+DisableFullBright
+}
+BrightMap Sprite DUKHB1
+{
+Map DUK2B1
+DisableFullBright
+}
+BrightMap Sprite DUKHB2B8
+{
+Map DUK2B2B8
+DisableFullBright
+}
+BrightMap Sprite DUKHC1
+{
+Map DUK2C1
+DisableFullBright
+}
+BrightMap Sprite DUKHC2C8
+{
+Map DUK2C2C8
+DisableFullBright
+}
+BrightMap Sprite DUKHD1
+{
+Map DUK2D1
+DisableFullBright
+}
+BrightMap Sprite DUKHD2D8
+{
+Map DUK2D2D8
+DisableFullBright
+}
+BrightMap Sprite DUKHE1
+{
+Map DUK2E1
+DisableFullBright
+}
+BrightMap Sprite DUKHF1
+{
+Map DUK2F1
+DisableFullBright
+}
+BrightMap Sprite DUKHF2F8
+{
+Map DUK2F2F8
+DisableFullBright
+}
+BrightMap Sprite DUKHG0
+{
+Map DUK2G0
+DisableFullBright
+}
+BrightMap Sprite DUKHH1
+{
+Map DUK2H1
+DisableFullBright
+}
+BrightMap Sprite DUKHH2H8
+{
+Map DUK2H2H8
+DisableFullBright
+}
+BrightMap Sprite DUKHI1
+{
+Map DUK2I1
+DisableFullBright
+}
+BrightMap Sprite DUKHI2I8
+{
+Map DUK2I2I8
+DisableFullBright
+}
+BrightMap Sprite DUKHJ1
+{
+Map DUK2J1
+DisableFullBright
+}
+BrightMap Sprite DUKHJ2J8
+{
+Map DUK2J2J8
+DisableFullBright
+}
+BrightMap Sprite DUKHK1
+{
+Map DUK2K1
+DisableFullBright
+}
+BrightMap Sprite DUKHK2K8
+{
+Map DUK2K2K8
+DisableFullBright
+}
+BrightMap Sprite TROOA1
+{
+Map TROLA1
+DisableFullBright
+}
+BrightMap Sprite TROOA2A8
+{
+Map TROLA2A8
+DisableFullBright
+}
+BrightMap Sprite TROOA3A7
+{
+Map TROLA3A7
+DisableFullBright
+}
+BrightMap Sprite TROOB1
+{
+Map TROLB1
+DisableFullBright
+}
+BrightMap Sprite TROOB2B8
+{
+Map TROLB2B8
+DisableFullBright
+}
+BrightMap Sprite TROOB3B7
+{
+Map TROLB3B7
+DisableFullBright
+}
+BrightMap Sprite TROOC1
+{
+Map TROLC1
+DisableFullBright
+}
+BrightMap Sprite TROOC2C8
+{
+Map TROLC2C8
+DisableFullBright
+}
+BrightMap Sprite TROOC3C7
+{
+Map TROLC3C7
+DisableFullBright
+}
+BrightMap Sprite TROOD1
+{
+Map TROLD1
+DisableFullBright
+}
+BrightMap Sprite TROOD2D8
+{
+Map TROLD2D8
+DisableFullBright
+}
+BrightMap Sprite TROOD3D7
+{
+Map TROLD3D7
+DisableFullBright
+}
+BrightMap Sprite TROOE1
+{
+Map TROLE1
+DisableFullBright
+}
+BrightMap Sprite TROOE2E8
+{
+Map TROLE2E8
+DisableFullBright
+}
+BrightMap Sprite TROOE3E7
+{
+Map TROLE3E7
+DisableFullBright
+}
+BrightMap Sprite TROOF1
+{
+Map TROLF1
+DisableFullBright
+}
+BrightMap Sprite TROOF2F8
+{
+Map TROLF2F8
+DisableFullBright
+}
+BrightMap Sprite TROOF3F7
+{
+Map TROLF3F7
+DisableFullBright
+}
+BrightMap Sprite TROOG1
+{
+Map TROLG1
+DisableFullBright
+}
+BrightMap Sprite TROOG2G8
+{
+Map TROLG2G8
+DisableFullBright
+}
+BrightMap Sprite TROOG3G7
+{
+Map TROLG3G7
+DisableFullBright
+}
+BrightMap Sprite TROOH1
+{
+Map TROLH1
+DisableFullBright
+}
+BrightMap Sprite TROOH2H8
+{
+Map TROLH2H8
+DisableFullBright
+}
+BrightMap Sprite TROOH3H7
+{
+Map TROLH3H7
+DisableFullBright
+}
+BrightMap Sprite P2RCA0
+{
+Map P2RlA0
+DisableFullBright
+}

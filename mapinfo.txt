@@ -1,0 +1,88 @@
+
+gameinfo
+{
+playerclasses = "Scavenger"
+}
+
+//UseToPickup Item Highlighter
+gameinfo {
+AddEventHandlers = "UseToPickup"
+}
+
+clearskills
+skill Relaxed
+{
+    DamageFactor = 0.75
+	Aggressiveness = 0.5
+    EasyBossBrain
+	AutoUseHealth
+	SpawnFilter = Easy
+	PicName = "M_BEGIN"
+	Name = "Relaxed"
+	Key = "b"
+	mustconfirm = "For beginner players or story over combat. Enemies are less common and supplies are more plentiful. Play on relaxed?"
+}
+skill Standard
+{
+	SpawnFilter = Normal
+	PicName = "M_STAND"
+	Name = "Standard"
+	Key = "t"
+	DefaultSkill
+	mustconfirm = "Regular difficulty. For experienced players, with an emphasis on action. Play on standard?"
+}
+skill Arcade
+{
+	SpawnFilter = Hard
+	Aggressiveness = 1
+	mustconfirm = "Hard difficulty. Plenty of enemies and stuff to shoot them with. Ultra-violence equivalent. Play on Arcade?"
+	PicName = "M_ARCAD"
+	Name = "ARCADE"
+	Key = "A"
+}
+skill Survival
+{
+    Monsterhealth = 0.75
+	SpawnFilter = normal
+	AmmoFactor = 0.5
+	DamageFactor = 2
+	PicName = "M_SRVVE"
+	Name = "$SKILL_HARD"
+	mustconfirm = "A true survivor makes the most of what he has. Ammo is more scarce and you take more damage - but so do your enemies. Play on Survival?"
+	Key = "s"
+}
+
+skill Apocalypse
+{
+	DamageFactor = 2.0
+	SpawnFilter = Hard
+	Aggressiveness = 1.0
+	mustconfirm = "Every mistake hurts. Every enemy wants you dead. Every fight could be your last. The ultimate challenge. Play on Apocalypse?"
+	PicName = "M_APOCA"
+	Name = "Apocalypse"
+	Key = "p"
+}
+
+DamageType SLIME
+{
+    Factor = 1.0
+    NoArmor
+	Obituary = "%o died from radiation poisoning."  
+}
+DamageType RADS
+{
+    Factor = 1.0
+    NoArmor
+	Obituary = "%o died from radiation poisoning."  
+}
+
+//Gearbox
+gameinfo
+{
+
+  AddEventHandlers = "gb_EventHandler"
+                   , "gb_PreviousWeaponEventHandler"
+                   , "gb_PreviousWeaponStorage"
+                   , "gb_VmAbortHandler"
+
+} // gameinfo

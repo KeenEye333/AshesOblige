@@ -1,0 +1,5 @@
+JOURNALFONT
+{
+   SpaceWidth 5
+   Template STBFN%03d
+}

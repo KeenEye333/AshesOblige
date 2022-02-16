@@ -1,0 +1,51 @@
+// ASHES menu cursor
+texture optional M_SKULL1
+pic M_SKULL1 tics 3
+pic M_SKULL2 tics 3
+pic M_SKULL3 tics 3
+pic M_SKULL4 tics 3
+pic M_SKULL5 tics 3
+pic M_SKULL6 tics 3
+
+texture optional M_DOOM
+pic M_DOOM tics 3
+pic M_DOOM1 tics 3
+pic M_DOOM2 tics 3
+pic M_DOOM3 tics 3
+pic M_DOOM4 tics 3
+pic M_DOOM5 tics 3
+pic M_DOOM6 tics 3
+// pic MBENCH03 tics 3
+// pic MBENCH04 tics 3
+// pic MBENCH05 tics 3
+// pic MBENCH06 tics 3
+// pic MBENCH07 tics 3
+// pic MBENCH08 tics 3
+// pic MBENCH09 tics 3
+// pic MBENCH10 tics 3
+// pic MBENCH11 tics 3
+// pic MBENCH12 tics 3
+// pic MBENCH13 tics 3
+// pic MBENCH14 tics 3
+// pic MBENCH15 tics 3
+// pic MBENCH16 tics 3
+// pic MBENCH17 tics 3
+// pic MBENCH18 tics 3
+// pic MBENCH19 tics 3
+// pic MBENCH20 tics 3
+// pic MBENCH21 tics 3
+// pic MBENCH22 tics 3
+// pic MBENCH23 tics 3
+// pic MBENCH24 tics 3
+// pic MBENCH25 tics 3
+// pic MBENCH26 tics 3
+// pic MBENCH27 tics 3
+// pic MBENCH28 tics 3
+// pic MBENCH29 tics 3
+// pic MBENCH33 tics 3
+// pic MBENCH34 tics 3
+// pic MBENCH35 tics 3
+// pic MBENCH36 tics 3
+
+
+

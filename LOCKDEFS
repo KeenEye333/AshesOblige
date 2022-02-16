@@ -1,0 +1,41 @@
+Lock 1
+{
+	RedCard
+	Message "You need a RED access Card."
+	RemoteMessage "You need a RED access Card."
+	Mapcolor 255 0 0
+}
+Lock 2
+{
+	BlueCard
+	Message "You need a BLUE employee Card."
+	RemoteMessage "You need a BLUE employee Card."
+	Mapcolor 0 0 255
+}
+Lock 3
+{
+	YellowCard
+	Message "You need a YELLOW security Card."
+	RemoteMessage "You need a YELLOW security Card."
+	Mapcolor 255 255 0
+}Lock 4
+{
+	RedSkull
+	Message "You need a BRONZE Room Key."
+	RemoteMessage "You need a BRONZE Room Key."
+	Mapcolor 255 150 100
+}
+Lock 5
+{
+	BlueSkull
+	Message "You need a SILVER Utility key."
+	RemoteMessage "You need a SILVER Utility key."
+	Mapcolor 100 100 255
+}
+Lock 6
+{
+	YellowSkull
+	Message "You need a GOLD Security key."
+	RemoteMessage "You need a GOLD Security key."
+	Mapcolor 255 200 0
+}
