@@ -1,0 +1,34 @@
+ACTOR Slugammo: Ammo replaces Cell
+{
+  Inventory.Amount 4
+   Inventory.MaxAmount 996
+   Ammo.BackpackAmount 8
+   Ammo.BackpackMaxAmount 996
+   Inventory.PickupSound "items/ammopickup"
+   Inventory.Icon "CELLA0"
+  Inventory.PickupMessage "Got the slugs."
+  scale 0.6
+  +ignoreskill
+ States
+ {
+ Spawn:
+  CELL A 10 
+  CELL A 1 bright
+  loop
+ }
+}
+ACTOR Slugpack : Slugammo replaces cellpack
+{
+  Inventory.Amount 12
+  Inventory.PickupMessage "Got the pack of slugs."
+  Inventory.PickupSound "items/pickupclip"
+  scale 0.7
+   -ignoreskill
+ States
+ {
+ Spawn:
+  CELP A 10
+  CELP A 1 bright
+  loop
+ }
+}

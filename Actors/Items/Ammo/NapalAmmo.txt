@@ -1,0 +1,18 @@
+ACTOR Napalmammo: Ammo replaces RocketBox
+{
+  Inventory.Amount 6
+   Inventory.MaxAmount 996
+   Ammo.BackpackAmount 6
+   Ammo.BackpackMaxAmount 996
+   Inventory.PickupSound "items/ammopickup"
+   Inventory.Icon "BROKA0"
+  Inventory.PickupMessage "Got the fuel canister."
+  scale 0.8
+ States
+ {
+ Spawn:
+  BROK A 10
+  BROK A 1 bright
+  loop
+ }
+}

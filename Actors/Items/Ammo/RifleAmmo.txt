@@ -1,0 +1,46 @@
+ACTOR RifleAmmo : Ammo 13056
+{
+ Inventory.Amount 31
+ Inventory.MaxAmount 992
+ Ammo.BackpackAmount 30 
+ Ammo.BackpackMaxAmount 992
+ Inventory.Icon "556AA0" 
+ Inventory.PickupSound "items/pickupclip"
+ Inventory.PickupMessage "Got the rifle cartridges."
+ scale 0.6
+ States
+ {
+ Spawn:
+   556A A 10
+  556A A 1 bright
+  loop
+ }
+}
+ACTOR RifleMagFull : RifleAmmo
+{
++ignoreskill
+}
+ACTOR RifleMagDouble : RifleAmmo
+{
+Inventory.Amount 60 
++ignoreskill
+}
+ACTOR PipeAmmo : Ammo
+{
+   Inventory.Amount 2
+   Inventory.MaxAmount 998
+   Ammo.BackpackAmount 0
+   Ammo.BackpackMaxAmount 998
+   Inventory.PickupSound "items/ammopickup"
+   Inventory.PickupMessage "Got the Pipebomb."
+   Inventory.Icon "ROCKA0"
+   Scale 0.6
+   +IGNORESKILL
+   States
+   {
+   Spawn:
+      ROCK A 10
+	  ROCK A 1 bright
+      Loop
+   }
+}

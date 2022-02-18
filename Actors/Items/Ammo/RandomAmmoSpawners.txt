@@ -1,0 +1,41 @@
+actor FortyFiveAmmoDropper : RandomSpawner
+{
+    DropItem "fortyfiveAmmo"
+    DropItem "fortyfiveLoose"
+    DropItem "fortyfivecylinder"
+    DropItem "fortyfiveBox"
+}
+actor NineMilAmmoDropper : RandomSpawner
+{
+    DropItem "NineMilAmmo"
+    DropItem "NineMilSmallMag"
+    DropItem "NineMilbigMag"
+}
+actor ShotAmmoDropper : RandomSpawner
+{
+    DropItem "Shotgunammo"
+    DropItem "Shotgunbox"
+    DropItem "ShotgunAmmoSleeve"
+}
+actor RifleAmmoDropper : RandomSpawner
+{
+    DropItem "RifleAmmo"
+    DropItem "RifleMagFull"
+    DropItem "RifleMagDouble"
+}
+actor NapalmammoDropper : RandomSpawner
+{
+    DropItem "Napalmammo"
+    DropItem "PipeAmmo"
+}
+actor SlugAmmoDropper : RandomSpawner
+{
+    DropItem "Slugammo"
+    DropItem "Slugpack"
+}
+actor FalAmmoDropper : RandomSpawner
+{
+    DropItem "Falammo"
+    DropItem "PipeAmmo"
+
+}

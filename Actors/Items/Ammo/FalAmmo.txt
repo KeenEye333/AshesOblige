@@ -1,0 +1,19 @@
+ACTOR Falammo: Ammo 13092
+{
+  Inventory.Amount 21
+   Inventory.MaxAmount 987
+   Ammo.BackpackAmount 8
+   Ammo.BackpackMaxAmount 987
+   Inventory.PickupSound "items/ammopickup"
+   Inventory.Icon "FAMOA0"
+  Inventory.PickupMessage "Got the .308 rounds."
+  scale 0.6
+  +ignoreskill
+ States
+ {
+ Spawn:
+  FAMO A 10 
+  FAMO A 1 bright
+  loop
+ }
+}

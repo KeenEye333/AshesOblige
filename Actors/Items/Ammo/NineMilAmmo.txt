@@ -1,0 +1,49 @@
+ACTOR NineMilAmmo : Ammo replaces Clipbox
+{
+ Inventory.Amount 32
+ Inventory.MaxAmount 992
+ Ammo.BackpackAmount 48 
+ Ammo.BackpackMaxAmount 992
+ Inventory.Icon "AMMOA0"
+ Inventory.PickupSound "items/ammopickup"
+ Inventory.PickupMessage "Got the light bullets."
+ scale 0.5
+
+ States
+ {
+ Spawn:
+  AMMO A 10
+  AMMO A 1 bright
+  loop
+ }
+}
+ACTOR NineMilSmallMag : NineMilAmmo
+{
+ Inventory.Amount 16
+ Inventory.PickupSound "items/ammopickup"
+ Inventory.PickupMessage "Got the magazine of light bullets."
+ +IGNORESKILL
+ scale 0.5
+ States
+ {
+ Spawn:
+   AMMO A 10
+  AMMO A 1 bright
+  loop
+ }
+}
+ACTOR NineMilbigMag : NineMilAmmo
+{
+ Inventory.Amount 32
+ Inventory.PickupSound "items/ammopickup"
+ Inventory.PickupMessage "Got the large magazine of light bullets."
+ +IGNORESKILL
+ scale 0.5
+ States
+ {
+ Spawn:
+  AMMO A 10
+  AMMO A 1 bright
+  loop
+ }
+}

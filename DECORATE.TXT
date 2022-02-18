@@ -28,7 +28,6 @@
 #Include Actors/Enemies/BurnDeathHuman.txt
 #Include Actors/Enemies/CannibalMaster.txt
 #Include Actors/Enemies/Destroyer.txt
-#Include Actors/Enemies/EnemySpawners.txt
 #Include Actors/Enemies/Gasbag.txt
 #Include Actors/Enemies/GasBagNursery.txt
 #Include Actors/Enemies/Gemini.txt
@@ -52,6 +51,7 @@
 #Include Actors/Enemies/SporeMortar.txt
 #Include Actors/Enemies/Steiner.txt //bugged
 #Include Actors/Enemies/Vinaya.txt
+#Include Actors/Enemies/RandomEnemySpawners.txt
 //==============================================================================
 // Items
 //==============================================================================
@@ -65,8 +65,18 @@
 #Include Actors/Items/Keys/AshesSilverKey.txt
 #Include Actors/Items/Keys/AshesYellowCard.txt
 
+//Ammo
 
-#Include Actors/Items/Ammo.txt //Ammunition pickups
+#Include Actors/Items/Ammo/FortFiveAmmo.txt
+#Include Actors/Items/Ammo/ShotgunAmmo.txt
+#Include Actors/Items/Ammo/NineMilAmmo.txt
+#Include Actors/Items/Ammo/RifleAmmo.txt
+#Include Actors/Items/Ammo/NapalAmmo.txt
+#Include Actors/Items/Ammo/SlugAmmo.txt
+#Include Actors/Items/Ammo/FalAmmo.txt
+#Include Actors/Items/Ammo/RandomAmmoSpawners.txt
+
+
 #Include Actors/Items/Armor.txt //Armor pickups
 #Include Actors/Items/Health.txt //Health pickups
 #Include Actors/Items/Power.txt //Inventory and powerups

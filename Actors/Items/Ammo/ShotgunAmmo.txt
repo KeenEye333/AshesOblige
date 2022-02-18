@@ -1,0 +1,47 @@
+ACTOR Shotgunammo : Ammo replaces Shell
+{
+ Inventory.Amount 4 
+ Inventory.MaxAmount 996
+ Ammo.BackpackAmount 8 
+ Ammo.BackpackMaxAmount 996 
+ Inventory.PickupSound "items/ammopickup"
+ Inventory.Icon "SBOXA0"
+ Inventory.PickupMessage "Got the shotgun shells."
+ scale 0.4
+  +ignoreskill
+ States
+ {
+ Spawn:
+  SHEL A 10
+  SHEL A 1 bright
+  loop
+ }
+}
+ACTOR Shotgunbox : Shotgunammo replaces Shellbox
+{
+  Inventory.Amount 16
+  Inventory.PickupMessage "Got the box of shells."
+  Inventory.PickupSound "items/pickupclip"
+  scale 0.7
+   -ignoreskill
+ States
+ {
+ Spawn:
+  SBOX A 10
+  SBOX A 1 bright
+  loop
+ }
+}
+ACTOR ShotgunAmmoSleeve : Shotgunammo
+{
+  Inventory.Amount 12
+  Inventory.PickupMessage "Got the sleeve of shells."
+  scale 0.7
+ States
+ {
+ Spawn:
+  SBOX A 10
+  SBOX A 1 bright
+  loop
+ }
+}

@@ -1,0 +1,58 @@
+ACTOR fortyfiveAmmo : Ammo replaces clip
+{
+ Inventory.Amount 6
+ Inventory.MaxAmount 996
+ Ammo.BackpackAmount 12 
+ Ammo.BackpackMaxAmount 996
+ Inventory.Icon "CLIPA0"
+ Inventory.PickupSound "items/pickupclip"
+ Inventory.PickupMessage "Got the box of heavy bullets."
+ scale 0.5
+ States
+ {
+ Spawn:
+  CLIP A 10
+  CLIP A 1 bright
+  loop
+ }
+}
+
+ACTOR fortyfiveLoose : Fortyfiveammo
+{
+ Inventory.Amount 4
+ Inventory.PickupSound "items/pickuploose"
+ Inventory.PickupMessage "Got the heavy bullets."
+ scale 0.6
+ +ignoreskill
+ States
+ {
+ Spawn:
+  LOOS A 10
+  LOOS A 1 bright
+  loop
+ }
+}
+
+ACTOR fortyfivecylinder : Fortyfiveammo
+{
+ +ignoreskill
+ States
+ {
+ Spawn:
+  LOOS A 10
+  LOOS A 1 bright
+  loop
+ }
+}
+ACTOR fortyfiveBox : Fortyfiveammo
+{
+ Inventory.Amount 12
+ +ignoreskill
+ States
+ {
+ Spawn:
+  CLIP A 10
+  CLIP A 1 bright
+  loop
+ }
+}
