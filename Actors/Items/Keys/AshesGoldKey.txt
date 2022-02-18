@@ -1,0 +1,16 @@
+ACTOR AshesGoldKey : CustomInventory replaces Yellowskull
+{
+  Inventory.PickupMessage "Got the Gold Security Key"
+  Inventory.Icon "STKEYS4"
+  scale 0.8
+  States
+  {
+  Spawn:
+    YSKU A 10
+    YSKU A 10 Bright
+    Loop
+  Pickup:
+	TNT1 A 1 A_GiveInventory("YellowSkull",1)
+	stop
+  }
+}

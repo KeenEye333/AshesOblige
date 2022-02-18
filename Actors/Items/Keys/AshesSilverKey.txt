@@ -1,0 +1,16 @@
+ACTOR AshesSilverKey : CustomInventory replaces Blueskull
+{
+  Inventory.PickupMessage "Got the Silver Utility Key"
+  Inventory.Icon "STKEYS3"
+  scale 0.8
+  States
+  {
+  Spawn:
+    BSKU A 10
+    BSKU A 10 Bright
+    Loop
+  Pickup:
+	TNT1 A 1 A_GiveInventory("BlueSkull",1)
+	stop
+  }
+}

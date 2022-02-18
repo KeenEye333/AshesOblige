@@ -1,5 +1,5 @@
 //==============================================================================
-// Ashes Oblige Decorate
+// Ashes Oblige Decoratives
 //==============================================================================
 // Effects
 //==============================================================================
@@ -55,9 +55,17 @@
 //==============================================================================
 // Items
 //==============================================================================
+
 //Keys
+
 #Include Actors/Items/Keys/AshesBlueCard.txt
+#Include Actors/Items/Keys/AshesBronzeKey.txt
+#Include Actors/Items/Keys/AshesGoldKey.txt
+#Include Actors/Items/Keys/AshesRedCard.txt
+#Include Actors/Items/Keys/AshesSilverKey.txt
 #Include Actors/Items/Keys/AshesYellowCard.txt
+
+
 #Include Actors/Items/Ammo.txt //Ammunition pickups
 #Include Actors/Items/Armor.txt //Armor pickups
 #Include Actors/Items/Health.txt //Health pickups
@@ -174,70 +182,6 @@ ACTOR RadiationExtreme : RadiationVeryLow 1073
   Spawn:
     TNT1 A 1
     Loop
-  }
-}
-ACTOR AshesRedCard : CustomInventory replaces Redcard
-{
-  Inventory.PickupMessage "Got the red access card"
-  Inventory.Icon "STKEYS2"
-  scale 0.7
-  States
-  {
-  Spawn:
-    RKEY A 10
-    RKEY A 10 Bright
-    Loop
-  Pickup:
-	TNT1 A 1 A_GiveInventory("Redcard",1)
-	stop
-  }
-}
-ACTOR AshesSilverKey : CustomInventory replaces Blueskull
-{
-  Inventory.PickupMessage "Got the Silver Utility Key"
-  Inventory.Icon "STKEYS3"
-  scale 0.8
-  States
-  {
-  Spawn:
-    BSKU A 10
-    BSKU A 10 Bright
-    Loop
-  Pickup:
-	TNT1 A 1 A_GiveInventory("BlueSkull",1)
-	stop
-  }
-}
-ACTOR AshesBronzeKey : CustomInventory replaces Redskull
-{
-  Inventory.PickupMessage "Got the Bronze Room Key"
-  Inventory.Icon "STKEYS5"
-  scale 0.8
-  States
-  {
-  Spawn:
-    RSKU A 10
-    RSKU A 10 Bright
-    Loop
-  Pickup:
-	TNT1 A 1 A_GiveInventory("RedSkull",1)
-	stop
-  }
-}
-ACTOR AshesGoldKey : CustomInventory replaces Yellowskull
-{
-  Inventory.PickupMessage "Got the Gold Security Key"
-  Inventory.Icon "STKEYS4"
-  scale 0.8
-  States
-  {
-  Spawn:
-    YSKU A 10
-    YSKU A 10 Bright
-    Loop
-  Pickup:
-	TNT1 A 1 A_GiveInventory("YellowSkull",1)
-	stop
   }
 }
 ACTOR PigWeaponPieces: Inventory  //For Project Pig

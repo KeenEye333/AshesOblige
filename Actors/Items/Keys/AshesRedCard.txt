@@ -1,0 +1,16 @@
+ACTOR AshesRedCard : CustomInventory replaces Redcard
+{
+  Inventory.PickupMessage "Got the red access card"
+  Inventory.Icon "STKEYS2"
+  scale 0.7
+  States
+  {
+  Spawn:
+    RKEY A 10
+    RKEY A 10 Bright
+    Loop
+  Pickup:
+	TNT1 A 1 A_GiveInventory("Redcard",1)
+	stop
+  }
+}

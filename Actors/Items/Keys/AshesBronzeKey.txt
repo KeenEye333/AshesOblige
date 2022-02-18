@@ -1,0 +1,16 @@
+ACTOR AshesBronzeKey : CustomInventory replaces Redskull
+{
+  Inventory.PickupMessage "Got the Bronze Room Key"
+  Inventory.Icon "STKEYS5"
+  scale 0.8
+  States
+  {
+  Spawn:
+    RSKU A 10
+    RSKU A 10 Bright
+    Loop
+  Pickup:
+	TNT1 A 1 A_GiveInventory("RedSkull",1)
+	stop
+  }
+}
