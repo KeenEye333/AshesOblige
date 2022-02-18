@@ -76,8 +76,15 @@
 #Include Actors/Items/Ammo/FalAmmo.txt
 #Include Actors/Items/Ammo/RandomAmmoSpawners.txt
 
+//Armor
 
-#Include Actors/Items/Armor.txt //Armor pickups
+#Include Actors/Items/Armor/ArmorCombat.txt
+#Include Actors/Items/Armor/ArmorLeather.txt
+#Include Actors/Items/Armor/ArmorLegendary.txt
+#Include Actors/Items/Armor/ArmorScrap.txt
+#Include Actors/Items/Armor/RandomArmorSpawner.txt
+
+
 #Include Actors/Items/Health.txt //Health pickups
 #Include Actors/Items/Power.txt //Inventory and powerups
 #Include Actors/Items/Journal.txt // Journal tracker items

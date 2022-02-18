@@ -1,0 +1,19 @@
+ACTOR ArmorCombat : Armorscrap replaces bluearmor
+{
+  armor.maxsaveamount 200
+  armor.savepercent 40
+  armor.saveamount 200
+  inventory.icon "ARM2A0"
+  scale 1
+  Inventory.PickupSound "items/armorpickup2"
+  -INVENTORY.ALWAYSPICKUP
+  -COUNTITEM
+  Inventory.PickupMessage "Got the Metal Armor."
+  states
+  {
+  Spawn:
+    ARM2 A 10
+	ARM2 A 1 bright
+	loop
+  }
+}

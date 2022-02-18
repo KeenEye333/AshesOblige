@@ -1,0 +1,7 @@
+actor ArmorDropper : RandomSpawner
+{
+   DropItem "ArmorScrap"
+   DropItem "ArmorLeather"
+   DropItem "ArmorLegendary"
+   DropItem "ArmorCombat"
+}

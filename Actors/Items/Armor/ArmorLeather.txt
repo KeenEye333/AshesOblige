@@ -1,0 +1,19 @@
+ACTOR ArmorLeather : Armorscrap replaces greenarmor
+{
+  armor.maxsaveamount 100
+  armor.savepercent 40
+  armor.saveamount 100
+  inventory.icon "ARM1A0"
+  scale 1
+  Inventory.PickupSound "items/armorpickup"
+  -INVENTORY.ALWAYSPICKUP
+  -COUNTITEM
+  Inventory.PickupMessage "Got the Leather Armor."
+  states
+  {
+  Spawn:
+    ARM1 A 10
+	ARM1 A 1 bright
+	loop
+  }
+}

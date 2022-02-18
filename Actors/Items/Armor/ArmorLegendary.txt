@@ -1,0 +1,13 @@
+Actor ArmorLegendary: MegaSphere replaces Megasphere
+{
+   Inventory.PickupSound "items/Legendpickup"
+   scale 1
+   Inventory.PickupMessage "Got the Legendary Armor!!"
+  states
+  {
+  Spawn:
+    ARM3 A 10
+	ARM3 A 10 Bright
+    loop
+  }
+}
