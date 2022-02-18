@@ -67,7 +67,7 @@
 
 //Ammo
 
-#Include Actors/Items/Ammo/FortFiveAmmo.txt
+#Include Actors/Items/Ammo/FortyFiveAmmo.txt
 #Include Actors/Items/Ammo/ShotgunAmmo.txt
 #Include Actors/Items/Ammo/NineMilAmmo.txt
 #Include Actors/Items/Ammo/RifleAmmo.txt
@@ -77,12 +77,11 @@
 #Include Actors/Items/Ammo/RandomAmmoSpawners.txt
 
 //Armor
-
+#Include Actors/Items/Armor/ArmorScrap.txt
 #Include Actors/Items/Armor/ArmorCombat.txt
 #Include Actors/Items/Armor/ArmorLeather.txt
 #Include Actors/Items/Armor/ArmorLegendary.txt
-#Include Actors/Items/Armor/ArmorScrap.txt
-#Include Actors/Items/Armor/RandomArmorSpawner.txt
+#Include Actors/Items/Armor/RandomArmorSpawners.txt
 
 
 #Include Actors/Items/Health.txt //Health pickups
