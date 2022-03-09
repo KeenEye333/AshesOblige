@@ -18,7 +18,7 @@ ACTOR Master: Actor replaces BaronOfHell
   ActiveSound "master/idle"
   DropItem "NapalmammoDropper"
   DropItem "NapalmSpawn"
-  DropItem "PipeAmmo"
+  // DropItem "PipeAmmo"
   hitObituary "%o was pulped by a Cannibal Master."
   States
   {
