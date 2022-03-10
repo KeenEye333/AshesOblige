@@ -154,7 +154,6 @@ ACTOR Lazergun : Weapon 13102
   +WEAPON.MELEEWEAPON
   +NOALERT
   +NOAUTOFIRE
-  +CHEATNOTWEAPON
   Weapon.BobStyle Alpha
 	Weapon.BobSpeed 1.5
 	Weapon.BobRangeX .2
@@ -162,7 +161,7 @@ ACTOR Lazergun : Weapon 13102
   States
   {
   Ready:
-    LZRP A 1 A_WeaponReady(WRF_ALLOWUSER1)
+    LZRP A 1 A_WeaponReady(WRF_ALLOWUSER1|WRF_ALLOWZOOM)
     Loop
  Deselect:
   LZRP A 0 A_lower
@@ -197,6 +196,11 @@ ACTOR Lazergun : Weapon 13102
   TNT1 A 10 A_WeaponReady(WRF_NOFIRE|WRF_NOSWITCH)
   LZRP KJIH 2 A_WeaponReady(WRF_NOFIRE|WRF_NOSWITCH)
   goto ready
+  Zoom:
+	    LZRP A 0  A_giveinventory("lightlit",1)
+	    LZRP A 0  A_SelectWeapon("crowbar")
+		LZRP A 0  A_SelectWeapon("crowbar2")
+		goto deselect
  Spawn:
        LZRG A 10
        LZRG A 1 bright
@@ -222,7 +226,7 @@ ACTOR Lazergun2 : Lazergun
   States
   {
   Ready:
-    L2RP A 1 A_WeaponReady(WRF_ALLOWUSER1)
+    L2RP A 1 A_WeaponReady(WRF_ALLOWUSER1|WRF_ALLOWZOOM)
     Loop
  Deselect:
   L2RP A 0 A_lower
@@ -257,6 +261,11 @@ ACTOR Lazergun2 : Lazergun
   TNT1 A 10 A_WeaponReady(WRF_NOFIRE|WRF_NOSWITCH)
   L2RP KJIH 2 A_WeaponReady(WRF_NOFIRE|WRF_NOSWITCH)
   goto ready
+  Zoom:
+	    L2RP A 0  A_giveinventory("lightlit",1)
+	    L2RP A 0  A_SelectWeapon("crowbar")
+		L2RP A 0  A_SelectWeapon("crowbar2")
+		goto deselect
    Spawn:
        LZRG B 10
        LZRG B 1 bright
@@ -286,7 +295,7 @@ ACTOR Lazergun3 : Lazergun
   States
   {
   Ready:
-    L3RP A 1 A_WeaponReady(WRF_ALLOWUSER1)
+    L3RP A 1 A_WeaponReady(WRF_ALLOWUSER1|WRF_ALLOWZOOM)
     Loop
  Deselect:
   L3RP A 0 A_lower
@@ -315,6 +324,11 @@ ACTOR Lazergun3 : Lazergun
   TNT1 A 10 A_WeaponReady(WRF_NOFIRE|WRF_NOSWITCH)
   L3RP KJIH 2 A_WeaponReady(WRF_NOFIRE|WRF_NOSWITCH)
   goto ready
+ Zoom:
+	    L3RP A 0  A_giveinventory("lightlit",1)
+	    L3RP A 0  A_SelectWeapon("crowbar")
+		L3RP A 0  A_SelectWeapon("crowbar2")
+		goto deselect
    Spawn:
        LZRG C 10
        LZRG C 1 bright
