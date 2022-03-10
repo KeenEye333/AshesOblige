@@ -20,7 +20,7 @@
 #Include Actors/Weapons/AR15.txt //Military Rifle
 #Include Actors/Weapons/KillerPig.txt //Killer P.I.G.
 #Include Actors/Weapons/Lantern.txt //Solar Lantern
-#Include Actors/Weapons/Lazergun.txt //uselessjokeweapon
+#Include Actors/Weapons/LazerGun.txt //uselessjokeweapon
 #Include Actors/Weapons/Fal.txt // Added by KeenEye
 //==============================================================================
 // Ashes Enemies
