@@ -20,7 +20,7 @@ ACTOR PistolThug: actor
   Obituary "%o was shot down by a Vulture Thug."
   DropItem "Autoloaderspawn"
   DropItem "NineMilAmmoDropper"
-  DropItem "FAL"
+  DropItem "FALSpawn"
   States
   {
   Spawn:

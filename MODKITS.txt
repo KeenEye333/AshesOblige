@@ -18,6 +18,7 @@ else if(checkweapon("revolver2"))
 giveinventory("revolver3",1);
 takeinventory("revolver2",1);
 PlaySound(0,"special/workbench",CHAN_ITEM);
+Print(s:"You installed the Custom mechanism (TRIGGER MOD)!");
 takeinventory("ItemModkit",1);
 setweapon("revolver3");
 terminate;
@@ -28,6 +29,7 @@ giveinventory("glock2",1);
 takeinventory("glock",1);
 PlaySound(0,"special/workbench",CHAN_ITEM);
 takeinventory("ItemModkit",1);
+Print(s:"You installed the Laser sight (ACCURACY MOD)!");
 setweapon("Glock2");
 terminate;
 }
@@ -37,6 +39,7 @@ giveinventory("glock3",1);
 takeinventory("glock2",1);
 PlaySound(0,"special/workbench",CHAN_ITEM);
 takeinventory("ItemModkit",1);
+Print(s:"You installed the Burst-fire trigger (BURST MOD)!");
 setweapon("Glock3");
 terminate;
 }
@@ -46,6 +49,7 @@ giveinventory("Pumpaction2",1);
 takeinventory("Pumpaction",1);
 PlaySound(0,"special/workbench",CHAN_ITEM);
 takeinventory("ItemModkit",1);
+Print(s:"You installed the bayonet (MELEE MOD)!");
 setweapon("Pumpaction2");
 terminate;
 }
@@ -55,6 +59,7 @@ giveinventory("Pumpaction3",1);
 takeinventory("Pumpaction2",1);
 PlaySound(0,"special/workbench",CHAN_ITEM);
 takeinventory("ItemModkit",1);
+Print(s:"You installed the magazine adaptor (RELOAD MOD)!");
 setweapon("Pumpaction3");
 terminate;
 }
@@ -64,6 +69,7 @@ giveinventory("Sawedoff2",1);
 takeinventory("Sawedoff",1);
 PlaySound(0,"special/workbench",CHAN_ITEM);
 takeinventory("ItemModkit",1);
+Print(s:"You installed the extra barrel (TRIPLE MOD)!");
 setweapon("Sawedoff2");
 terminate;
 }
@@ -73,6 +79,7 @@ giveinventory("Sawedoff3",1);
 takeinventory("Sawedoff2",1);
 PlaySound(0,"special/workbench",CHAN_ITEM);
 takeinventory("ItemModkit",1);
+Print(s:"You installed the shoulder stock (RECOIL MOD)!");
 setweapon("Sawedoff3");
 terminate;
 }
@@ -82,6 +89,7 @@ giveinventory("Ingram2",1);
 takeinventory("Ingram",1);
 PlaySound(0,"special/workbench",CHAN_ITEM);
 takeinventory("ItemModkit",1);
+Print(s:"You installed the suppressor (STEALTH MOD)!");
 setweapon("Ingram2");
 terminate;
 }
@@ -91,6 +99,7 @@ giveinventory("Ingram3",1);
 takeinventory("Ingram2",1);
 PlaySound(0,"special/workbench",CHAN_ITEM);
 takeinventory("ItemModkit",1);
+Print(s:"You installed the full overhaul (HANDLING MOD)!");
 setweapon("Ingram3");
 terminate;
 }
@@ -100,6 +109,7 @@ giveinventory("m162",1);
 takeinventory("m16",1);
 PlaySound(0,"special/workbench",CHAN_ITEM);
 takeinventory("ItemModkit",1);
+Print(s:"You installed the heavy barrel & trigger mech (AUTOFIRE MOD)!");
 setweapon("M162");
 terminate;
 }
@@ -109,6 +119,7 @@ giveinventory("m163",1);
 takeinventory("m162",1);
 PlaySound(0,"special/workbench",CHAN_ITEM);
 takeinventory("ItemModkit",1);
+Print(s:"You installed the pipebomb launcher (ALTFIRE MOD)!");
 setweapon("M163");
 terminate;
 }
@@ -119,6 +130,7 @@ takeinventory("Napalmgun",1);
 PlaySound(0,"special/workbench",CHAN_ITEM);
 takeinventory("ItemModkit",1);
 setweapon("Napalmgun2");
+Print(s:"You installed the Expanded tank (CAPACITY MOD)!");
 terminate;
 }
 else if(checkweapon("Napalmgun2"))
@@ -127,6 +139,7 @@ giveinventory("Napalmgun3",1);
 takeinventory("Napalmgun2",1);
 PlaySound(0,"special/workbench",CHAN_ITEM);
 takeinventory("ItemModkit",1);
+Print(s:"You installed the improved nozzles (RANGE MOD)!");
 setweapon("Napalmgun3");
 terminate;
 }
@@ -137,6 +150,7 @@ takeinventory("JunkerMusket",1);
 PlaySound(0,"special/workbench",CHAN_ITEM);
 takeinventory("ItemModkit",1);
 setweapon("Junkermusket2");
+Print(s:"You installed the magazine adaptor (CAPACITY MOD)!");
 terminate;
 }
 else if(checkweapon("JunkerMusket2"))
@@ -146,6 +160,7 @@ takeinventory("JunkerMusket2",1);
 PlaySound(0,"special/workbench",CHAN_ITEM);
 takeinventory("ItemModkit",1);
 setweapon("Junkermusket3");
+Print(s:"You installed the bug-zapper driver (CHARGE MOD)!");
 terminate;
 }
 else if(checkweapon("Killerpig"))
@@ -155,6 +170,7 @@ takeinventory("Killerpig",1);
 PlaySound(0,"special/workbench",CHAN_ITEM);
 takeinventory("ItemModkit",1);
 setweapon("Killerpig2");
+Print(s:"You installed the gas launcher (SALVO MOD)!");
 terminate;
 }
 else if(checkweapon("Killerpig2"))
@@ -163,7 +179,48 @@ giveinventory("Killerpig3",1);
 takeinventory("Killerpig2",1);
 PlaySound(0,"special/workbench",CHAN_ITEM);
 takeinventory("ItemModkit",1);
+Print(s:"You installed the improved motor (ROF MOD)!");
 setweapon("Killerpig3");
+terminate;
+}
+else if(checkweapon("Jackhammer"))
+{
+giveinventory("Jackhammer2",1);
+takeinventory("Jackhammer",1);
+PlaySound(0,"special/workbench",CHAN_ITEM);
+takeinventory("ItemModkit",1);
+setweapon("Jackhammer2");
+Print(s:"You installed the pointy piston (PENETRATION MOD)!");
+terminate;
+}
+else if(checkweapon("Jackhammer2"))
+{
+giveinventory("Jackhammer3",1);
+takeinventory("Jackhammer2",1);
+PlaySound(0,"special/workbench",CHAN_ITEM);
+takeinventory("ItemModkit",1);
+setweapon("Jackhammer3");
+Print(s:"You installed the remapped engine (EFFICIENCY MOD)!");
+terminate;
+}
+else if(checkweapon("FAL"))
+{
+giveinventory("FAL2",1);
+takeinventory("FAL",1);
+PlaySound(0,"special/workbench",CHAN_ITEM);
+takeinventory("ItemModkit",1);
+Print(s:"You installed the modified trigger mechanism (AUTOFIRE MOD)!");
+setweapon("FAL2");
+terminate;
+}
+else if(checkweapon("FAL2"))
+{
+giveinventory("FAL3",1);
+takeinventory("FAL2",1);
+PlaySound(0,"special/workbench",CHAN_ITEM);
+takeinventory("ItemModkit",1);
+Print(s:"You installed the bottle-reflex-scope (SNOOPER MOD)!");
+setweapon("FAL3");
 terminate;
 }
 else
