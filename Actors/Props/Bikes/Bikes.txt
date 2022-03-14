@@ -1,0 +1,52 @@
+ACTOR PropRJMotorcycle2: PropMotorcycle //inert motorcycle for 27
+{
+	scale 0.8
+	States
+	{
+		Spawn:
+			B2KE A -1
+			Stop
+	}
+}
+ACTOR PropMotorcycleBroke: TallGreenColumn 336
+{
+    scale 0.9
+	Radius 16
+	Height 40
+	ProjectilePassHeight -16
+	+SOLID
+	States
+	{
+	Spawn:
+		BIK2 A -1
+		Stop
+	}
+}
+ACTOR PropMotorcycleBroke2: TallGreenColumn 360
+{
+    scale 0.9
+	Radius 16
+	Height 40
+	ProjectilePassHeight -16
+	+SOLID
+	States
+	{
+	Spawn:
+		BIK3 A -1
+		Stop
+	}
+}
+ACTOR PropMotorcycleBroke3: TallGreenColumn 363
+{
+    scale 0.9
+	Radius 16
+	Height 40
+	ProjectilePassHeight -16
+	+SOLID
+	States
+	{
+	Spawn:
+		BIK4 A -1
+		Stop
+	}
+}
