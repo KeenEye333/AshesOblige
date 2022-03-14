@@ -1,0 +1,72 @@
+ACTOR Chips : Ammo
+{
+ Inventory.Amount 1
+ Inventory.MaxAmount 10000
+ Ammo.BackPackMaxAmount 10000
+ +IGNORESKILL
+}
+ACTOR TwentyChips : Chips
+{
+ Inventory.Amount 20
+ +IGNORESKILL
+}
+ACTOR TwentyFiveChips : Chips
+{
+ Inventory.Amount 25
+ +IGNORESKILL
+}
+ACTOR FortyChips : Chips
+{
+ Inventory.Amount 40
+ +IGNORESKILL
+}
+ACTOR FortyFiveChips : Chips
+{
+ Inventory.Amount 45
+ +IGNORESKILL
+}
+ACTOR FiddyChips : Chips
+{
+ Inventory.Amount 50
+ +IGNORESKILL
+}
+ACTOR SixtyChips : Chips
+{
+ Inventory.Amount 60
+ +IGNORESKILL
+}
+ACTOR EightyChips : Chips
+{
+ Inventory.Amount 80
+ +IGNORESKILL
+}
+ACTOR NinetyChips : Chips
+{
+ Inventory.Amount 90
+ +IGNORESKILL
+}
+ACTOR HundredChips : Chips
+{
+ Inventory.Amount 100
+ +IGNORESKILL
+}
+ACTOR Onefiddychips : Chips
+{
+ Inventory.Amount 150
+ +IGNORESKILL
+}
+ACTOR HundredEightyChips : Chips
+{
+ Inventory.Amount 180
+ +IGNORESKILL
+}
+ACTOR twohundredchips : Chips
+{
+ Inventory.Amount 200
+ +IGNORESKILL
+}
+ACTOR threehundredchips : Chips
+{
+ Inventory.Amount 300
+ +IGNORESKILL
+}

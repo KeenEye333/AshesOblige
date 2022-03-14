@@ -96,6 +96,13 @@
 #Include Actors/npc/npcs.txt // and a few assholes more
 #Include Actors/Player/Tesla79.txt //and the horse you rode in on
 #Include Actors/Player/LUCY.txt //and your little dog too
+
+//==============================================================================
+// Misc
+//==============================================================================
+#Include Actors/Misc/Chips.txt // Chips!
+#Include Actors/Misc/Tokens.txt // Tokens
+#Include Actors/Misc/Quests.txt // Related to Quest Items
 //==============================================================================
 
 ACTOR Radiationcount : Inventory
@@ -514,164 +521,8 @@ actor ManslayerCutscene: actor 316
     Goto See
 	}
 	}
-ACTOR Dialogtoken1: Inventory  //GateCaptainCheck- both towns
-{
-    Inventory.Amount 1
-    Inventory.MaxAmount 999
-	Inventory.InterHubAmount 0
-    -INVBAR
-}
-ACTOR Dialogtoken2: Dialogtoken1 //MetViolet //heard about roamers
-{
-}
-ACTOR Dialogtoken3: Dialogtoken1 //PorcelainDescription //visited roamers
-{
-}
-ACTOR Dialogtoken4: Dialogtoken1 //VioletQuest //SheriffTrust
-{
-}
-ACTOR Dialogtoken5: Dialogtoken1 //OutlawMichonne //OutlawBadlands
-{
-}
-ACTOR Dialogtoken6: Dialogtoken1 //MichonneDiscount //tunnelscleared
-{
-}
-ACTOR Dialogtoken7: Dialogtoken1 //SeenCityTrucks //DomeSeedsQuest
-{
-}
-ACTOR Dialogtoken8: Dialogtoken1 //PorcelainJoined //SilverQuest
-{
-}
-ACTOR Dialogtoken9: Dialogtoken1 //Pitfightquest //DomeSporesQuest
-{
-}
-ACTOR Dialogtoken10: Dialogtoken1 //SavedPorcelain //TunnelsQuest
-{
-}
-ACTOR Dialogtoken11: Dialogtoken1 //BikeRepaired //BaronAppointment
-{
-}
-ACTOR Dialogtoken12: Dialogtoken1 //WalkerDescription //Suitquest
-{
-}
-ACTOR Dialogtoken13: Dialogtoken1 //RegenFight //SmileyQuest
-{
-}
-ACTOR Dialogtoken14: Dialogtoken1 //Frnzyfight //Roamersquest
-{
-}
-ACTOR Dialogtoken15: Dialogtoken1 //Titanfight //RebelsQuest
-{
-}
-ACTOR Dialogtoken16: Dialogtoken1 //MojoKilled //RoamersKilled
-{
-}
-ACTOR Dialogtoken17: Dialogtoken1 //Mojowon //Won Race
-{
-}
-ACTOR Dialogtoken18: Dialogtoken1 //VicIntroduced //RoamersSabotaged
-{
-}
-ACTOR Dialogtoken19: Dialogtoken1 //Refugeesaved //Gotbike
-{
-}
-ACTOR Dialogtoken20: Dialogtoken1 //finalgift //SpecialTasksAuthority
-{
-}
-ACTOR Beastchecktoken: Dialogtoken1 //only to check beast is near
-{
-}
-ACTOR Gamerchecktoken: Dialogtoken1 //only to check game is changed
-{
-}
-ACTOR MoralityToken: Inventory  //GeneralMoralityChecker
-{
-    Inventory.Amount 1
-    Inventory.MaxAmount 5
-	Inventory.InterHubAmount 0
-    -INVBAR
-	+IGNORESKILL
-}
-ACTOR GoodEndingToken: Inventory  //GeneralMoralityChecker
-{
-    Inventory.Amount 1
-    Inventory.MaxAmount 5
-	Inventory.InterHubAmount 0
-    -INVBAR
-	+IGNORESKILL
-}
-ACTOR GoldenEndingToken: Inventory  //GeneralMoralityChecker
-{
-    Inventory.Amount 1
-    Inventory.MaxAmount 5
-	Inventory.InterHubAmount 0
-    -INVBAR
-	+IGNORESKILL
-}
-ACTOR DocCheckToken: Inventory  //GeneralMoralityChecker
-{
-    Inventory.Amount 1
-    Inventory.MaxAmount 1
-	Inventory.InterHubAmount 0
-    -INVBAR
-	+IGNORESKILL
-}
-ACTOR LosingTicket : Inventory
-{
- Inventory.Amount 1
- Inventory.MaxAmount 1
- Inventory.InterHubAmount 0
-    -INVBAR
-}
-ACTOR WinningTicket : Inventory
-{
- Inventory.Amount 1
- Inventory.MaxAmount 1
- Inventory.InterHubAmount 0
-    -INVBAR
-}
-Actor QuestticketMojo15 : Inventory
-{
-Inventory.Amount 1
-Inventory.MaxAmount 1
-Inventory.InterHubAmount 0
--invbar
-}
-Actor QuestticketMojo30 : Inventory
-{
-Inventory.Amount 1
-Inventory.MaxAmount 1
-Inventory.InterHubAmount 0
--invbar
-}
-Actor QuestticketMojo60 : Inventory
-{
-Inventory.Amount 1
-Inventory.MaxAmount 1
-Inventory.InterHubAmount 0
--invbar
-}
-Actor QuestticketDogs15 : Inventory
-{
-Inventory.Amount 1
-Inventory.MaxAmount 1
-Inventory.InterHubAmount 0
--invbar
-}
-Actor QuestticketDogs30 : Inventory
-{
-Inventory.Amount 1
-Inventory.MaxAmount 1
-Inventory.InterHubAmount 0
--invbar
-}
-Actor QuestticketDogs60 : Inventory
-{
-Inventory.Amount 1
-Inventory.MaxAmount 1
-Inventory.InterHubAmount 0
--invbar
-}
+
+
 ACTOR BarWater : Stimpack
 {
   Inventory.Amount 10
@@ -712,78 +563,7 @@ Inventory.PickupMessage "Got patched up!"
      stop
   } 
 }
-ACTOR Chips : Ammo
-{
- Inventory.Amount 1
- Inventory.MaxAmount 10000
- Ammo.BackPackMaxAmount 10000
- +IGNORESKILL
-}
-ACTOR TwentyChips : Chips
-{
- Inventory.Amount 20
- +IGNORESKILL
-}
-ACTOR TwentyFiveChips : Chips
-{
- Inventory.Amount 25
- +IGNORESKILL
-}
-ACTOR FortyChips : Chips
-{
- Inventory.Amount 40
- +IGNORESKILL
-}
-ACTOR FortyFiveChips : Chips
-{
- Inventory.Amount 45
- +IGNORESKILL
-}
-ACTOR FiddyChips : Chips
-{
- Inventory.Amount 50
- +IGNORESKILL
-}
-ACTOR SixtyChips : Chips
-{
- Inventory.Amount 60
- +IGNORESKILL
-}
-ACTOR EightyChips : Chips
-{
- Inventory.Amount 80
- +IGNORESKILL
-}
-ACTOR NinetyChips : Chips
-{
- Inventory.Amount 90
- +IGNORESKILL
-}
-ACTOR HundredChips : Chips
-{
- Inventory.Amount 100
- +IGNORESKILL
-}
-ACTOR Onefiddychips : Chips
-{
- Inventory.Amount 150
- +IGNORESKILL
-}
-ACTOR HundredEightyChips : Chips
-{
- Inventory.Amount 180
- +IGNORESKILL
-}
-ACTOR twohundredchips : Chips
-{
- Inventory.Amount 200
- +IGNORESKILL
-}
-ACTOR threehundredchips : Chips
-{
- Inventory.Amount 300
- +IGNORESKILL
-}
+
 actor CrapJunk : RandomSpawner
 {
     DropItem "JUNKtools"

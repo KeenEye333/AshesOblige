@@ -1,0 +1,102 @@
+ACTOR Dialogtoken1: Inventory  //GateCaptainCheck- both towns
+{
+    Inventory.Amount 1
+    Inventory.MaxAmount 999
+	Inventory.InterHubAmount 0
+    -INVBAR
+}
+ACTOR Dialogtoken2: Dialogtoken1 //MetViolet //heard about roamers
+{
+}
+ACTOR Dialogtoken3: Dialogtoken1 //PorcelainDescription //visited roamers
+{
+}
+ACTOR Dialogtoken4: Dialogtoken1 //VioletQuest //SheriffTrust
+{
+}
+ACTOR Dialogtoken5: Dialogtoken1 //OutlawMichonne //OutlawBadlands
+{
+}
+ACTOR Dialogtoken6: Dialogtoken1 //MichonneDiscount //tunnelscleared
+{
+}
+ACTOR Dialogtoken7: Dialogtoken1 //SeenCityTrucks //DomeSeedsQuest
+{
+}
+ACTOR Dialogtoken8: Dialogtoken1 //PorcelainJoined //SilverQuest
+{
+}
+ACTOR Dialogtoken9: Dialogtoken1 //Pitfightquest //DomeSporesQuest
+{
+}
+ACTOR Dialogtoken10: Dialogtoken1 //SavedPorcelain //TunnelsQuest
+{
+}
+ACTOR Dialogtoken11: Dialogtoken1 //BikeRepaired //BaronAppointment
+{
+}
+ACTOR Dialogtoken12: Dialogtoken1 //WalkerDescription //Suitquest
+{
+}
+ACTOR Dialogtoken13: Dialogtoken1 //RegenFight //SmileyQuest
+{
+}
+ACTOR Dialogtoken14: Dialogtoken1 //Frnzyfight //Roamersquest
+{
+}
+ACTOR Dialogtoken15: Dialogtoken1 //Titanfight //RebelsQuest
+{
+}
+ACTOR Dialogtoken16: Dialogtoken1 //MojoKilled //RoamersKilled
+{
+}
+ACTOR Dialogtoken17: Dialogtoken1 //Mojowon //Won Race
+{
+}
+ACTOR Dialogtoken18: Dialogtoken1 //VicIntroduced //RoamersSabotaged
+{
+}
+ACTOR Dialogtoken19: Dialogtoken1 //Refugeesaved //Gotbike
+{
+}
+ACTOR Dialogtoken20: Dialogtoken1 //finalgift //SpecialTasksAuthority
+{
+}
+ACTOR Beastchecktoken: Dialogtoken1 //only to check beast is near
+{
+}
+ACTOR Gamerchecktoken: Dialogtoken1 //only to check game is changed
+{
+}
+ACTOR MoralityToken: Inventory  //GeneralMoralityChecker
+{
+    Inventory.Amount 1
+    Inventory.MaxAmount 5
+	Inventory.InterHubAmount 0
+    -INVBAR
+	+IGNORESKILL
+}
+ACTOR GoodEndingToken: Inventory  //GeneralMoralityChecker
+{
+    Inventory.Amount 1
+    Inventory.MaxAmount 5
+	Inventory.InterHubAmount 0
+    -INVBAR
+	+IGNORESKILL
+}
+ACTOR GoldenEndingToken: Inventory  //GeneralMoralityChecker
+{
+    Inventory.Amount 1
+    Inventory.MaxAmount 5
+	Inventory.InterHubAmount 0
+    -INVBAR
+	+IGNORESKILL
+}
+ACTOR DocCheckToken: Inventory  //GeneralMoralityChecker
+{
+    Inventory.Amount 1
+    Inventory.MaxAmount 1
+	Inventory.InterHubAmount 0
+    -INVBAR
+	+IGNORESKILL
+}

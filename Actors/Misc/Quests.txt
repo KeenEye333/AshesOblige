@@ -1,0 +1,56 @@
+ACTOR LosingTicket : Inventory
+{
+ Inventory.Amount 1
+ Inventory.MaxAmount 1
+ Inventory.InterHubAmount 0
+    -INVBAR
+}
+ACTOR WinningTicket : Inventory
+{
+ Inventory.Amount 1
+ Inventory.MaxAmount 1
+ Inventory.InterHubAmount 0
+    -INVBAR
+}
+Actor QuestticketMojo15 : Inventory
+{
+Inventory.Amount 1
+Inventory.MaxAmount 1
+Inventory.InterHubAmount 0
+-invbar
+}
+Actor QuestticketMojo30 : Inventory
+{
+Inventory.Amount 1
+Inventory.MaxAmount 1
+Inventory.InterHubAmount 0
+-invbar
+}
+Actor QuestticketMojo60 : Inventory
+{
+Inventory.Amount 1
+Inventory.MaxAmount 1
+Inventory.InterHubAmount 0
+-invbar
+}
+Actor QuestticketDogs15 : Inventory
+{
+Inventory.Amount 1
+Inventory.MaxAmount 1
+Inventory.InterHubAmount 0
+-invbar
+}
+Actor QuestticketDogs30 : Inventory
+{
+Inventory.Amount 1
+Inventory.MaxAmount 1
+Inventory.InterHubAmount 0
+-invbar
+}
+Actor QuestticketDogs60 : Inventory
+{
+Inventory.Amount 1
+Inventory.MaxAmount 1
+Inventory.InterHubAmount 0
+-invbar
+}
