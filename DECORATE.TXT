@@ -105,6 +105,14 @@
 #Include Actors/Misc/Quests.txt // Related to Quest Items
 //==============================================================================
 
+//==============================================================================
+// Props
+//==============================================================================
+#Include Actors/Props/Bikes/Bikes.txt // Added bikes
+#Include Actors/Props/Corpses/Corpses.txt // Mentioned corpses
+#include Actors/Props/Props.txt // Fixed adding.
+//==============================================================================
+
 ACTOR Radiationcount : Inventory
 {
     Inventory.Amount 1
@@ -1047,20 +1055,6 @@ States
     WLK2 ABC 4 bright
     loop
   }
-}
-ACTOR PropMotorcycle: TallGreenColumn 335
-{
-    scale 0.9
-	Radius 16
-	Height 40
-	ProjectilePassHeight -16
-	+SOLID
-	States
-	{
-	Spawn:
-		BIKE A -1
-		Stop
-	}
 }
 ACTOR PropRubbishBagEmpty: TallGreenColumn 337
 {

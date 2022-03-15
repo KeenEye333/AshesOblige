@@ -1,3 +1,17 @@
+ACTOR PropMotorcycle: TallGreenColumn 335
+{
+    scale 0.9
+	Radius 16
+	Height 40
+	ProjectilePassHeight -16
+	+SOLID
+	States
+	{
+	Spawn:
+		BIKE A -1
+		Stop
+	}
+}
 ACTOR PropRJMotorcycle2: PropMotorcycle //inert motorcycle for 27
 {
 	scale 0.8
